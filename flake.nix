@@ -1,0 +1,70 @@
+{
+  description = "jupiter system configuration";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    darwin.url = "github:LnL7/nix-darwin";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs-firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
+    nur.url = "github:nix-community/NUR";
+  };
+
+  outputs = {
+    self,
+    darwin,
+    nixpkgs,
+    home-manager,
+    nixpkgs-firefox-darwin,
+    nur,
+  }: let
+    configuration = {pkgs, ...}: {
+      # Auto upgrade nix package and the daemon service.
+      services.nix-daemon.enable = true;
+      # nix.package = pkgs.nix;
+      # Necessary for using flakes on this system.
+      nix.settings.experimental-features = "nix-command flakes";
+      # Create /etc/zshrc that loads the darwin environment.
+      programs.zsh.enable = true; # default shell on catalina
+      # programs.fish.enable = true;
+      # Set Git commit hash for darwin-version.
+      system.configurationRevision = self.rev or self.dirtyRev or null;
+      # Used for backwards compatibility, please read the changelog before changing.
+      # $ darwin-rebuild changelog
+      system.stateVersion = 4;
+      # The platform the configuration will be used on.
+      nixpkgs.hostPlatform = "aarch64-darwin";
+
+      security.pam.enableSudoTouchIdAuth = true;
+      system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
+      system.defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
+      system.defaults.dock.mru-spaces = false;
+      system.defaults.dock.show-recents = false;
+      system.defaults.dock.tilesize = 48;
+      system.keyboard.enableKeyMapping = true;
+      system.keyboard.remapCapsLockToControl = true;
+    };
+  in {
+    darwinConfigurations."jupiter" = darwin.lib.darwinSystem {
+      modules = [
+        configuration
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          nixpkgs.overlays = [nixpkgs-firefox-darwin.overlay];
+          home-manager.users.dan.imports = [
+            ./home.nix
+            ./firefox.nix
+            ./helix.nix
+            ./gpg.nix
+            nur.hmModules.nur
+          ];
+        }
+      ];
+    };
+    # Expose the package set, including overlays, for convenience.
+    darwinPackages = self.darwinConfigurations."jupiter".pkgs;
+  };
+}
