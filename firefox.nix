@@ -38,6 +38,8 @@
           libredirect
           ublock-origin
           vimium
+          stylus
+          bitwarden
         ];
       };
     };

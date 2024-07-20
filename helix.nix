@@ -3,7 +3,7 @@
     defaultEditor = true;
 
     settings = {
-      theme = "catppuccin_mocha";
+      theme = "theme";
 
       editor = {
         line-number = "relative";

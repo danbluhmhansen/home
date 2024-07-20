@@ -19,9 +19,11 @@
     pkgs.pkg-config
     pkgs.openssl
     pkgs.usql
+    pkgs.cargo-outdated
   ];
 
   home.sessionVariables = {
+    DEFAULT_SHELL = "${pkgs.zsh}/bin/zsh";
     # TODO: remove when rust configuration is moved to a devshell
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
   };
@@ -143,8 +145,7 @@
         invocation = "hx";
         key = "enter";
         apply_to = "text_file";
-        external = "/etc/profiles/per-user/dan/bin/nu ~/wz.nu {file}:{line}";
-        # external = "$EDITOR {file}:{line}";
+        external = "nu ~/wz.nu {file}:{line}";
         leave_broot = false;
       }
     ];

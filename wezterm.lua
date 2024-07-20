@@ -1,18 +1,12 @@
 local config = wezterm.config_builder()
 
-config.default_prog = { '/bin/zsh', '-c', '/etc/profiles/per-user/dan/bin/nu' }
+local shell = os.getenv('DEFAULT_SHELL') or '/bin/zsh'
+
+config.default_prog = { shell, '-c', 'nu' }
 
 config.launch_menu = {
-  {
-    label = 'broot',
-    args = { '/bin/zsh', '-c', '/etc/profiles/per-user/dan/bin/broot' },
-    cwd = "~",
-  },
-  {
-    label = 'bottom',
-    args = { '/bin/zsh', '-c', '/etc/profiles/per-user/dan/bin/btm' },
-    cwd = "~",
-  },
+  { label = 'bottom', args = { shell, '-c', 'btm' },   cwd = "~", },
+  { label = 'broot',  args = { shell, '-c', 'broot' }, cwd = "~", },
 }
 
 -- wezterm.gui is not available to the mux server, so take care to
@@ -71,17 +65,9 @@ wezterm.on('update-right-status', function(window, pane)
 
     local home = cwd:gsub(wezterm.home_dir:gsub('\\', '/'), '~')
 
-    local _, git_branch, _ = wezterm.run_child_process {
-      '/bin/zsh',
-      '-c',
-      '/etc/profiles/per-user/dan/bin/starship module git_branch --path ' .. cwd,
-    }
+    local _, git_branch, _ = wezterm.run_child_process { shell, '-c', 'starship module git_branch --path ' .. cwd, }
 
-    local _, git_status, _ = wezterm.run_child_process {
-      '/bin/zsh',
-      '-c',
-      '/etc/profiles/per-user/dan/bin/starship module git_status --path ' .. cwd,
-    }
+    local _, git_status, _ = wezterm.run_child_process { shell, '-c', 'starship module git_status --path ' .. cwd, }
 
     table.insert(cells, git_branch .. git_status)
     table.insert(cells, home)
@@ -187,11 +173,9 @@ local br_act = wezterm.action_callback(function(win, pane)
   local br_pane = pane:tab():get_pane_direction('Left')
   if (br_pane == nil) then
     win:perform_action(
-      act.SplitPane {
-        command = { args = { '/bin/zsh', '-c', '/etc/profiles/per-user/dan/bin/broot' } },
-        direction = 'Left',
-        size = { Cells = 36 },
-      }, pane)
+      act.SplitPane { command = { args = { shell, '-c', 'broot' } }, direction = 'Left', size = { Cells = 36 }, },
+      pane
+    )
   else
     br_pane:activate()
     win:perform_action(act.CloseCurrentPane { confirm = true }, pane)
