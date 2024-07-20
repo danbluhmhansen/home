@@ -37,13 +37,18 @@
       nixpkgs.hostPlatform = "aarch64-darwin";
 
       security.pam.enableSudoTouchIdAuth = true;
-      system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
       system.defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
       system.defaults.dock.mru-spaces = false;
       system.defaults.dock.show-recents = false;
       system.defaults.dock.tilesize = 48;
       system.keyboard.enableKeyMapping = true;
       system.keyboard.remapCapsLockToControl = true;
+
+      homebrew.enable = true;
+      homebrew = {
+        brews = ["cormacrelf/tap/dark-notify"];
+        taps = ["cormacrelf/tap"];
+      };
     };
   in {
     darwinConfigurations."jupiter" = darwin.lib.darwinSystem {

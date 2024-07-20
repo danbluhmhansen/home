@@ -23,6 +23,10 @@
   ];
 
   home.file = {
+    "hx.sh" = {
+      executable = true;
+      source = ./hx.sh;
+    };
     "wz.nu".source = ./wz.nu;
   };
 
@@ -33,6 +37,16 @@
   };
 
   fonts.fontconfig.enable = true;
+
+  launchd.agents.dark-notify.enable = true;
+  launchd.agents.dark-notify.config = {
+    Label = "dark-notify";
+    RunAtLoad = true;
+    KeepAlive = true;
+    StandardErrorPath = "/Users/dan/dark-notify-err.log";
+    StandardOutPath = "/Users/dan/dark-notify-out.log";
+    ProgramArguments = ["/opt/homebrew/bin/dark-notify" "-c" "/bin/sh /Users/dan/hx.sh"];
+  };
 
   programs.home-manager.enable = true;
 
