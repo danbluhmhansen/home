@@ -22,6 +22,10 @@
     pkgs.cargo-outdated
   ];
 
+  home.file = {
+    "wz.nu".source = ./wz.nu;
+  };
+
   home.sessionVariables = {
     DEFAULT_SHELL = "${pkgs.zsh}/bin/zsh";
     # TODO: remove when rust configuration is moved to a devshell
@@ -40,6 +44,7 @@
   programs.carapace.enable = true; # shell completions
   programs.gpg.enable = true; # crypt
   programs.starship.enable = true; # shell prompt
+  programs.direnv.enable = true; # load .env
 
   # cli
   programs.git.enable = true;
@@ -57,39 +62,13 @@
   programs.wezterm.enable = true; # terminal
 
   programs.nushell = {
-    configFile = {
-      text = ''
-        $env.config.show_banner = false
-      '';
-    };
-    envFile = {
-      text = ''
-        def create_left_prompt [] {
-          let dir = match (do --ignore-shell-errors { $env.PWD | path relative-to $nu.home-path }) {
-              null => $env.PWD
-              ''' => '~'
-              $relative_pwd => ([~ $relative_pwd] | path join)
-          }
-
-          let path_color = (if (is-admin) { ansi red_bold } else { ansi green_bold })
-          let separator_color = (if (is-admin) { ansi light_red_bold } else { ansi light_green_bold })
-          let path_segment = $"($path_color)($dir)"
-
-          $path_segment | str replace --all (char path_sep) $"($separator_color)(char path_sep)($path_color)"
-        }
-
-        def create_right_prompt [] {
-          let last_exit_code = if ($env.LAST_EXIT_CODE != 0) {
-            ([(ansi rb) ($env.LAST_EXIT_CODE)] | str join)
-          } else { "" }
-
-          $last_exit_code
-        }
-
-        $env.PROMPT_COMMAND = {|| create_left_prompt }
-        $env.PROMPT_COMMAND_RIGHT = {|| create_right_prompt }
-      '';
-    };
+    configFile.text = ''
+      $env.config.show_banner = false
+    '';
+    envFile.source = ./env.nu;
+    extraConfig = ''
+      source ${pkgs.nu_scripts}/share/nu_scripts/sourced/cool-oneliners/dict.nu
+    '';
   };
 
   programs.starship = {

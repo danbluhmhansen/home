@@ -6,14 +6,12 @@
     pkgs.gopass
   ];
 
-  home.file = {
-    # security key
-    ".gnupg/gpg-agent.conf".text = ''
-      enable-ssh-support
-      default-cache-ttl 60
-      max-cache-ttl 120
-    '';
-  };
+  # security key
+  home.file.".gnupg/gpg-agent.conf".text = ''
+    enable-ssh-support
+    default-cache-ttl 60
+    max-cache-ttl 120
+  '';
 
   programs.gpg = {
     publicKeys = [
