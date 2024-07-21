@@ -1,12 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
-  home.username = "dan";
-  home.homeDirectory = lib.mkForce "/Users/dan";
-  home.stateVersion = "24.05";
-
+{pkgs, ...}: {
   home.packages = [
     pkgs.cachix # nix cache
     pkgs.fd # find files
@@ -22,36 +14,14 @@
     pkgs.cargo-outdated
   ];
 
-  home.file = {
-    "hx.sh" = {
-      executable = true;
-      source = ./hx.sh;
-    };
-    "wz.nu".source = ./wz.nu;
-  };
-
   home.sessionVariables = {
-    DEFAULT_SHELL = "${pkgs.zsh}/bin/zsh";
     # TODO: remove when rust configuration is moved to a devshell
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
   };
 
   fonts.fontconfig.enable = true;
 
-  launchd.agents.dark-notify.enable = true;
-  launchd.agents.dark-notify.config = {
-    Label = "dark-notify";
-    RunAtLoad = true;
-    KeepAlive = true;
-    StandardErrorPath = "/Users/dan/dark-notify-err.log";
-    StandardOutPath = "/Users/dan/dark-notify-out.log";
-    ProgramArguments = ["/opt/homebrew/bin/dark-notify" "-c" "/bin/sh /Users/dan/hx.sh"];
-  };
-
   programs.home-manager.enable = true;
-
-  # shells
-  programs.zsh.enable = true;
   programs.nushell.enable = true;
 
   # misc
@@ -100,6 +70,8 @@
       };
     };
   };
+
+  programs.direnv.nix-direnv.enable = true;
 
   programs.git = {
     userEmail = "00.pavers_dither@icloud.com";
