@@ -181,5 +181,18 @@
           };
         };
       };
+
+      perSystem = {
+        self',
+        pkgs,
+        ...
+      }: {
+        packages.default = self'.packages.activate;
+
+        devShells.default = pkgs.mkShell {
+          inputsFrom = [];
+          packages = with pkgs; [alejandra lua-language-server nil];
+        };
+      };
     };
 }

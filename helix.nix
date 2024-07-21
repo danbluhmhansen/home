@@ -141,10 +141,6 @@
     };
 
     extraPackages = [
-      # TODO: move to nix devshell
-      pkgs.alejandra
-      pkgs.nil
-
       # misc
       pkgs.ltex-ls # grammar & spelling
       pkgs.marksman # markdown
@@ -153,17 +149,6 @@
       pkgs.yaml-language-server # yaml
       pkgs.deno # formatters
       pkgs.nodePackages.prettier # formatters
-
-      # TODO: move to lua devshell
-      pkgs.lua-language-server
-
-      # TODO: move to ts devshell
-      pkgs.typescript-language-server
-      pkgs.tailwindcss-language-server
-
-      # TODO: move to docker devshell
-      pkgs.docker-compose-language-service
-      pkgs.dockerfile-language-server-nodejs
     ];
   };
 }
