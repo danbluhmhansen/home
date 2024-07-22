@@ -1,17 +1,21 @@
-{pkgs, ...}: {
-  home.packages = [
-    pkgs.cachix # nix cache
-    pkgs.fd # find files
-    pkgs.sad # find & replace
-    pkgs.maple-mono-NF # monospace font
-    pkgs.vesktop # chat
+{
+  pkgs,
+  lib,
+  ...
+}: {
+  home.packages = with pkgs; [
+    cachix # nix cache
+    fd # find files
+    sad # find & replace
+    maple-mono-NF # monospace font
+    vesktop # chat
 
     # TODO: move to devshell when pgrx supports it https://github.com/pgcentralfoundation/pgrx/pull/1683
-    pkgs.rustup
-    pkgs.pkg-config
-    pkgs.openssl
-    pkgs.usql
-    pkgs.cargo-outdated
+    rustup
+    pkg-config
+    openssl
+    usql
+    cargo-outdated
   ];
 
   home.sessionVariables = {
@@ -94,17 +98,8 @@
   };
 
   programs.broot.settings = {
-    imports = [
-      "verbs.hjson"
-      {
-        file = "skins/catppuccin-mocha.hjson";
-        luma = ["dark" "unknown"];
-      }
-      {
-        file = "skins/white.hjson";
-        luma = "light";
-      }
-    ];
+    icon_theme = "nerdfont";
+    imports = lib.mkForce ["verbs.hjson" "skins/native-16.hjson"];
     verbs = [
       {
         invocation = "hx";
