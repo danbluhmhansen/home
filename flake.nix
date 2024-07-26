@@ -159,8 +159,12 @@
 
             homebrew.enable = true;
             homebrew.onActivation.cleanup = "zap";
-            homebrew.brews = ["cormacrelf/tap/dark-notify"];
-            homebrew.taps = ["cormacrelf/tap"];
+            homebrew.casks = [
+              {
+                name = "hammerspoon";
+                args = {appdir = "~/Applications";};
+              }
+            ];
           };
         };
 
@@ -188,20 +192,11 @@
             home.homeDirectory = lib.mkForce "/Users/${user}";
 
             home.file = {
-              "hx.sh" = {
-                executable = true;
-                source = ./hx.sh;
+              ".hammerspoon/init.lua".source = ./hammerspoon.lua;
+              ".hammerspoon/Spoons/ReloadConfiguration.spoon".source = pkgs.fetchzip {
+                url = "https://github.com/Hammerspoon/Spoons/raw/c53546e00552451e077677a92eb1646c65acdca1/Spoons/ReloadConfiguration.spoon.zip";
+                hash = "sha256-kNyFHP3i1O4VhZQL2Ief6002TrvXzT4doZ9w8X5z6C0=";
               };
-            };
-
-            launchd.agents.dark-notify.enable = true;
-            launchd.agents.dark-notify.config = {
-              Label = "dark-notify";
-              RunAtLoad = true;
-              KeepAlive = true;
-              StandardErrorPath = "/Users/${user}/.cache/dark-notify/err.log";
-              StandardOutPath = "/Users/${user}/.cache/dark-notify/out.log";
-              ProgramArguments = ["/opt/homebrew/bin/dark-notify" "-c" "/bin/sh /Users/${user}/hx.sh"];
             };
 
             programs.zsh.enable = true;
