@@ -52,6 +52,7 @@
   programs.nushell = {
     configFile.text = ''
       $env.config.show_banner = false
+      $env.config.ls.use_ls_colors = false
     '';
     envFile.source = ./env.nu;
     extraConfig = ''
@@ -64,14 +65,10 @@
     enableNushellIntegration = false;
     enableZshIntegration = false;
     settings = {
-      git_branch = {
-        format = "[$symbol$branch(:$remote_branch)]($style) ";
-        style = "";
-      };
-      git_status = {
-        format = "([$all_status$ahead_behind]($style))";
-        style = "";
-      };
+      git_branch.format = "[$symbol$branch(:$remote_branch)]($style) ";
+      git_branch.style = "";
+      git_status.format = "([$all_status$ahead_behind]($style))";
+      git_status.style = "";
     };
   };
 
@@ -80,22 +77,15 @@
   programs.git = {
     userEmail = "00.pavers_dither@icloud.com";
     userName = "Dan Bluhm Hansen";
-    signing = {
-      key = "0x077BBC8A99A747DD";
-      signByDefault = true;
-    };
-    extraConfig = {
-      diff.algorithm = "histogram";
-      init.defaultBranch = "dev";
-      push.autoSetupRemote = true;
-    };
-    delta = {
-      enable = true;
-      options = {
-        side-by-side = true;
-      };
-    };
+    signing.key = "0x077BBC8A99A747DD";
+    signing.signByDefault = true;
+    extraConfig.diff.algorithm = "histogram";
+    extraConfig.init.defaultBranch = "dev";
+    extraConfig.push.autoSetupRemote = true;
+    delta.enable = true;
   };
+
+  programs.bat.config.theme = "base16-256";
 
   programs.broot.settings = {
     icon_theme = "nerdfont";
