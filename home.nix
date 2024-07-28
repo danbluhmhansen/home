@@ -50,10 +50,7 @@
   programs.wezterm.enable = true; # terminal
 
   programs.nushell = {
-    configFile.text = ''
-      $env.config.show_banner = false
-      $env.config.ls.use_ls_colors = false
-    '';
+    configFile.source = ./config.nu;
     envFile.source = ./env.nu;
     extraConfig = ''
       use ${pkgs.nu_scripts}/share/nu_scripts/modules/background_task/task.nu

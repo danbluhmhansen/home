@@ -124,6 +124,8 @@ config.font = wezterm.font {
 
 config.window_close_confirmation = 'NeverPrompt'
 
+config.enable_kitty_keyboard = true
+
 if wezterm.hostname() == 'jupiter.local' then
   config.window_padding = {
     left = 8,
