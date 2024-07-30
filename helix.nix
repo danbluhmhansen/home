@@ -55,46 +55,38 @@
       language = [
         {
           name = "css";
-          formatter = {
-            command = "prettier";
-            args = ["--parser" "css"];
-          };
+          formatter.command = "prettier";
+          formatter.args = ["--parser" "css"];
           auto-format = false;
         }
         {
           name = "html";
-          formatter = {
-            command = "prettier";
-            args = ["--parser" "html"];
-          };
+          formatter.command = "prettier";
+          formatter.args = ["--parser" "html"];
           auto-format = false;
         }
         {
           name = "javascript";
-          formatter = {
-            command = "deno";
-            args = ["fmt" "-" "--line-width" "120" "--ext" "js"];
-          };
+          formatter.command = "deno";
+          formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "js"];
           auto-format = false;
         }
         {
           name = "json";
-          formatter = {
-            command = "deno";
-            args = ["fmt" "-" "--line-width" "120" "--ext" "json"];
-          };
+          formatter.command = "deno";
+          formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "json"];
           auto-format = false;
         }
         {
           name = "jsx";
-          formatter = {
-            command = "deno";
-            args = ["fmt" "-" "--line-width" "120" "--ext" "jsx"];
-          };
+          formatter.command = "deno";
+          formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "jsx"];
           auto-format = false;
         }
         {
           name = "markdown";
+          formatter.command = "deno";
+          formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "md"];
           language-servers = ["marksman" "ltex-ls"];
         }
         {
@@ -107,26 +99,20 @@
         }
         {
           name = "tsx";
-          formatter = {
-            command = "deno";
-            args = ["fmt" "-" "--line-width" "120" "--ext" "tsx"];
-          };
+          formatter.command = "deno";
+          formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "tsx"];
           auto-format = false;
         }
         {
           name = "typescript";
-          formatter = {
-            command = "deno";
-            args = ["fmt" "-" "--line-width" "120" "--ext" "ts"];
-          };
+          formatter.command = "deno";
+          formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "ts"];
           auto-format = false;
         }
         {
           name = "yaml";
-          formatter = {
-            command = "prettier";
-            args = ["--parser" "yaml"];
-          };
+          formatter.command = "prettier";
+          formatter.args = ["--parser" "yaml"];
           auto-format = false;
         }
       ];
@@ -141,7 +127,6 @@
     };
 
     extraPackages = [
-      # misc
       pkgs.ltex-ls # grammar & spelling
       pkgs.marksman # markdown
       pkgs.taplo # toml
