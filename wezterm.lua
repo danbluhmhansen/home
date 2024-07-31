@@ -27,86 +27,31 @@ function scheme_for_appearance(appearance)
 end
 
 wezterm.on('update-right-status', function(window, pane)
-  -- Each element holds the text for a cell in a "powerline" style << fade
-  local cells = {}
-
-  -- The powerline < symbol
-  local LEFT_ARROW = utf8.char(0xe0b3)
-  -- The filled in variant of the < symbol
-  local SOLID_LEFT_ARROW = utf8.char(0xe0b2)
-
   local scheme = wezterm.get_builtin_color_schemes()[scheme_for_appearance(get_appearance())]
 
-  -- Color palette for the backgrounds of each cell
-  local colors = {
-    scheme.tab_bar.background,
-    scheme.tab_bar.inactive_tab.bg_color,
-    scheme.tab_bar.inactive_tab_hover.bg_color,
-    scheme.tab_bar.new_tab.bg_color,
-    scheme.tab_bar.new_tab_hover.bg_color,
-  }
+  local status = ''
 
-  -- Figure out the cwd and host of the current pane.
-  -- This will pick up the hostname for the remote host if your
-  -- shell is using OSC 7 on the remote host.
+  -- Figure out the cwd and host of the current pane. This will pick up the hostname for the remote host if your shell
+  -- is using OSC 7 on the remote host.
   local cwd_uri = pane:get_current_working_dir()
   if cwd_uri then
-    local cwd = wezterm.target_triple == 'x86_64-pc-windows-msvc' and cwd_uri.file_path:sub(2) or cwd_uri.file_path
-    local hostname = cwd_uri.host or wezterm.hostname()
-
-    -- Remove the domain name portion of the hostname
-    local dot = hostname:find '[.]'
-    if dot then
-      hostname = hostname:sub(1, dot - 1)
-    end
-    if hostname == '' then
-      hostname = wezterm.hostname()
-    end
-
-    local home = cwd:gsub(wezterm.home_dir:gsub('\\', '/'), '~')
+    local cwd = cwd_uri.file_path
 
     local _, git_branch, _ = wezterm.run_child_process { shell, '-c', 'starship module git_branch --path ' .. cwd, }
-
     local _, git_status, _ = wezterm.run_child_process { shell, '-c', 'starship module git_status --path ' .. cwd, }
+    local directory = cwd:gsub(wezterm.home_dir, '~')
+    local hostname = cwd_uri.host or wezterm.hostname()
 
-    table.insert(cells, git_branch .. git_status)
-    table.insert(cells, home)
-    table.insert(cells, hostname)
+    status = status .. wezterm.format { { Foreground = { Color = scheme.ansi[6] } }, { Text = git_branch .. ' ' } }
+    status = status .. wezterm.format { { Foreground = { Color = scheme.ansi[2] } }, { Text = git_status .. ' ' } }
+    status = status .. wezterm.format { { Foreground = { Color = scheme.ansi[7] } }, { Text = directory .. ' ' } }
+    status = status .. wezterm.format { { Foreground = { Color = scheme.ansi[3] } }, { Text = hostname .. ' ' } }
   end
 
-  -- I like my date/time in this style: "Wed Mar 3 08:14"
-  local date = wezterm.strftime '%F %T'
-  table.insert(cells, date)
+  local date = wezterm.strftime '%a %b %-d %T'
+  status = status .. wezterm.format { { Foreground = { Color = scheme.ansi[4] } }, { Text = date } }
 
-  -- An entry for each battery (typically 0 or 1 battery)
-  -- for _, b in ipairs(wezterm.battery_info()) do
-  --   table.insert(cells, string.format('%.0f%%', b.state_of_charge * 100))
-  -- end
-
-  -- The elements to be formatted
-  local elements = {}
-  -- How many cells have been formatted
-  local num_cells = 0
-
-  -- Translate a cell into elements
-  function push(text, is_last)
-    local cell_no = num_cells + 1
-    table.insert(elements, { Foreground = { Color = scheme.foreground } })
-    table.insert(elements, { Background = { Color = colors[cell_no] } })
-    table.insert(elements, { Text = ' ' .. text .. ' ' })
-    if not is_last then
-      table.insert(elements, { Foreground = { Color = colors[cell_no + 1] } })
-      table.insert(elements, { Text = SOLID_LEFT_ARROW })
-    end
-    num_cells = num_cells + 1
-  end
-
-  while #cells > 0 do
-    local cell = table.remove(cells, 1)
-    push(cell, #cells == 0)
-  end
-
-  window:set_right_status(wezterm.format(elements))
+  window:set_right_status(status)
 end)
 
 config.native_macos_fullscreen_mode = true
@@ -126,7 +71,7 @@ config.window_close_confirmation = 'NeverPrompt'
 
 config.enable_kitty_keyboard = true
 
-if wezterm.hostname() == 'jupiter.local' then
+if wezterm.target_triple == 'aarch64-apple-darwin' then
   config.window_padding = {
     left = 8,
     right = 0,
@@ -193,13 +138,6 @@ table.insert(keys, {
   mods = 'SUPER',
   action = br_act,
 })
-
-if wezterm.hostname() == 'venus.local' then
-  table.insert(keys, { key = '§', action = act.SendKey { key = '`' } })
-  table.insert(keys, { key = '±', action = act.SendKey { key = '~' } })
-  table.insert(keys, { key = '`', action = act.SendKey { key = '§' } })
-  table.insert(keys, { key = '~', action = act.SendKey { key = '±' } })
-end
 
 config.keys = keys
 
