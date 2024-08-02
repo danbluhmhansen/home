@@ -1,12 +1,13 @@
 local config = wezterm.config_builder()
 
-local shell = os.getenv('DEFAULT_SHELL') or '/bin/zsh'
+local shell = '/bin/zsh'
 
 config.default_prog = { shell, '-c', 'nu' }
 
 config.launch_menu = {
-  { label = 'bottom', args = { shell, '-c', 'btm' },   cwd = "~", },
-  { label = 'broot',  args = { shell, '-c', 'nu --execute br' }, cwd = "~", },
+  { label = 'bottom', args = { shell, '-c', 'btm' },             cwd = '~', },
+  { label = 'broot',  args = { shell, '-c', 'nu --execute br' }, cwd = '~', },
+  { label = 'sh',     args = { shell }, },
 }
 
 -- wezterm.gui is not available to the mux server, so take care to
@@ -120,7 +121,11 @@ local br_act = wezterm.action_callback(function(win, pane)
   local br_pane = pane:tab():get_pane_direction('Left')
   if (br_pane == nil) then
     win:perform_action(
-      act.SplitPane { command = { args = { shell, '-c', 'nu --execute br' } }, direction = 'Left', size = { Cells = 36 }, },
+      act.SplitPane {
+        command = { args = { shell, '-c', 'nu --execute br' } },
+        direction = 'Left',
+        size = { Cells = 36 },
+      },
       pane
     )
   else
