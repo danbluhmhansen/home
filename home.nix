@@ -8,7 +8,8 @@
     fd # find files
     sad # find & replace
     maple-mono-NF # monospace font
-    vesktop # chat
+    discord # chat
+    presenterm # slideshows
 
     # TODO: move to devshell when pgrx supports it https://github.com/pgcentralfoundation/pgrx/pull/1683
     rustup
