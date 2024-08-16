@@ -30,7 +30,7 @@ end
 wezterm.on('update-right-status', function(window, pane)
   local scheme = wezterm.get_builtin_color_schemes()[scheme_for_appearance(get_appearance())]
 
-  local status = ''
+  local status = {}
 
   -- Figure out the cwd and host of the current pane. This will pick up the hostname for the remote host if your shell
   -- is using OSC 7 on the remote host.
@@ -43,16 +43,20 @@ wezterm.on('update-right-status', function(window, pane)
     local directory = cwd:gsub(wezterm.home_dir, '~')
     local hostname = cwd_uri.host or wezterm.hostname()
 
-    status = status .. wezterm.format { { Foreground = { Color = scheme.ansi[6] } }, { Text = git_branch .. ' ' } }
-    status = status .. wezterm.format { { Foreground = { Color = scheme.ansi[2] } }, { Text = git_status .. ' ' } }
-    status = status .. wezterm.format { { Foreground = { Color = scheme.ansi[7] } }, { Text = directory .. ' ' } }
-    status = status .. wezterm.format { { Foreground = { Color = scheme.ansi[3] } }, { Text = hostname .. ' ' } }
+    if git_branch ~= '' then
+    	table.insert(status, wezterm.format { { Foreground = { Color = scheme.ansi[6] } }, { Text = git_branch } })
+    end
+    if git_status ~= '' then
+    	table.insert(status, wezterm.format { { Foreground = { Color = scheme.ansi[2] } }, { Text = git_status } })
+    end
+    table.insert(status, wezterm.format { { Foreground = { Color = scheme.ansi[7] } }, { Text = directory } })
+    table.insert(status, wezterm.format { { Foreground = { Color = scheme.ansi[3] } }, { Text = hostname } })
   end
 
   local date = wezterm.strftime '%a %b %-d %T'
-  status = status .. wezterm.format { { Foreground = { Color = scheme.ansi[4] } }, { Text = date } }
+  table.insert(status, wezterm.format { { Foreground = { Color = scheme.ansi[4] } }, { Text = date } })
 
-  window:set_right_status(status)
+  window:set_right_status(table.concat(status, ' '))
 end)
 
 config.native_macos_fullscreen_mode = true
