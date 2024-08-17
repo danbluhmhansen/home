@@ -2,11 +2,11 @@ local config = wezterm.config_builder()
 
 local shell = '/bin/zsh'
 
-config.default_prog = { shell, '-c', 'nu' }
+config.default_prog = { shell, '-cil', 'nu' }
 
 config.launch_menu = {
-  { label = 'bottom', args = { shell, '-c', 'btm' },             cwd = '~', },
-  { label = 'broot',  args = { shell, '-c', 'nu --execute br' }, cwd = '~', },
+  { label = 'bottom', args = { shell, '-cil', 'btm' },             cwd = '~', },
+  { label = 'broot',  args = { shell, '-cil', 'nu --execute br' }, cwd = '~', },
   { label = 'sh',     args = { shell }, },
 }
 
@@ -126,7 +126,7 @@ local br_act = wezterm.action_callback(function(win, pane)
   if (br_pane == nil) then
     win:perform_action(
       act.SplitPane {
-        command = { args = { shell, '-c', 'nu --execute br' } },
+        command = { args = { shell, '-cil', 'nu --execute br' } },
         direction = 'Left',
         size = { Cells = 36 },
       },

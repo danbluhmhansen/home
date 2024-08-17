@@ -157,6 +157,7 @@
 
             homebrew.enable = true;
             homebrew.onActivation.cleanup = "zap";
+            homebrew.brews = ["podman"];
             homebrew.casks = [
               {
                 name = "hammerspoon";
@@ -216,6 +217,7 @@
             };
 
             programs.zsh.enable = true;
+            programs.zsh.profileExtra = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
           };
         };
       };
