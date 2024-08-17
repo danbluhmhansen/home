@@ -10,19 +10,9 @@
     maple-mono-NF # monospace font
     discord # chat
     presenterm # slideshows
-
-    # TODO: move to devshell when pgrx supports it https://github.com/pgcentralfoundation/pgrx/pull/1683
-    rustup
-    pkg-config
-    openssl
-    usql
-    cargo-outdated
   ];
 
-  home.sessionVariables = {
-    # TODO: remove when rust configuration is moved to a devshell
-    PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
-  };
+  home.sessionVariables = {};
 
   fonts.fontconfig.enable = true;
 

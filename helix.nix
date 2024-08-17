@@ -126,14 +126,16 @@
       };
     };
 
-    extraPackages = [
-      pkgs.ltex-ls # grammar & spelling
-      pkgs.marksman # markdown
-      pkgs.taplo # toml
-      pkgs.vscode-langservers-extracted # css, html, javascript, json, jsx
-      pkgs.yaml-language-server # yaml
-      pkgs.deno # formatters
-      pkgs.nodePackages.prettier # formatters
+    extraPackages = with pkgs; [
+      dockerfile-language-server-nodejs # dockerfile
+      docker-compose-language-service # docker-compose
+      ltex-ls # grammar & spelling
+      marksman # markdown
+      taplo # toml
+      vscode-langservers-extracted # css, html, javascript, json, jsx
+      yaml-language-server # yaml
+      deno # formatters
+      nodePackages.prettier # formatters
     ];
   };
 }
