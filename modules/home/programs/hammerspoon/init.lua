@@ -40,3 +40,9 @@ end)
 hs.hotkey.bind({ 'cmd', 'ctrl' }, 'P', function()
   pass_chooser:show()
 end)
+
+PaperWM = hs.loadSpoon("PaperWM")
+PaperWM.window_ratios = { 0.33333, 0.5, 0.66666 }
+PaperWM.window_gap = 6
+PaperWM:bindHotkeys(PaperWM.default_hotkeys)
+PaperWM:start()

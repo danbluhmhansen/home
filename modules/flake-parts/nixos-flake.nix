@@ -1,0 +1,22 @@
+{inputs, ...}: {
+  imports = [
+    inputs.nixos-flake.flakeModule
+  ];
+  perSystem = {self', ...}: {
+    packages.default = self'.packages.activate;
+
+    # Flake inputs we want to update periodically
+    # Run: `nix run .#update`.
+    nixos-flake = {
+      primary-inputs = [
+        "nixpkgs"
+        "home-manager"
+        "nix-darwin"
+        "nixos-flake"
+        "firefox-darwin"
+        "firefox-addons"
+        "helix"
+      ];
+    };
+  };
+}

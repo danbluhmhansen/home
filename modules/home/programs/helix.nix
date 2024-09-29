@@ -1,5 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  helix-master,
+  ...
+}: {
   programs.helix = {
+    package = helix-master.packages.${pkgs.system}.default;
     defaultEditor = true;
 
     settings = {
@@ -33,16 +38,21 @@
         soft-wrap.enable = true;
         file-picker.hidden = false;
         shell = ["nu" "--stdin" "--commands"];
+        end-of-line-diagnostics = "hint";
+        inline-diagnostics = {
+          cursor-line = "warning";
+        };
       };
 
       keys.normal = {
         H = "goto_first_nonwhitespace";
         L = "goto_line_end";
+        C-h = ":toggle lsp.display-inlay-hints";
         space.w = ":write";
         space.x = ":buffer-close";
         space.q = ":quit";
         space.l = ":format";
-        C-h = ":toggle lsp.display-inlay-hints";
+        space.F = "file_picker_in_current_buffer_directory";
       };
 
       keys.select = {
@@ -92,6 +102,12 @@
         {
           name = "nix";
           formatter.command = "alejandra";
+        }
+        {
+          name = "python";
+          formatter.command = "ruff";
+          formatter.args = ["format" "--line-length" "120" "-"];
+          auto-format = false;
         }
         {
           name = "rust";
