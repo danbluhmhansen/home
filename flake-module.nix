@@ -22,10 +22,9 @@ in {
       forAllNixFiles "${self}/configurations/darwin"
       (fn: self.nixos-flake.lib.mkMacosSystem {home-manager = true;} fn);
 
-    # TODO: enable nixosConfigurations
-    # nixosConfigurations =
-    #   forAllNixFiles "${self}/configurations/nixos"
-    #   (fn: self.nixos-flake.lib.mkLinuxSystem {home-manager = true;} fn);
+    nixosConfigurations =
+      forAllNixFiles "${self}/configurations/nixos"
+      (fn: self.nixos-flake.lib.mkLinuxSystem {home-manager = true;} fn);
 
     darwinModules =
       forAllNixFiles "${self}/modules/darwin"

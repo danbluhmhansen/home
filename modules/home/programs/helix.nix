@@ -1,10 +1,8 @@
-{
-  pkgs,
-  helix-master,
-  ...
-}: {
+{flake, pkgs, ...}: let
+  inherit (flake) inputs;
+in {
   programs.helix = {
-    package = helix-master.packages.${pkgs.system}.default;
+    package = inputs.helix.packages.${pkgs.system}.default;
     defaultEditor = true;
 
     settings = {

@@ -37,7 +37,7 @@
         # So we must do this manually; https://flake.parts/overlays#consuming-an-overlay
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
-          # overlays = lib.attrValues self.overlays;
+          overlays = lib.attrValues self.overlays;
         };
       };
     };

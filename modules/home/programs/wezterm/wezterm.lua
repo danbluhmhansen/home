@@ -1,5 +1,6 @@
 local config = wezterm.config_builder()
 
+-- TODO: shell agnostic
 local shell = '/bin/zsh'
 
 config.default_prog = { shell, '-cil', 'nu' }

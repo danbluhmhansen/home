@@ -5,6 +5,8 @@
 in {
   imports = [
     {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
       users.users.${config.me.username}.isNormalUser = true;
       home-manager.users.${config.me.username} = {};
       home-manager.sharedModules = [

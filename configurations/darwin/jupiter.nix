@@ -1,4 +1,3 @@
-# Configuration for my M1 Macbook Max (using nix-darwin)
 {flake, ...}: let
   inherit (flake) inputs;
   inherit (inputs) self;
@@ -19,8 +18,6 @@ in {
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
-
-  programs.zsh.enable = true;
 
   security.pam.enableSudoTouchIdAuth = true;
   system.defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
