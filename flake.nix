@@ -6,7 +6,7 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nixos-flake.url = "github:srid/nixos-flake";
+    nixos-unified.url = "github:srid/nixos-unified";
 
     firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -16,18 +16,12 @@
   outputs = inputs @ {self, ...}:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
-      imports =
-        (with builtins;
-          map
-          (fn: ./modules/flake-parts/${fn})
-          (attrNames (readDir ./modules/flake-parts)))
-        ++ [
-          ./flake-module.nix
-        ];
+      imports = with builtins;
+        map
+        (fn: ./modules/flake-parts/${fn})
+        (attrNames (readDir ./modules/flake-parts));
 
       perSystem = {
-        self',
-        pkgs,
         lib,
         system,
         ...
