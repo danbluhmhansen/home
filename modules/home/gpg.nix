@@ -7,6 +7,7 @@
   ];
 
   programs.gpg = {
+    enable = true;
     publicKeys = [
       {
         source = pkgs.fetchurl {

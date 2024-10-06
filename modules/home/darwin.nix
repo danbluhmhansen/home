@@ -15,7 +15,14 @@
           '';
         };
 
-        home.packages = with pkgs; [pinentry_mac pueue];
+        home.packages = with pkgs; [
+          discord
+          # TODO: re-enable when https://github.com/NixOS/nixpkgs/issues/327836 is closed
+          # mpv
+          pinentry_mac
+          pueue
+          yt-dlp
+        ];
 
         launchd.agents.pueue.enable = true;
         launchd.agents.pueue.config = {
@@ -31,5 +38,8 @@
         programs.zsh.profileExtra = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
       }
     )
+    ./firefox.nix
+    ./starship.nix
+    ./wezterm
   ];
 }

@@ -8,6 +8,7 @@
 in {
   programs.firefox =
     {
+      enable = true;
       profiles = {
         ${config.me.username} = {
           search = {
