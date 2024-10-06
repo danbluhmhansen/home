@@ -1,31 +1,37 @@
 local config = wezterm.config_builder()
 
--- TODO: shell agnostic
-local shell = '/bin/zsh'
+local shell = wezterm.target_triple == 'aarch64-apple-darwin' and '/bin/zsh' or '/bin/bash';
 
 config.default_prog = { shell, '-cil', 'nu' }
 
 config.launch_menu = {
-  { label = 'bottom', args = { shell, '-cil', 'btm' },             cwd = '~', },
-  { label = 'broot',  args = { shell, '-cil', 'nu --execute br' }, cwd = '~', },
-  { label = 'sh',     args = { shell }, },
+  wezterm.run_child_process { shell, '-c', 'which broot' } and
+  { label = 'broot', args = { shell, '-cil', 'nu --execute br' }, cwd = '~', } or {},
+  { label = 'sh', args = { shell }, },
+  wezterm.run_child_process { shell, '-c', 'which btm' } and
+  { label = 'bottom', args = { shell, '-cil', 'btm' }, cwd = '~', } or {},
 }
 
--- wezterm.gui is not available to the mux server, so take care to
--- do something reasonable when this config is evaluated by the mux
-function get_appearance()
-  if wezterm.gui then
-    return wezterm.gui.get_appearance()
-  end
-  return 'Dark'
+-- wezterm.gui is not available to the mux server, so take care to do something reasonable when this config is evaluated
+-- by the mux
+local function get_appearance()
+  return wezterm.gui and wezterm.gui.get_appearance() or 'Dark'
 end
 
-function scheme_for_appearance(appearance)
-  if appearance:find 'Dark' then
-    return 'Catppuccin Mocha'
-  else
-    return 'Catppuccin Latte'
+local function scheme_for_appearance(appearance)
+  local file = io.open(os.getenv('HOME') .. '/.config/helix/themes/theme.toml', 'w')
+
+  if file then
+    if appearance:find 'Dark' then
+      file:write('inherits = "catppuccin_mocha"')
+    else
+      file:write('inherits = "catppuccin_latte"')
+    end
+    file:close()
+    wezterm.run_child_process { shell, '-c', 'pkill -USR1 hx' }
   end
+
+  return appearance:find 'Dark' and 'Catppuccin Mocha' or 'Catppuccin Latte'
 end
 
 wezterm.on('update-right-status', function(window, pane)
@@ -45,10 +51,10 @@ wezterm.on('update-right-status', function(window, pane)
     local hostname = cwd_uri.host or wezterm.hostname()
 
     if git_branch ~= '' then
-    	table.insert(status, wezterm.format { { Foreground = { Color = scheme.ansi[6] } }, { Text = git_branch } })
+      table.insert(status, wezterm.format { { Foreground = { Color = scheme.ansi[6] } }, { Text = git_branch } })
     end
     if git_status ~= '' then
-    	table.insert(status, wezterm.format { { Foreground = { Color = scheme.ansi[2] } }, { Text = git_status } })
+      table.insert(status, wezterm.format { { Foreground = { Color = scheme.ansi[2] } }, { Text = git_status } })
     end
     table.insert(status, wezterm.format { { Foreground = { Color = scheme.ansi[7] } }, { Text = directory } })
     table.insert(status, wezterm.format { { Foreground = { Color = scheme.ansi[3] } }, { Text = hostname } })
@@ -152,4 +158,3 @@ table.insert(keys, {
 config.keys = keys
 
 return config
-
