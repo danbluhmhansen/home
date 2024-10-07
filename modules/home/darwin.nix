@@ -17,11 +17,8 @@
 
         home.packages = with pkgs; [
           discord
-          # TODO: re-enable when https://github.com/NixOS/nixpkgs/issues/327836 is closed
-          # mpv
           pinentry_mac
           pueue
-          yt-dlp
         ];
 
         launchd.agents.pueue.enable = true;
@@ -36,6 +33,10 @@
 
         programs.zsh.enable = true;
         programs.zsh.profileExtra = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
+
+        # TODO: re-enable when https://github.com/NixOS/nixpkgs/issues/327836 is closed
+        programs.mpv.enable = false;
+        programs.yt-dlp.enable = true;
       }
     )
     ./firefox.nix
