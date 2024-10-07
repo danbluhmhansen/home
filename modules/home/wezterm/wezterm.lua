@@ -7,6 +7,8 @@ config.default_prog = { shell, '-cil', 'nu' }
 config.launch_menu = {
   wezterm.run_child_process { shell, '-c', 'which broot' } and
   { label = 'broot', args = { shell, '-cil', 'nu --execute br' }, cwd = '~', } or {},
+  wezterm.run_child_process { shell, '-c', 'which yazi' } and
+  { label = 'yazi', args = { shell, '-cil', 'yazi' }, cwd = '~', } or {},
   { label = 'sh', args = { shell }, },
   wezterm.run_child_process { shell, '-c', 'which btm' } and
   { label = 'bottom', args = { shell, '-cil', 'btm' }, cwd = '~', } or {},
@@ -73,7 +75,9 @@ config.color_scheme = scheme_for_appearance(get_appearance())
 config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = false
 
-config.font_size = 16
+if wezterm.target_triple == 'aarch64-apple-darwin' then
+  config.font_size = 16
+end
 config.font = wezterm.font {
   family = 'Maple Mono NF',
   harfbuzz_features = { 'cv01', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', },

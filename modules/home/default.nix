@@ -11,6 +11,7 @@
         programs.ripgrep.enable = true;
         programs.fzf.enable = true;
         programs.bottom.enable = true;
+        programs.yazi.enable = true;
         programs.bat.config.theme = "base16-256";
       }
     )
