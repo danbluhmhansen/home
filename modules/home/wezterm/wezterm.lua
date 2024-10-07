@@ -8,7 +8,7 @@ config.launch_menu = {
   wezterm.run_child_process { shell, '-c', 'which broot' } and
   { label = 'broot', args = { shell, '-cil', 'nu --execute br' }, cwd = '~', } or {},
   wezterm.run_child_process { shell, '-c', 'which yazi' } and
-  { label = 'yazi', args = { shell, '-cil', 'yazi' }, cwd = '~', } or {},
+  { label = 'yazi', args = { shell, '-cil', 'nu --execute yy' }, cwd = '~', } or {},
   { label = 'sh', args = { shell }, },
   wezterm.run_child_process { shell, '-c', 'which btm' } and
   { label = 'bottom', args = { shell, '-cil', 'btm' }, cwd = '~', } or {},
