@@ -2,16 +2,16 @@ local config = wezterm.config_builder()
 
 local shell = wezterm.target_triple == 'aarch64-apple-darwin' and '/bin/zsh' or '/bin/bash';
 
-config.default_prog = { shell, '-cil', 'nu' }
+config.default_prog = { shell, '-ci', 'nu' }
 
 config.launch_menu = {
   wezterm.run_child_process { shell, '-c', 'which broot' } and
-  { label = 'broot', args = { shell, '-cil', 'nu --execute br' }, cwd = '~', } or {},
+  { label = 'broot', args = { shell, '-ci', 'nu --execute br' }, cwd = '~', } or {},
   wezterm.run_child_process { shell, '-c', 'which yazi' } and
-  { label = 'yazi', args = { shell, '-cil', 'nu --execute yy' }, cwd = '~', } or {},
+  { label = 'yazi', args = { shell, '-ci', 'nu --execute yy' }, cwd = '~', } or {},
   { label = 'sh', args = { shell }, },
   wezterm.run_child_process { shell, '-c', 'which btm' } and
-  { label = 'bottom', args = { shell, '-cil', 'btm' }, cwd = '~', } or {},
+  { label = 'bottom', args = { shell, '-ci', 'btm' }, cwd = '~', } or {},
 }
 
 -- wezterm.gui is not available to the mux server, so take care to do something reasonable when this config is evaluated
@@ -23,6 +23,31 @@ end
 local function scheme_for_appearance(appearance)
   return appearance:find 'Dark' and 'Catppuccin Mocha' or 'Catppuccin Latte'
 end
+
+wezterm.on('user-var-changed', function(window, pane, name, value)
+  if name == 'br' then
+    local ex_pane = pane:tab():get_pane_direction('Right')
+    if ex_pane then
+      local proc_info = ex_pane:get_foreground_process_info()
+      if proc_info.name == 'hx' then
+        ex_pane:send_text(':o ' .. value)
+        ex_pane:activate()
+      end
+      if proc_info.name == 'bash' or proc_info.name == 'nu' or proc_info.name == 'zsh' then
+        ex_pane:send_text('hx ' .. value)
+        ex_pane:activate()
+      end
+    else
+      local dims = pane:get_dimensions()
+      local new_pane = pane:split {
+        args = { shell, '-ci', 'nu --execute hx' },
+        direction = 'Right',
+        size = dims.cols - 36,
+      }
+      new_pane:send_text(':o ' .. value)
+    end
+  end
+end)
 
 wezterm.on('update-right-status', function(window, pane)
   local scheme = wezterm.get_builtin_color_schemes()[scheme_for_appearance(get_appearance())]
@@ -125,7 +150,7 @@ local br_act = wezterm.action_callback(function(win, pane)
   if (br_pane == nil) then
     win:perform_action(
       act.SplitPane {
-        command = { args = { shell, '-cil', 'nu --execute br' } },
+        command = { args = { shell, '-ci', 'nu --execute br' } },
         direction = 'Left',
         size = { Cells = 36 },
       },

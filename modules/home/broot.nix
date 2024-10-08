@@ -5,14 +5,13 @@
       icon_theme = "nerdfont";
       imports = lib.mkForce ["skins/native-16.hjson"];
       verbs = [
-        # TODO: improve wz.nu script and re-enable
-        # {
-        #   invocation = "edit";
-        #   shortcut = "e";
-        #   key = "ctrl-e";
-        #   external = "nu ~/wz.nu {file}:{line} {directory}";
-        #   leave_broot = false;
-        # }
+        {
+          invocation = "edit";
+          shortcut = "e";
+          key = "ctrl-e";
+          external = ''$SHELL -ci "__wezterm_set_user_var br {file}:{line}"'';
+          leave_broot = false;
+        }
         {
           invocation = "open_stay";
           shortcut = "os";
