@@ -21,18 +21,6 @@ local function get_appearance()
 end
 
 local function scheme_for_appearance(appearance)
-  local file = io.open(os.getenv('HOME') .. '/.config/helix/themes/theme.toml', 'w')
-
-  if file then
-    if appearance:find 'Dark' then
-      file:write('inherits = "catppuccin_mocha"')
-    else
-      file:write('inherits = "catppuccin_latte"')
-    end
-    file:close()
-    wezterm.run_child_process { shell, '-c', 'pkill -USR1 hx' }
-  end
-
   return appearance:find 'Dark' and 'Catppuccin Mocha' or 'Catppuccin Latte'
 end
 
