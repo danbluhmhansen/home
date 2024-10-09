@@ -39,12 +39,18 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
       end
     else
       local dims = pane:get_dimensions()
-      local new_pane = pane:split {
-        args = { shell, '-ci', 'nu --execute hx' },
+      local pos = value:find('␟')
+      local dir = value:sub(1, pos - 1)
+      local file = value:sub(pos + 3, -1)
+      wezterm.log_info('br dir', dir)
+      wezterm.log_info('br file', file)
+      pane:split {
+        args = { shell, '-ci', 'nu --execute "hx ' .. file .. '"' },
         direction = 'Right',
         size = dims.cols - 36,
+        -- NOTE: cwd does not currently work?
+        cwd = dir,
       }
-      new_pane:send_text(':o ' .. value)
     end
   end
 end)

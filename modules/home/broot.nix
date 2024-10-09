@@ -9,7 +9,7 @@
           invocation = "edit";
           shortcut = "e";
           key = "ctrl-e";
-          external = ''$SHELL -ci "__wezterm_set_user_var br {file}:{line}"'';
+          external = ''$SHELL -ci "__wezterm_set_user_var br {directory}␟{file}:{line}"'';
           leave_broot = false;
         }
         {
