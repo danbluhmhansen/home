@@ -20,7 +20,38 @@ local function get_appearance()
   return wezterm.gui and wezterm.gui.get_appearance() or 'Dark'
 end
 
+local function hx_appearance()
+  local file = io.open(os.getenv('HOME') .. '/.config/helix/themes/theme.toml', 'r')
+
+  if file and file:read("*all"):find('inherits = "catppuccin_latte"') then
+    file:close()
+    return 'Light'
+  elseif file and file:read("*all"):find('inherits = "catppuccin_mocha"') then
+    file:close()
+    return 'Dark'
+  elseif file then
+    file:close()
+  end
+
+  return 'Dark'
+end
+
 local function scheme_for_appearance(appearance)
+  local file = io.open(os.getenv('HOME') .. '/.config/helix/themes/theme.toml', 'r+')
+
+  if file then
+    if appearance:find('Light') and hx_appearance():find('Dark') then
+      wezterm.log_info('hx light')
+      file:write('inherits = "catppuccin_latte"')
+      wezterm.run_child_process { shell, '-c', 'pkill -USR1 hx' }
+    elseif appearance:find('Dark') and hx_appearance():find('Light') then
+      wezterm.log_info('hx dark')
+      file:write('inherits = "catppuccin_mocha"')
+      wezterm.run_child_process { shell, '-c', 'pkill -USR1 hx' }
+    end
+    file:close()
+  end
+
   return appearance:find 'Dark' and 'Catppuccin Mocha' or 'Catppuccin Latte'
 end
 
