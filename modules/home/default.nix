@@ -3,7 +3,7 @@
   imports = [
     (
       {pkgs, ...}: {
-        home.packages = with pkgs; [cachix fd sad];
+        home.packages = with pkgs; [cachix fd sad vivid];
         programs.home-manager.enable = true;
         programs.direnv.enable = true;
         programs.direnv.nix-direnv.enable = true;
