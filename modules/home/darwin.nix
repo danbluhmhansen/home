@@ -12,6 +12,7 @@ in {
           ".gnupg/gpg-agent.conf".text = ''
             pinentry-program ${pkgs.pinentry_mac}/bin/pinentry-mac
             enable-ssh-support
+            ttyname $GPG_TTY
             default-cache-ttl 60
             max-cache-ttl 120
           '';
@@ -42,6 +43,21 @@ in {
           StandardErrorPath = "/Users/${flake.config.me.username}/.cache/pueue/err.log";
           StandardOutPath = "/Users/${flake.config.me.username}/.cache/pueue/out.log";
           ProgramArguments = ["${pkgs.pueue}/bin/pueud" "--verbose"];
+        };
+
+        launchd.agents.gpg-agent.enable = true;
+        launchd.agents.gpg-agent.config = {
+          Label = "gpg-agent";
+          RunAtLoad = true;
+          KeepAlive = false;
+          ProgramArguments = ["/etc/profiles/per-user/${flake.config.me.username}/bin/gpg-connect-agent" "/bye"];
+        };
+
+        launchd.agents.gpg-agent-symlink.enable = true;
+        launchd.agents.gpg-agent-symlink.config = {
+          Label = "gpg-agent-symlink";
+          RunAtLoad = true;
+          ProgramArguments = ["/bin/sh" "-c" "/bin/ln -sf $HOME/.gnupg/S.gpg-agent.ssh $SSH_AUTH_SOCK"];
         };
 
         programs.zsh.enable = true;

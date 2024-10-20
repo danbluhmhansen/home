@@ -34,3 +34,4 @@ $env.ENV_CONVERSIONS = {
   }
 }
 
+$env.GPG_TTY = (tty)
