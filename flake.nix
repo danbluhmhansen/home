@@ -7,6 +7,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-unified.url = "github:srid/nixos-unified";
+    nix-std.url = "github:chessai/nix-std";
 
     firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";

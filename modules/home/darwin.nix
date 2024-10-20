@@ -1,4 +1,6 @@
-{
+{flake, ...}: let
+  inherit (flake) inputs;
+in {
   imports = [
     (
       {
@@ -13,6 +15,17 @@
             default-cache-ttl 60
             max-cache-ttl 120
           '';
+          "Library/Application Support/org.dystroy.bacon/prefs.toml".text = inputs.nix-std.lib.serde.toTOML {
+            keybindings = {
+              esc = "back";
+              g = "scroll-to-top";
+              shift-g = "scroll-to-bottom";
+              j = "scroll-lines(1)";
+              k = "scroll-lines(-1)";
+              h = "scroll-pages(-1)";
+              l = "scroll-pages(1)";
+            };
+          };
         };
 
         home.packages = with pkgs; [
