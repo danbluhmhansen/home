@@ -1,9 +1,10 @@
 {pkgs, ...}: {
-  home.packages = [
+  home.packages = with pkgs; [
     # password management
-    pkgs.openssh
-    pkgs.libfido2
-    pkgs.gopass
+    openssh
+    libfido2
+    gopass
+    prs
   ];
 
   programs.gpg = {

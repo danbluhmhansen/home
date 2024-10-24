@@ -2,7 +2,14 @@
   home.stateVersion = "24.05";
   imports = [
     (
-      {pkgs, ...}: {
+      {
+        flake,
+        pkgs,
+        ...
+      }: {
+        home.sessionVariables = {
+          PASSWORD_STORE_DIR = "/home/${flake.config.me.username}/.local/share/pass";
+        };
         home.packages = with pkgs; [cachix fd sad vivid];
         programs.home-manager.enable = true;
         programs.direnv.enable = true;
