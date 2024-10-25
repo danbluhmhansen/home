@@ -35,6 +35,19 @@ in {
           pueue
         ];
 
+        launchd.agents.env.enable = true;
+        launchd.agents.env.config = {
+          Label = "env";
+          RunAtLoad = true;
+          ProgramArguments = [
+            "/bin/sh"
+            "-c"
+            ''
+              launchctl setenv PASSWORD_STORE_DIR /Users/${flake.config.me.username}/.local/share/pass
+            ''
+          ];
+        };
+
         launchd.agents.pueue.enable = true;
         launchd.agents.pueue.config = {
           Label = "pueue";

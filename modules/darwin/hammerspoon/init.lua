@@ -3,12 +3,12 @@ spoon.ReloadConfiguration:start()
 
 local pass_chooser = hs.chooser.new(function(choice)
   if choice then
-    hs.execute('gopass show --clip ' .. choice.text, true)
+    hs.execute('prs copy ' .. choice.text, true)
   end
 end)
 
 pass_chooser:choices(function()
-  local out, status = hs.execute('gopass ls --flat', true)
+  local out, status = hs.execute('prs list --list', true)
   if status then
     local t = {}
     for str in string.gmatch(out, '([^%s]+)') do
