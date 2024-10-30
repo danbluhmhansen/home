@@ -44,6 +44,9 @@ in {
             "-c"
             ''
               launchctl setenv PASSWORD_STORE_DIR /Users/${flake.config.me.username}/.local/share/pass
+              launchctl setenv HOMEBREW_PREFIX /opt/homebrew
+              launchctl setenv HOMEBREW_CELLAR /opt/homebrew/Cellar
+              launchctl setenv HOMEBREW_REPOSITORY /opt/homebrew
             ''
           ];
         };
