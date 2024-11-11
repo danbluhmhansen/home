@@ -59,6 +59,13 @@ in {
   homebrew.brews = ["podman" "podman-compose"];
   homebrew.casks = [
     {
+      name = "chromium";
+      args = {
+        appdir = "~/Applications";
+        no_quarantine = true;
+      };
+    }
+    {
       name = "hammerspoon";
       args = {appdir = "~/Applications";};
     }
