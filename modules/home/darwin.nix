@@ -54,11 +54,10 @@ in {
         launchd.agents.pueue.enable = true;
         launchd.agents.pueue.config = {
           Label = "pueue";
-          LimitLoadToSessionType = "Aqua Background LoginWindow StandardIO System";
           RunAtLoad = true;
           StandardErrorPath = "/Users/${flake.config.me.username}/.cache/pueue/err.log";
           StandardOutPath = "/Users/${flake.config.me.username}/.cache/pueue/out.log";
-          ProgramArguments = ["${pkgs.pueue}/bin/pueud" "--verbose"];
+          ProgramArguments = ["${pkgs.pueue}/bin/pueued" "--verbose"];
         };
 
         launchd.agents.gpg-agent.enable = true;
