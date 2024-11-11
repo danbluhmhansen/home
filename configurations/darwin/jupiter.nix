@@ -56,7 +56,7 @@ in {
 
   homebrew.enable = true;
   homebrew.onActivation.cleanup = "zap";
-  homebrew.brews = ["mpv" "podman"];
+  homebrew.brews = ["podman" "podman-compose"];
   homebrew.casks = [
     {
       name = "hammerspoon";

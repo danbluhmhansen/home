@@ -78,8 +78,7 @@ in {
         programs.zsh.enable = true;
         programs.zsh.profileExtra = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
 
-        # TODO: re-enable when https://github.com/NixOS/nixpkgs/issues/327836 is closed
-        programs.mpv.enable = false;
+        programs.mpv.enable = true;
         programs.yt-dlp.enable = true;
       }
     )
