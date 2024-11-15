@@ -1,14 +1,8 @@
-{...}: {
-  imports = [];
-  perSystem = {
-    inputs',
-    config,
-    pkgs,
-    ...
-  }: {
+{
+  perSystem = {pkgs, ...}: {
     devShells.default = pkgs.mkShell {
-      name = "nixos-config-shell";
-      meta.description = "Dev environment for nixos-config";
+      name = "nixos-unified-shell";
+      meta.description = "Shell environment for modifying this Nix configuration";
       packages = with pkgs; [alejandra lua-language-server nil];
     };
   };
