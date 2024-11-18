@@ -7,7 +7,7 @@
         pkgs,
         ...
       }: {
-        home.packages = with pkgs; [cachix fd imagemagick sad usql vivid];
+        home.packages = with pkgs; [cachix fd imagemagick sad termscp usql vivid];
         programs.home-manager.enable = true;
         programs.direnv.enable = true;
         programs.direnv.nix-direnv.enable = true;
