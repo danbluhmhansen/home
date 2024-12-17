@@ -7,13 +7,14 @@
         pkgs,
         ...
       }: {
-        home.packages = with pkgs; [cachix fd imagemagick sad termscp usql vivid];
+        home.packages = with pkgs; [cachix fd sad termscp usql vivid];
         programs.home-manager.enable = true;
         programs.direnv.enable = true;
         programs.direnv.nix-direnv.enable = true;
         programs.bat.enable = true;
         programs.ripgrep.enable = true;
         programs.fzf.enable = true;
+        programs.skim.enable = true;
         programs.bottom.enable = true;
         programs.bat.config.theme = "base16-256";
       }
