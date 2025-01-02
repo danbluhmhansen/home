@@ -1,13 +1,17 @@
 {pkgs, ...}: {
   home.file = {
     ".hammerspoon/init.lua".source = ./init.lua;
-    ".hammerspoon/Spoons/ReloadConfiguration.spoon".source = pkgs.fetchzip {
-      url = "https://github.com/Hammerspoon/Spoons/raw/c53546e00552451e077677a92eb1646c65acdca1/Spoons/ReloadConfiguration.spoon.zip";
-      hash = "sha256-kNyFHP3i1O4VhZQL2Ief6002TrvXzT4doZ9w8X5z6C0=";
+    ".hammerspoon/Spoons/ReloadConfiguration.spoon/init.lua".source = pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/Hammerspoon/Spoons/640619cdffc7bb67b9273d059a32586d55be17f8/Source/ReloadConfiguration.spoon/init.lua";
+      hash = "sha256-lNnrff43pjJ7pPPUTHlVTCywWx4eU1GVPSFr7NAUs7c=";
     };
     ".hammerspoon/Spoons/PaperWM.spoon/init.lua".source = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/mogenson/PaperWM.spoon/02a9ec65217167882b14c480cc1f7a0365f53f66/init.lua";
-      hash = "sha256-setLXaKf43weN1Cj1jaeng30zxjeWQ/qz310+MbWB2A=";
+      url = "https://raw.githubusercontent.com/mogenson/PaperWM.spoon/d6366efed263793df5919b2f6d7185c9056995c6/init.lua";
+      hash = "sha256-fYkY/Y7AB8BYrkexxsZuI22iAeMwNa14cxBg/ZIA2RY=";
+    };
+    ".hammerspoon/Spoons/PaperWM.spoon/mission_control.lua".source = pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/mogenson/PaperWM.spoon/d6366efed263793df5919b2f6d7185c9056995c6/mission_control.lua";
+      hash = "sha256-xdvtPvM56jXsLZ+T6NONdhIKyFii6TZRemhPaMJWsvw=";
     };
   };
 }

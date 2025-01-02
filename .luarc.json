@@ -1,7 +1,7 @@
 {
-    "diagnostics.globals": [
-        "wezterm",
-        "hs",
-        "spoon"
-    ]
+  "diagnostics.globals": [
+    "wezterm",
+    "hs",
+    "spoon"
+  ]
 }
