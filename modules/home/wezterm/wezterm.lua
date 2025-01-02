@@ -58,23 +58,29 @@ end
 wezterm.on('user-var-changed', function(window, pane, name, value)
   if name == 'br' then
     local ex_pane = pane:tab():get_pane_direction('Right')
+
+      local pos = value:find('␟')
+      local dir = value:sub(1, pos - 1)
+      local file = value:sub(pos + 3, -1)
+
     if ex_pane then
       local proc_info = ex_pane:get_foreground_process_info()
+
       if proc_info.name == 'hx' then
-        ex_pane:send_text(':o ' .. value)
+        ex_pane:send_text(':o ' .. file)
         ex_pane:activate()
       end
+
       if proc_info.name == 'bash' or proc_info.name == 'nu' or proc_info.name == 'zsh' then
-        ex_pane:send_text('hx ' .. value)
+        ex_pane:send_text('hx --working-dir ' .. dir .. ' ' .. file)
         ex_pane:activate()
       end
     else
       local dims = pane:get_dimensions()
-      local pos = value:find('␟')
-      local dir = value:sub(1, pos - 1)
-      local file = value:sub(pos + 3, -1)
+
       wezterm.log_info('br dir', dir)
       wezterm.log_info('br file', file)
+
       pane:split {
         args = { shell, '-ci', 'nu --execute "hx ' .. file .. '"' },
         direction = 'Right',
