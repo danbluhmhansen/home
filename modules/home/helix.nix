@@ -1,4 +1,8 @@
-{flake, pkgs, ...}: let
+{
+  flake,
+  pkgs,
+  ...
+}: let
   inherit (flake) inputs;
 in {
   programs.helix = {
@@ -10,43 +14,56 @@ in {
       theme = "theme";
 
       editor = {
+        shell = ["nu" "--stdin" "--commands"];
         line-number = "relative";
         cursorline = true;
-        color-modes = true;
         bufferline = "multiple";
+        color-modes = true;
+        text-width = 120;
+        end-of-line-diagnostics = "info";
+
         statusline = {
-          left = ["mode" "spinner"];
-          center = ["file-name"];
-          right = [
-            "diagnostics"
-            "position"
-            "file-encoding"
-            "file-line-ending"
-            "file-type"
-          ];
+          left = ["mode" "spinner" "diagnostics" "workspace-diagnostics"];
+          center = ["read-only-indicator" "file-name" "file-modification-indicator"];
+          right = ["position" "position-percentage" "primary-selection-length" "register" "file-encoding"];
         };
+
         lsp = {
           display-messages = true;
-          auto-signature-help = false;
+          goto-reference-include-declaration = false;
         };
+
         cursor-shape = {
           insert = "bar";
           select = "underline";
         };
+
+        file-picker.hidden = false;
+        auto-pairs = false;
+
+        whitespace = {
+          render.tab = "all";
+          render.nbsp = "all";
+          render.nnbsp = "all";
+          characters.space = "·";
+          characters.nbsp = "⍽";
+          characters.nnbsp = "␣";
+          characters.tab = "→";
+          characters.newline = "⏎";
+          characters.tabpad = "·";
+        };
+
         indent-guides.render = true;
         soft-wrap.enable = true;
-        file-picker.hidden = false;
-        shell = ["nu" "--stdin" "--commands"];
-        end-of-line-diagnostics = "hint";
-        inline-diagnostics = {
-          cursor-line = "warning";
-        };
+        inline-diagnostics.cursor-line = "warning";
       };
 
       keys.normal = {
         H = "goto_first_nonwhitespace";
         L = "goto_line_end";
         C-h = ":toggle lsp.display-inlay-hints";
+        tab = "move_parent_node_end";
+        S-tab = "move_parent_node_start";
         space.w = ":write";
         space.x = ":buffer-close";
         space.q = ":quit";
@@ -54,9 +71,17 @@ in {
         space.F = "file_picker_in_current_buffer_directory";
       };
 
+      keys.insert = {
+        tab = "move_parent_node_end";
+        S-tab = "move_parent_node_start";
+        A-tab = "insert_tab";
+      };
+
       keys.select = {
         H = "goto_first_nonwhitespace";
         L = "goto_line_end";
+        tab = "move_parent_node_end";
+        S-tab = "move_parent_node_start";
       };
     };
 
