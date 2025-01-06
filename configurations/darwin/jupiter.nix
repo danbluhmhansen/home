@@ -1,4 +1,4 @@
-{flake, ...}: let
+{flake, pkgs, ...}: let
   inherit (flake) inputs;
   inherit (inputs) self;
 in {
@@ -18,6 +18,10 @@ in {
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
+
+  nix.linux-builder.enable = true;
+  nix.linux-builder.ephemeral = true;
+  nix.linux-builder.package = pkgs.darwin.linux-builder-x86_64;
 
   security.pam.enableSudoTouchIdAuth = true;
   system.defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
