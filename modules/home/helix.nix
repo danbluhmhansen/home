@@ -39,7 +39,9 @@ in {
         };
 
         file-picker.hidden = false;
-        auto-pairs = false;
+        auto-pairs."(" = ")";
+        auto-pairs."{" = "}";
+        auto-pairs."[" = "]";
 
         whitespace = {
           render.tab = "all";
@@ -89,14 +91,14 @@ in {
       language = [
         {
           name = "css";
-          formatter.command = "prettier";
-          formatter.args = ["--parser" "css"];
+          formatter.command = "deno";
+          formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "css"];
           auto-format = false;
         }
         {
           name = "html";
-          formatter.command = "prettier";
-          formatter.args = ["--parser" "html"];
+          formatter.command = "deno";
+          formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "html"];
           auto-format = false;
         }
         {
@@ -149,12 +151,12 @@ in {
           formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "ts"];
           auto-format = false;
         }
-        {
-          name = "yaml";
-          formatter.command = "prettier";
-          formatter.args = ["--parser" "yaml"];
-          auto-format = false;
-        }
+        # {
+        #   name = "yaml";
+        #   formatter.command = "prettier";
+        #   formatter.args = ["--parser" "yaml"];
+        #   auto-format = false;
+        # }
       ];
 
       language-server = {
@@ -175,7 +177,6 @@ in {
       vscode-langservers-extracted # css, html, javascript, json, jsx
       yaml-language-server # yaml
       deno # formatters
-      nodePackages.prettier # formatters
     ];
   };
 }
