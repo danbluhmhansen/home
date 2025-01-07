@@ -113,15 +113,16 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1735674113,
-        "narHash": "sha256-X2+0+s6qNxrD+ySlD15jr5H314jOKMKJHBzbtNw1cBk=",
-        "owner": "helix-editor",
+        "lastModified": 1736275850,
+        "narHash": "sha256-mvVwQOLZkp3MjKZnwkOxSvqYXmoebItofmGP2K2kt+0=",
+        "owner": "danbluhmhansen",
         "repo": "helix",
-        "rev": "b1759f998d527b7014b6be1eb26a518e1b5927c4",
+        "rev": "e7f818ffd7a185fd8a600940047dd5817b755c75",
         "type": "github"
       },
       "original": {
-        "owner": "helix-editor",
+        "owner": "danbluhmhansen",
+        "ref": "patchy",
         "repo": "helix",
         "type": "github"
       }
@@ -272,6 +273,40 @@
         "type": "github"
       }
     },
+    "nixpkgs_5": {
+      "locked": {
+        "lastModified": 1736012469,
+        "narHash": "sha256-/qlNWm/IEVVH7GfgAIyP6EsVZI6zjAx1cV5zNyrs+rI=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "8f3e1f807051e32d8c95cd12b9b421623850a34d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "patchy": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_5"
+      },
+      "locked": {
+        "lastModified": 1736271489,
+        "narHash": "sha256-jyxHXd5HfWGIcK+gdoAaQR9Fvj+48soypEABSkW3OqU=",
+        "owner": "nikitarevenco",
+        "repo": "patchy",
+        "rev": "71d583a4a1ee3ebc2a7d755e886d3a5cdb6b419c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nikitarevenco",
+        "repo": "patchy",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "firefox-addons": "firefox-addons",
@@ -282,7 +317,8 @@
         "nix-darwin": "nix-darwin",
         "nix-std": "nix-std",
         "nixos-unified": "nixos-unified",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_4",
+        "patchy": "patchy"
       }
     },
     "rust-overlay": {

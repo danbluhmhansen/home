@@ -64,6 +64,17 @@
         space.q = ":quit";
         space.l = ":format";
         space.F = "file_picker_in_current_buffer_directory";
+        space.e = "file_browser";
+        space.E = "file_browser_in_current_buffer_directory";
+        space.v.s = ":run-shell-command git status";
+        space.v.f = ":run-shell-command git fetch";
+        space.v.F = ":run-shell-command git fetch --all";
+        space.v.a = ":run-shell-command git add %{filename}";
+        space.v.b = ":run-shell-command git blame -L %{linenumber} %{filename}";
+        space.v.B = ":run-shell-command git blame %{filename}";
+        space.v.d = ":run-shell-command git diff %{filename}";
+        space.v.l = ":run-shell-command git log -- %{filename}";
+        space.v.L = ":run-shell-command git log --patch -- %{filename}";
       };
 
       keys.insert = {
@@ -75,8 +86,25 @@
       keys.select = {
         H = "goto_first_nonwhitespace";
         L = "goto_line_end";
+        C-h = ":toggle lsp.display-inlay-hints";
         tab = "move_parent_node_end";
         S-tab = "move_parent_node_start";
+        space.w = ":write";
+        space.x = ":buffer-close";
+        space.q = ":quit";
+        space.l = ":format";
+        space.F = "file_picker_in_current_buffer_directory";
+        space.e = "file_browser";
+        space.E = "file_browser_in_current_buffer_directory";
+        space.v.s = ":run-shell-command git status";
+        space.v.f = ":run-shell-command git fetch";
+        space.v.F = ":run-shell-command git fetch --all";
+        space.v.a = ":run-shell-command git add %{filename}";
+        space.v.b = ":run-shell-command git blame -L %{linenumber} %{filename}";
+        space.v.B = ":run-shell-command git blame %{filename}";
+        space.v.d = ":run-shell-command git diff %{filename}";
+        space.v.l = ":run-shell-command git log -- %{filename}";
+        space.v.L = ":run-shell-command git log --patch -- %{filename}";
       };
     };
 

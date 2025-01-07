@@ -17,6 +17,7 @@ in {
         }: let
           inherit (flake) inputs;
         in {
+          home.packages = [inputs.patchy.packages.${pkgs.system}.default];
           programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
         })
       ];

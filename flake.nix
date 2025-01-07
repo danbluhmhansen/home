@@ -13,7 +13,8 @@
     nix-std.url = "github:chessai/nix-std";
     firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-    helix.url = "github:helix-editor/helix";
+    helix.url = "github:danbluhmhansen/helix/patchy";
+    patchy.url = "github:nikitarevenco/patchy";
   };
 
   outputs = inputs:
