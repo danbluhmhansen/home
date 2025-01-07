@@ -55,43 +55,6 @@ local function scheme_for_appearance(appearance)
   return appearance:find 'Dark' and 'Catppuccin Mocha' or 'Catppuccin Latte'
 end
 
-wezterm.on('user-var-changed', function(window, pane, name, value)
-  if name == 'br' then
-    local ex_pane = pane:tab():get_pane_direction('Right')
-
-      local pos = value:find('␟')
-      local dir = value:sub(1, pos - 1)
-      local file = value:sub(pos + 3, -1)
-
-    if ex_pane then
-      local proc_info = ex_pane:get_foreground_process_info()
-
-      if proc_info.name == 'hx' then
-        ex_pane:send_text(':o ' .. file)
-        ex_pane:activate()
-      end
-
-      if proc_info.name == 'bash' or proc_info.name == 'nu' or proc_info.name == 'zsh' then
-        ex_pane:send_text('hx --working-dir ' .. dir .. ' ' .. file)
-        ex_pane:activate()
-      end
-    else
-      local dims = pane:get_dimensions()
-
-      wezterm.log_info('br dir', dir)
-      wezterm.log_info('br file', file)
-
-      pane:split {
-        args = { shell, '-ci', 'nu --execute "hx ' .. file .. '"' },
-        direction = 'Right',
-        size = dims.cols - 36,
-        -- NOTE: cwd does not currently work?
-        cwd = dir,
-      }
-    end
-  end
-end)
-
 wezterm.on('update-right-status', function(window, pane)
   local scheme = wezterm.get_builtin_color_schemes()[scheme_for_appearance(get_appearance())]
 
@@ -186,33 +149,6 @@ table.insert(keys, {
   key = 'e',
   mods = 'SUPER',
   action = act.ShowLauncher,
-})
-
-local br_act = wezterm.action_callback(function(win, pane)
-  local br_pane = pane:tab():get_pane_direction('Left')
-  if (br_pane == nil) then
-    win:perform_action(
-      act.SplitPane {
-        command = { args = { shell, '-ci', 'nu --execute br' } },
-        direction = 'Left',
-        size = { Cells = 36 },
-      },
-      pane
-    )
-  else
-    br_pane:activate()
-    win:perform_action(act.CloseCurrentPane { confirm = true }, pane)
-  end
-end)
-table.insert(keys, {
-  key = 'b',
-  mods = 'SHIFT|CTRL',
-  action = br_act,
-})
-table.insert(keys, {
-  key = 'b',
-  mods = 'SUPER',
-  action = br_act,
 })
 
 config.keys = keys
