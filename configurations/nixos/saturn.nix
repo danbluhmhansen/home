@@ -12,11 +12,6 @@ in {
         device = "/dev/disk/by-label/nixos";
         fsType = "btrfs";
       };
-      users.users.${flake.config.me.username} = {
-        isNormalUser = true;
-        initialPassword = "test";
-        extraGroups = ["wheel"];
-      };
       virtualisation.vmVariant.virtualisation.graphics = false;
       virtualisation.vmVariant.virtualisation.host.pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
     })

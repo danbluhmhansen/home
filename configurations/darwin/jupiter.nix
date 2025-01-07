@@ -1,8 +1,27 @@
-{flake, pkgs, ...}: let
+{
+  flake,
+  pkgs,
+  ...
+}: let
   inherit (flake) inputs;
   inherit (inputs) self;
 in {
-  imports = [self.darwinModules.default];
+  imports = [
+    self.darwinModules.default
+    {
+      home-manager.sharedModules = [
+        ({
+          flake,
+          pkgs,
+          ...
+        }: let
+          inherit (flake) inputs;
+        in {
+          programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
+        })
+      ];
+    }
+  ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
   networking.hostName = "jupiter";

@@ -7,7 +7,11 @@ in {
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      # users.users.${config.me.username}.isNormalUser = true;
+      users.users.${flake.config.me.username} = {
+        isNormalUser = true;
+        initialPassword = "test";
+        extraGroups = ["wheel"];
+      };
       home-manager.users.${config.me.username} = {};
       home-manager.sharedModules = [
         self.homeModules.default

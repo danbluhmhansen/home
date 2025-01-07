@@ -1,13 +1,6 @@
-{
-  flake,
-  pkgs,
-  ...
-}: let
-  inherit (flake) inputs;
-in {
+{pkgs, ...}: {
   programs.helix = {
     enable = true;
-    package = inputs.helix.packages.${pkgs.system}.default;
     defaultEditor = true;
 
     settings = {

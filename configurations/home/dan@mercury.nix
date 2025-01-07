@@ -5,10 +5,18 @@ in {
     self.homeModules.default
     self.homeModules.linux
     (
-      {pkgs, ...}: {
+      {
+        flake,
+        pkgs,
+        ...
+      }: let
+        inherit (flake) inputs;
+      in {
         home.file = {
           ".config/wezterm/wezterm.lua".text = "local wezterm = require 'wezterm'\n" + builtins.readFile ../../modules/home/wezterm/wezterm.lua;
         };
+
+        programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
 
         services.gpg-agent.enable = true;
         services.gpg-agent.enableSshSupport = true;
