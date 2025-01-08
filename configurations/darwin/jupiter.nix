@@ -6,21 +6,12 @@
   inherit (flake) inputs;
   inherit (inputs) self;
 in {
-  imports = [
-    self.darwinModules.default
+  imports = [self.darwinModules.default];
+
+  home-manager.sharedModules = [
     {
-      home-manager.sharedModules = [
-        ({
-          flake,
-          pkgs,
-          ...
-        }: let
-          inherit (flake) inputs;
-        in {
-          home.packages = [inputs.patchy.packages.${pkgs.system}.default];
-          programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
-        })
-      ];
+      home.packages = [inputs.patchy.packages.${pkgs.system}.default];
+      programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
     }
   ];
 
