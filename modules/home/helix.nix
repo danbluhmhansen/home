@@ -115,12 +115,14 @@
           formatter.command = "deno";
           formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "css"];
           auto-format = false;
+          language-servers = ["vscode-css-language-server" "tailwindcss-ls"];
         }
         {
           name = "html";
           formatter.command = "deno";
           formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "html"];
           auto-format = false;
+          language-servers = ["vscode-html-language-server" "superhtml" "tailwindcss-ls"];
         }
         {
           name = "javascript";
@@ -183,8 +185,8 @@
       language-server = {
         rust-analyzer.config.check.command = "clippy";
         tailwindcss-ls.config.userLanguages = {
+          html = "html";
           rust = "html";
-          "*.rs" = "html";
         };
       };
     };
