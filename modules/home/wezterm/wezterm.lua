@@ -41,11 +41,9 @@ local function scheme_for_appearance(appearance)
 
   if file then
     if appearance:find('Light') and hx_appearance():find('Dark') then
-      wezterm.log_info('hx light')
       file:write('inherits = "catppuccin_latte"')
       wezterm.run_child_process { shell, '-c', 'pkill -USR1 hx' }
     elseif appearance:find('Dark') and hx_appearance():find('Light') then
-      wezterm.log_info('hx dark')
       file:write('inherits = "catppuccin_mocha"')
       wezterm.run_child_process { shell, '-c', 'pkill -USR1 hx' }
     end
@@ -56,8 +54,6 @@ local function scheme_for_appearance(appearance)
 end
 
 wezterm.on('update-right-status', function(window, pane)
-  local scheme = wezterm.get_builtin_color_schemes()[scheme_for_appearance(get_appearance())]
-
   local status = {}
 
   -- Figure out the cwd and host of the current pane. This will pick up the hostname for the remote host if your shell
@@ -65,24 +61,9 @@ wezterm.on('update-right-status', function(window, pane)
   local cwd_uri = pane:get_current_working_dir()
   if cwd_uri then
     local cwd = cwd_uri.file_path
-
-    local _, git_branch, _ = wezterm.run_child_process { shell, '-c', 'starship module git_branch --path ' .. cwd, }
-    local _, git_status, _ = wezterm.run_child_process { shell, '-c', 'starship module git_status --path ' .. cwd, }
-    local directory = cwd:gsub(wezterm.home_dir, '~')
-    local hostname = cwd_uri.host or wezterm.hostname()
-
-    if git_branch ~= '' then
-      table.insert(status, wezterm.format { { Foreground = { Color = scheme.ansi[6] } }, { Text = git_branch } })
-    end
-    if git_status ~= '' then
-      table.insert(status, wezterm.format { { Foreground = { Color = scheme.ansi[2] } }, { Text = git_status } })
-    end
-    table.insert(status, wezterm.format { { Foreground = { Color = scheme.ansi[7] } }, { Text = directory } })
-    table.insert(status, wezterm.format { { Foreground = { Color = scheme.ansi[3] } }, { Text = hostname } })
+    local _, prompt, _ = wezterm.run_child_process { shell, '-c', 'starship prompt --profile wz --path ' .. cwd, }
+    table.insert(status, prompt)
   end
-
-  local date = wezterm.strftime '%a %b %-d %T'
-  table.insert(status, wezterm.format { { Foreground = { Color = scheme.ansi[4] } }, { Text = date } })
 
   window:set_right_status(table.concat(status, ' '))
 end)
