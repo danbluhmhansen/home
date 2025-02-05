@@ -103,6 +103,7 @@
       status.disabled = false;
       status.format = " [$common_meaning $status]($style)";
       time.disabled = false;
+      time.format = "at [$time]($style)";
       time.time_format = "%F %T";
 
       aws.symbol = "  ";

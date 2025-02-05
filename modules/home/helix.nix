@@ -13,7 +13,6 @@
         bufferline = "multiple";
         color-modes = true;
         text-width = 120;
-        end-of-line-diagnostics = "info";
 
         statusline = {
           left = ["mode" "spinner" "diagnostics" "workspace-diagnostics"];
@@ -50,7 +49,7 @@
 
         indent-guides.render = true;
         soft-wrap.enable = true;
-        inline-diagnostics.cursor-line = "warning";
+        inline-diagnostics.cursor-line = "hint";
       };
 
       keys.normal = {
