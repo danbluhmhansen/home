@@ -63,8 +63,6 @@
         space.q = ":quit";
         space.l = ":format";
         space.F = "file_picker_in_current_buffer_directory";
-        space.e = "file_browser";
-        space.E = "file_browser_in_current_buffer_directory";
         space.v.s = ":run-shell-command git status";
         space.v.f = ":run-shell-command git fetch";
         space.v.F = ":run-shell-command git fetch --all";
@@ -93,8 +91,6 @@
         space.q = ":quit";
         space.l = ":format";
         space.F = "file_picker_in_current_buffer_directory";
-        space.e = "file_browser";
-        space.E = "file_browser_in_current_buffer_directory";
         space.v.s = ":run-shell-command git status";
         space.v.f = ":run-shell-command git fetch";
         space.v.F = ":run-shell-command git fetch --all";
