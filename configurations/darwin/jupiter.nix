@@ -23,9 +23,6 @@ in {
     home = "/Users/${flake.config.me.username}";
   };
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
@@ -34,7 +31,7 @@ in {
   nix.linux-builder.ephemeral = true;
   nix.linux-builder.package = pkgs.darwin.linux-builder-x86_64;
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
   system.defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
   system.defaults.dock.autohide = true;
   system.defaults.dock.mru-spaces = false;

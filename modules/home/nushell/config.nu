@@ -6,8 +6,6 @@ $env.config.explore.highlight = { fg: black, bg: yellow }
 $env.config.explore.status.error = { fg: red }
 $env.config.explore.selected_cell = { bg: black }
 
-$env.config.filesize.metric = true
-
 $env.config.use_kitty_protocol = true
 
 if (sys host | get name) == 'Darwin' {
