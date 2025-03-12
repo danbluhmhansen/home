@@ -7,7 +7,6 @@
       theme = "theme";
 
       editor = {
-        shell = ["nu" "--stdin" "--commands"];
         line-number = "relative";
         cursorline = true;
         bufferline = "multiple";
@@ -18,6 +17,7 @@
           left = ["mode" "spinner" "diagnostics" "workspace-diagnostics"];
           center = ["read-only-indicator" "file-name" "file-modification-indicator"];
           right = ["position" "position-percentage" "primary-selection-length" "register" "file-encoding"];
+          merge-with-commandline = true;
         };
 
         lsp = {
@@ -63,15 +63,33 @@
         space.q = ":quit";
         space.l = ":format";
         space.F = "file_picker_in_current_buffer_directory";
+        space.e = [
+          ":sh rm -f /tmp/unique-file"
+          ":insert-output yazi --chooser-file=/tmp/unique-file"
+          '':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty''
+          ":open %sh{cat /tmp/unique-file}"
+          ":redraw"
+          ":set mouse false"
+          ":set mouse true"
+        ];
+        space.E = [
+          ":sh rm -f /tmp/unique-file"
+          ":insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file"
+          '':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty''
+          ":open %sh{cat /tmp/unique-file}"
+          ":redraw"
+          ":set mouse false"
+          ":set mouse true"
+        ];
         space.v.s = ":run-shell-command git status";
         space.v.f = ":run-shell-command git fetch";
         space.v.F = ":run-shell-command git fetch --all";
-        space.v.a = ":run-shell-command git add %{filename}";
-        space.v.b = ":run-shell-command git blame -L %{linenumber} %{filename}";
-        space.v.B = ":run-shell-command git blame %{filename}";
-        space.v.d = ":run-shell-command git diff %{filename}";
-        space.v.l = ":run-shell-command git log -- %{filename}";
-        space.v.L = ":run-shell-command git log --patch -- %{filename}";
+        space.v.a = ":run-shell-command git add %{buffer_name}";
+        space.v.b = ":run-shell-command git blame -L %{cursor_line} %{buffer_name}";
+        space.v.B = ":run-shell-command git blame %{buffer_name}";
+        space.v.d = ":run-shell-command git diff %{buffer_name}";
+        space.v.l = ":run-shell-command git log -- %{buffer_name}";
+        space.v.L = ":run-shell-command git log --patch -- %{buffer_name}";
       };
 
       keys.insert = {
@@ -91,15 +109,33 @@
         space.q = ":quit";
         space.l = ":format";
         space.F = "file_picker_in_current_buffer_directory";
+        space.e = [
+          ":sh rm -f /tmp/unique-file"
+          ":insert-output yazi --chooser-file=/tmp/unique-file"
+          '':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty''
+          ":open %sh{cat /tmp/unique-file}"
+          ":redraw"
+          ":set mouse false"
+          ":set mouse true"
+        ];
+        space.E = [
+          ":sh rm -f /tmp/unique-file"
+          ":insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file"
+          '':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty''
+          ":open %sh{cat /tmp/unique-file}"
+          ":redraw"
+          ":set mouse false"
+          ":set mouse true"
+        ];
         space.v.s = ":run-shell-command git status";
         space.v.f = ":run-shell-command git fetch";
         space.v.F = ":run-shell-command git fetch --all";
-        space.v.a = ":run-shell-command git add %{filename}";
-        space.v.b = ":run-shell-command git blame -L %{linenumber} %{filename}";
-        space.v.B = ":run-shell-command git blame %{filename}";
-        space.v.d = ":run-shell-command git diff %{filename}";
-        space.v.l = ":run-shell-command git log -- %{filename}";
-        space.v.L = ":run-shell-command git log --patch -- %{filename}";
+        space.v.a = ":run-shell-command git add %{buffer_name}";
+        space.v.b = ":run-shell-command git blame -L %{cursor_line} %{buffer_name}";
+        space.v.B = ":run-shell-command git blame %{buffer_name}";
+        space.v.d = ":run-shell-command git diff %{buffer_name}";
+        space.v.l = ":run-shell-command git log -- %{buffer_name}";
+        space.v.L = ":run-shell-command git log --patch -- %{buffer_name}";
       };
     };
 

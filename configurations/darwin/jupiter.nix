@@ -10,8 +10,8 @@ in {
 
   home-manager.sharedModules = [
     {
-      home.packages = [inputs.patchy.packages.${pkgs.system}.default];
       programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
+      programs.yazi.package = inputs.yazi.packages.${pkgs.system}.default;
     }
   ];
 

@@ -19,6 +19,7 @@ in {
   };
 
   programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
+  programs.yazi.package = inputs.yazi.packages.${pkgs.system}.default;
 
   services.gpg-agent.enable = true;
   services.gpg-agent.enableSshSupport = true;

@@ -16,7 +16,7 @@
     firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
     helix.url = "github:nik-rev/helix/patchy";
-    patchy.url = "github:nikitarevenco/patchy";
+    yazi.url = "github:sxyazi/yazi";
   };
 
   outputs = inputs:
