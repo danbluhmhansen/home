@@ -68,6 +68,7 @@ config.font = wezterm.font {
 }
 
 config.window_close_confirmation = 'NeverPrompt'
+config.window_decorations = 'RESIZE'
 
 config.enable_kitty_keyboard = true
 
