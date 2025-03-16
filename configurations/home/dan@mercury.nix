@@ -9,6 +9,22 @@ in {
   imports = [
     self.homeModules.default
     self.homeModules.linux
+    (
+      {pkgs, ...}: {
+        home.file = {
+          ".config/wezterm/wezterm.lua".text = "local wezterm = require 'wezterm'\n" + builtins.readFile ../../modules/home/wezterm/wezterm.lua;
+        };
+
+        programs.mpv.enable = true;
+        programs.yt-dlp.enable = true;
+
+        services.gpg-agent.enable = true;
+        services.gpg-agent.enableSshSupport = true;
+        services.gpg-agent.defaultCacheTtl = 60;
+        services.gpg-agent.maxCacheTtl = 120;
+        services.gpg-agent.pinentryPackage = pkgs.pinentry-gnome3;
+      }
+    )
     ../../modules/home/starship.nix
   ];
   home.username = "dan";
