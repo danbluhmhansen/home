@@ -41,9 +41,7 @@ in {
             consent-o-matic
             libredirect
             ublock-origin
-            vimium
             stylus
-            bitwarden
           ];
         };
       };
