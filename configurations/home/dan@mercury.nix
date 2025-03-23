@@ -18,6 +18,7 @@ in {
     ".config/wezterm/wezterm.lua".text = "local wezterm = require 'wezterm'\n" + builtins.readFile ../../modules/home/wezterm/wezterm.lua;
   };
 
+  programs.git.extraConfig.credential.helper = "/usr/lib/git-core/git-credential-libsecret";
   programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
   programs.yazi.package = inputs.yazi.packages.${pkgs.system}.default;
   programs.mpv.enable = true;
