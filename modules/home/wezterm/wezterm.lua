@@ -62,13 +62,13 @@ config.hide_tab_bar_if_only_one_tab = false
 if wezterm.target_triple == 'aarch64-apple-darwin' then
   config.font_size = 16
 end
+
 config.font = wezterm.font {
   family = 'Maple Mono NF',
-  harfbuzz_features = { 'cv01', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', },
+  harfbuzz_features = { 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', },
 }
 
 config.window_close_confirmation = 'NeverPrompt'
-config.window_decorations = 'RESIZE'
 
 config.enable_kitty_keyboard = true
 

@@ -15,8 +15,10 @@
     nix-std.url = "github:chessai/nix-std";
     firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    wezterm.url = "github:wezterm/wezterm?dir=nix";
     helix.url = "github:nik-rev/helix/patchy";
     yazi.url = "github:sxyazi/yazi";
+    nixgl.url = "github:nix-community/nixGL";
   };
 
   outputs = inputs:
