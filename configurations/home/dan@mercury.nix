@@ -10,6 +10,7 @@ in {
   imports = [
     self.homeModules.default
     self.homeModules.linux
+    ../../modules/home/firefox.nix
     ../../modules/home/starship.nix
     ../../modules/home/wezterm
   ];
