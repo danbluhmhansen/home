@@ -4,6 +4,7 @@
     openssh
     libfido2
     gopass
+    gopass-jsonapi
     prs
   ];
 

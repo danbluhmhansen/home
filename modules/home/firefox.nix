@@ -39,10 +39,9 @@ in {
           };
         };
         extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
-          consent-o-matic
-          libredirect
           ublock-origin
-          stylus
+          consent-o-matic
+          gopass-bridge
         ];
       };
 
