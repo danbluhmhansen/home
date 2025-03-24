@@ -42,7 +42,7 @@ in {
       }
       {
         on = "f";
-        run = "plugin jump-to-charr";
+        run = "plugin jump-to-char";
         desc = "Jump to char";
       }
       {
