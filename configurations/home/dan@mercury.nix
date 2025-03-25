@@ -23,11 +23,17 @@ in {
   fonts.fontconfig.defaultFonts.monospace = ["Maple Mono NF"];
 
   programs.git.extraConfig.credential.helper = "/usr/lib/git-core/git-credential-libsecret";
+  programs.firefox.package = config.lib.nixGL.wrap pkgs.firefox;
   programs.wezterm.package = config.lib.nixGL.wrap inputs.wezterm.packages.${pkgs.system}.default;
   programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
   programs.yazi.package = inputs.yazi.packages.${pkgs.system}.default;
   programs.mpv.enable = true;
   programs.yt-dlp.enable = true;
+
+  programs.ssh.enable = true;
+  programs.ssh.matchBlocks."192.168.0.113" = {
+    user = "dan";
+  };
 
   services.gpg-agent.enable = true;
   services.gpg-agent.enableSshSupport = true;
