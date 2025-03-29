@@ -10,7 +10,7 @@
 
   home.stateVersion = "24.05";
 
-  home.packages = with pkgs; [cachix fd sad termscp vivid];
+  home.packages = with pkgs; [cachix fd sad tea termscp vivid];
 
   programs.home-manager.enable = true;
   programs.direnv.enable = true;
