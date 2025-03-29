@@ -7,7 +7,6 @@ in {
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  nixpkgs.overlays = [inputs.firefox-darwin.overlay];
   home-manager.users.${config.me.username} = {};
   home-manager.sharedModules = [
     self.homeModules.default

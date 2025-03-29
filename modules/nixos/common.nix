@@ -8,10 +8,7 @@
   inherit (flake) inputs;
   inherit (inputs) self;
 in {
-  nixpkgs = {
-    config.allowUnfree = true;
-    overlays = lib.attrValues self.overlays;
-  };
+  nixpkgs = {overlays = lib.attrValues self.overlays;};
 
   nix = {
     package = pkgs.nixVersions.latest;

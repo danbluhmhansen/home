@@ -5,13 +5,10 @@
 }: let
   inherit (flake) inputs;
 in {
-  imports = [
-    ./firefox.nix
-    ./starship.nix
-    ./wezterm
-  ];
+  imports = [./starship.nix];
 
   home.file = {
+    ".config/wezterm/wezterm.lua".text = "local wezterm = require 'wezterm'\n" + builtins.readFile ./wezterm.lua;
     ".gnupg/gpg-agent.conf".text = ''
       pinentry-program ${pkgs.pinentry_mac}/bin/pinentry-mac
       enable-ssh-support
@@ -32,10 +29,7 @@ in {
     };
   };
 
-  home.packages = with pkgs; [
-    discord
-    pinentry_mac
-  ];
+  home.packages = with pkgs; [maple-mono-NF pinentry_mac];
 
   launchd.agents.env.enable = true;
   launchd.agents.env.config = {

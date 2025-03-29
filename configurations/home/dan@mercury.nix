@@ -1,7 +1,6 @@
 {
   flake,
   pkgs,
-  config,
   ...
 }: let
   inherit (flake) inputs;
@@ -10,21 +9,22 @@ in {
   imports = [
     self.homeModules.default
     self.homeModules.linux
-    ../../modules/home/firefox.nix
     ../../modules/home/starship.nix
-    ../../modules/home/wezterm
   ];
+
   home.username = "dan";
   home.homeDirectory = "/home/dan";
 
-  nixGL.packages = inputs.nixgl.packages;
+  home.file = {
+    ".config/wezterm/wezterm.lua".text = "local wezterm = require 'wezterm'\n" + builtins.readFile ../../modules/home/wezterm.lua;
+  };
+
+  home.packages = with pkgs; [maple-mono-NF];
 
   fonts.fontconfig.enable = true;
   fonts.fontconfig.defaultFonts.monospace = ["Maple Mono NF"];
 
   programs.git.extraConfig.credential.helper = "/usr/lib/git-core/git-credential-libsecret";
-  programs.firefox.package = config.lib.nixGL.wrap pkgs.firefox;
-  programs.wezterm.package = config.lib.nixGL.wrap inputs.wezterm.packages.${pkgs.system}.default;
   programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
   programs.yazi.package = inputs.yazi.packages.${pkgs.system}.default;
   programs.mpv.enable = true;

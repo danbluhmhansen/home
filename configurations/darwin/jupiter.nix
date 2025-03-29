@@ -78,7 +78,19 @@ in {
       };
     }
     {
+      name = "discord";
+      args = {appdir = "~/Applications";};
+    }
+    {
       name = "hammerspoon";
+      args = {appdir = "~/Applications";};
+    }
+    {
+      name = "wezterm";
+      args = {appdir = "~/Applications";};
+    }
+    {
+      name = "zen-browser";
       args = {appdir = "~/Applications";};
     }
   ];
