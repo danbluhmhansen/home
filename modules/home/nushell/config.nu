@@ -23,3 +23,16 @@ if (sys host | get name) == 'Darwin' {
     }
   ]
 }
+
+$env.config.keybindings ++= [
+  {
+    name: job_unfreeze
+    modifier: alt
+    keycode: char_z
+    mode: [emacs vi_normal vi_insert]
+    event: [
+      { edit: InsertString, value: "job unfreeze" }
+      { send: Enter }
+    ]
+  }
+]
