@@ -11,7 +11,6 @@ in {
   home-manager.sharedModules = [
     {
       programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
-      programs.yazi.package = inputs.yazi.packages.${pkgs.system}.default;
     }
   ];
 

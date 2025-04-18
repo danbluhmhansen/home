@@ -29,7 +29,7 @@ in {
     };
   };
 
-  home.packages = with pkgs; [maple-mono-NF pinentry_mac];
+  home.packages = with pkgs; [maple-mono.NF ouch pinentry_mac];
 
   launchd.agents.env.enable = true;
   launchd.agents.env.config = {

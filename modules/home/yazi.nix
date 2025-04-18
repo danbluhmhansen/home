@@ -2,8 +2,14 @@
   yazi-plugins = pkgs.fetchFromGitHub {
     owner = "yazi-rs";
     repo = "plugins";
-    rev = "273019910c1111a388dd20e057606016f4bd0d17";
-    hash = "sha256-80mR86UWgD11XuzpVNn56fmGRkvj0af2cFaZkU8M31I=";
+    rev = "b12a9ab085a8c2fe2b921e1547ee667b714185f9";
+    hash = "sha256-LWN0riaUazQl3llTNNUMktG+7GLAHaG/IxNj1gFhDRE=";
+  };
+  yazi-ouch = pkgs.fetchFromGitHub {
+    owner = "ndtoan96";
+    repo = "ouch.yazi";
+    rev = "2496cd9ac2d1fb52597b22ae84f3af06c826a86d";
+    hash = "sha256-OsNfR7rtnq+ceBTiFjbz+NFMSV/6cQ1THxEFzI4oPJk=";
   };
 in {
   programs.yazi.enable = true;
@@ -12,6 +18,7 @@ in {
     git = "${yazi-plugins}/git.yazi";
     jump-to-char = "${yazi-plugins}/jump-to-char.yazi";
     mount = "${yazi-plugins}/mount.yazi";
+    ouch = "${yazi-ouch}";
     smart-enter = "${yazi-plugins}/smart-enter.yazi";
     smart-filter = "${yazi-plugins}/smart-filter.yazi";
     vcs-files = "${yazi-plugins}/vcs-files.yazi";
@@ -32,6 +39,36 @@ in {
         run = "git";
       }
     ];
+    plugin.prepend_previewers = [
+      {
+        mime = "application/*zip";
+        run = "ouch";
+      }
+      {
+        mime = "application/x-tar";
+        run = "ouch";
+      }
+      {
+        mime = "application/x-bzip2";
+        run = "ouch";
+      }
+      {
+        mime = "application/x-7z-compressed";
+        run = "ouch";
+      }
+      {
+        mime = "application/x-rar";
+        run = "ouch";
+      }
+      {
+        mime = "application/x-xz";
+        run = "ouch";
+      }
+      {
+        mime = "application/xz";
+        run = "ouch";
+      }
+    ];
   };
   programs.yazi.keymap = {
     manager.prepend_keymap = [
@@ -48,6 +85,11 @@ in {
       {
         on = "M";
         run = "plugin mount";
+      }
+      {
+        on = "C";
+        run = "plugin ouch";
+        desc = "Compress with ouch";
       }
       {
         on = "l";

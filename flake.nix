@@ -15,7 +15,6 @@
     nix-std.url = "github:chessai/nix-std";
     wezterm.url = "github:wezterm/wezterm?dir=nix";
     helix.url = "github:nik-rev/helix/patchy";
-    yazi.url = "github:sxyazi/yazi";
   };
 
   outputs = inputs:

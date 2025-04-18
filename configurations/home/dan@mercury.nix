@@ -19,14 +19,13 @@ in {
     ".config/wezterm/wezterm.lua".text = "local wezterm = require 'wezterm'\n" + builtins.readFile ../../modules/home/wezterm.lua;
   };
 
-  home.packages = with pkgs; [maple-mono-NF];
+  home.packages = with pkgs; [maple-mono.NF ouch];
 
   fonts.fontconfig.enable = true;
   fonts.fontconfig.defaultFonts.monospace = ["Maple Mono NF"];
 
   programs.git.extraConfig.credential.helper = "/usr/lib/git-core/git-credential-libsecret";
   programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
-  programs.yazi.package = inputs.yazi.packages.${pkgs.system}.default;
   programs.mpv.enable = true;
   programs.yt-dlp.enable = true;
 
