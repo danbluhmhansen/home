@@ -1,6 +1,6 @@
 {lib, ...}: {
   programs.broot = {
-    enable = true;
+    enable = false;
     settings = {
       icon_theme = "nerdfont";
       imports = lib.mkForce ["skins/native-16.hjson"];
