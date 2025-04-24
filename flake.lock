@@ -266,6 +266,22 @@
     },
     "nixpkgs_3": {
       "locked": {
+        "lastModified": 1743964447,
+        "narHash": "sha256-nEo1t3Q0F+0jQ36HJfbJtiRU4OI+/0jX/iITURKe3EE=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "063dece00c5a77e4a0ea24e5e5a5bd75232806f8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
         "lastModified": 1735821806,
         "narHash": "sha256-cuNapx/uQeCgeuhUhdck3JKbgpsml259sjUQnWM7zW8=",
         "owner": "NixOS",
@@ -280,6 +296,24 @@
         "type": "github"
       }
     },
+    "patchy": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1744180313,
+        "narHash": "sha256-YfY6RcbANUd5i/9HRtdUXvNEomiwGD40NtigGThKMbY=",
+        "owner": "nik-rev",
+        "repo": "patchy",
+        "rev": "020100968800c956810ac323230a8fb9018375f4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nik-rev",
+        "repo": "patchy",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "disko": "disko",
@@ -290,6 +324,7 @@
         "nix-std": "nix-std",
         "nixos-unified": "nixos-unified",
         "nixpkgs": "nixpkgs_2",
+        "patchy": "patchy",
         "wezterm": "wezterm"
       }
     },
@@ -371,7 +406,7 @@
         "freetype2": "freetype2",
         "harfbuzz": "harfbuzz",
         "libpng": "libpng",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "rust-overlay": "rust-overlay_2",
         "zlib": "zlib"
       },
