@@ -65,6 +65,8 @@ in {
   programs.zsh.enable = true;
   programs.zsh.profileExtra = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
 
+  programs.git.extraConfig.credential.helper = "osxkeychain";
+
   programs.mpv.enable = true;
   programs.yt-dlp.enable = true;
 }
