@@ -194,6 +194,10 @@
           language-servers = ["rust-analyzer" "tailwindcss-ls"];
         }
         {
+          name = "sql";
+          language-servers = ["postgrestools"];
+        }
+        {
           name = "tsx";
           formatter.command = "deno";
           formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "tsx"];
@@ -218,6 +222,10 @@
         tailwindcss-ls.config.userLanguages = {
           html = "html";
           rust = "html";
+        };
+        postgrestools = {
+          command = "postgrestools";
+          args = ["lsp-proxy"];
         };
       };
     };
