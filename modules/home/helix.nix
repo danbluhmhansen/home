@@ -142,6 +142,13 @@
     languages = {
       language = [
         {
+          name = "c-sharp";
+          formatter.command = "dotnet";
+          formatter.args = ["csharpier" "format"];
+          auto-format = false;
+          language-servers = ["csharp"];
+        }
+        {
           name = "css";
           formatter.command = "deno";
           formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "css"];
@@ -218,6 +225,7 @@
       ];
 
       language-server = {
+        csharp.command = "csharp-language-server";
         rust-analyzer.config.check.command = "clippy";
         tailwindcss-ls.config.userLanguages = {
           html = "html";
