@@ -8,14 +8,13 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixos-unified.url = "github:srid/nixos-unified";
-    disko.url = "github:nix-community/disko/latest";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
 
     # Software inputs
     nix-std.url = "github:chessai/nix-std";
     wezterm.url = "github:wezterm/wezterm?dir=nix";
     helix.url = "github:danbluhmhansen/helix/patchy";
     patchy.url = "github:nik-rev/patchy"; 
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
   };
 
   outputs = inputs:

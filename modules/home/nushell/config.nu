@@ -36,3 +36,7 @@ $env.config.keybindings ++= [
     ]
   }
 ]
+
+if (sys host | get hostname) == 'mars' {
+  $env.config.shell_integration.osc133 = false;
+}

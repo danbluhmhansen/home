@@ -9,6 +9,7 @@
   inherit (inputs) self;
 in {
   nixpkgs = {overlays = lib.attrValues self.overlays;};
+  nixpkgs.config.allowUnfree = true;
 
   nix = {
     package = pkgs.nixVersions.latest;
