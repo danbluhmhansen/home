@@ -4,15 +4,21 @@ local shell = wezterm.target_triple == 'aarch64-apple-darwin' and '/bin/zsh' or 
 
 config.default_prog = { shell, '-ci', 'nu' }
 
-config.launch_menu = {
-  wezterm.run_child_process { shell, '-c', 'which broot' } and
-  { label = 'broot', args = { shell, '-ci', 'nu --execute br' }, cwd = '~', } or {},
-  wezterm.run_child_process { shell, '-c', 'which yazi' } and
-  { label = 'yazi', args = { shell, '-ci', 'nu --execute yy' }, cwd = '~', } or {},
-  { label = 'sh', args = { shell }, },
-  wezterm.run_child_process { shell, '-c', 'which btm' } and
-  { label = 'bottom', args = { shell, '-ci', 'btm' }, cwd = '~', } or {},
-}
+local launch_menu = {}
+
+local function add_launch_menu_item(arg)
+  if wezterm.run_child_process { shell, '-c', 'which ' .. arg.bin } then
+    table.insert(launch_menu,
+      { label = arg.label or arg.bin, args = { shell, '-ci', 'nu --execute ' .. (arg.alt or arg.bin) }, cwd = '~', })
+  end
+end
+
+add_launch_menu_item { bin = 'broot', alt = 'br' }
+add_launch_menu_item { bin = 'yazi', alt = 'yy' }
+table.insert(launch_menu, { label = 'sh', args = { shell }, })
+add_launch_menu_item { bin = 'btm', label = 'bottom' }
+
+config.launch_menu = launch_menu
 
 -- wezterm.gui is not available to the mux server, so take care to do something reasonable when this config is evaluated
 -- by the mux
