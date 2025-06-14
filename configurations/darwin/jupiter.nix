@@ -86,6 +86,10 @@ in {
       args = {appdir = "~/Applications";};
     }
     {
+      name = "utm";
+      args = {appdir = "~/Applications";};
+    }
+    {
       name = "wezterm";
       args = {appdir = "~/Applications";};
     }
