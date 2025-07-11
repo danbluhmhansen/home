@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    # password management
     openssh
     libfido2
     gopass
@@ -9,7 +8,6 @@
   ];
 
   programs.gpg = {
-    enable = true;
     publicKeys = [
       {
         source = pkgs.fetchurl {

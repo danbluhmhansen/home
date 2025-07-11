@@ -1,34 +1,8 @@
-{flake, ...}: let
-  inherit (flake) inputs;
-  inherit (inputs) self;
-in {
-  imports = [
-    inputs.nixos-wsl.nixosModules.default
-    self.nixosModules.default
-    {
-      home-manager.sharedModules = [
-        ({pkgs, ...}: {
-          home.packages = with pkgs; [yubikey-manager];
-
-          programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
-
-          programs.gpg.scdaemonSettings = {
-            disable-ccid = true;
-          };
-
-          services.gpg-agent.enable = true;
-          services.gpg-agent.enableSshSupport = true;
-          services.gpg-agent.defaultCacheTtl = 60;
-          services.gpg-agent.maxCacheTtl = 120;
-          services.gpg-agent.pinentryPackage = pkgs.pinentry-curses;
-        })
-      ];
-    }
-  ];
-
-  system.stateVersion = "24.05";
-  networking.hostName = "mars";
+{inputs, ...}: {
   nixpkgs.hostPlatform = "x86_64-linux";
+  system.stateVersion = "25.05";
+
+  imports = [inputs.nixos-wsl.nixosModules.default];
 
   wsl.enable = true;
   wsl.defaultUser = "dan";
@@ -36,9 +10,7 @@ in {
   wsl.usbip.autoAttach = ["2-1"];
 
   users.groups.plugdev = {};
-  users.users.${flake.config.me.username} = {
-    extraGroups = ["plugdev"];
-  };
+  users.users.dan.extraGroups = ["plugdev"];
 
   programs.ssh.startAgent = false;
   programs.ssh.knownHosts.github0 = {

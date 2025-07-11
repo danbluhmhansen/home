@@ -1,8 +1,5 @@
-{
+{pkgs, ...}: {
+  home.packages = with pkgs; [vivid];
   programs.carapace.enable = true;
-  programs.nushell = {
-    enable = true;
-    configFile.source = ./config.nu;
-    envFile.source = ./env.nu;
-  };
+  programs.nushell.configFile.source = ./config.nu;
 }

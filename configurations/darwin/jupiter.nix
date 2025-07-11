@@ -1,35 +1,13 @@
-{
-  flake,
-  pkgs,
-  ...
-}: let
-  inherit (flake) inputs;
-  inherit (inputs) self;
-in {
-  imports = [self.darwinModules.default];
-
-  home-manager.sharedModules = [
-    {
-      home.packages = [inputs.patchy.packages.${pkgs.system}.default];
-      programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
-    }
-  ];
-
+{pkgs, ...}: {
   nixpkgs.hostPlatform = "aarch64-darwin";
-  networking.hostName = "jupiter";
+  system.stateVersion = 6;
 
-  # For home-manager to work.
-  users.users.${flake.config.me.username} = {
-    home = "/Users/${flake.config.me.username}";
+  nix.linux-builder = {
+    enable = true;
+    ephemeral = true;
+    package = pkgs.darwin.linux-builder-x86_64;
   };
-
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-  system.stateVersion = 4;
-
-  nix.linux-builder.enable = true;
-  nix.linux-builder.ephemeral = true;
-  nix.linux-builder.package = pkgs.darwin.linux-builder-x86_64;
+  ids.gids.nixbld = 30000;
 
   security.pam.services.sudo_local.touchIdAuth = true;
   system.defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
@@ -68,7 +46,7 @@ in {
 
   homebrew.enable = true;
   homebrew.onActivation.cleanup = "zap";
-  homebrew.brews = ["podman" "podman-compose"];
+  homebrew.brews = ["podman"];
   homebrew.casks = [
     {
       name = "chromium";
@@ -78,23 +56,11 @@ in {
       };
     }
     {
-      name = "discord";
-      args = {appdir = "~/Applications";};
-    }
-    {
       name = "hammerspoon";
       args = {appdir = "~/Applications";};
     }
     {
       name = "utm";
-      args = {appdir = "~/Applications";};
-    }
-    {
-      name = "wezterm";
-      args = {appdir = "~/Applications";};
-    }
-    {
-      name = "zen-browser";
       args = {appdir = "~/Applications";};
     }
   ];

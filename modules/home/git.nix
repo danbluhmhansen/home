@@ -1,8 +1,7 @@
-{flake, ...}: {
+{
   programs.git = {
-    enable = true;
-    userName = flake.config.me.fullname;
-    userEmail = flake.config.me.email;
+    userName = "Dan Bluhm Hansen";
+    userEmail = "00.pavers_dither@icloud.com";
     delta.enable = true;
     signing.key = "0x077BBC8A99A747DD";
     signing.signByDefault = true;

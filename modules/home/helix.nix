@@ -1,12 +1,11 @@
 {pkgs, ...}: {
   programs.helix = {
-    enable = true;
     defaultEditor = true;
 
     settings = {
-      theme = "theme";
-
+      theme = pkgs.lib.mkDefault "catppuccin_mocha";
       editor = {
+        shell = ["nu" "--commands"];
         line-number = "relative";
         cursorline = true;
         bufferline = "multiple";
@@ -202,7 +201,9 @@
         }
         {
           name = "sql";
-          language-servers = ["postgrestools"];
+          formatter.command = "sqruff";
+          formatter.args = ["fix" "-"];
+          language-servers = ["postgrestools" "sqruff"];
         }
         {
           name = "tsx";
@@ -216,12 +217,6 @@
           formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "ts"];
           auto-format = false;
         }
-        # {
-        #   name = "yaml";
-        #   formatter.command = "prettier";
-        #   formatter.args = ["--parser" "yaml"];
-        #   auto-format = false;
-        # }
       ];
 
       language-server = {
@@ -234,6 +229,10 @@
         postgrestools = {
           command = "postgrestools";
           args = ["lsp-proxy"];
+        };
+        sqruff = {
+          command = "sqruff";
+          args = ["lsp"];
         };
       };
     };
