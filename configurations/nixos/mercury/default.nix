@@ -56,6 +56,11 @@
   programs.niri.enable = true;
   programs.niri.package = pkgs.niri-unstable;
 
+  programs.hyprland.enable = true;
+  programs.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  programs.hyprland.portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+  programs.hyprland.withUWSM = true;
+
   programs.gamescope.enable = true;
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
@@ -64,7 +69,7 @@
 
   home-manager.sharedModules = [
     ({ezModules, ...}: {
-      imports = [inputs.sherlock.homeManagerModules.default ezModules.niri ezModules.sherlock];
+      imports = [inputs.sherlock.homeManagerModules.default ezModules.hyprland ezModules.niri ezModules.sherlock];
 
       fonts.fontconfig.enable = true;
 
@@ -85,6 +90,8 @@
       services.gnome-keyring.enable = true;
       services.swaync.enable = true;
       services.wpaperd.enable = true;
+
+      wayland.windowManager.hyprland.enable = true;
     })
   ];
 }

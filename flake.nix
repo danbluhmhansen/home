@@ -39,6 +39,9 @@
     yazelix.flake = false;
 
     niri.url = "github:sodiboo/niri-flake";
+    hyprland.url = "github:hyprwm/hyprland";
+    hyprland-plugins.url = "github:hyprwm/hyprland-plugins";
+    hyprland-plugins.inputs.hyprland.follows = "hyprland";
     sherlock.url = "github:skxxtz/sherlock";
 
     hs-spoons.url = "github:hammerspoon/spoons";
