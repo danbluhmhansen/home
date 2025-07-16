@@ -5,6 +5,7 @@
     appearance.height = 593;
     appearance.gsk_renderer = "cairo";
     appearance.status_bar = false;
+    behavior.global_prefix = "uwsm app -- ";
     binds.prev = "control-p";
     binds.next = "control-n";
     binds.context = "control-l";
@@ -127,6 +128,11 @@
             icon = "system-reboot";
             exec = "systemctl reboot";
             search_string = "reboot";
+          };
+          LogOut = {
+            icon = "system-log-out";
+            exec = "uwsm stop";
+            search_string = "logout;signout";
           };
         };
       };

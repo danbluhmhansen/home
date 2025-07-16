@@ -112,7 +112,7 @@
 
         "sidebar.main.tools" = "history,bookmarks";
         "sidebar.revamp" = true;
-        "sidebar.verticalTabs" = true;
+        "sidebar.verticalTabs" = false;
         "sidebar.visibility" = "hide-sidebar";
 
         "browser.uiCustomization.state" = builtins.toJSON {

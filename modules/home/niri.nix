@@ -15,6 +15,7 @@
 
     layout = {
       gaps = 4;
+      border.width = 2;
       center-focused-column = "on-overflow";
       background-color = "transparent";
 
@@ -36,15 +37,14 @@
     ];
 
     binds = with config.lib.niri.actions; {
-      "Mod+Ctrl+E".action = quit;
       "Mod+Ctrl+Slash".action = show-hotkey-overlay;
       "Mod+Escape".action = toggle-keyboard-shortcuts-inhibit;
-      "Mod+Q".action = spawn "wezterm";
-      "Mod+space".action = spawn "sherlock";
+      "Mod+Q".action = spawn "uwsm" "app" "--" "wezterm";
+      "Mod+space".action = spawn "uwsm" "app" "--" "sherlock";
       "Mod+W".action = close-window;
       "Mod+C".action = center-column;
-      "Mod+N".action = spawn "swaync-client" "-t";
-      "Mod+E".action = spawn "swaylock";
+      "Mod+N".action = spawn "uwsm" "app" "--" "swaync-client" "-t";
+      "Mod+E".action = spawn "uwsm" "app" "--" "swaylock";
       "Mod+S".action = spawn "toggle-theme";
       "Mod+Z".action = toggle-overview;
 

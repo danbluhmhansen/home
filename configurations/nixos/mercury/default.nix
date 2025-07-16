@@ -52,6 +52,10 @@
     hostNames = ["github.com"];
     publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
   };
+  programs.ssh.knownHosts.saturn0 = {
+    hostNames = ["192.168.0.113"];
+    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICKKrNe2ufRlqAZyS++ItBxothX3P5hUScEVHckJTpD8";
+  };
 
   programs.niri.enable = true;
   programs.niri.package = pkgs.niri-unstable;
@@ -60,12 +64,20 @@
   programs.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   programs.hyprland.portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
   programs.hyprland.withUWSM = true;
+  programs.uwsm.enable = true;
+  programs.uwsm.waylandCompositors.niri = {
+    prettyName = "Niri";
+    comment = "A scrollable-tiling Wayland compositor.";
+    binPath = "/run/current-system/sw/bin/niri-session";
+  };
 
   programs.gamescope.enable = true;
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
 
   stylix.enable = true;
+
+  xdg.portal.config.niri.default = "gtk;gnome";
 
   home-manager.sharedModules = [
     ({ezModules, ...}: {
