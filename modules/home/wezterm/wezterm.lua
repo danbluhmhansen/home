@@ -25,9 +25,6 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
     local dir = value:sub(1, pos - 1)
     local file = value:sub(pos + 3, -1)
 
-    wezterm.log_info('br dir', dir)
-    wezterm.log_info('br file', file)
-
     local ex_pane = pane:tab():get_pane_direction('Right')
     if ex_pane then
       local proc_info = ex_pane:get_foreground_process_info()
@@ -62,7 +59,8 @@ wezterm.on('update-right-status', function(window, pane)
   local cwd_uri = pane:get_current_working_dir()
   if cwd_uri then
     local cwd = cwd_uri.file_path
-    local _, prompt, _ = wezterm.run_child_process({ 'sh', '-ci', 'TERM=xterm-256color starship prompt --profile wz --path ' .. cwd })
+    local _, prompt, _ = wezterm.run_child_process({ 'sh', '-ci',
+      'TERM=xterm-256color starship prompt --profile wz --path ' .. cwd })
     table.insert(status, prompt)
   end
   window:set_right_status(table.concat(status, ' '))
@@ -137,19 +135,28 @@ table.insert(keys, {
   action = act.ShowLauncher,
 })
 
-local br_act = wezterm.action_callback(function(win, pane)
-  local br_pane = pane:tab():get_pane_direction('Left')
-  if br_pane == nil then
-    win:perform_action(
-      act.SplitPane({
-        command = { args = { shell, '-ci', 'nu --execute br' } },
-        direction = 'Left',
-        size = { Cells = 36 },
-      }),
-      pane
-    )
+local br_act = wezterm.action_callback(function(window, pane)
+  local proc_info = pane:get_foreground_process_info()
+  if proc_info.name == '.broot-wrapped' then
+    local main_pane = pane:tab():get_pane_direction('Right')
+    if main_pane ~= nil then
+      window:perform_action(act.ActivatePaneDirection('Right'), pane)
+      window:perform_action(act.TogglePaneZoomState, main_pane)
+    end
   else
-    win:perform_action(act.TogglePaneZoomState, pane)
+    local br_pane = pane:tab():get_pane_direction('Left')
+    if br_pane == nil then
+      window:perform_action(
+        act.SplitPane({
+          command = { args = { shell, '-ci', 'nu --execute br' } },
+          direction = 'Left',
+          size = { Cells = 36 },
+        }),
+        pane
+      )
+    else
+      window:perform_action(act.TogglePaneZoomState, pane)
+    end
   end
 end)
 table.insert(keys, {
