@@ -30,4 +30,6 @@
     };
     mutableTaps = false;
   };
+
+  services.tailscale.enable = true;
 }
