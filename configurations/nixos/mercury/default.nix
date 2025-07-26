@@ -48,15 +48,6 @@
 
   fonts.packages = with pkgs; [maple-mono.NF noto-fonts noto-fonts-emoji];
 
-  programs.ssh.knownHosts.github0 = {
-    hostNames = ["github.com"];
-    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
-  };
-  programs.ssh.knownHosts.saturn0 = {
-    hostNames = ["192.168.0.113"];
-    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICKKrNe2ufRlqAZyS++ItBxothX3P5hUScEVHckJTpD8";
-  };
-
   programs.niri.enable = true;
   programs.niri.package = pkgs.niri-unstable;
 
