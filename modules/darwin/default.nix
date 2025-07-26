@@ -31,5 +31,8 @@
     mutableTaps = false;
   };
 
+  programs.gnupg.agent.enable = true;
+  programs.gnupg.agent.enableSSHSupport = true;
+
   services.tailscale.enable = true;
 }
