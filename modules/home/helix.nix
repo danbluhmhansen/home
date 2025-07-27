@@ -2,7 +2,55 @@
   programs.helix = {
     defaultEditor = true;
 
-    settings = {
+    settings = let
+      nor_sel = {
+        H = "goto_first_nonwhitespace";
+        L = "goto_line_end";
+        C-h = ":toggle lsp.display-inlay-hints";
+        tab = "move_parent_node_end";
+        S-tab = "move_parent_node_start";
+
+        space = {
+          w = ":write";
+          x = ":buffer-close";
+          q = ":quit";
+          l = ":format";
+          F = "file_picker_in_current_buffer_directory";
+          z = ":set-max-width 120 0";
+
+          e = [
+            ":sh rm -f /tmp/unique-file"
+            ":insert-output yazi --chooser-file=/tmp/unique-file"
+            '':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty''
+            ":open %sh{cat /tmp/unique-file}"
+            ":redraw"
+            ":set mouse false"
+            ":set mouse true"
+          ];
+          E = [
+            ":sh rm -f /tmp/unique-file"
+            ":insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file"
+            '':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty''
+            ":open %sh{cat /tmp/unique-file}"
+            ":redraw"
+            ":set mouse false"
+            ":set mouse true"
+          ];
+
+          v = {
+            s = ":run-shell-command git status";
+            f = ":run-shell-command git fetch";
+            F = ":run-shell-command git fetch --all";
+            a = ":run-shell-command git add %{buffer_name}";
+            b = ":run-shell-command git blame -L %{cursor_line} %{buffer_name}";
+            B = ":run-shell-command git blame %{buffer_name}";
+            d = ":run-shell-command git diff %{buffer_name}";
+            l = ":run-shell-command git log -- %{buffer_name}";
+            L = ":run-shell-command git log --patch -- %{buffer_name}";
+          };
+        };
+      };
+    in {
       theme = pkgs.lib.mkDefault "catppuccin_mocha";
       editor = {
         shell = ["nu" "--commands"];
@@ -11,11 +59,12 @@
         bufferline = "multiple";
         color-modes = true;
         text-width = 120;
+        rainbow-brackets = true;
 
         statusline = {
           left = ["mode" "spinner" "diagnostics" "workspace-diagnostics"];
           center = ["read-only-indicator" "file-name" "file-modification-indicator"];
-          right = ["position" "position-percentage" "primary-selection-length" "register" "file-encoding"];
+          right = ["zoom" "position" "position-percentage" "primary-selection-length" "register" "file-encoding"];
           merge-with-commandline = true;
         };
 
@@ -48,94 +97,15 @@
 
         indent-guides.render = true;
         soft-wrap.enable = true;
-        inline-diagnostics.cursor-line = "hint";
       };
 
-      keys.normal = {
-        H = "goto_first_nonwhitespace";
-        L = "goto_line_end";
-        C-h = ":toggle lsp.display-inlay-hints";
-        tab = "move_parent_node_end";
-        S-tab = "move_parent_node_start";
-        space.w = ":write";
-        space.x = ":buffer-close";
-        space.q = ":quit";
-        space.l = ":format";
-        space.F = "file_picker_in_current_buffer_directory";
-        space.e = [
-          ":sh rm -f /tmp/unique-file"
-          ":insert-output yazi --chooser-file=/tmp/unique-file"
-          '':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty''
-          ":open %sh{cat /tmp/unique-file}"
-          ":redraw"
-          ":set mouse false"
-          ":set mouse true"
-        ];
-        space.E = [
-          ":sh rm -f /tmp/unique-file"
-          ":insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file"
-          '':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty''
-          ":open %sh{cat /tmp/unique-file}"
-          ":redraw"
-          ":set mouse false"
-          ":set mouse true"
-        ];
-        space.v.s = ":run-shell-command git status";
-        space.v.f = ":run-shell-command git fetch";
-        space.v.F = ":run-shell-command git fetch --all";
-        space.v.a = ":run-shell-command git add %{buffer_name}";
-        space.v.b = ":run-shell-command git blame -L %{cursor_line} %{buffer_name}";
-        space.v.B = ":run-shell-command git blame %{buffer_name}";
-        space.v.d = ":run-shell-command git diff %{buffer_name}";
-        space.v.l = ":run-shell-command git log -- %{buffer_name}";
-        space.v.L = ":run-shell-command git log --patch -- %{buffer_name}";
-      };
-
+      keys.normal = nor_sel;
       keys.insert = {
         tab = "move_parent_node_end";
         S-tab = "move_parent_node_start";
         A-tab = "insert_tab";
       };
-
-      keys.select = {
-        H = "goto_first_nonwhitespace";
-        L = "goto_line_end";
-        C-h = ":toggle lsp.display-inlay-hints";
-        tab = "move_parent_node_end";
-        S-tab = "move_parent_node_start";
-        space.w = ":write";
-        space.x = ":buffer-close";
-        space.q = ":quit";
-        space.l = ":format";
-        space.F = "file_picker_in_current_buffer_directory";
-        space.e = [
-          ":sh rm -f /tmp/unique-file"
-          ":insert-output yazi --chooser-file=/tmp/unique-file"
-          '':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty''
-          ":open %sh{cat /tmp/unique-file}"
-          ":redraw"
-          ":set mouse false"
-          ":set mouse true"
-        ];
-        space.E = [
-          ":sh rm -f /tmp/unique-file"
-          ":insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file"
-          '':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty''
-          ":open %sh{cat /tmp/unique-file}"
-          ":redraw"
-          ":set mouse false"
-          ":set mouse true"
-        ];
-        space.v.s = ":run-shell-command git status";
-        space.v.f = ":run-shell-command git fetch";
-        space.v.F = ":run-shell-command git fetch --all";
-        space.v.a = ":run-shell-command git add %{buffer_name}";
-        space.v.b = ":run-shell-command git blame -L %{cursor_line} %{buffer_name}";
-        space.v.B = ":run-shell-command git blame %{buffer_name}";
-        space.v.d = ":run-shell-command git diff %{buffer_name}";
-        space.v.l = ":run-shell-command git log -- %{buffer_name}";
-        space.v.L = ":run-shell-command git log --patch -- %{buffer_name}";
-      };
+      keys.select = nor_sel;
     };
 
     languages = {
@@ -245,6 +215,7 @@
       taplo # toml
       vscode-langservers-extracted # css, html, javascript, json, jsx
       yaml-language-server # yaml
+      yamlfmt # yaml
       deno # formatters
     ];
   };
