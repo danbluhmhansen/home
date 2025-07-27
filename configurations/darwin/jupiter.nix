@@ -34,6 +34,10 @@
       args = {appdir = "~/Applications";};
     }
     {
+      name = "macfuse@dev";
+      args = {appdir = "~/Applications";};
+    }
+    {
       name = "utm";
       args = {appdir = "~/Applications";};
     }
