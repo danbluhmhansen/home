@@ -18,10 +18,10 @@
     wezterm
   ];
 
-  home.shellAliases.nixswitch =
-    if pkgs.stdenv.isDarwin
-    then "sudo darwin-rebuild switch --flake ~/.config/home"
-    else "sudo nixos-rebuild switch --flake ~/.config/home";
+  home.shellAliases = {
+    la = "ls -a";
+    ll = "ls -la";
+  };
 
   home.packages = with pkgs; [cachix fd sad xh];
 
