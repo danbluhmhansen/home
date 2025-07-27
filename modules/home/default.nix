@@ -23,7 +23,7 @@
     ll = "ls -la";
   };
 
-  home.packages = with pkgs; [cachix fd sad xh];
+  home.packages = with pkgs; [cachix fd git-ignore sad xh];
 
   programs.nh.enable = true;
   programs.home-manager.enable = true;
