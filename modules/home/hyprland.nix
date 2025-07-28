@@ -12,6 +12,8 @@
     input.kb_layout = "us,dk";
     input.kb_options = "grp:alt_space_toggle";
 
+    animation = ["workspaces, 1, 5, default, slidevert"];
+
     binds.drag_threshold = 10;
 
     "$mod" = "SUPER";

@@ -36,8 +36,9 @@
     pipewire.enable = true;
     xserver.videoDrivers = ["nvidia"];
     greetd.enable = true;
-    greetd.settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd niri-session";
+    greetd.settings.default_session.command = "${pkgs.lib.getExe pkgs.greetd.tuigreet} --time --remember --remember-user-session";
     greetd.settings.default_session.user = "greeter";
+    tailscale.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -68,15 +69,13 @@
 
   stylix.enable = true;
 
-  xdg.portal.config.niri.default = "gtk;gnome";
-
   home-manager.sharedModules = [
     ({ezModules, ...}: {
       imports = [inputs.sherlock.homeManagerModules.default ezModules.hyprland ezModules.niri ezModules.sherlock];
 
       fonts.fontconfig.enable = true;
 
-      home.packages = with pkgs; [discord gcr libnotify pavucontrol yubikey-manager];
+      home.packages = with pkgs; [discord gcr libnotify pavucontrol sshfs yubikey-manager];
 
       programs.alacritty.enable = true;
       programs.wezterm.enable = true;
@@ -91,6 +90,7 @@
       services.gpg-agent.pinentry.package = pkgs.pinentry-gnome3;
 
       services.gnome-keyring.enable = true;
+      services.hyprpaper.enable = pkgs.lib.mkForce false;
       services.swaync.enable = true;
       services.wpaperd.enable = true;
 
