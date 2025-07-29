@@ -2,7 +2,7 @@
   nixpkgs.hostPlatform = "x86_64-linux";
   system.stateVersion = "25.05";
 
-  imports = [inputs.nixos-wsl.nixosModules.default];
+  imports = [inputs.wsl.nixosModules.default];
 
   wsl.enable = true;
   wsl.defaultUser = "dan";
