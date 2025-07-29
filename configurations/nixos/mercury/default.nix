@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  ezModules,
   ...
 }: {
   imports = [
@@ -8,6 +9,9 @@
     ./disks.nix
     ./hardware.nix
     inputs.niri.nixosModules.niri
+    inputs.stylix.nixosModules.stylix
+    ezModules.pipewire
+    ezModules.stylix
   ];
 
   system.stateVersion = "25.05";
@@ -36,7 +40,9 @@
     pipewire.enable = true;
     xserver.videoDrivers = ["nvidia"];
     greetd.enable = true;
-    greetd.settings.default_session.command = "${pkgs.lib.getExe pkgs.greetd.tuigreet} --time --remember --remember-user-session";
+    greetd.settings.default_session.command = let
+      pkg = pkgs.lib.getExe pkgs.greetd.tuigreet;
+    in "${pkg} --time --remember --remember-user-session";
     greetd.settings.default_session.user = "greeter";
     tailscale.enable = true;
   };
@@ -85,7 +91,9 @@
       programs.sherlock.enable = true;
       programs.swaylock.enable = true;
 
-      programs.git.extraConfig.credential.helper = "${pkgs.git.override {withLibsecret = true;}}/bin/git-credential-libsecret";
+      programs.git.extraConfig.credential.helper = let
+        pkg = pkgs.git.override {withLibsecret = true;};
+      in "${pkg}/bin/git-credential-libsecret";
 
       services.gpg-agent.pinentry.package = pkgs.pinentry-gnome3;
 
@@ -93,6 +101,32 @@
       services.hyprpaper.enable = pkgs.lib.mkForce false;
       services.swaync.enable = true;
       services.wpaperd.enable = true;
+
+      systemd.user.mounts.home-dan-saturn = {
+        Unit.After = ["network-online.target"];
+        Unit.Wants = ["network-online.target"];
+        Install.WantedBy = ["default.target"];
+        Mount.What = "saturn:/home/dan";
+        Mount.Where = "${config.home.homeDirectory}/saturn";
+        Mount.Type = "fuse.sshfs";
+      };
+      systemd.user.automounts.home-dan-saturn = {
+        Install.WantedBy = ["default.target"];
+        Automount.Where = "${config.home.homeDirectory}/saturn";
+      };
+
+      systemd.user.mounts.home-dan-glbe9300 = {
+        Unit.After = ["network-online.target"];
+        Unit.Wants = ["network-online.target"];
+        Install.WantedBy = ["default.target"];
+        Mount.What = "gl-be9300:/";
+        Mount.Where = "${config.home.homeDirectory}/glbe9300";
+        Mount.Type = "fuse.sshfs";
+      };
+      systemd.user.automounts.home-dan-glbe9300 = {
+        Install.WantedBy = ["default.target"];
+        Automount.Where = "${config.home.homeDirectory}/glbe9300";
+      };
 
       wayland.windowManager.hyprland.enable = true;
     })

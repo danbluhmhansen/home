@@ -1,11 +1,4 @@
-{
-  inputs,
-  pkgs,
-  ezModules,
-  ...
-}: {
-  imports = [inputs.stylix.nixosModules.stylix ezModules.pipewire ezModules.stylix];
-
+{pkgs, ...}: {
   nixpkgs.config.allowUnfree = true;
 
   nix.settings = {
