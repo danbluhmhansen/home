@@ -2,55 +2,7 @@
   programs.helix = {
     defaultEditor = true;
 
-    settings = let
-      nor_sel = {
-        H = "goto_first_nonwhitespace";
-        L = "goto_line_end";
-        C-h = ":toggle lsp.display-inlay-hints";
-        tab = "move_parent_node_end";
-        S-tab = "move_parent_node_start";
-
-        space = {
-          w = ":write";
-          x = ":buffer-close";
-          q = ":quit";
-          l = ":format";
-          F = "file_picker_in_current_buffer_directory";
-          z = ":set-max-width 120 0";
-
-          e = [
-            ":sh rm -f /tmp/unique-file"
-            ":insert-output yazi --chooser-file=/tmp/unique-file"
-            '':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty''
-            ":open %sh{cat /tmp/unique-file}"
-            ":redraw"
-            ":set mouse false"
-            ":set mouse true"
-          ];
-          E = [
-            ":sh rm -f /tmp/unique-file"
-            ":insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file"
-            '':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty''
-            ":open %sh{cat /tmp/unique-file}"
-            ":redraw"
-            ":set mouse false"
-            ":set mouse true"
-          ];
-
-          v = {
-            s = ":run-shell-command git status";
-            f = ":run-shell-command git fetch";
-            F = ":run-shell-command git fetch --all";
-            a = ":run-shell-command git add %{buffer_name}";
-            b = ":run-shell-command git blame -L %{cursor_line} %{buffer_name}";
-            B = ":run-shell-command git blame %{buffer_name}";
-            d = ":run-shell-command git diff %{buffer_name}";
-            l = ":run-shell-command git log -- %{buffer_name}";
-            L = ":run-shell-command git log --patch -- %{buffer_name}";
-          };
-        };
-      };
-    in {
+    settings = rec {
       theme = pkgs.lib.mkDefault "catppuccin_mocha";
       editor = {
         shell = ["nu" "--commands"];
@@ -97,15 +49,65 @@
 
         indent-guides.render = true;
         soft-wrap.enable = true;
+
+        inline-blame = {
+          show = "cursor-line";
+          auto-fetch = true;
+          format = "{author}, {time-ago} • {commit} • {title}";
+        };
       };
 
-      keys.normal = nor_sel;
+      keys.normal = {
+        H = "goto_first_nonwhitespace";
+        L = "goto_line_end";
+        C-h = ":toggle lsp.display-inlay-hints";
+        tab = "move_parent_node_end";
+        S-tab = "move_parent_node_start";
+
+        space = {
+          w = ":write";
+          x = ":buffer-close";
+          q = ":quit";
+          l = ":format";
+          F = "file_picker_in_current_buffer_directory";
+          z = ":set-max-width 120 0";
+
+          e = [
+            ":sh rm -f /tmp/unique-file"
+            ":insert-output yazi --chooser-file=/tmp/unique-file"
+            ":insert-output echo $'(ansi -e ?1049h)(ansi -e ?2004h)' o> /dev/tty"
+            ":open %sh{cat /tmp/unique-file}"
+            ":redraw"
+            ":set mouse false"
+            ":set mouse true"
+          ];
+          E = [
+            ":sh rm -f /tmp/unique-file"
+            ":insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file"
+            ":insert-output echo $'(ansi -e ?1049h)(ansi -e ?2004h)' o> /dev/tty"
+            ":open %sh{cat /tmp/unique-file}"
+            ":redraw"
+            ":set mouse false"
+            ":set mouse true"
+          ];
+
+          v = [
+            ":new"
+            ":insert-output lazygit"
+            ":set mouse false"
+            ":set mouse true"
+            ":buffer-close!"
+            ":redraw"
+            ":reload-all"
+          ];
+        };
+      };
       keys.insert = {
         tab = "move_parent_node_end";
         S-tab = "move_parent_node_start";
         A-tab = "insert_tab";
       };
-      keys.select = nor_sel;
+      keys.select = keys.normal;
     };
 
     languages = {

@@ -11,14 +11,6 @@
   programs.bat.config.theme = "base16-256";
   programs.helix.settings.theme = "theme";
 
-  programs.gitui.theme = ''
-    (
-      selection_bg: Some("Black"),
-      cmdbar_bg: Some("Reset"),
-      cmdbar_extra_lines_bg: Some("Reset"),
-    )
-  '';
-
   programs.yazi.theme = {
     mode = {
       normal_main = {

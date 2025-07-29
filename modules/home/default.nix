@@ -7,9 +7,9 @@
     broot
     firefox
     git
-    gitui
     gpg
     helix
+    lazygit
     nushell
     starship
     swaync
@@ -35,9 +35,9 @@
   programs.bottom.enable = true;
   programs.broot.enable = true;
   programs.fzf.enable = true;
-  programs.gitui.enable = true;
   programs.gpg.enable = true;
   programs.helix.enable = true;
+  programs.lazygit.enable = true;
   programs.nushell.enable = true;
   programs.ripgrep.enable = true;
   programs.starship.enable = true;
