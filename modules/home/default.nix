@@ -1,9 +1,11 @@
 {
+  inputs,
   pkgs,
   ezModules,
   ...
 }: {
   imports = with ezModules; [
+    inputs.sops.homeManagerModules.sops
     broot
     firefox
     git

@@ -1,5 +1,6 @@
 {
   inputs,
+  config,
   pkgs,
   ezModules,
   ...
@@ -8,6 +9,7 @@
     inputs.disko.nixosModules.disko
     ./disks.nix
     ./hardware.nix
+    inputs.sops.nixosModules.sops
     inputs.niri.nixosModules.niri
     inputs.stylix.nixosModules.stylix
     ezModules.pipewire
@@ -17,6 +19,18 @@
   system.stateVersion = "25.05";
 
   nixpkgs.overlays = [inputs.niri.overlays.niri];
+
+  sops.defaultSopsFile = "/home/dan/.config/sops/secrets/main.yml";
+  sops.validateSopsFiles = false;
+  sops.age.keyFile = "/home/dan/.config/sops/age/keys.txt";
+  sops.age.generateKey = true;
+
+  sops.secrets.userpass.neededForUsers = true;
+
+  users.users.dan = {
+    hashedPasswordFile = config.sops.secrets.userpass.path;
+    linger = true;
+  };
 
   hardware = {
     graphics.enable = true;
