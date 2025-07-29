@@ -32,12 +32,15 @@
     linger = true;
   };
 
+  boot.kernel.sysctl = {"net.ipv4.ip_unprivileged_port_start" = 0;};
+
   hardware = {
     graphics.enable = true;
     nvidia.open = true;
     bluetooth.enable = true;
   };
 
+  networking.firewall.allowedTCPPorts = [80 443];
   networking.networkmanager.enable = true;
 
   security = {
@@ -89,13 +92,48 @@
 
   stylix.enable = true;
 
+  virtualisation.containers.enable = true;
+  virtualisation.containers.storage.settings.storage = {
+    driver = "btrfs";
+    runroot = "/run/containers/storage";
+    graphroot = "/var/lib/containers/storage";
+    options.overlay.mountopt = "nodev,metacopy=on";
+  };
+  virtualisation.oci-containers.backend = "podman";
+  virtualisation.podman.enable = true;
+  virtualisation.podman = {
+    autoPrune.enable = true;
+    dockerCompat = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
+
   home-manager.sharedModules = [
-    ({ezModules, ...}: {
+    ({
+      config,
+      ezModules,
+      ...
+    }: {
       imports = [inputs.sherlock.homeManagerModules.default ezModules.hyprland ezModules.niri ezModules.sherlock];
+
+      sops.defaultSopsFile = "/home/dan/.config/sops/secrets/main.yml";
+      sops.validateSopsFiles = false;
+      sops.age.keyFile = "/home/dan/.config/sops/age/keys.txt";
+      sops.age.generateKey = true;
+
+      sops.secrets.foundryvtt = {};
 
       fonts.fontconfig.enable = true;
 
-      home.packages = with pkgs; [discord gcr libnotify pavucontrol sshfs yubikey-manager];
+      home.packages = with pkgs; [
+        discord
+        gcr
+        libnotify
+        pavucontrol
+        podman-tui
+        sshfs
+        systemctl-tui
+        yubikey-manager
+      ];
 
       programs.alacritty.enable = true;
       programs.wezterm.enable = true;
@@ -115,6 +153,70 @@
       services.hyprpaper.enable = pkgs.lib.mkForce false;
       services.swaync.enable = true;
       services.wpaperd.enable = true;
+
+      services.podman.enable = true;
+
+      services.podman.networks.traefik = {
+        driver = "bridge";
+        subnet = "10.80.0.0/24";
+      };
+
+      services.podman.containers.glance = {
+        image = "docker.io/glanceapp/glance:latest";
+        environment = {TZ = "Europe/Copenhagen";};
+        network = ["traefik"];
+        volumes = [
+          "/run/user/1000/podman/podman.sock:/var/run/docker.sock:ro"
+          "${config.home.homeDirectory}/srv/glance/glance.yml:/app/config/glance.yml:ro"
+        ];
+        labels = {
+          "glance.name" = "Glance";
+          "glance.icon" = "sh:glance";
+          "glance.url" = "https://glance.920301.xyz";
+          "glance.description" = ''"Dashboard"'';
+        };
+      };
+
+      services.podman.containers.forgejo = {
+        image = "codeberg.org/forgejo/forgejo:11-rootless";
+        user = "1000:1000";
+        environment = {
+          USER_UID = "1000";
+          USER_GID = "1000";
+          TZ = "Europe/Copenhagen";
+        };
+        network = ["traefik"];
+        volumes = [
+          "${config.home.homeDirectory}/srv/forgejo/data:/var/lib/gitea"
+          "${config.home.homeDirectory}/srv/forgejo/conf:/etc/gitea"
+        ];
+        ports = ["3000:3000" "222:2222"];
+        labels = {
+          "glance.name" = "Forgejo";
+          "glance.icon" = "si:forgejo";
+          "glance.url" = "https://forgejo.920301.xyz";
+          "glance.description" = ''"Software forge"'';
+        };
+      };
+
+      services.podman.containers.foundryvtt = {
+        image = "docker.io/felddy/foundryvtt:13";
+        environment = {
+          USER_UID = "1000";
+          USER_GID = "1000";
+          TZ = "Europe/Copenhagen";
+        };
+        environmentFile = [config.sops.secrets.foundryvtt.path];
+        network = ["traefik"];
+        volumes = ["${config.home.homeDirectory}/srv/foundry:/data"];
+        ports = ["30000:30000"];
+        labels = {
+          "glance.name" = "FoundryVTT";
+          "glance.icon" = "si:foundryvirtualtabletop";
+          "glance.url" = "https://foundry.920301.xyz";
+          "glance.description" = ''"A Self-Hosted & Modern Roleplaying Platform"'';
+        };
+      };
 
       systemd.user.mounts.home-dan-saturn = {
         Unit.After = ["network-online.target"];
