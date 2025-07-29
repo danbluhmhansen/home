@@ -92,12 +92,11 @@
           ];
 
           v = [
-            ":new"
             ":insert-output lazygit"
+            ":insert-output echo $'(ansi -e ?1049h)(ansi -e ?2004h)' o> /dev/tty"
+            ":redraw"
             ":set mouse false"
             ":set mouse true"
-            ":buffer-close!"
-            ":redraw"
             ":reload-all"
           ];
         };
