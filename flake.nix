@@ -93,9 +93,7 @@
         pkgs,
         ...
       }: {
-        treefmt.programs = {
-          alejandra.enable = true; # nix
-        };
+        treefmt.programs.alejandra.enable = true; # nix
         devshells.default = {
           devshell.startup.hook.text = config.pre-commit.installationScript;
           motd = "";

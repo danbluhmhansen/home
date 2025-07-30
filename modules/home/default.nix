@@ -1,10 +1,9 @@
 {
   inputs,
   pkgs,
-  ezModules,
   ...
 }: {
-  imports = with ezModules; [
+  imports = with inputs.self.outputs.homeModules; [
     inputs.sops.homeManagerModules.sops
     broot
     firefox
