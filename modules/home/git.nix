@@ -22,13 +22,13 @@
       b = "branch";
       ba = "branch --all";
       bd = "branch --delete";
-      bD = "branch --delete --force";
+      bd- = "branch --delete --force";
       c = "commit";
       c- = "commit --amend";
       ca = "commit --all";
       ca- = "commit --all --amend";
       cb = "checkout -b";
-      cB = "checkout -B";
+      cb- = "checkout -B";
       cl = "clone";
       d = "diff";
       ds = "diff --cached";
