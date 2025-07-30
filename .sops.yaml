@@ -1,4 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/chri11g6/sops-schema/refs/heads/master/sops.schema.json
 creation_rules:
   - age: >-
-      age13zlejryr25ml24w0phukreks7f3283n07z20mcm82mp0l87xxq7syka0rs
+      age13zlejryr25ml24w0phukreks7f3283n07z20mcm82mp0l87xxq7syka0rs,
+      age1cgnl784wle66489z8ut6gyy5xru0nqyyy64ymvsu5x3d9ufflydqq95rvn

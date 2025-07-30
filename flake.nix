@@ -86,6 +86,7 @@
         darwin.hosts.jupiter.userHomeModules = ["dan"];
         nixos.hosts.mercury.userHomeModules = ["dan"];
         nixos.hosts.mars.userHomeModules = ["dan"];
+        nixos.hosts.saturn.userHomeModules = ["dan"];
       };
 
       perSystem = {
