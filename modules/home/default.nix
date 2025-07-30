@@ -1,5 +1,6 @@
 {
   inputs,
+  config,
   pkgs,
   ...
 }: {
@@ -18,6 +19,11 @@
     waybar
     wezterm
   ];
+
+  sops.defaultSopsFile = "${config.home.homeDirectory}/.config/sops/secrets/main.yml";
+  sops.validateSopsFiles = false;
+  sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+  sops.age.generateKey = true;
 
   home.shellAliases = {
     la = "ls -a";
@@ -45,9 +51,6 @@
   programs.yazi.enable = true;
   programs.zoxide.enable = true;
 
-  programs.nh.flake =
-    if pkgs.stdenv.isDarwin
-    then "/Users/dan/.config/home"
-    else "/home/dan/.config/home";
+  programs.nh.flake = "${config.home.homeDirectory}/.config/home";
   programs.nh.clean.enable = true;
 }

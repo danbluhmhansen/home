@@ -1,4 +1,11 @@
-{pkgs, ...}: {
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [inputs.sops.nixosModules.sops];
+
   nixpkgs.config.allowUnfree = true;
 
   nix.settings = {
@@ -8,6 +15,13 @@
     extra-substituters = ["https://nix-community.cachix.org"];
     extra-trusted-public-keys = ["nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="];
   };
+
+  sops.defaultSopsFile = "${config.users.users.dan.home}/.config/sops/secrets/main.yml";
+  sops.validateSopsFiles = false;
+  sops.age.keyFile = "${config.users.users.dan.home}/.config/sops/age/keys.txt";
+  sops.age.generateKey = true;
+
+  sops.secrets.userpass.neededForUsers = true;
 
   time.timeZone = "Europe/Copenhagen";
 
@@ -22,6 +36,7 @@
     isNormalUser = true;
     createHome = true;
     home = "/home/dan";
+    hashedPasswordFile = config.sops.secrets.userpass.path;
     extraGroups = ["wheel" "networkmanager"];
   };
 

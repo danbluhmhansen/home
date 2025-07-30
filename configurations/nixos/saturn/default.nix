@@ -1,6 +1,5 @@
 {
   inputs,
-  config,
   pkgs,
   ...
 }: {
@@ -8,24 +7,13 @@
     inputs.disko.nixosModules.disko
     ./disks.nix
     ./hardware.nix
-    inputs.sops.nixosModules.sops
   ];
 
   home-manager.sharedModules = [inputs.self.outputs.homeModules.saturn];
 
   system.stateVersion = "25.05";
 
-  sops.defaultSopsFile = "${config.users.users.dan.home}/.config/sops/secrets/main.yml";
-  sops.validateSopsFiles = false;
-  sops.age.keyFile = "${config.users.users.dan.home}/.config/sops/age/keys.txt";
-  sops.age.generateKey = true;
-
-  sops.secrets.userpass.neededForUsers = true;
-
-  users.users.dan = {
-    hashedPasswordFile = config.sops.secrets.userpass.path;
-    linger = true;
-  };
+  users.users.dan.linger = true;
 
   boot.kernel.sysctl = {"net.ipv4.ip_unprivileged_port_start" = 0;};
 

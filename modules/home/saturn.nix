@@ -9,11 +9,6 @@
     ./services/streaming.nix
   ];
 
-  sops.defaultSopsFile = "${config.home.homeDirectory}/.config/sops/secrets/main.yml";
-  sops.validateSopsFiles = false;
-  sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-  sops.age.generateKey = true;
-
   sops.secrets.foundryvtt = {};
 
   home.packages = with pkgs; [podman-tui systemctl-tui];

@@ -11,11 +11,6 @@
     inputs.self.outputs.homeModules.sherlock
   ];
 
-  sops.defaultSopsFile = "${config.home.homeDirectory}/.config/sops/secrets/main.yml";
-  sops.validateSopsFiles = false;
-  sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-  sops.age.generateKey = true;
-
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [discord gcr libnotify pavucontrol sshfs yubikey-manager];
