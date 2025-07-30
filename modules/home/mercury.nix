@@ -51,7 +51,7 @@
   services.gnome-keyring.enable = true;
   services.hyprpaper.enable = pkgs.lib.mkForce false;
   services.swaync.enable = true;
-  services.wpaperd.enable = true;
+  services.swww.enable = true;
 
   services.podman.enable = true;
 

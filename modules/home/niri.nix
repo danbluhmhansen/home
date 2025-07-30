@@ -34,6 +34,10 @@
         matches = [{namespace = "^wpaperd";}];
         place-within-backdrop = true;
       }
+      {
+        matches = [{namespace = "^swww-daemon";}];
+        place-within-backdrop = true;
+      }
     ];
 
     binds = with config.lib.niri.actions; {

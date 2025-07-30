@@ -1,4 +1,15 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  wallpaperDark = pkgs.fetchurl {
+    name = "wallpaper.png";
+    url = "https://initiate.alphacoders.com/download/images7/1397453/png";
+    hash = "sha256-o+LGCMXiE+TiRiwwPCCHuZCEIYBncfhBElWidrGYU54=";
+  };
+  wallpaperLight = pkgs.fetchurl {
+    name = "wallpaper.png";
+    url = "https://initiate.alphacoders.com/download/images8/1397851/png";
+    hash = "sha256-d2GQBw/V//5C6g6Vi/VMn6Lw/eekSffdXQZAaVok6O0=";
+  };
+in {
   security.doas.extraRules = [
     {
       users = ["dan"];
@@ -31,11 +42,7 @@
       monospace.package = pkgs.maple-mono.NF;
       monospace.name = "Maple Mono NF";
     };
-    image = pkgs.lib.mkDefault (pkgs.fetchurl {
-      name = "wallpaper.png";
-      url = "https://initiate.alphacoders.com/download/images7/1397453/png";
-      hash = "sha256-o+LGCMXiE+TiRiwwPCCHuZCEIYBncfhBElWidrGYU54=";
-    });
+    image = pkgs.lib.mkDefault wallpaperDark;
   };
 
   specialisation.light.configuration = {
@@ -44,11 +51,7 @@
       polarity = "light";
       cursor.package = pkgs.catppuccin-cursors.latteLight;
       cursor.name = "catppuccin-latte-light-cursors";
-      image = pkgs.fetchurl {
-        name = "wallpaper.png";
-        url = "https://initiate.alphacoders.com/download/images8/1397851/png";
-        hash = "sha256-d2GQBw/V//5C6g6Vi/VMn6Lw/eekSffdXQZAaVok6O0=";
-      };
+      image = wallpaperLight;
     };
 
     home-manager.sharedModules = [
@@ -103,10 +106,12 @@
           if [ "$current_system" == "$light_specialisation" ]; then
              notify-send "Switching to Dark"
              doas /nix/var/nix/profiles/system/bin/switch-to-configuration switch
+             swww img ${wallpaperDark}
              pkill -USR1 hx
           else
              notify-send "Switching to Light"
              doas /nix/var/nix/profiles/system/specialisation/light/bin/switch-to-configuration switch
+             swww img ${wallpaperLight}
              pkill -USR1 hx
           fi
         '')
