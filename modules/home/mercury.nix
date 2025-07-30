@@ -9,9 +9,6 @@
     inputs.self.outputs.homeModules.hyprland
     inputs.self.outputs.homeModules.niri
     inputs.self.outputs.homeModules.sherlock
-    ./services/forgejo.nix
-    ./services/foundryvtt.nix
-    ./services/streaming.nix
   ];
 
   sops.defaultSopsFile = "${config.home.homeDirectory}/.config/sops/secrets/main.yml";
@@ -19,20 +16,9 @@
   sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
   sops.age.generateKey = true;
 
-  sops.secrets.foundryvtt = {};
-
   fonts.fontconfig.enable = true;
 
-  home.packages = with pkgs; [
-    discord
-    gcr
-    libnotify
-    pavucontrol
-    podman-tui
-    sshfs
-    systemctl-tui
-    yubikey-manager
-  ];
+  home.packages = with pkgs; [discord gcr libnotify pavucontrol sshfs yubikey-manager];
 
   programs.alacritty.enable = true;
   programs.wezterm.enable = true;
@@ -52,29 +38,6 @@
   services.hyprpaper.enable = pkgs.lib.mkForce false;
   services.swaync.enable = true;
   services.swww.enable = true;
-
-  services.podman.enable = true;
-
-  services.podman.networks.traefik = {
-    driver = "bridge";
-    subnet = "10.80.0.0/24";
-  };
-
-  services.podman.containers.glance = {
-    image = "docker.io/glanceapp/glance:latest";
-    environment = {TZ = "Europe/Copenhagen";};
-    network = ["traefik"];
-    volumes = [
-      "/run/user/1000/podman/podman.sock:/var/run/docker.sock:ro"
-      "${config.home.homeDirectory}/srv/glance/glance.yml:/app/config/glance.yml:ro"
-    ];
-    labels = {
-      "glance.name" = "Glance";
-      "glance.icon" = "sh:glance";
-      "glance.url" = "https://glance.920301.xyz";
-      "glance.description" = ''"Dashboard"'';
-    };
-  };
 
   systemd.user.mounts.home-dan-saturn = {
     Unit.After = ["network-online.target"];
