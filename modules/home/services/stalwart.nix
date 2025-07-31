@@ -16,6 +16,8 @@
       "4190:4190"
     ];
     labels = {
+      "traefik.http.routers.stalwart.rule" = ''Host(`stalwart.920301.xyz`)'';
+      "traefik.http.services.stalwart.loadbalancer.server.port" = "8080";
       "glance.name" = "Stalwart";
       "glance.icon" = "sh:stalwart";
       "glance.url" = "https://stalwart.920301.xyz";

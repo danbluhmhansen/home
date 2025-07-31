@@ -20,6 +20,8 @@
     ];
     ports = ["8096:8096" "7359:7359/udp" "1900:1900/udp"];
     labels = {
+      "traefik.http.routers.jellyfin.rule" = ''Host(`jf.920301.xyz`)'';
+      "traefik.http.services.jellyfin.loadbalancer.server.port" = "8096";
       "glance.name" = "Jellyfin";
       "glance.icon" = "si:jellyfin";
       "glance.url" = "https://jf.920301.xyz";
@@ -39,6 +41,7 @@
     volumes = ["${config.home.homeDirectory}/srv/ombi:/config"];
     ports = ["3579:3579"];
     labels = {
+      "traefik.http.routers.ombi.rule" = ''Host(`ombi.920301.xyz`)'';
       "glance.name" = "Ombi";
       "glance.icon" = "sh:ombi";
       "glance.url" = "https://ombi.920301.xyz";
@@ -61,6 +64,7 @@
     ];
     ports = ["8989:8989"];
     labels = {
+      "traefik.http.routers.sonarr.rule" = ''Host(`sonarr.920301.xyz`)'';
       "glance.name" = "Sonarr";
       "glance.icon" = "si:sonarr";
       "glance.url" = "https://sonarr.920301.xyz";
@@ -83,6 +87,7 @@
     ];
     ports = ["7878:7878"];
     labels = {
+      "traefik.http.routers.radarr.rule" = ''Host(`radarr.920301.xyz`)'';
       "glance.name" = "Radarr";
       "glance.icon" = "si:radarr";
       "glance.url" = "https://radarr.920301.xyz";
@@ -105,6 +110,7 @@
     ];
     ports = ["6767:6767"];
     labels = {
+      "traefik.http.routers.bazarr.rule" = ''Host(`bazarr.920301.xyz`)'';
       "glance.name" = "Bazarr";
       "glance.icon" = "di:bazarr";
       "glance.url" = "https://bazarr.920301.xyz";
@@ -123,6 +129,7 @@
     volumes = ["${config.home.homeDirectory}/srv/prowlarr:/config"];
     ports = ["9696:9696"];
     labels = {
+      "traefik.http.routers.prowlarr.rule" = ''Host(`prowlarr.920301.xyz`)'';
       "glance.name" = "Prowlarr";
       "glance.icon" = "sh:prowlarr";
       "glance.url" = "https://prowlarr.920301.xyz";
@@ -141,6 +148,7 @@
     network = ["traefik" "streaming"];
     ports = ["8191:8191"];
     labels = {
+      "traefik.enable" = "false";
       "glance.name" = "Flaresolverr";
       "glance.icon" = "sh:flaresolverr";
       "glance.url" = "https://flaresolverr.920301.xyz";
@@ -164,11 +172,13 @@
       "${config.home.homeDirectory}/srv/downloads:/downloads"
     ];
     ports = [
-      "8081:8080"
+      "8083:8080"
       "6881:6881"
       "6881:6881/udp"
     ];
     labels = {
+      "traefik.http.routers.qbittorrent.rule" = ''Host(`qb.920301.xyz`)'';
+      "traefik.http.services.qbittorrent.loadbalancer.server.port" = "8080";
       "glance.name" = "QBittorrent";
       "glance.icon" = "si:qbittorrent";
       "glance.url" = "https://qb.920301.xyz";

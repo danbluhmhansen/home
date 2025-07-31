@@ -14,6 +14,8 @@
     ];
     ports = ["3000:3000" "222:2222"];
     labels = {
+      "traefik.http.routers.forgejo.rule" = ''Host(`forgejo.920301.xyz`)'';
+      "traefik.http.services.forgejo.loadbalancer.server.port" = "3000";
       "glance.name" = "Forgejo";
       "glance.icon" = "si:forgejo";
       "glance.url" = "https://forgejo.920301.xyz";

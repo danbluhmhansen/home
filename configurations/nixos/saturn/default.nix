@@ -21,21 +21,6 @@
   networking.networkmanager.enable = true;
 
   services = {
-    caddy.enable = true;
-
-    caddy.virtualHosts."forgejo.920301.xyz".extraConfig = "reverse_proxy localhost:3000";
-    caddy.virtualHosts."git.920301.xyz".extraConfig = "reverse_proxy localhost:3000";
-    caddy.virtualHosts."foundry.920301.xyz".extraConfig = "reverse_proxy localhost:30000";
-    caddy.virtualHosts."stalwart.920301.xyz".extraConfig = "reverse_proxy localhost:8082";
-
-    caddy.virtualHosts."jf.920301.xyz".extraConfig = "reverse_proxy localhost:8096";
-    caddy.virtualHosts."ombi.920301.xyz".extraConfig = "reverse_proxy localhost:3579";
-    caddy.virtualHosts."sonarr.920301.xyz".extraConfig = "reverse_proxy localhost:8989";
-    caddy.virtualHosts."radarr.920301.xyz".extraConfig = "reverse_proxy localhost:7878";
-    caddy.virtualHosts."bazarr.920301.xyz".extraConfig = "reverse_proxy localhost:6767";
-    caddy.virtualHosts."prowlarr.920301.xyz".extraConfig = "reverse_proxy localhost:9696";
-    caddy.virtualHosts."qb.920301.xyz".extraConfig = "reverse_proxy localhost:8081";
-
     openssh.enable = true;
     tailscale.enable = true;
   };

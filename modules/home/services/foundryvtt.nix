@@ -1,4 +1,6 @@
 {config, ...}: {
+  sops.secrets.foundryvtt = {};
+
   services.podman.containers.foundryvtt = {
     image = "docker.io/felddy/foundryvtt:13";
     environment = {
@@ -11,6 +13,7 @@
     volumes = ["${config.home.homeDirectory}/srv/foundry:/data"];
     ports = ["30000:30000"];
     labels = {
+      "traefik.http.routers.foundryvtt.rule" = ''Host(`foundry.920301.xyz`)'';
       "glance.name" = "FoundryVTT";
       "glance.icon" = "si:foundryvirtualtabletop";
       "glance.url" = "https://foundry.920301.xyz";
