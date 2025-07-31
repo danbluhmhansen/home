@@ -6,6 +6,7 @@
   imports = [
     ./services/forgejo.nix
     ./services/foundryvtt.nix
+    ./services/stalwart.nix
     ./services/streaming.nix
   ];
 
