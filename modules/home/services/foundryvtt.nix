@@ -14,7 +14,7 @@
       "glance.name" = "FoundryVTT";
       "glance.icon" = "si:foundryvirtualtabletop";
       "glance.url" = "https://foundry.920301.xyz";
-      "glance.description" = ''"A Self-Hosted & Modern Roleplaying Platform"'';
+      "glance.description" = "A-Self-Hosted-&-Modern-Roleplaying-Platform";
     };
   };
 }

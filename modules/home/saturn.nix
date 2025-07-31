@@ -32,11 +32,12 @@
       "/run/user/1000/podman/podman.sock:/var/run/docker.sock:ro"
       "${config.home.homeDirectory}/srv/glance/glance.yml:/app/config/glance.yml:ro"
     ];
+    ports = ["8080:8080"];
     labels = {
       "glance.name" = "Glance";
       "glance.icon" = "sh:glance";
       "glance.url" = "https://glance.920301.xyz";
-      "glance.description" = ''"Dashboard"'';
+      "glance.description" = "Dashboard";
     };
   };
 }

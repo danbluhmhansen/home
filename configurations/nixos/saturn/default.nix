@@ -27,7 +27,7 @@
     caddy.virtualHosts."jf.920301.xyz".extraConfig = "reverse_proxy localhost:8096";
     caddy.virtualHosts."ombi.920301.xyz".extraConfig = "reverse_proxy localhost:3579";
     caddy.virtualHosts."prowlarr.920301.xyz".extraConfig = "reverse_proxy localhost:9696";
-    caddy.virtualHosts."qb.920301.xyz".extraConfig = "reverse_proxy localhost:8080";
+    caddy.virtualHosts."qb.920301.xyz".extraConfig = "reverse_proxy localhost:8081";
     caddy.virtualHosts."radarr.920301.xyz".extraConfig = "reverse_proxy localhost:7878";
     caddy.virtualHosts."sonarr.920301.xyz".extraConfig = "reverse_proxy localhost:8989";
     caddy.virtualHosts."forgejo.920301.xyz".extraConfig = "reverse_proxy localhost:3000";

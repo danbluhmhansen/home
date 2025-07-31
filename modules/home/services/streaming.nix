@@ -23,7 +23,7 @@
       "glance.name" = "Jellyfin";
       "glance.icon" = "si:jellyfin";
       "glance.url" = "https://jf.920301.xyz";
-      "glance.description" = ''"The Free Software Media System"'';
+      "glance.description" = "The-Free-Software-Media-System";
     };
   };
 
@@ -42,7 +42,7 @@
       "glance.name" = "Ombi";
       "glance.icon" = "sh:ombi";
       "glance.url" = "https://ombi.920301.xyz";
-      "glance.description" = ''"Request tool"'';
+      "glance.description" = "Request-tool";
     };
   };
 
@@ -64,7 +64,7 @@
       "glance.name" = "Sonarr";
       "glance.icon" = "si:sonarr";
       "glance.url" = "https://sonarr.920301.xyz";
-      "glance.description" = ''"TV show manager"'';
+      "glance.description" = "TV-show-manager";
     };
   };
 
@@ -86,7 +86,7 @@
       "glance.name" = "Radarr";
       "glance.icon" = "si:radarr";
       "glance.url" = "https://radarr.920301.xyz";
-      "glance.description" = ''"Movie manager"'';
+      "glance.description" = "Movie-manager";
     };
   };
 
@@ -106,9 +106,9 @@
     ports = ["6767:6767"];
     labels = {
       "glance.name" = "Bazarr";
-      "glance.icon" = "sh:bazarr";
+      "glance.icon" = "di:bazarr";
       "glance.url" = "https://bazarr.920301.xyz";
-      "glance.description" = ''"Subtitle manager"'';
+      "glance.description" = "Subtitle-manager";
     };
   };
 
@@ -126,7 +126,7 @@
       "glance.name" = "Prowlarr";
       "glance.icon" = "sh:prowlarr";
       "glance.url" = "https://prowlarr.920301.xyz";
-      "glance.description" = ''"Index manager"'';
+      "glance.description" = "Index-manager";
     };
   };
 
@@ -144,7 +144,7 @@
       "glance.name" = "Flaresolverr";
       "glance.icon" = "sh:flaresolverr";
       "glance.url" = "https://flaresolverr.920301.xyz";
-      "glance.description" = ''"Proxy server to bypass Cloudflare protection"'';
+      "glance.description" = "Proxy-server-to-bypass-Cloudflare-protection";
     };
   };
 
@@ -164,7 +164,7 @@
       "${config.home.homeDirectory}/srv/downloads:/downloads"
     ];
     ports = [
-      "8080:8080"
+      "8081:8080"
       "6881:6881"
       "6881:6881/udp"
     ];
@@ -172,7 +172,7 @@
       "glance.name" = "QBittorrent";
       "glance.icon" = "si:qbittorrent";
       "glance.url" = "https://qb.920301.xyz";
-      "glance.description" = ''"Torrent client"'';
+      "glance.description" = "Torrent-client";
     };
   };
 }
