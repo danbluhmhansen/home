@@ -6,7 +6,6 @@
 }: {
   imports = [
     inputs.sherlock.homeManagerModules.default
-    inputs.self.outputs.homeModules.hyprland
     inputs.self.outputs.homeModules.niri
     inputs.self.outputs.homeModules.sherlock
   ];
@@ -30,7 +29,6 @@
   services.gpg-agent.pinentry.package = pkgs.pinentry-gnome3;
 
   services.gnome-keyring.enable = true;
-  services.hyprpaper.enable = pkgs.lib.mkForce false;
   services.swaync.enable = true;
   services.swww.enable = true;
 
@@ -59,6 +57,4 @@
     Install.WantedBy = ["default.target"];
     Automount.Where = "${config.home.homeDirectory}/glbe9300";
   };
-
-  wayland.windowManager.hyprland.enable = true;
 }

@@ -49,6 +49,7 @@
     in "${pkg} --time --remember --remember-user-session";
     greetd.settings.default_session.user = "greeter";
     tailscale.enable = true;
+    desktopManager.plasma6.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -62,10 +63,6 @@
   programs.niri.enable = true;
   programs.niri.package = pkgs.niri-unstable;
 
-  programs.hyprland.enable = true;
-  programs.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  programs.hyprland.portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
-  programs.hyprland.withUWSM = true;
   programs.uwsm.enable = true;
   programs.uwsm.waylandCompositors.niri = {
     prettyName = "Niri";
@@ -76,6 +73,7 @@
   programs.gamescope.enable = true;
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
+  programs.steam.gamescopeSession.args = ["--adaptive-sync" "--hdr-enabled"];
 
   stylix.enable = true;
 }

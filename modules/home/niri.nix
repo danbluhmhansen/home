@@ -41,6 +41,7 @@
     ];
 
     binds = with config.lib.niri.actions; {
+      "Mod+Ctrl+E".action = quit;
       "Mod+Ctrl+Slash".action = show-hotkey-overlay;
       "Mod+Escape".action = toggle-keyboard-shortcuts-inhibit;
       "Mod+Q".action = spawn "uwsm" "app" "--" "wezterm";
