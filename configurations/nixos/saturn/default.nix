@@ -21,6 +21,7 @@
   networking.networkmanager.enable = true;
 
   services = {
+    cachix-agent.enable = true;
     openssh.enable = true;
     tailscale.enable = true;
   };
