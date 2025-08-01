@@ -6,6 +6,7 @@
     ./services/foundryvtt.nix
     ./services/stalwart.nix
     ./services/streaming.nix
+    ./services/cv.nix
   ];
 
   home.packages = with pkgs; [podman-tui systemctl-tui];
