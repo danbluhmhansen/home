@@ -1,5 +1,12 @@
-{inputs, ...}: {
-  imports = [inputs.nix-homebrew.darwinModules.nix-homebrew];
+{
+  inputs,
+  config,
+  ...
+}: {
+  imports = [
+    inputs.sops.darwinModules.sops
+    inputs.nix-homebrew.darwinModules.nix-homebrew
+  ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -13,6 +20,11 @@
       "danbluhmhansen.cachix.org-1:0qTEsQt253LH3OJC7oxZSjSIf+6vB+l2scs1r+DnM+I="
     ];
   };
+
+  sops.defaultSopsFile = "${config.users.users.dan.home}/Library/Application Support/sops/secrets/main.yml";
+  sops.validateSopsFiles = false;
+  sops.age.keyFile = "${config.users.users.dan.home}/Library/Application Support/sops/age/keys.txt";
+  sops.age.generateKey = true;
 
   time.timeZone = "Europe/Copenhagen";
 
