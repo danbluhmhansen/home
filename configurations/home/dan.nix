@@ -1,19 +1,20 @@
 {
   inputs,
   pkgs,
+  user,
   ...
 }: {
   home.stateVersion = "25.05";
-  home.username = "dan";
+  home.username = user;
   home.homeDirectory =
     if pkgs.stdenv.isDarwin
-    then "/Users/dan"
-    else "/home/dan";
+    then "/Users/${user}"
+    else "/home/${user}";
 
   home.sessionVariables.PASSWORD_STORE_DIR =
     if pkgs.stdenv.isDarwin
-    then "/Users/dan/.local/share/pass"
-    else "/home/dan/.local/share/pass";
+    then "/Users/${user}/.local/share/pass"
+    else "/home/${user}/.local/share/pass";
 
   home.packages = with pkgs; [termscp];
 

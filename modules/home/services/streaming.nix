@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  timeZone,
+  ...
+}: {
   services.podman.networks.streaming = {
     driver = "bridge";
     subnet = "10.81.0.0/24";
@@ -9,7 +13,7 @@
     environment = {
       PUID = "1000";
       PGID = "1000";
-      TZ = "Europe/Copenhagen";
+      TZ = timeZone;
       JELLYFIN_PublishedServerUrl = "https://jf.920301.xyz";
     };
     network = ["traefik" "streaming"];
@@ -34,14 +38,14 @@
     environment = {
       PUID = "1000";
       PGID = "1000";
-      TZ = "Europe/Copenhagen";
+      TZ = timeZone;
       BASE_URL = "/";
     };
     network = ["traefik" "streaming"];
     volumes = ["${config.home.homeDirectory}/srv/ombi:/config"];
-    ports = ["3579:3579"];
     labels = {
       "traefik.http.routers.ombi.rule" = ''Host(`ombi.920301.xyz`)'';
+      "traefik.http.services.ombi.loadbalancer.server.port" = "3579";
       "glance.name" = "Ombi";
       "glance.icon" = "sh:ombi";
       "glance.url" = "https://ombi.920301.xyz";
@@ -54,7 +58,7 @@
     environment = {
       PUID = "1000";
       PGID = "1000";
-      TZ = "Europe/Copenhagen";
+      TZ = timeZone;
     };
     network = ["traefik" "streaming"];
     volumes = [
@@ -62,9 +66,9 @@
       "${config.home.homeDirectory}/srv/tvshows:/data/tv"
       "${config.home.homeDirectory}/srv/downloads:/downloads"
     ];
-    ports = ["8989:8989"];
     labels = {
       "traefik.http.routers.sonarr.rule" = ''Host(`sonarr.920301.xyz`)'';
+      "traefik.http.services.sonarr.loadbalancer.server.port" = "8989";
       "glance.name" = "Sonarr";
       "glance.icon" = "si:sonarr";
       "glance.url" = "https://sonarr.920301.xyz";
@@ -77,7 +81,7 @@
     environment = {
       PUID = "1000";
       PGID = "1000";
-      TZ = "Europe/Copenhagen";
+      TZ = timeZone;
     };
     network = ["traefik" "streaming"];
     volumes = [
@@ -85,9 +89,9 @@
       "${config.home.homeDirectory}/srv/movies:/data/movies"
       "${config.home.homeDirectory}/srv/downloads:/downloads"
     ];
-    ports = ["7878:7878"];
     labels = {
       "traefik.http.routers.radarr.rule" = ''Host(`radarr.920301.xyz`)'';
+      "traefik.http.services.radarr.loadbalancer.server.port" = "7878";
       "glance.name" = "Radarr";
       "glance.icon" = "si:radarr";
       "glance.url" = "https://radarr.920301.xyz";
@@ -100,7 +104,7 @@
     environment = {
       PUID = "1000";
       PGID = "1000";
-      TZ = "Europe/Copenhagen";
+      TZ = timeZone;
     };
     network = ["traefik" "streaming"];
     volumes = [
@@ -108,9 +112,9 @@
       "${config.home.homeDirectory}/srv/movies:/data/movies"
       "${config.home.homeDirectory}/srv/tvshows:/data/tvshows"
     ];
-    ports = ["6767:6767"];
     labels = {
       "traefik.http.routers.bazarr.rule" = ''Host(`bazarr.920301.xyz`)'';
+      "traefik.http.services.bazarr.loadbalancer.server.port" = "6767";
       "glance.name" = "Bazarr";
       "glance.icon" = "di:bazarr";
       "glance.url" = "https://bazarr.920301.xyz";
@@ -123,13 +127,13 @@
     environment = {
       PUID = "1000";
       PGID = "1000";
-      TZ = "Europe/Copenhagen";
+      TZ = timeZone;
     };
     network = ["traefik" "streaming"];
     volumes = ["${config.home.homeDirectory}/srv/prowlarr:/config"];
-    ports = ["9696:9696"];
     labels = {
       "traefik.http.routers.prowlarr.rule" = ''Host(`prowlarr.920301.xyz`)'';
+      "traefik.http.services.prowlarr.loadbalancer.server.port" = "9696";
       "glance.name" = "Prowlarr";
       "glance.icon" = "sh:prowlarr";
       "glance.url" = "https://prowlarr.920301.xyz";
@@ -143,15 +147,13 @@
       LOG_LEVEL = "info";
       LOG_HTML = false;
       CAPTCHA_SOLVER = "none";
-      TZ = "Europe/Copenhagen";
+      TZ = timeZone;
     };
     network = ["traefik" "streaming"];
-    ports = ["8191:8191"];
     labels = {
       "traefik.enable" = "false";
       "glance.name" = "Flaresolverr";
       "glance.icon" = "sh:flaresolverr";
-      "glance.url" = "https://flaresolverr.920301.xyz";
       "glance.description" = "Proxy-server-to-bypass-Cloudflare-protection";
     };
   };
@@ -161,7 +163,7 @@
     environment = {
       PUID = "1000";
       PGID = "1000";
-      TZ = "Europe/Copenhagen";
+      TZ = timeZone;
       WEBUI_PORT = "8080";
       TORRENTING_PORT = "6881";
       DOCKER_MODS = "arafatamim/linuxserver-io-mod-vuetorrent";
@@ -170,11 +172,6 @@
     volumes = [
       "${config.home.homeDirectory}/srv/qbittorrent:/config"
       "${config.home.homeDirectory}/srv/downloads:/downloads"
-    ];
-    ports = [
-      "8083:8080"
-      "6881:6881"
-      "6881:6881/udp"
     ];
     labels = {
       "traefik.http.routers.qbittorrent.rule" = ''Host(`qb.920301.xyz`)'';

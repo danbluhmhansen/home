@@ -1,11 +1,12 @@
 {
   config,
   pkgs,
+  timeZone,
   ...
 }: {
   services.podman.containers.cv = {
     image = "docker.io/11notes/caddy:2.10.0";
-    environment = {TZ = "Europe/Copenhagen";};
+    environment = {TZ = timeZone;};
     network = ["traefik"];
     volumes = [
       "${pkgs.writeScript "default.json" ''

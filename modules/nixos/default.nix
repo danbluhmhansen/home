@@ -2,9 +2,11 @@
   inputs,
   config,
   pkgs,
+  user,
+  timeZone,
   ...
 }: {
-  imports = [inputs.sops.nixosModules.sops];
+  imports = [inputs.sops.nixosModules.sops inputs.stylix.nixosModules.stylix];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -26,7 +28,7 @@
 
   sops.secrets.userpass.neededForUsers = true;
 
-  time.timeZone = "Europe/Copenhagen";
+  time.timeZone = timeZone;
 
   boot.initrd.systemd.enable = true;
   boot.loader.systemd-boot.enable = true;
@@ -38,7 +40,7 @@
   users.users.dan = {
     isNormalUser = true;
     createHome = true;
-    home = "/home/dan";
+    home = "/home/${user}";
     hashedPasswordFile = config.sops.secrets.userpass.path;
     extraGroups = ["wheel" "networkmanager"];
   };

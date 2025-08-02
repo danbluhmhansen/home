@@ -14,9 +14,7 @@
     lazygit
     nushell
     starship
-    swaync
     yazi
-    waybar
     wezterm
   ];
 

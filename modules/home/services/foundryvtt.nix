@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  timeZone,
+  ...
+}: {
   sops.secrets.foundryvtt = {};
 
   services.podman.containers.foundryvtt = {
@@ -6,14 +10,14 @@
     environment = {
       USER_UID = "1000";
       USER_GID = "1000";
-      TZ = "Europe/Copenhagen";
+      TZ = timeZone;
     };
     environmentFile = [config.sops.secrets.foundryvtt.path];
     network = ["traefik"];
     volumes = ["${config.home.homeDirectory}/srv/foundry:/data"];
-    ports = ["30000:30000"];
     labels = {
       "traefik.http.routers.foundryvtt.rule" = ''Host(`foundry.920301.xyz`)'';
+      "traefik.http.services.foundryvtt.loadbalancer.server.port" = "30000";
       "glance.name" = "FoundryVTT";
       "glance.icon" = "si:foundryvirtualtabletop";
       "glance.url" = "https://foundry.920301.xyz";

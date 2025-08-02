@@ -1,4 +1,10 @@
-{lib, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
+  imports = [inputs.sherlock.homeManagerModules.default];
+
   programs.sherlock.settings.config = {
     default_apps.terminal = "wezterm";
     appearance.width = 900;
@@ -48,9 +54,9 @@
       type = "command";
       args = {
         commands = {
-          Gitea = {
-            exec = "xdg-open https://git.920301.xyz &";
-            search_string = "git;gitea;";
+          Forgejo = {
+            exec = "xdg-open https://forgejo.920301.xyz &";
+            search_string = "git;forgejo;";
           };
           GitHub = {
             exec = "xdg-open https://github.com &";

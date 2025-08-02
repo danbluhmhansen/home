@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [discord maple-mono.NF ouch sshfs];
 
   programs.git.extraConfig.credential.helper = "osxkeychain";
@@ -53,7 +57,7 @@
       "/bin/sh"
       "-c"
       ''
-        launchctl setenv PASSWORD_STORE_DIR /Users/dan/.local/share/pass
+        launchctl setenv PASSWORD_STORE_DIR ${config.home.homeDirectory}/.local/share/pass
       ''
     ];
   };

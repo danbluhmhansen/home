@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  timeZone,
+  ...
+}: {
   sops.secrets.traefik = {};
   sops.secrets.glance = {};
 
@@ -9,7 +13,7 @@
 
   services.podman.containers.traefik = {
     image = "docker.io/traefik:v3.5";
-    environment = {TZ = "Europe/Copenhagen";};
+    environment = {TZ = timeZone;};
     network = ["traefik"];
     volumes = [
       "/run/user/1000/podman/podman.sock:/var/run/docker.sock"
@@ -18,11 +22,7 @@
       "${config.sops.secrets.traefik.path}:/traefik-usersfile:ro"
       "${config.sops.secrets.glance.path}:/glance-usersfile:ro"
     ];
-    ports = [
-      "80:80"
-      "443:443"
-      "8080:8080"
-    ];
+    ports = ["80:80" "443:443"];
     labels = {
       "traefik.enable" = "true";
       "traefik.http.routers.dashboard.rule" = ''Host(`traefik.920301.xyz`)'';

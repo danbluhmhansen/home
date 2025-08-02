@@ -42,9 +42,6 @@
     yazelix.flake = false;
 
     niri.url = "github:sodiboo/niri-flake";
-    hyprland.url = "github:hyprwm/hyprland";
-    hyprland-plugins.url = "github:hyprwm/hyprland-plugins";
-    hyprland-plugins.inputs.hyprland.follows = "hyprland";
     sherlock.url = "github:skxxtz/sherlock";
 
     hs-spoons.url = "github:hammerspoon/spoons";
@@ -71,9 +68,16 @@
         git-hooks.flakeModule
       ];
 
-      ezConfigs = {
+      ezConfigs = let
+        user = "dan";
+      in {
         root = ./.;
-        globalArgs = {inherit inputs;};
+        globalArgs = {
+          inherit inputs user;
+          userName = "Dan Bluhm Hansen";
+          email = "00.pavers_dither@icloud.com";
+          timeZone = "Europe/Copenhagen";
+        };
 
         darwin.configurationsDirectory = ./configurations/darwin;
         home.configurationsDirectory = ./configurations/home;
@@ -83,10 +87,10 @@
         home.modulesDirectory = ./modules/home;
         nixos.modulesDirectory = ./modules/nixos;
 
-        darwin.hosts.jupiter.userHomeModules = ["dan"];
-        nixos.hosts.mercury.userHomeModules = ["dan"];
-        nixos.hosts.mars.userHomeModules = ["dan"];
-        nixos.hosts.saturn.userHomeModules = ["dan"];
+        darwin.hosts.jupiter.userHomeModules = [user];
+        nixos.hosts.mercury.userHomeModules = [user];
+        nixos.hosts.mars.userHomeModules = [user];
+        nixos.hosts.saturn.userHomeModules = [user];
       };
 
       perSystem = {

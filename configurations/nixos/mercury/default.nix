@@ -8,7 +8,6 @@
     ./disks.nix
     ./hardware.nix
     inputs.niri.nixosModules.niri
-    inputs.stylix.nixosModules.stylix
     inputs.self.outputs.nixosModules.pipewire
     inputs.self.outputs.nixosModules.stylix
   ];

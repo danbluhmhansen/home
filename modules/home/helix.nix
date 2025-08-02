@@ -110,7 +110,9 @@
     };
 
     languages = {
-      language = [
+      language = let
+        denoFmt = name: ["fmt" "-" "--line-width" "120" "--ext" name];
+      in [
         {
           name = "c-sharp";
           formatter.command = "dotnet";
@@ -118,42 +120,42 @@
           auto-format = false;
           language-servers = ["csharp"];
         }
-        {
+        rec {
           name = "css";
           formatter.command = "deno";
-          formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "css"];
+          formatter.args = denoFmt name;
           auto-format = false;
           language-servers = ["vscode-css-language-server" "tailwindcss-ls"];
         }
-        {
+        rec {
           name = "html";
           formatter.command = "deno";
-          formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "html"];
+          formatter.args = denoFmt name;
           auto-format = false;
           language-servers = ["vscode-html-language-server" "superhtml" "tailwindcss-ls"];
         }
         {
           name = "javascript";
           formatter.command = "deno";
-          formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "js"];
+          formatter.args = denoFmt "js";
           auto-format = false;
         }
-        {
+        rec {
           name = "json";
           formatter.command = "deno";
-          formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "json"];
+          formatter.args = denoFmt name;
           auto-format = false;
         }
-        {
+        rec {
           name = "jsx";
           formatter.command = "deno";
-          formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "jsx"];
+          formatter.args = denoFmt name;
           auto-format = false;
         }
         {
           name = "markdown";
           formatter.command = "deno";
-          formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "md"];
+          formatter.args = denoFmt "md";
           language-servers = ["marksman" "ltex-ls"];
         }
         {
@@ -176,16 +178,16 @@
           formatter.args = ["fix" "-"];
           language-servers = ["postgrestools" "sqruff"];
         }
-        {
+        rec {
           name = "tsx";
           formatter.command = "deno";
-          formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "tsx"];
+          formatter.args = denoFmt name;
           auto-format = false;
         }
         {
           name = "typescript";
           formatter.command = "deno";
-          formatter.args = ["fmt" "-" "--line-width" "120" "--ext" "ts"];
+          formatter.args = denoFmt "ts";
           auto-format = false;
         }
       ];

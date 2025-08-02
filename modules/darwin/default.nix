@@ -1,11 +1,14 @@
 {
   inputs,
   config,
+  user,
+  timeZone,
   ...
 }: {
   imports = [
     inputs.sops.darwinModules.sops
     inputs.nix-homebrew.darwinModules.nix-homebrew
+    inputs.stylix.darwinModules.stylix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -26,17 +29,17 @@
   sops.age.keyFile = "${config.users.users.dan.home}/Library/Application Support/sops/age/keys.txt";
   sops.age.generateKey = true;
 
-  time.timeZone = "Europe/Copenhagen";
+  time.timeZone = timeZone;
 
-  system.primaryUser = "dan";
-  users.users.dan.home = "/Users/dan";
+  system.primaryUser = user;
+  users.users.dan.home = "/Users/${user}";
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.sharedModules = [./hammerspoon];
 
   nix-homebrew = {
-    user = "dan";
+    user = user;
     enable = true;
     enableRosetta = true;
     taps = {

@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  user,
+  ...
+}: let
   wallpaperDark = pkgs.fetchurl {
     name = "wallpaper.png";
     url = "https://initiate.alphacoders.com/download/images7/1397453/png";
@@ -12,7 +16,7 @@
 in {
   security.doas.extraRules = [
     {
-      users = ["dan"];
+      users = [user];
       keepEnv = true;
       persist = true;
     }
@@ -91,7 +95,7 @@ in {
         iconTheme.package = pkgs.kdePackages.breeze-icons;
         iconTheme.dark = "breeze-dark";
         iconTheme.light = "breeze";
-        targets.firefox.profileNames = ["dan"];
+        targets.firefox.profileNames = [user];
         targets.helix.enable = false;
       };
 

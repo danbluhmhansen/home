@@ -31,36 +31,19 @@
           run = "git";
         }
       ];
-      plugin.prepend_previewers = [
-        {
-          mime = "application/*zip";
+      plugin.prepend_previewers =
+        map (mime: {
+          inherit mime;
           run = "ouch";
-        }
-        {
-          mime = "application/x-tar";
-          run = "ouch";
-        }
-        {
-          mime = "application/x-bzip2";
-          run = "ouch";
-        }
-        {
-          mime = "application/x-7z-compressed";
-          run = "ouch";
-        }
-        {
-          mime = "application/x-rar";
-          run = "ouch";
-        }
-        {
-          mime = "application/x-xz";
-          run = "ouch";
-        }
-        {
-          mime = "application/xz";
-          run = "ouch";
-        }
-      ];
+        }) [
+          "application/*zip"
+          "application/x-tar"
+          "application/x-bzip2"
+          "application/x-7z-compressed"
+          "application/x-rar"
+          "application/x-xz"
+          "application/xz"
+        ];
     };
 
     keymap = {

@@ -1,7 +1,11 @@
 {
+  userName,
+  email,
+  ...
+}: {
   programs.git = {
-    userName = "Dan Bluhm Hansen";
-    userEmail = "00.pavers_dither@icloud.com";
+    userName = userName;
+    userEmail = email;
     delta.enable = true;
     signing.key = "0x077BBC8A99A747DD";
     signing.signByDefault = true;
@@ -15,7 +19,7 @@
       tag.sort = "-version:refname";
     };
 
-    aliases = {
+    aliases = rec {
       a = "add";
       aa = "add --all";
       ap = "add --patch";
@@ -42,8 +46,8 @@
       lo = "log --oneline";
       log = "log --oneline --graph";
       lod = "log --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'";
-      lodd = "log --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short";
-      lods = "log --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --stat";
+      lodd = "${lod} --date=short";
+      lods = "${lod} --stat";
       p = "push";
       p- = "push --force";
       pd = "push --dry-run";

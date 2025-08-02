@@ -1,11 +1,14 @@
-{config, ...}: {
+{
+  config,
+  timeZone,
+  ...
+}: {
   services.podman.containers.stalwart = {
     image = "docker.io/stalwartlabs/stalwart:v0.13.2-alpine";
-    environment = {TZ = "Europe/Copenhagen";};
+    environment = {TZ = timeZone;};
     network = ["traefik"];
     volumes = ["${config.home.homeDirectory}/srv/stalwart:/opt/stalwart"];
     ports = [
-      "8082:8080"
       "25:25"
       "110:110"
       "143:143"

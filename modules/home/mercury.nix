@@ -1,11 +1,9 @@
 {
   inputs,
-  config,
   pkgs,
   ...
 }: {
   imports = [
-    inputs.sherlock.homeManagerModules.default
     inputs.self.outputs.homeModules.niri
     inputs.self.outputs.homeModules.sherlock
   ];
@@ -31,30 +29,4 @@
   services.gnome-keyring.enable = true;
   services.swaync.enable = true;
   services.swww.enable = true;
-
-  systemd.user.mounts.home-dan-saturn = {
-    Unit.After = ["network-online.target"];
-    Unit.Wants = ["network-online.target"];
-    Install.WantedBy = ["default.target"];
-    Mount.What = "saturn:/home/dan";
-    Mount.Where = "${config.home.homeDirectory}/saturn";
-    Mount.Type = "fuse.sshfs";
-  };
-  systemd.user.automounts.home-dan-saturn = {
-    Install.WantedBy = ["default.target"];
-    Automount.Where = "${config.home.homeDirectory}/saturn";
-  };
-
-  systemd.user.mounts.home-dan-glbe9300 = {
-    Unit.After = ["network-online.target"];
-    Unit.Wants = ["network-online.target"];
-    Install.WantedBy = ["default.target"];
-    Mount.What = "gl-be9300:/";
-    Mount.Where = "${config.home.homeDirectory}/glbe9300";
-    Mount.Type = "fuse.sshfs";
-  };
-  systemd.user.automounts.home-dan-glbe9300 = {
-    Install.WantedBy = ["default.target"];
-    Automount.Where = "${config.home.homeDirectory}/glbe9300";
-  };
 }

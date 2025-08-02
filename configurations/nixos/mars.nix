@@ -1,11 +1,15 @@
-{inputs, ...}: {
+{
+  inputs,
+  user,
+  ...
+}: {
   nixpkgs.hostPlatform = "x86_64-linux";
   system.stateVersion = "25.05";
 
   imports = [inputs.wsl.nixosModules.default];
 
   wsl.enable = true;
-  wsl.defaultUser = "dan";
+  wsl.defaultUser = user;
   wsl.usbip.enable = true;
   wsl.usbip.autoAttach = ["2-1"];
 
