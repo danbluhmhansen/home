@@ -38,6 +38,10 @@
       args = {appdir = "~/Applications";};
     }
     {
+      name = "signal";
+      args = {appdir = "~/Applications";};
+    }
+    {
       name = "utm";
       args = {appdir = "~/Applications";};
     }
