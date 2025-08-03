@@ -1,13 +1,20 @@
-{config, timeZone, ...}: {
+{
+  config,
+  timeZone,
+  ...
+}: {
+  sops.secrets.forgejo = {};
+
   services.podman.containers.forgejo = {
-    image = "codeberg.org/forgejo/forgejo:11-rootless";
+    image = "codeberg.org/forgejo/forgejo:12-rootless";
     user = "1000:1000";
     environment = {
       USER_UID = "1000";
       USER_GID = "1000";
       TZ = timeZone;
     };
-    network = ["traefik"];
+    environmentFile = [config.sops.secrets.forgejo.path];
+    network = ["traefik" "postgres"];
     volumes = [
       "${config.home.homeDirectory}/srv/forgejo/data:/var/lib/gitea"
       "${config.home.homeDirectory}/srv/forgejo/conf:/etc/gitea"

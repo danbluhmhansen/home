@@ -6,7 +6,7 @@
   services.podman.containers.stalwart = {
     image = "docker.io/stalwartlabs/stalwart:v0.13.2-alpine";
     environment = {TZ = timeZone;};
-    network = ["traefik"];
+    network = ["traefik" "postgres"];
     volumes = ["${config.home.homeDirectory}/srv/stalwart:/opt/stalwart"];
     ports = [
       "25:25"

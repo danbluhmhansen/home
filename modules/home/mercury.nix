@@ -10,7 +10,7 @@
 
   fonts.fontconfig.enable = true;
 
-  home.packages = with pkgs; [discord gcr libnotify pavucontrol sshfs yubikey-manager];
+  home.packages = with pkgs; [discord gcr libnotify pavucontrol sshfs systemctl-tui yubikey-manager];
 
   programs.alacritty.enable = true;
   programs.wezterm.enable = true;
