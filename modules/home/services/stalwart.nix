@@ -24,7 +24,7 @@
       "glance.name" = "Stalwart";
       "glance.icon" = "sh:stalwart";
       "glance.url" = "https://stalwart.920301.xyz";
-      "glance.description" = "IMAP,JMAP,SMTP,CalDAV,CardDAV,WebDAV";
+      "glance.description" = "'IMAP, JMAP, SMTP, CalDAV, CardDAV, WebDAV'";
     };
   };
 }

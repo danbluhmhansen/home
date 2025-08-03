@@ -19,7 +19,7 @@
       "glance.name" = "Forgejo";
       "glance.icon" = "si:forgejo";
       "glance.url" = "https://forgejo.920301.xyz";
-      "glance.description" = "Software-forge";
+      "glance.description" = "'Software forge'";
     };
   };
 }
