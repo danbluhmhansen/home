@@ -10,11 +10,14 @@
     appearance.width = 900;
     appearance.height = 593;
     appearance.gsk_renderer = "cairo";
-    appearance.status_bar = false;
-    behavior.global_prefix = "uwsm app -- ";
-    binds.prev = "control-p";
-    binds.next = "control-n";
-    binds.context = "control-l";
+    behavior.global_prefix = "uwsm app --";
+    status_bar.enable = false;
+    units.currency = "dkk";
+    binds.left = "control-h";
+    binds.down = "control-j";
+    binds.up = "control-k";
+    binds.right = "control-l";
+    binds.context = "control-i";
   };
 
   programs.sherlock.settings.launchers = [
@@ -24,8 +27,7 @@
       args.location = "roskilde";
       args.update_interval = 60;
       priority = 1;
-      home = true;
-      only_home = true;
+      home = "OnlyHome";
       async = true;
       shortcut = false;
       spawn_focus = false;
@@ -34,7 +36,7 @@
       name = "Clipboard";
       type = "clipboard-execution";
       priority = 1;
-      home = true;
+      home = "Home";
     }
     {
       name = "Calculator";
@@ -46,7 +48,7 @@
       alias = "app";
       type = "app_launcher";
       priority = 2;
-      home = true;
+      home = "Home";
     }
     {
       name = "Bookmarks";
@@ -107,7 +109,7 @@
         };
       };
       priority = 3;
-      home = true;
+      home = "Home";
     }
     {
       name = "Power Management";
@@ -148,7 +150,6 @@
       name = "Emoji Picker";
       type = "emoji_picker";
       priority = 4;
-      home = false;
     }
     {
       name = "Web Search";
