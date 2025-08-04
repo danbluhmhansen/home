@@ -5,6 +5,7 @@
 }: {
   sops.secrets.traefik = {};
   sops.secrets.glance = {};
+  sops.secrets.metube = {};
 
   services.podman.networks.traefik = {
     driver = "bridge";
@@ -36,6 +37,7 @@
       "${config.home.homeDirectory}/srv/letsencrypt:/letsencrypt"
       "${config.sops.secrets.traefik.path}:/traefik-usersfile:ro"
       "${config.sops.secrets.glance.path}:/glance-usersfile:ro"
+      "${config.sops.secrets.metube.path}:/metube-usersfile:ro"
     ];
     labels = {
       "traefik.enable" = "true";

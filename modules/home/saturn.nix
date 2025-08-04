@@ -4,6 +4,7 @@
     ./services/glance.nix
     ./services/forgejo.nix
     ./services/foundryvtt.nix
+    ./services/metube.nix
     ./services/postgres.nix
     ./services/stalwart.nix
     ./services/streaming.nix

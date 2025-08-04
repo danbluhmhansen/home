@@ -14,7 +14,10 @@
     };
     environmentFile = [config.sops.secrets.foundryvtt.path];
     network = ["traefik"];
-    volumes = ["${config.home.homeDirectory}/srv/foundry:/data"];
+    volumes = [
+      "${config.home.homeDirectory}/srv/foundry:/data"
+      "${config.home.homeDirectory}/srv/downloads:/data/Data/assets/downloads"
+    ];
     labels = {
       "traefik.http.routers.foundryvtt.rule" = ''Host(`foundry.920301.xyz`)'';
       "traefik.http.services.foundryvtt.loadbalancer.server.port" = "30000";
