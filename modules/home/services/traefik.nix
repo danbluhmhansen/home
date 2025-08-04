@@ -3,10 +3,6 @@
   timeZone,
   ...
 }: {
-  sops.secrets.traefik = {};
-  sops.secrets.glance = {};
-  sops.secrets.metube = {};
-
   services.podman.networks.traefik = {
     driver = "bridge";
     subnet = "10.80.0.0/24";
@@ -35,16 +31,12 @@
       "/run/user/1000/podman/podman.sock:/var/run/docker.sock"
       "${config.home.homeDirectory}/srv/traefik/traefik.yml:/etc/traefik/traefik.yml"
       "${config.home.homeDirectory}/srv/letsencrypt:/letsencrypt"
-      "${config.sops.secrets.traefik.path}:/traefik-usersfile:ro"
-      "${config.sops.secrets.glance.path}:/glance-usersfile:ro"
-      "${config.sops.secrets.metube.path}:/metube-usersfile:ro"
     ];
     labels = {
       "traefik.enable" = "true";
       "traefik.http.routers.dashboard.rule" = ''Host(`traefik.920301.xyz`)'';
       "traefik.http.routers.dashboard.service" = "api@internal";
-      "traefik.http.routers.dashboard.middlewares" = "dashboard-auth";
-      "traefik.http.middlewares.dashboard-auth.basicauth.usersfile" = "/traefik-usersfile";
+      "traefik.http.routers.dashboard.middlewares" = "authelia@docker";
       "glance.name" = "Traefik";
       "glance.icon" = "si:traefikproxy";
       "glance.url" = "https://traefik.920301.xyz";

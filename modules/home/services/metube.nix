@@ -5,8 +5,7 @@
     volumes = ["${config.home.homeDirectory}/srv/downloads:/downloads"];
     labels = {
       "traefik.http.routers.metube.rule" = ''Host(`metube.920301.xyz`)'';
-      "traefik.http.routers.metube.middlewares" = "metube-auth";
-      "traefik.http.middlewares.metube-auth.basicauth.usersfile" = "/metube-usersfile";
+      "traefik.http.routers.metube.middlewares" = "authelia@docker";
       "traefik.http.services.metube.loadbalancer.server.port" = "8081";
       "glance.name" = "MeTube";
       "glance.icon" = "sh:metube";

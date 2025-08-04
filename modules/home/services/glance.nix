@@ -9,8 +9,7 @@
     ];
     labels = {
       "traefik.http.routers.glance.rule" = ''Host(`glance.920301.xyz`)'';
-      "traefik.http.routers.glance.middlewares" = "glance-auth";
-      "traefik.http.middlewares.glance-auth.basicauth.usersfile" = "/glance-usersfile";
+      "traefik.http.routers.glance.middlewares" = "authelia@docker";
       "traefik.http.services.glance.loadbalancer.server.port" = "8080";
       "glance.name" = "Glance";
       "glance.icon" = "sh:glance";

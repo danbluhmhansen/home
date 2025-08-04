@@ -1,7 +1,9 @@
 {pkgs, ...}: {
   imports = [
+    ./services/authelia.nix
     ./services/traefik.nix
     ./services/glance.nix
+    ./services/lldap.nix
     ./services/forgejo.nix
     ./services/foundryvtt.nix
     ./services/metube.nix
