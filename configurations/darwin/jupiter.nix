@@ -1,13 +1,6 @@
-{pkgs, ...}: {
+{
   nixpkgs.hostPlatform = "aarch64-darwin";
   system.stateVersion = 6;
-
-  nix.linux-builder = {
-    enable = true;
-    ephemeral = true;
-    package = pkgs.darwin.linux-builder-x86_64;
-  };
-  ids.gids.nixbld = 30000;
 
   security.pam.services.sudo_local.touchIdAuth = true;
   system.defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;

@@ -5,10 +5,11 @@
   timeZone,
   ...
 }: {
-  imports = [
-    inputs.sops.darwinModules.sops
-    inputs.nix-homebrew.darwinModules.nix-homebrew
-    inputs.stylix.darwinModules.stylix
+  imports = with inputs; [
+    sops.darwinModules.sops
+    rosetta-builder.darwinModules.default
+    nix-homebrew.darwinModules.nix-homebrew
+    stylix.darwinModules.stylix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -33,6 +34,15 @@
 
   system.primaryUser = user;
   users.users.dan.home = "/Users/${user}";
+
+  # NOTE enable to bootstrap nix-rosetta-builder
+  # nix.linux-builder = {
+  #   enable = true;
+  #   ephemeral = true;
+  # };
+
+  nix-rosetta-builder.onDemand = true;
+  ids.gids.nixbld = 30000;
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;

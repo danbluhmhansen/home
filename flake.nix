@@ -8,6 +8,8 @@
     wsl.url = "github:nix-community/nixos-wsl";
     darwin.url = "github:LnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+    rosetta-builder.url = "github:cpick/nix-rosetta-builder";
+    rosetta-builder.inputs.nixpkgs.follows = "nixpkgs";
 
     devshell.url = "github:numtide/devshell";
     treefmt.url = "github:numtide/treefmt-nix";
