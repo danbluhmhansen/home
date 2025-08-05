@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./services/authelia.nix
+    ./services/actual.nix
     ./services/traefik.nix
     ./services/glance.nix
     ./services/lldap.nix
