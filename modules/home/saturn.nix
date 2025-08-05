@@ -12,6 +12,7 @@
     ./services/stalwart.nix
     ./services/streaming.nix
     ./services/cv.nix
+    ./services/vaultwarden.nix
   ];
 
   home.packages = with pkgs; [podman-tui systemctl-tui];

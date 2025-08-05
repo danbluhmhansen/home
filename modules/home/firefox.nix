@@ -94,7 +94,7 @@
 
       settings = {
         "browser.display.document_color_use" = 0;
-        "browser.fullscreen.autohide" = true;
+        "browser.fullscreen.autohide" = false;
         "browser.fullscreen.exit_on_escape" = false;
         "browser.ml.chat.enabled" = false;
         "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
@@ -119,7 +119,6 @@
           placements = {
             widget-overflow-fixed-list = [];
             unified-extensions-area = [
-              "_eec37db0-22ad-4bf1-9068-5ae08df8c7e9_-browser-action"
               "7esoorv3_alefvanoon_anonaddy_me-browser-action"
               "gdpr_cavi_au_dk-browser-action"
             ];
@@ -135,6 +134,7 @@
               "downloads-button"
               "unified-extensions-button"
               "ublock0_raymondhill_net-browser-action"
+              "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
             ];
             TabsToolbar = [
               "tabbrowser-tabs"
@@ -147,11 +147,12 @@
           seen = [
             "save-to-pocket-button"
             "developer-button"
-            "_eec37db0-22ad-4bf1-9068-5ae08df8c7e9_-browser-action"
             "_testpilot-containers-browser-action"
             "7esoorv3_alefvanoon_anonaddy_me-browser-action"
             "gdpr_cavi_au_dk-browser-action"
             "ublock0_raymondhill_net-browser-action"
+            "screenshot-button"
+            "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
           ];
           dirtyAreaCache = ["nav-bar" "vertical-tabs" "PersonalToolbar" "unified-extensions-area" "TabsToolbar"];
           currentVersion = 22;
@@ -179,7 +180,7 @@
         ublock-origin
         consent-o-matic
         libredirect
-        gopass-bridge
+        bitwarden
       ];
     };
 
