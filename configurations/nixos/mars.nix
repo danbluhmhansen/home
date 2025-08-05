@@ -8,6 +8,13 @@
 
   imports = [inputs.wsl.nixosModules.default];
 
+  home-manager.sharedModules = [
+    {
+      programs.git.delta.options.light = true;
+      programs.helix.settings.theme = "catppuccin_latte";
+    }
+  ];
+
   wsl.enable = true;
   wsl.defaultUser = user;
   wsl.usbip.enable = true;

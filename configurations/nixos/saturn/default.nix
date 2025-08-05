@@ -1,5 +1,6 @@
 {
   inputs,
+  config,
   pkgs,
   ...
 }: {
@@ -13,8 +14,17 @@
 
   system.stateVersion = "25.05";
 
-  users.users.dan.linger = true;
+  sops.secrets.userpass.neededForUsers = true;
 
+  users.users.dan = {
+    linger = true;
+    hashedPasswordFile = config.sops.secrets.userpass.path;
+  };
+
+  boot.initrd.systemd.enable = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernel.sysctl = {"net.ipv4.ip_unprivileged_port_start" = 0;};
 
   networking.firewall.allowedTCPPorts = [80 443];
@@ -23,7 +33,6 @@
   services = {
     cachix-agent.enable = true;
     openssh.enable = true;
-    tailscale.enable = true;
   };
 
   fonts.packages = with pkgs; [maple-mono.NF noto-fonts noto-fonts-emoji];

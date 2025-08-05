@@ -26,25 +26,22 @@
   sops.age.keyFile = "${config.users.users.dan.home}/.config/sops/age/keys.txt";
   sops.age.generateKey = true;
 
-  sops.secrets.userpass.neededForUsers = true;
-
   time.timeZone = timeZone;
-
-  boot.initrd.systemd.enable = true;
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   hardware.gpgSmartcards.enable = true;
 
+  users.defaultUserShell = pkgs.zsh;
   users.users.dan = {
     isNormalUser = true;
     createHome = true;
     home = "/home/${user}";
-    hashedPasswordFile = config.sops.secrets.userpass.path;
     extraGroups = ["wheel" "networkmanager"];
   };
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
+
+  programs.zsh.enable = true;
+
+  services.tailscale.enable = true;
 }

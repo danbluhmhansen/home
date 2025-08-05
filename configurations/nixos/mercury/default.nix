@@ -1,5 +1,6 @@
 {
   inputs,
+  config,
   pkgs,
   ...
 }: {
@@ -18,7 +19,14 @@
 
   nixpkgs.overlays = [inputs.niri.overlays.niri];
 
-  boot.kernel.sysctl = {"net.ipv4.ip_unprivileged_port_start" = 0;};
+  sops.secrets.userpass.neededForUsers = true;
+
+  users.users.dan.hashedPasswordFile = config.sops.secrets.userpass.path;
+
+  boot.initrd.systemd.enable = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   hardware = {
     graphics.enable = true;
@@ -26,7 +34,6 @@
     bluetooth.enable = true;
   };
 
-  networking.firewall.allowedTCPPorts = [80 443];
   networking.networkmanager.enable = true;
 
   security = {
@@ -47,7 +54,6 @@
       pkg = pkgs.lib.getExe pkgs.greetd.tuigreet;
     in "${pkg} --time --remember --remember-user-session";
     greetd.settings.default_session.user = "greeter";
-    tailscale.enable = true;
     desktopManager.plasma6.enable = true;
   };
 
