@@ -70,7 +70,7 @@
           q = ":quit";
           l = ":format";
           F = "file_picker_in_current_buffer_directory";
-          z = ":set-max-width 120 0";
+          z = ":set-max-width 128 0";
 
           e = [
             ":sh rm -f /tmp/unique-file"

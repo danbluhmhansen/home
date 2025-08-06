@@ -14,8 +14,8 @@
               name = "dev";
               bookmarks = [
                 {
-                  name = "Gitea";
-                  url = "https://git.920301.xyz";
+                  name = "Forgejo";
+                  url = "https://forgejo.920301.xyz";
                 }
                 {
                   name = "GitHub";
@@ -74,20 +74,78 @@
             urls = [
               {
                 template = "https://search.nixos.org/packages";
-                params = [
-                  {
-                    name = "type";
-                    value = "packages";
-                  }
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
+                params = pkgs.lib.attrsToList {
+                  channel = "unstable";
+                  type = "packages";
+                  query = "{searchTerms}";
+                };
               }
             ];
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             definedAliases = ["@np"];
+          };
+          "Nix Options" = {
+            urls = [
+              {
+                template = "https://search.nixos.org/options";
+                params = pkgs.lib.attrsToList {
+                  channel = "unstable";
+                  type = "packages";
+                  query = "{searchTerms}";
+                };
+              }
+            ];
+            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = ["@no"];
+          };
+          "Home Manager - Option Search" = {
+            urls = [
+              {
+                template = "https://home-manager-options.extranix.com";
+                params = pkgs.lib.attrsToList {
+                  release = "master";
+                  query = "{searchTerms}";
+                };
+              }
+            ];
+            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = ["@hm"];
+          };
+          Noogle = {
+            urls = [
+              {
+                template = "https://noogle.dev/q";
+                params = pkgs.lib.attrsToList {term = "{searchTerms}";};
+              }
+            ];
+            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = ["@na"];
+          };
+          GitHub = {
+            urls = [
+              {
+                template = "https://github.com/search";
+                params = pkgs.lib.attrsToList {q = "{searchTerms}";};
+              }
+            ];
+            icon = pkgs.fetchurl {
+              url = "https://simpleicons.org/icons/github.svg";
+              hash = "sha256-O/jM7q2CCuxQ1O6CWj/QLFoc1mZcyc9Mvz2ciGGiBLs=";
+            };
+            definedAliases = ["@gh"];
+          };
+          "crates.io" = {
+            urls = [
+              {
+                template = "https://github.com/search";
+                params = pkgs.lib.attrsToList {q = "{searchTerms}";};
+              }
+            ];
+            icon = pkgs.fetchurl {
+              url = "https://simpleicons.org/icons/rust.svg";
+              hash = "sha256-laKR2Ih2ENEDcErcxcXyy/pMgKlvjnKwBTHVaRvrZ6g=";
+            };
+            definedAliases = ["@rs"];
           };
         };
       };
@@ -181,6 +239,7 @@
         consent-o-matic
         libredirect
         bitwarden
+        plasma-integration
       ];
     };
 

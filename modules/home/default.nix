@@ -23,12 +23,24 @@
   sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
   sops.age.generateKey = true;
 
+  sops.secrets.cachix = {};
+  sops.templates."cachix.dhall".content = ''
+    { authToken = "${config.sops.placeholder.cachix}"
+    , hostname = "https://cachix.org"
+    , binaryCaches = [] : List { name : Text, secretKey : Text }
+    }
+  '';
+
   home.shellAliases = {
     la = "ls -a";
     ll = "ls -la";
   };
 
-  home.packages = with pkgs; [cachix fd git-ignore sad xh];
+  home.packages = with pkgs; [cachix fd git-ignore ouch sad xh];
+
+  home.file = {
+    ".config/cachix/cachix.dhall".source = config.lib.file.mkOutOfStoreSymlink config.sops.templates."cachix.dhall".path;
+  };
 
   programs.nh.enable = true;
   programs.home-manager.enable = true;

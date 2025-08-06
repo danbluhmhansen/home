@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  home.packages = with pkgs; [discord maple-mono.NF ouch sshfs];
+  home.packages = with pkgs; [discord maple-mono.NF sshfs];
 
   programs.git.extraConfig.credential.helper = "osxkeychain";
 
