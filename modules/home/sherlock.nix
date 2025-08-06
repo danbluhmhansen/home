@@ -1,10 +1,9 @@
 {
   inputs,
-  lib,
+  pkgs,
   ...
 }: {
-  imports = [inputs.sherlock.homeManagerModules.default];
-
+  programs.sherlock.package = inputs.sherlock.packages.${pkgs.system}.default;
   programs.sherlock.settings.config = {
     default_apps.terminal = "wezterm";
     appearance.width = 900;
@@ -165,7 +164,7 @@
     }
   ];
 
-  programs.sherlock.settings.style = lib.mkDefault ''
+  programs.sherlock.settings.style = pkgs.lib.mkDefault ''
     :root {
         /* backgrounds */
         --background: 240, 23%, 9%; /* Crust */

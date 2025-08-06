@@ -1,7 +1,7 @@
 {inputs, ...}: {
   programs.yazi = {
     plugins = {
-      auto-layout = "${inputs.yazelix}/yazi/plugins/auto-layout.yazi";
+      auto-layout = "${inputs.yazelix}/configs/yazi/plugins/auto_layout.yazi";
       diff = "${inputs.yazi-plugins}/diff.yazi";
       git = "${inputs.yazi-plugins}/git.yazi";
       jump-to-char = "${inputs.yazi-plugins}/jump-to-char.yazi";

@@ -284,7 +284,6 @@
       HttpsOnlyMode = "enabled";
       NetworkPrediction = true;
       NewTabPage = true;
-      NoDefaultBookmarks = true;
       OfferToSaveLoginsDefault = false;
       OverrideFirstRunPage = "";
 
