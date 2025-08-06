@@ -38,7 +38,12 @@
 
   security = {
     doas.enable = true;
-    pam.services.identity.enableGnomeKeyring = true;
+    pam.services = {
+      login.enableGnomeKeyring = true;
+      login.kwallet.enable = true;
+      login.u2fAuth = true;
+      sudo.u2fAuth = true;
+    };
     polkit.enable = true;
     rtkit.enable = true;
   };
