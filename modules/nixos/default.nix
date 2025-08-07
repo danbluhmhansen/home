@@ -6,7 +6,7 @@
   timeZone,
   ...
 }: {
-  imports = [inputs.sops.nixosModules.sops inputs.stylix.nixosModules.stylix];
+  imports = with inputs; [sops.nixosModules.sops stylix.nixosModules.stylix];
 
   nixpkgs.config.allowUnfree = true;
 

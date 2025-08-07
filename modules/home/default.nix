@@ -6,6 +6,7 @@
 }: {
   imports = with inputs.self.outputs.homeModules; [
     inputs.sops.homeManagerModules.sops
+    inputs.nix-index-database.homeModules.nix-index
     broot
     firefox
     git
@@ -18,9 +19,15 @@
     wezterm
   ];
 
-  sops.defaultSopsFile = "${config.home.homeDirectory}/.config/sops/secrets/main.yml";
+  sops.defaultSopsFile =
+    if pkgs.stdenv.isDarwin
+    then "${config.home.homeDirectory}/Library/Application Support/sops/secrets/main.yml"
+    else "${config.home.homeDirectory}/.config/sops/secrets/main.yml";
   sops.validateSopsFiles = false;
-  sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+  sops.age.keyFile =
+    if pkgs.stdenv.isDarwin
+    then "${config.home.homeDirectory}/Library/Application Support/sops/age/keys.txt"
+    else "${config.home.homeDirectory}/.config/sops/age/keys.txt";
   sops.age.generateKey = true;
 
   sops.secrets.cachix = {};
@@ -47,6 +54,7 @@
   programs.git.enable = true;
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
+  programs.nix-index-database.comma.enable = true;
 
   programs.bat.enable = true;
   programs.bottom.enable = true;
