@@ -523,6 +523,26 @@
         "type": "github"
       }
     },
+    "nh": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754755851,
+        "narHash": "sha256-gL6Y4KmU4oc5YThH/uyY05pFLqfku3tCSJYeBwBM/Io=",
+        "owner": "nix-community",
+        "repo": "nh",
+        "rev": "1ddca31a07a9b86252749bd5927033d4d2bcf620",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nh",
+        "type": "github"
+      }
+    },
     "niri": {
       "inputs": {
         "niri-stable": "niri-stable",
@@ -884,6 +904,7 @@
         "homebrew-core": "homebrew-core",
         "hs-paperwm": "hs-paperwm",
         "hs-spoons": "hs-spoons",
+        "nh": "nh",
         "niri": "niri",
         "nix-homebrew": "nix-homebrew",
         "nix-index-database": "nix-index-database",

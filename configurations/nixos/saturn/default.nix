@@ -4,11 +4,7 @@
   pkgs,
   ...
 }: {
-  imports = [
-    inputs.disko.nixosModules.disko
-    ./disks.nix
-    ./hardware.nix
-  ];
+  imports = [./disks.nix ./hardware.nix];
 
   home-manager.sharedModules = [inputs.self.outputs.homeModules.saturn];
 

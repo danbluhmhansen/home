@@ -15,35 +15,30 @@
   programs.bat.config.theme = "base16-256";
   programs.helix.settings.theme = "theme";
 
-  programs.yazi.theme = {
+  programs.yazi.theme = rec {
     mode = {
       normal_main = {
         fg = "black";
         bg = "blue";
-        bold = true;
       };
       normal_alt = {
         fg = "blue";
-        bg = "darkgray";
+        bg = "black";
       };
       select_main = {
         fg = "black";
         bg = "red";
-        bold = true;
       };
       select_alt = {
         fg = "red";
-        bg = "darkgray";
+        bg = "black";
       };
-      unset_main = {
-        fg = "black";
-        bg = "red";
-        bold = true;
-      };
-      unset_alt = {
-        fg = "red";
-        bg = "darkgray";
-      };
+      unset_main = mode.select_main;
+      unset_alt = mode.select_alt;
+    };
+    tabs = {
+      active = mode.normal_main;
+      inactive = mode.normal_alt;
     };
   };
 

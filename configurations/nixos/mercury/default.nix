@@ -4,13 +4,12 @@
   pkgs,
   ...
 }: {
-  imports = [
-    inputs.disko.nixosModules.disko
+  imports = with inputs.self.outputs.nixosModules; [
+    inputs.niri.nixosModules.niri
     ./disks.nix
     ./hardware.nix
-    inputs.niri.nixosModules.niri
-    inputs.self.outputs.nixosModules.pipewire
-    inputs.self.outputs.nixosModules.stylix
+    pipewire
+    stylix
   ];
 
   home-manager.sharedModules = [inputs.self.outputs.homeModules.mercury];
@@ -64,7 +63,17 @@
 
   environment.systemPackages = with pkgs; [wayland-utils wl-clipboard xwayland-satellite];
 
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [ark dolphin elisa gwenview kate kinfocenter konsole ksystemstats okular];
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    ark
+    dolphin
+    elisa
+    gwenview
+    kate
+    kinfocenter
+    konsole
+    ksystemstats
+    okular
+  ];
 
   fonts.packages = with pkgs; [maple-mono.NF noto-fonts noto-fonts-emoji];
 

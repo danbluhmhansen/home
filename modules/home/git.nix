@@ -7,6 +7,7 @@
     userName = userName;
     userEmail = email;
     delta.enable = true;
+    delta.options.hyperlinks = true;
     signing.key = "0x077BBC8A99A747DD";
     signing.signByDefault = true;
     extraConfig = {
@@ -14,7 +15,9 @@
       column.ui = "auto";
       commit.verbose = true;
       diff.algorithm = "histogram";
+      diff.colorMoved = "default";
       init.defaultBranch = "dev";
+      merge.conflictStyle = "zdiff3";
       push.autoSetupRemote = true;
       tag.sort = "-version:refname";
     };

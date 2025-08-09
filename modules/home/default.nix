@@ -14,6 +14,7 @@
     helix
     lazygit
     nushell
+    sherlock
     starship
     yazi
     wezterm
@@ -43,13 +44,14 @@
     ll = "ls -la";
   };
 
-  home.packages = with pkgs; [cachix fd git-ignore ouch sad xh];
+  home.packages = with pkgs; [cachix fd git-ignore less ouch sad xh];
 
   home.file = {
     ".config/cachix/cachix.dhall".source = config.lib.file.mkOutOfStoreSymlink config.sops.templates."cachix.dhall".path;
   };
 
   programs.nh.enable = true;
+  programs.nh.package = inputs.nh.packages.${pkgs.system}.default;
   programs.home-manager.enable = true;
   programs.git.enable = true;
   programs.direnv.enable = true;

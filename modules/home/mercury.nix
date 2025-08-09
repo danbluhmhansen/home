@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  imports = with inputs.self.outputs.homeModules; [niri sherlock];
+  imports = with inputs.self.outputs.homeModules; [niri];
 
   fonts.fontconfig.enable = true;
 
