@@ -8,7 +8,9 @@
     ./services/forgejo.nix
     ./services/foundryvtt.nix
     ./services/metube.nix
+    ./services/minio.nix
     ./services/postgres.nix
+    ./services/resume.nix
     ./services/stalwart.nix
     ./services/streaming.nix
     ./services/cv.nix
