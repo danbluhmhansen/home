@@ -1,6 +1,7 @@
 {
   inputs,
   user,
+  pkgs,
   ...
 }: {
   nixpkgs.hostPlatform = "x86_64-linux";
@@ -12,6 +13,7 @@
     {
       programs.git.delta.options.light = true;
       programs.helix.settings.theme = "catppuccin_latte";
+      services.gpg-agent.pinentry.package = pkgs.pinentry-curses;
     }
   ];
 
