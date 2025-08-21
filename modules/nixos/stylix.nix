@@ -64,24 +64,24 @@ in {
 
         programs.sherlock.settings.style = ''
           :root {
-              /* backgrounds */
-              --background: 220, 21%, 89%; /* Crust */
-              --background-soft: 220, 23%, 95%; /* Base */
-              --border:  220, 91%, 54%; /* Blue */
-              --border-soft:  231, 97%, 72%; /* Lavender */
-              --text:  234, 16%, 35%; /* Text */
-              --text-active: 233, 10%, 47%; /* Subtext0 */
+            /* backgrounds */
+            --background: hsl(220, 22%, 92%); /* Crust */
+            --background-soft: hsl(220, 23%, 95%); /* Base */
+            --border: hsl(220, 91%, 54%); /* Blue */
+            --border-soft: hsl(231, 97%, 72%); /* Lavender */
+            --text: hsl(234, 16%, 35%); /* Text */
+            --text-active: hsl(233, 10%, 47%); /* Subtext0 */
 
-              --tag-background: 220, 23%, 95%; /* Base */
+            --tag-background: hsl(220, 23%, 95%); /* Base */
 
-              /* foreground */
-              --foreground: 223, 16%, 83%; /* Surface0 */
-              --foreground-soft: 240, 21%, 12%; /* Mantle */
+            /* foreground */
+            --foreground: hsl(223, 16%, 83%); /* Surface0 */
+            --foreground-soft: hsl(220, 22%, 92%); /* Mantle */
 
-              /* accent colors */
-              --error: 355, 76%, 59%; /* Maroon */
-              --success:  109, 58%, 40%; /* Green */
-              --warning: 22, 99%, 52%; /* Peach */
+            /* accent colors */
+            --error: hsl(355, 76%, 59%); /* Maroon */
+            --success: hsl(109, 58%, 40%); /* Green */
+            --warning: hsl(22, 99%, 52%); /* Peach */
           }
         '';
       }

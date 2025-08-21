@@ -55,7 +55,7 @@
     xserver.videoDrivers = ["nvidia"];
     greetd.enable = true;
     greetd.settings.default_session.command = let
-      pkg = pkgs.lib.getExe pkgs.greetd.tuigreet;
+      pkg = pkgs.lib.getExe pkgs.tuigreet;
     in "${pkg} --time --remember --remember-user-session";
     greetd.settings.default_session.user = "greeter";
     desktopManager.plasma6.enable = true;

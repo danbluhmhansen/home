@@ -4,7 +4,7 @@
   ...
 }: {
   programs.sherlock.package = inputs.sherlock.packages.${pkgs.system}.default;
-  programs.sherlock.settings.config = {
+  programs.sherlock.settings = {
     default_apps.terminal = "wezterm";
     appearance.width = 900;
     appearance.height = 593;
@@ -19,7 +19,7 @@
     binds.context = "control-i";
   };
 
-  programs.sherlock.settings.launchers = [
+  programs.sherlock.launchers = [
     {
       name = "Weather";
       type = "weather";
@@ -164,30 +164,30 @@
     }
   ];
 
-  programs.sherlock.settings.style = pkgs.lib.mkDefault ''
+  programs.sherlock.style = ''
     :root {
-        /* backgrounds */
-        --background: 240, 23%, 9%; /* Crust */
-        --background-soft: 240, 21%, 15%; /* Base */
-        --border:  217, 92%, 76%; /* Blue */
-        --border-soft:  232, 97%, 85%; /* Lavender */
-        --text:  226, 64%, 88%; /* Text */
-        --text-active: 228, 24%, 72%; /* Subtext0 */
+      /* backgrounds */
+      --background: hsl(240, 23%, 9%); /* Crust */
+      --background-soft: hsl(240, 21%, 15%); /* Base */
+      --border: hsl(217, 92%, 76%); /* Blue */
+      --border-soft: hsl(232, 97%, 85%); /* Lavender */
+      --text: hsl(226, 64%, 88%); /* Text */
+      --text-active: hsl(228, 24%, 72%); /* Subtext0 */
 
-        --tag-background: 240, 21%, 15%; /* Base */
+      --tag-background: hsl(240, 21%, 15%); /* Base */
 
-        /* foreground */
-        --foreground: 237, 16%, 23%; /* Surface0 */
-        --foreground-soft: 240, 21%, 12%; /* Mantle */
+      /* foreground */
+      --foreground: hsl(237, 16%, 23%); /* Surface0 */
+      --foreground-soft: hsl(240, 21%, 12%); /* Mantle */
 
-        /* accent colors */
-        --error: 350, 65%, 77%; /* Maroon */
-        --success:  115, 54%, 76%; /* Green */
-        --warning: 23, 92%, 75%; /* Peach */
+      /* accent colors */
+      --error: hsl(350, 65%, 77%); /* Maroon */
+      --success: hsl(115, 54%, 76%); /* Green */
+      --warning: hsl(23, 92%, 75%); /* Peach */
     }
   '';
 
-  programs.sherlock.settings.ignore = ''
+  programs.sherlock.ignore = ''
     qt*
   '';
 }
