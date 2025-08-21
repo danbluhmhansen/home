@@ -19,7 +19,7 @@
       "glance.name" = "MinIO";
       "glance.icon" = "sh:minio";
       "glance.url" = "https://minio.920301.xyz";
-      "glance.description" = "S3 compatible object store";
+      "glance.description" = "'S3 compatible object store'";
     };
   };
 }
