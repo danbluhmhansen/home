@@ -6,9 +6,13 @@
     environment = {
       PORT = "3000";
       NODE_ENV = "production";
-      PUBLIC_URL = "https://resume.920301.xyz";
+      # FIX PUBLIC_URL if this issue is resolved https://github.com/AmruthPillai/Reactive-Resume/issues/2153
+      PUBLIC_URL = "http://resume.920301.xyz";
+      STORAGE_URL = "http://minio:9000/default";
+      # TODO set up chromium
+      CHROME_URL = "ws://chrome:3000";
       MAIL_FROM = "noreply@920301.xyz";
-      DISABLE_SIGNUPS = "false";
+      DISABLE_SIGNUPS = "true";
       DISABLE_EMAIL_AUTH = "false";
     };
     environmentFile = [config.sops.secrets.resume.path];
