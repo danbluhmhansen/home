@@ -11,6 +11,7 @@
     ./services/minio.nix
     ./services/postgres.nix
     ./services/resume.nix
+    ./services/radicale.nix
     ./services/stalwart.nix
     ./services/streaming.nix
     ./services/cv.nix
