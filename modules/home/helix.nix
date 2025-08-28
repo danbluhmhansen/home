@@ -5,7 +5,7 @@
     settings = rec {
       theme = pkgs.lib.mkDefault "catppuccin_mocha";
       editor = {
-        shell = ["nu" "--commands"];
+        shell = ["nu" "--stdin" "--commands"];
         line-number = "relative";
         cursorline = true;
         bufferline = "multiple";
@@ -63,6 +63,40 @@
         C-h = ":toggle lsp.display-inlay-hints";
         tab = "move_parent_node_end";
         S-tab = "move_parent_node_start";
+
+        "`" = {
+          c = ":pipe str camel-case";
+          l = ":pipe str downcase";
+          k = ":pipe str kebab-case";
+          p = ":pipe str pascal-case";
+          s = ":pipe str snake-case";
+          t = ":pipe str title-case";
+          u = ":pipe str upcase";
+          e = {
+            "3" = ":pipe encode base32";
+            "6" = ":pipe encode base64";
+            h = ":pipe encode hex";
+            u = ":pipe url encode";
+          };
+          d = {
+            "3" = ":pipe decode base32 | decode";
+            "6" = ":pipe decode base64 | decode";
+            h = ":pipe decode hex | decode";
+            u = ":pipe url decode";
+          };
+          h = {
+            m = ":pipe hash md5";
+            s = ":pipe hash sha256";
+          };
+          r = {
+            c = ":insert-output random chars";
+            f = ":insert-output random float";
+            i = ":insert-output random int";
+            u = ":insert-output random uuid";
+            "4" = ":insert-output random uuid --version 4";
+            "7" = ":insert-output random uuid --version 7";
+          };
+        };
 
         space = {
           w = ":write";
