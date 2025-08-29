@@ -12,12 +12,14 @@
   programs.alacritty.enable = true;
   programs.wezterm.enable = true;
   programs.firefox.enable = true;
+  programs.chromium.enable = true;
   programs.mpv.enable = true;
   programs.yt-dlp.enable = true;
   programs.sherlock.enable = true;
   programs.swaylock.enable = true;
 
   programs.firefox.nativeMessagingHosts = [pkgs.kdePackages.plasma-browser-integration];
+  programs.chromium.package = pkgs.ungoogled-chromium;
 
   programs.git.extraConfig.credential.helper = let
     pkg = pkgs.git.override {withLibsecret = true;};

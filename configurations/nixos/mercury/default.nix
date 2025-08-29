@@ -21,6 +21,8 @@
   sops.secrets.userpass.neededForUsers = true;
 
   users.users.dan.hashedPasswordFile = config.sops.secrets.userpass.path;
+  users.groups.plugdev = {};
+  users.users.dan.extraGroups = ["plugdev"];
 
   boot.initrd.systemd.enable = true;
   boot.loader.systemd-boot.enable = true;
@@ -59,6 +61,10 @@
     in "${pkg} --time --remember --remember-user-session";
     greetd.settings.default_session.user = "greeter";
     desktopManager.plasma6.enable = true;
+    udev.extraRules = ''
+      SUBSYSTEMS=="usb", ATTRS{idVendor}=="045e", MODE="0660", GROUP="plugdev", SYMLINK+="webusb"
+      SUBSYSTEMS=="usb", ATTRS{idVendor}=="0170", MODE="0660", GROUP="plugdev", SYMLINK+="webusb"
+    '';
   };
 
   environment.systemPackages = with pkgs; [wayland-utils wl-clipboard xwayland-satellite];
