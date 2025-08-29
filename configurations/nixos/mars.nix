@@ -20,7 +20,6 @@
   wsl.enable = true;
   wsl.defaultUser = user;
   wsl.usbip.enable = true;
-  wsl.usbip.autoAttach = ["2-1"];
 
   users.groups.plugdev = {};
   users.users.dan.extraGroups = ["plugdev"];
