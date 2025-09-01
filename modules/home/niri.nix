@@ -6,12 +6,7 @@
     prefer-no-csd = true;
     hotkey-overlay.skip-at-startup = true;
     hotkey-overlay.hide-not-bound = true;
-    spawn-at-startup = [{command = ["xwayland-satellite"];}];
     overview.workspace-shadow.enable = false;
-
-    environment = {
-      DISPLAY = ":0";
-    };
 
     layout = {
       gaps = 4;
@@ -54,6 +49,7 @@
       "Mod+Z".action = toggle-overview;
 
       "Mod+R".action = switch-preset-column-width;
+      "Mod+Ctrl+R".action = switch-preset-column-width-back;
       "Mod+F".action = maximize-column;
       "Mod+Ctrl+F".action = fullscreen-window;
       "Mod+Minus".action = set-column-width "-10%";

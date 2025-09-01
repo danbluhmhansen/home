@@ -99,4 +99,6 @@
   programs.steam.gamescopeSession.args = ["--adaptive-sync" "--hdr-enabled"];
 
   stylix.enable = true;
+
+  qt.platformTheme = pkgs.lib.mkForce "kde";
 }
