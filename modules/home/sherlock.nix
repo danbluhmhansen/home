@@ -164,7 +164,7 @@
     }
   ];
 
-  programs.sherlock.style = ''
+  programs.sherlock.style = pkgs.lib.mkDefault ''
     :root {
       /* backgrounds */
       --background: hsl(240, 23%, 9%); /* Crust */

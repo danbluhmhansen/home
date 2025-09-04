@@ -14,25 +14,20 @@
     hash = "sha256-d2GQBw/V//5C6g6Vi/VMn6Lw/eekSffdXQZAaVok6O0=";
   };
 in {
-  security.doas.extraRules = [
-    {
-      users = [user];
-      keepEnv = true;
-      persist = true;
-    }
+  security.sudo-rs.extraRules = [
     {
       groups = ["wheel"];
-      cmd = "/nix/var/nix/profiles/system/bin/switch-to-configuration";
-      args = ["switch"];
       runAs = "root";
-      noPass = true;
-    }
-    {
-      groups = ["wheel"];
-      cmd = "/nix/var/nix/profiles/system/specialisation/light/bin/switch-to-configuration";
-      args = ["switch"];
-      runAs = "root";
-      noPass = true;
+      commands = [
+        {
+          command = "/nix/var/nix/profiles/system/bin/switch-to-configuration switch";
+          options = ["SETENV" "NOPASSWD"];
+        }
+        {
+          command = "/nix/var/nix/profiles/system/specialisation/light/bin/switch-to-configuration switch";
+          options = ["SETENV" "NOPASSWD"];
+        }
+      ];
     }
   ];
 
@@ -61,8 +56,7 @@ in {
     home-manager.sharedModules = [
       {
         programs.helix.settings.theme = "catppuccin_latte";
-
-        programs.sherlock.settings.style = ''
+        programs.sherlock.style = ''
           :root {
             /* backgrounds */
             --background: hsl(220, 22%, 92%); /* Crust */
@@ -109,12 +103,12 @@ in {
           # check if the current system configuration matches the 'light' specialisation
           if [ "$current_system" == "$light_specialisation" ]; then
              notify-send "Switching to Dark"
-             doas /nix/var/nix/profiles/system/bin/switch-to-configuration switch
+             sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch
              swww img ${wallpaperDark}
              pkill -USR1 hx
           else
              notify-send "Switching to Light"
-             doas /nix/var/nix/profiles/system/specialisation/light/bin/switch-to-configuration switch
+             sudo /nix/var/nix/profiles/system/specialisation/light/bin/switch-to-configuration switch
              swww img ${wallpaperLight}
              pkill -USR1 hx
           fi

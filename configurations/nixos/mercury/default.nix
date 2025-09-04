@@ -38,7 +38,6 @@
   networking.networkmanager.enable = true;
 
   security = {
-    doas.enable = true;
     pam.services = {
       login.enableGnomeKeyring = true;
       login.kwallet.enable = true;
@@ -47,6 +46,7 @@
     };
     polkit.enable = true;
     rtkit.enable = true;
+    sudo-rs.enable = true;
   };
 
   services = {
