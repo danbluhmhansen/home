@@ -13,7 +13,6 @@
   programs.wezterm.enable = true;
 
   programs.bat.config.theme = "base16-256";
-  programs.helix.settings.theme = "theme";
 
   programs.yazi.theme = rec {
     mode = {

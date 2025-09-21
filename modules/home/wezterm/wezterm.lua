@@ -76,19 +76,6 @@ config.window_close_confirmation = 'NeverPrompt'
 config.enable_kitty_keyboard = true
 
 if wezterm.target_triple == 'aarch64-apple-darwin' then
-  wezterm.on('window-config-reloaded', function()
-    local file = io.open(wezterm.home_dir .. '/.config/helix/themes/theme.toml', 'w')
-    if (file) then
-      if get_appearance() == 'Dark' then
-        file:write('inherits = "catppuccin_mocha"')
-      else
-        file:write('inherits = "catppuccin_latte"')
-      end
-      file:close()
-      wezterm.run_child_process { shell, '-c', 'pkill -USR1 hx' }
-    end
-  end)
-
   config.color_scheme = scheme_for_appearance(get_appearance())
   config.font_size = 16
   config.window_padding = {

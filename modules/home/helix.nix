@@ -3,7 +3,8 @@
     defaultEditor = true;
 
     settings = rec {
-      theme = pkgs.lib.mkDefault "catppuccin_mocha";
+      theme.dark = "catppuccin_mocha";
+      theme.light = "catppuccin_latte";
       editor = {
         shell = ["nu" "--stdin" "--commands"];
         line-number = "relative";

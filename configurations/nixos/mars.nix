@@ -12,7 +12,6 @@
   home-manager.sharedModules = [
     {
       programs.git.delta.options.light = true;
-      programs.helix.settings.theme = "catppuccin_latte";
       services.gpg-agent.pinentry.package = pkgs.pinentry-curses;
     }
   ];

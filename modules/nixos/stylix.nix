@@ -55,7 +55,6 @@ in {
 
     home-manager.sharedModules = [
       {
-        programs.helix.settings.theme = "catppuccin_latte";
         programs.sherlock.style = ''
           :root {
             /* backgrounds */
