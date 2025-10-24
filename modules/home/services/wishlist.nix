@@ -11,8 +11,8 @@
     };
     network = ["traefik"];
     volumes = [
-      "${config.home.homeDirectory}/srv/wishlist:/usr/source/app/data"
-      "${config.home.homeDirectory}/srv/uploads:/usr/source/app/uploads"
+      "${config.home.homeDirectory}/srv/wishlist:/usr/src/app/data"
+      "${config.home.homeDirectory}/srv/uploads:/usr/src/app/uploads"
     ];
     labels = {
       "traefik.http.routers.wishlist.rule" = ''Host(`wish.920301.xyz`)'';
