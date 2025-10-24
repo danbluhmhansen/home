@@ -11,7 +11,6 @@
     ./services/metube.nix
     ./services/minio.nix
     ./services/postgres.nix
-    ./services/resume.nix
     ./services/radicale.nix
     ./services/stalwart.nix
     ./services/streaming.nix
