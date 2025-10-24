@@ -19,6 +19,7 @@
       "${config.home.homeDirectory}/srv/gameyfin/db:/opt/gameyfin/db"
       "${config.home.homeDirectory}/srv/gameyfin/data:/opt/gameyfin/data"
       "${config.home.homeDirectory}/srv/gameyfin/logs:/opt/gameyfin/logs"
+      "${config.home.homeDirectory}/srv/games:/data/games"
     ];
     labels = {
       "traefik.http.routers.gameyfin.rule" = ''Host(`gf.920301.xyz`)'';
