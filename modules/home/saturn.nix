@@ -7,6 +7,7 @@
     ./services/lldap.nix
     ./services/forgejo.nix
     ./services/foundryvtt.nix
+    ./services/gameyfin.nix
     ./services/metube.nix
     ./services/minio.nix
     ./services/postgres.nix
