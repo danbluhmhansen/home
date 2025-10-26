@@ -56,6 +56,7 @@
   programs.git.enable = true;
   programs.delta.enable = true;
   programs.direnv.enable = true;
+  programs.direnv.config.hide_env_diff = true;
   programs.direnv.nix-direnv.enable = true;
   programs.nix-index-database.comma.enable = true;
 
