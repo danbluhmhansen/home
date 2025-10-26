@@ -3,26 +3,28 @@
   email,
   ...
 }: {
-  programs.git = {
-    userName = userName;
-    userEmail = email;
-    delta.enable = true;
-    delta.options.hyperlinks = true;
-    signing.key = "0x077BBC8A99A747DD";
-    signing.signByDefault = true;
-    extraConfig = {
-      branch.sort = "-committerdate";
-      column.ui = "auto";
-      commit.verbose = true;
-      diff.algorithm = "histogram";
-      diff.colorMoved = "default";
-      init.defaultBranch = "dev";
-      merge.conflictStyle = "zdiff3";
-      push.autoSetupRemote = true;
-      tag.sort = "-version:refname";
-    };
+  programs.delta = {
+    enableGitIntegration = true;
+    options.hyperlinks = true;
+  };
 
-    aliases = rec {
+  programs.git.settings = {
+    user.name = userName;
+    user.email = email;
+    user.signingKey = "0x077BBC8A99A747DD";
+    branch.sort = "-committerdate";
+    column.ui = "auto";
+    commit.gpgSign = true;
+    commit.verbose = true;
+    diff.algorithm = "histogram";
+    diff.colorMoved = "default";
+    init.defaultBranch = "dev";
+    merge.conflictStyle = "zdiff3";
+    push.autoSetupRemote = true;
+    tag.gpgSign = true;
+    tag.sort = "-version:refname";
+
+    alias = rec {
       a = "add";
       aa = "add --all";
       ap = "add --patch";

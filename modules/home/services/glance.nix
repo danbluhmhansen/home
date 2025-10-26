@@ -1,4 +1,8 @@
-{config, timeZone, ...}: {
+{
+  config,
+  timeZone,
+  ...
+}: {
   services.podman.containers.glance = {
     image = "docker.io/glanceapp/glance:latest";
     environment = {TZ = timeZone;};

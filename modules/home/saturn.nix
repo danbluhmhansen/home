@@ -21,7 +21,7 @@
 
   home.packages = with pkgs; [podman-tui systemctl-tui];
 
-  programs.git.extraConfig.credential.helper = let
+  programs.git.settings.credential.helper = let
     pkg = pkgs.git.override {withLibsecret = true;};
   in "${pkg}/bin/git-credential-libsecret";
 

@@ -21,7 +21,7 @@
   programs.firefox.nativeMessagingHosts = [pkgs.kdePackages.plasma-browser-integration];
   programs.chromium.package = pkgs.ungoogled-chromium;
 
-  programs.git.extraConfig.credential.helper = let
+  programs.git.settings.credential.helper = let
     pkg = pkgs.git.override {withLibsecret = true;};
   in "${pkg}/bin/git-credential-libsecret";
 

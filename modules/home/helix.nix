@@ -246,7 +246,7 @@
     };
 
     extraPackages = with pkgs; [
-      dockerfile-language-server-nodejs # dockerfile
+      dockerfile-language-server # dockerfile
       docker-compose-language-service # docker-compose
       ltex-ls # grammar & spelling
       marksman # markdown

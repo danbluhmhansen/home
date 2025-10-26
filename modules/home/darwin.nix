@@ -5,7 +5,7 @@
 }: {
   home.packages = with pkgs; [discord maple-mono.NF sshfs];
 
-  programs.git.extraConfig.credential.helper = "osxkeychain";
+  programs.git.settings.credential.helper = "osxkeychain";
 
   programs.firefox.enable = true;
   programs.mpv.enable = true;

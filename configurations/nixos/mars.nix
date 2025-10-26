@@ -11,7 +11,7 @@
 
   home-manager.sharedModules = [
     {
-      programs.git.delta.options.light = true;
+      programs.delta.options.light = true;
       services.gpg-agent.pinentry.package = pkgs.pinentry-curses;
     }
   ];
