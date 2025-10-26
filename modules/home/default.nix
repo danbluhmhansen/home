@@ -51,7 +51,6 @@
   };
 
   programs.nh.enable = true;
-  programs.nh.package = inputs.nh.packages.${pkgs.system}.default;
   programs.home-manager.enable = true;
   programs.git.enable = true;
   programs.delta.enable = true;
