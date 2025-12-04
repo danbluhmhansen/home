@@ -30,6 +30,7 @@
       name = "macfuse@dev";
       args = {appdir = "~/Applications";};
     }
+    {name = "obs";}
     {
       name = "signal";
       args = {appdir = "~/Applications";};
