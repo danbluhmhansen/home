@@ -105,41 +105,9 @@
           q = ":quit";
           l = ":format";
           F = "file_picker_in_current_buffer_directory";
+          E = "file_explorer_in_current_buffer_directory";
           z = ":set-max-width 128 0";
-
-          e = [
-            ":sh rm -f /tmp/unique-file"
-            ":insert-output yazi --chooser-file=/tmp/unique-file"
-            ":insert-output echo $'(ansi -e ?1049h)(ansi -e ?2004h)' o> /dev/tty"
-            ":open %sh{cat /tmp/unique-file}"
-            ":redraw"
-            ":set mouse false"
-            ":set mouse true"
-          ];
-          E = [
-            ":sh rm -f /tmp/unique-file"
-            ":insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file"
-            ":insert-output echo $'(ansi -e ?1049h)(ansi -e ?2004h)' o> /dev/tty"
-            ":open %sh{cat /tmp/unique-file}"
-            ":redraw"
-            ":set mouse false"
-            ":set mouse true"
-          ];
-
-          v = [
-            ":insert-output lazygit"
-            ":insert-output echo $'(ansi -e ?1049h)(ansi -e ?2004h)' o> /dev/tty"
-            ":redraw"
-            ":set mouse false"
-            ":set mouse true"
-            ":reload-all"
-          ];
         };
-      };
-      keys.insert = {
-        tab = "move_parent_node_end";
-        S-tab = "move_parent_node_start";
-        A-tab = "insert_tab";
       };
       keys.select = keys.normal;
     };
