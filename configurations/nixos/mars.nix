@@ -9,12 +9,7 @@
 
   imports = [inputs.wsl.nixosModules.default];
 
-  home-manager.sharedModules = [
-    {
-      programs.delta.options.light = true;
-      services.gpg-agent.pinentry.package = pkgs.pinentry-curses;
-    }
-  ];
+  home-manager.sharedModules = [{services.gpg-agent.pinentry.package = pkgs.pinentry-curses;}];
 
   wsl.enable = true;
   wsl.defaultUser = user;
@@ -22,8 +17,6 @@
 
   users.groups.plugdev = {};
   users.users.dan.extraGroups = ["plugdev"];
-
-  programs.ssh.startAgent = false;
 
   services.pcscd.enable = true;
 
