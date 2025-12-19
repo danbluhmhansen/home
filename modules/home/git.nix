@@ -40,7 +40,9 @@
       cb- = "checkout -B";
       cl = "clone";
       d = "diff";
+      di = "diff -- . ':(exclude)*.lock'";
       ds = "diff --cached";
+      dsi = "diff --cached -- . ':(exclude)*.lock'";
       du = "diff @{upstream}";
       f = "fetch";
       fa = "fetch --all --prune";
