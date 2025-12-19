@@ -81,7 +81,7 @@
     okular
   ];
 
-  fonts.packages = with pkgs; [maple-mono.NF noto-fonts noto-fonts-emoji];
+  fonts.packages = with pkgs; [maple-mono.NF noto-fonts noto-fonts-color-emoji];
 
   programs.niri.enable = true;
   programs.niri.package = pkgs.niri-unstable;

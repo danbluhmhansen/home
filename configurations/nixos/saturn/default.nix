@@ -31,7 +31,7 @@
     openssh.enable = true;
   };
 
-  fonts.packages = with pkgs; [maple-mono.NF noto-fonts noto-fonts-emoji];
+  fonts.packages = with pkgs; [maple-mono.NF noto-fonts noto-fonts-color-emoji];
 
   virtualisation.containers.enable = true;
   virtualisation.containers.storage.settings.storage = {
