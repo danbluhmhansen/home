@@ -8,6 +8,8 @@
     options.hyperlinks = true;
   };
 
+  home.sessionVariables.DELTA_PAGER = "less -+X";
+
   programs.git.settings = {
     user.name = userName;
     user.email = email;
@@ -23,6 +25,9 @@
     push.autoSetupRemote = true;
     tag.gpgSign = true;
     tag.sort = "-version:refname";
+
+    delta.navigate = true;
+    delta.hyperlinks = true;
 
     alias = rec {
       a = "add";
