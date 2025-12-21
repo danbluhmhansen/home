@@ -36,7 +36,7 @@
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-    helix.url = "github:danbluhmhansen/helix/patchy";
+    helix.url = "github:gj1118/helix";
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
     yazi-plugins.url = "github:yazi-rs/plugins";
     yazi-plugins.flake = false;

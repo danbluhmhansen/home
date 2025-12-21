@@ -9,7 +9,7 @@
         shell = ["nu" "--stdin" "--commands"];
         line-number = "relative";
         cursorline = true;
-        bufferline = "multiple";
+        bufferline.render-mode = "multiple";
         color-modes = true;
         text-width = 120;
         rainbow-brackets = true;
@@ -17,8 +17,7 @@
         statusline = {
           left = ["mode" "spinner" "diagnostics" "workspace-diagnostics"];
           center = ["read-only-indicator" "file-name" "file-modification-indicator"];
-          right = ["zoom" "position" "position-percentage" "primary-selection-length" "register" "file-encoding"];
-          merge-with-commandline = true;
+          right = ["position" "position-percentage" "primary-selection-length" "register" "file-encoding"];
         };
 
         lsp = {
@@ -56,6 +55,18 @@
           auto-fetch = true;
           format = "{author}, {time-ago} • {commit} • {title}";
         };
+
+        cmdline = {
+          style = "popup";
+          show-icons = false;
+          use-full-height = true;
+        };
+      };
+
+      icons = {
+        mime.enabled = true;
+        vcs.enabled = true;
+        kind.enabled = true;
       };
 
       keys.normal = {
@@ -103,10 +114,9 @@
           w = ":write";
           x = ":buffer-close";
           q = ":quit";
-          l = ":format";
+          "=" = ":format";
           F = "file_picker_in_current_buffer_directory";
           E = "file_explorer_in_current_buffer_directory";
-          z = ":set-max-width 128 0";
         };
       };
       keys.select = keys.normal;
