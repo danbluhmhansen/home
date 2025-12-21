@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  programs.sherlock.package = inputs.sherlock.packages.${pkgs.system}.default;
+  programs.sherlock.package = inputs.sherlock.packages.${pkgs.stdenv.hostPlatform.system}.default;
   programs.sherlock.settings = {
     default_apps.terminal = "wezterm";
     appearance.width = 900;

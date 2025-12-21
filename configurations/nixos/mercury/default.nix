@@ -14,7 +14,7 @@
 
   home-manager.sharedModules = [inputs.self.outputs.homeModules.mercury];
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   nixpkgs.overlays = [inputs.niri.overlays.niri];
 

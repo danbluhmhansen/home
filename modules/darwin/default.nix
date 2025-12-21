@@ -14,6 +14,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  nix.channel.enable = false;
   nix.settings = {
     experimental-features = "nix-command flakes";
     trusted-users = ["@admin"];
@@ -58,6 +59,7 @@
     };
     mutableTaps = false;
   };
+  homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
 
   programs.gnupg.agent.enable = true;
   programs.gnupg.agent.enableSSHSupport = true;

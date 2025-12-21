@@ -4,7 +4,7 @@
   user,
   ...
 }: {
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
   home.username = user;
   home.homeDirectory =
     if pkgs.stdenv.isDarwin
@@ -27,7 +27,7 @@
 
   programs.gpg.scdaemonSettings.disable-ccid = true;
 
-  programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
+  programs.helix.package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
   services.gpg-agent.enable = true;
   services.gpg-agent.enableSshSupport = true;
