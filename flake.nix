@@ -5,13 +5,13 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     ez-configs.url = "github:ehllie/ez-configs";
+    ez-configs.inputs.nixpkgs.follows = "nixpkgs";
     wsl.url = "github:nix-community/nixos-wsl";
     darwin.url = "github:LnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     rosetta-builder.url = "github:cpick/nix-rosetta-builder";
     rosetta-builder.inputs.nixpkgs.follows = "nixpkgs";
 
-    devshell.url = "github:numtide/devshell";
     treefmt.url = "github:numtide/treefmt-nix";
     git-hooks.url = "github:cachix/git-hooks.nix";
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
@@ -57,7 +57,6 @@
   outputs = inputs @ {
     flake-parts,
     ez-configs,
-    devshell,
     treefmt,
     git-hooks,
     ...
@@ -65,12 +64,7 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["aarch64-darwin" "aarch64-linux" "x86_64-linux"];
 
-      imports = [
-        ez-configs.flakeModule
-        devshell.flakeModule
-        treefmt.flakeModule
-        git-hooks.flakeModule
-      ];
+      imports = [ez-configs.flakeModule treefmt.flakeModule git-hooks.flakeModule];
 
       ezConfigs = let
         user = "dan";
@@ -102,14 +96,15 @@
         pkgs,
         ...
       }: {
-        treefmt.programs.alejandra.enable = true; # nix
-        devshells.default = {
-          devshell.startup.hook.text = config.pre-commit.installationScript;
-          motd = "";
+        treefmt.programs.alejandra.enable = true;
+        pre-commit.settings.hooks.treefmt.enable = true;
+        pre-commit.settings.hooks.treefmt.package = config.treefmt.build.wrapper;
+        devShells.default = pkgs.mkShell {
+          shellHook = config.pre-commit.installationScript;
           packages = with pkgs;
             [lua-language-server nil]
             ++ config.pre-commit.settings.enabledPackages
-            ++ lib.attrValues config.treefmt.build.programs;
+            ++ builtins.attrValues config.treefmt.build.programs;
         };
       };
     };
