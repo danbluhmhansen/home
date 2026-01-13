@@ -11,6 +11,14 @@
   programs.mpv.enable = true;
   programs.yt-dlp.enable = true;
   programs.wezterm.enable = true;
+  programs.ghostty.enable = true;
+  programs.ghostty.package = null;
+  programs.ghostty.settings = {
+    theme = "light:Catppuccin Latte,dark:Catppuccin Mocha";
+    font-size = 15;
+    window-padding-balance = true;
+    keybind = ["global:cmd+backquote=toggle_quick_terminal"];
+  };
 
   programs.bat.config.theme = "base16-256";
 

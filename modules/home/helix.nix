@@ -145,7 +145,7 @@
           formatter.command = "deno";
           formatter.args = denoFmt name;
           auto-format = false;
-          language-servers = ["vscode-html-language-server" "superhtml" "tailwindcss-ls"];
+          language-servers = ["superhtml" "tailwindcss-ls"];
         }
         {
           name = "javascript";
@@ -180,10 +180,6 @@
           formatter.command = "ruff";
           formatter.args = ["format" "--line-length" "120" "-"];
           auto-format = false;
-        }
-        {
-          name = "rust";
-          language-servers = ["rust-analyzer" "tailwindcss-ls"];
         }
         {
           name = "sql";
@@ -224,12 +220,9 @@
     };
 
     extraPackages = with pkgs; [
-      dockerfile-language-server # dockerfile
-      docker-compose-language-service # docker-compose
       ltex-ls # grammar & spelling
       marksman # markdown
       taplo # toml
-      vscode-langservers-extracted # css, html, javascript, json, jsx
       yaml-language-server # yaml
       yamlfmt # yaml
       deno # formatters

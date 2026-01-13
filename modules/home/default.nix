@@ -16,8 +16,9 @@
     nushell
     sherlock
     starship
-    yazi
     wezterm
+    yazi
+    zellij
   ];
 
   sops.defaultSopsFile =
@@ -39,12 +40,13 @@
     }
   '';
 
+  home.shell.enableShellIntegration = true;
   home.shellAliases = {
     la = "ls -a";
     ll = "ls -la";
   };
 
-  home.packages = with pkgs; [cachix fd git-ignore less ouch sad xh];
+  home.packages = with pkgs; [cachix fd git-ignore gitu less ouch sad xh];
 
   home.file = {
     ".config/cachix/cachix.dhall".source = config.lib.file.mkOutOfStoreSymlink config.sops.templates."cachix.dhall".path;
@@ -65,11 +67,11 @@
   programs.fzf.enable = true;
   programs.gpg.enable = true;
   programs.helix.enable = true;
-  programs.lazygit.enable = true;
   programs.nushell.enable = true;
   programs.ripgrep.enable = true;
   programs.starship.enable = true;
   programs.yazi.enable = true;
+  programs.zellij.enable = true;
   programs.zoxide.enable = true;
 
   programs.nh.flake = "${config.home.homeDirectory}/.config/home";

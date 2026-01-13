@@ -37,7 +37,7 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
         ex_pane:activate()
       end
       if proc_info.name == 'nu' then
-        ex_pane:send_text('cd ' .. dir .. ';$env.EDITOR ' .. file .. '\n')
+        ex_pane:send_text('cd ' .. dir .. ';nu --commands $"($env.EDITOR) ' .. file .. '"\n')
         ex_pane:activate()
       end
     else
@@ -77,7 +77,7 @@ config.enable_kitty_keyboard = true
 
 if wezterm.target_triple == 'aarch64-apple-darwin' then
   config.color_scheme = scheme_for_appearance(get_appearance())
-  config.font_size = 16
+  config.font_size = 15
   config.window_padding = {
     left   = 8,
     right  = 0,

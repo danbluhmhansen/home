@@ -23,6 +23,14 @@
       };
     }
     {
+      name = "discord";
+      args = {appdir = "~/Applications";};
+    }
+    {
+      name = "ghostty";
+      args = {appdir = "~/Applications";};
+    }
+    {
       name = "hammerspoon";
       args = {appdir = "~/Applications";};
     }
@@ -33,10 +41,6 @@
     {name = "obs";}
     {
       name = "signal";
-      args = {appdir = "~/Applications";};
-    }
-    {
-      name = "utm";
       args = {appdir = "~/Applications";};
     }
   ];

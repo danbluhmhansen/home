@@ -16,8 +16,6 @@
     then "/Users/${user}/.local/share/pass"
     else "/home/${user}/.local/share/pass";
 
-  home.packages = with pkgs; [termscp];
-
   programs.bash.enable = true;
   programs.zsh.enable = true;
   programs.zsh = {
