@@ -44,6 +44,7 @@
     yazi-ouch.flake = false;
     yazelix.url = "github:luccahuguet/yazelix";
     yazelix.flake = false;
+    zjstatus.url = "github:dj95/zjstatus";
 
     niri.url = "github:sodiboo/niri-flake";
     sherlock.url = "github:skxxtz/sherlock";
