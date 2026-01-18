@@ -39,7 +39,7 @@
       "Mod+Ctrl+E".action = quit;
       "Mod+Ctrl+Slash".action = show-hotkey-overlay;
       "Mod+Escape".action = toggle-keyboard-shortcuts-inhibit;
-      "Mod+Q".action = spawn "uwsm" "app" "--" "wezterm";
+      "Mod+Q".action = spawn "uwsm" "app" "--" "ghostty";
       "Mod+space".action = spawn "uwsm" "app" "--" "sherlock";
       "Mod+W".action = close-window;
       "Mod+C".action = center-column;

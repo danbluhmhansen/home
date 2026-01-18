@@ -5,7 +5,7 @@
 }: {
   programs.sherlock.package = inputs.sherlock.packages.${pkgs.stdenv.hostPlatform.system}.default;
   programs.sherlock.settings = {
-    default_apps.terminal = "wezterm";
+    default_apps.terminal = "ghostty";
     appearance.width = 900;
     appearance.height = 593;
     appearance.gsk_renderer = "cairo";

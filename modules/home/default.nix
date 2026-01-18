@@ -9,6 +9,7 @@
     inputs.nix-index-database.homeModules.nix-index
     broot
     firefox
+    ghostty
     git
     gpg
     helix

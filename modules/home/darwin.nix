@@ -13,12 +13,7 @@
   programs.wezterm.enable = true;
   programs.ghostty.enable = true;
   programs.ghostty.package = null;
-  programs.ghostty.settings = {
-    theme = "light:Catppuccin Latte,dark:Catppuccin Mocha";
-    font-size = 15;
-    window-padding-balance = true;
-    keybind = ["global:cmd+backquote=toggle_quick_terminal"];
-  };
+  programs.ghostty.settings.font-size = 15;
 
   programs.bat.config.theme = "base16-256";
 
