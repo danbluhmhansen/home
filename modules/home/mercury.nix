@@ -18,6 +18,8 @@
   programs.sherlock.enable = true;
   programs.swaylock.enable = true;
   programs.walker.enable = true;
+  programs.obs-studio.enable = true;
+  programs.obs-studio.plugins = with pkgs.obs-studio-plugins; [droidcam-obs];
 
   programs.firefox.nativeMessagingHosts = [pkgs.kdePackages.plasma-browser-integration];
   programs.chromium.package = pkgs.ungoogled-chromium;
