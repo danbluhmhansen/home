@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  imports = with inputs.self.outputs.homeModules; [niri];
+  imports = with inputs.self.outputs.homeModules; [inputs.walker.homeManagerModules.default niri walker];
 
   fonts.fontconfig.enable = true;
 
@@ -17,6 +17,7 @@
   programs.yt-dlp.enable = true;
   programs.sherlock.enable = true;
   programs.swaylock.enable = true;
+  programs.walker.enable = true;
 
   programs.firefox.nativeMessagingHosts = [pkgs.kdePackages.plasma-browser-integration];
   programs.chromium.package = pkgs.ungoogled-chromium;

@@ -48,6 +48,9 @@
 
     niri.url = "github:sodiboo/niri-flake";
     sherlock.url = "github:skxxtz/sherlock";
+    elephant.url = "github:abenz1267/elephant";
+    walker.url = "github:abenz1267/walker";
+    walker.inputs.elephant.follows = "elephant";
 
     hs-spoons.url = "github:hammerspoon/spoons";
     hs-spoons.flake = false;
