@@ -6,13 +6,16 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     ez-configs.url = "github:ehllie/ez-configs";
     ez-configs.inputs.nixpkgs.follows = "nixpkgs";
+    ez-configs.inputs.flake-parts.follows = "flake-parts";
     wsl.url = "github:nix-community/nixos-wsl";
+    wsl.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:LnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     rosetta-builder.url = "github:cpick/nix-rosetta-builder";
     rosetta-builder.inputs.nixpkgs.follows = "nixpkgs";
 
     treefmt.url = "github:numtide/treefmt-nix";
+    treefmt.inputs.nixpkgs.follows = "nixpkgs";
     git-hooks.url = "github:cachix/git-hooks.nix";
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -33,11 +36,14 @@
 
     stylix.url = "github:nix-community/stylix";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
+    stylix.inputs.flake-parts.follows = "flake-parts";
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     helix.url = "github:gj1118/helix";
+    helix.inputs.nixpkgs.follows = "nixpkgs";
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
     yazi-plugins.url = "github:yazi-rs/plugins";
     yazi-plugins.flake = false;
     yazi-ouch.url = "github:ndtoan96/ouch.yazi";
@@ -45,11 +51,17 @@
     yazelix.url = "github:luccahuguet/yazelix";
     yazelix.flake = false;
     zjstatus.url = "github:dj95/zjstatus";
+    zjstatus.inputs.nixpkgs.follows = "nixpkgs";
 
     niri.url = "github:sodiboo/niri-flake";
+    niri.inputs.nixpkgs.follows = "nixpkgs";
     sherlock.url = "github:skxxtz/sherlock";
+    sherlock.inputs.nixpkgs.follows = "nixpkgs";
+    sherlock.inputs.flake-parts.follows = "flake-parts";
     elephant.url = "github:abenz1267/elephant";
+    elephant.inputs.nixpkgs.follows = "nixpkgs";
     walker.url = "github:abenz1267/walker";
+    walker.inputs.nixpkgs.follows = "nixpkgs";
     walker.inputs.elephant.follows = "elephant";
 
     hs-spoons.url = "github:hammerspoon/spoons";

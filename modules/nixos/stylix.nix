@@ -84,12 +84,13 @@ in {
   home-manager.sharedModules = [
     {
       stylix = {
-        iconTheme.enable = true;
-        iconTheme.package = pkgs.kdePackages.breeze-icons;
-        iconTheme.dark = "breeze-dark";
-        iconTheme.light = "breeze";
+        icons.enable = true;
+        icons.package = pkgs.kdePackages.breeze-icons;
+        icons.dark = "breeze-dark";
+        icons.light = "breeze";
         targets.firefox.profileNames = [user];
         targets.helix.enable = false;
+        targets.qt.platform = "qtct";
       };
 
       home.packages = [

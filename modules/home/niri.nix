@@ -40,7 +40,7 @@
       "Mod+Ctrl+Slash".action = show-hotkey-overlay;
       "Mod+Escape".action = toggle-keyboard-shortcuts-inhibit;
       "Mod+Q".action = spawn "uwsm" "app" "--" "ghostty";
-      "Mod+space".action = spawn "uwsm" "app" "--" "sherlock";
+      "Mod+space".action = spawn "uwsm" "app" "--" "walker";
       "Mod+W".action = close-window;
       "Mod+C".action = center-column;
       "Mod+N".action = spawn "uwsm" "app" "--" "swaync-client" "-t";
