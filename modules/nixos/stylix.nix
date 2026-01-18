@@ -2,35 +2,7 @@
   pkgs,
   user,
   ...
-}: let
-  wallpaperDark = pkgs.fetchurl {
-    name = "wallpaper.png";
-    url = "https://initiate.alphacoders.com/download/images7/1397453/png";
-    hash = "sha256-o+LGCMXiE+TiRiwwPCCHuZCEIYBncfhBElWidrGYU54=";
-  };
-  wallpaperLight = pkgs.fetchurl {
-    name = "wallpaper.png";
-    url = "https://initiate.alphacoders.com/download/images8/1397851/png";
-    hash = "sha256-d2GQBw/V//5C6g6Vi/VMn6Lw/eekSffdXQZAaVok6O0=";
-  };
-in {
-  security.sudo-rs.extraRules = [
-    {
-      groups = ["wheel"];
-      runAs = "root";
-      commands = [
-        {
-          command = "/nix/var/nix/profiles/system/bin/switch-to-configuration switch";
-          options = ["SETENV" "NOPASSWD"];
-        }
-        {
-          command = "/nix/var/nix/profiles/system/specialisation/light/bin/switch-to-configuration switch";
-          options = ["SETENV" "NOPASSWD"];
-        }
-      ];
-    }
-  ];
-
+}: {
   stylix = {
     base16Scheme = pkgs.lib.mkDefault "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     polarity = pkgs.lib.mkDefault "dark";
@@ -41,44 +13,6 @@ in {
       monospace.package = pkgs.maple-mono.NF;
       monospace.name = "Maple Mono NF";
     };
-    image = pkgs.lib.mkDefault wallpaperDark;
-  };
-
-  specialisation.light.configuration = {
-    stylix = {
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
-      polarity = "light";
-      cursor.package = pkgs.catppuccin-cursors.latteLight;
-      cursor.name = "catppuccin-latte-light-cursors";
-      image = wallpaperLight;
-    };
-
-    home-manager.sharedModules = [
-      {
-        programs.sherlock.style = ''
-          :root {
-            /* backgrounds */
-            --background: hsl(220, 22%, 92%); /* Crust */
-            --background-soft: hsl(220, 23%, 95%); /* Base */
-            --border: hsl(220, 91%, 54%); /* Blue */
-            --border-soft: hsl(231, 97%, 72%); /* Lavender */
-            --text: hsl(234, 16%, 35%); /* Text */
-            --text-active: hsl(233, 10%, 47%); /* Subtext0 */
-
-            --tag-background: hsl(220, 23%, 95%); /* Base */
-
-            /* foreground */
-            --foreground: hsl(223, 16%, 83%); /* Surface0 */
-            --foreground-soft: hsl(220, 22%, 92%); /* Mantle */
-
-            /* accent colors */
-            --error: hsl(355, 76%, 59%); /* Maroon */
-            --success: hsl(109, 58%, 40%); /* Green */
-            --warning: hsl(22, 99%, 52%); /* Peach */
-          }
-        '';
-      }
-    ];
   };
 
   home-manager.sharedModules = [
@@ -90,30 +24,9 @@ in {
         icons.light = "breeze";
         targets.firefox.profileNames = [user];
         targets.helix.enable = false;
+        targets.niri.enable = false;
         targets.qt.platform = "qtct";
       };
-
-      home.packages = [
-        (pkgs.writeShellScriptBin "toggle-theme" ''
-          #!/bin/sh
-          # get current active system configuration
-          current_system=$(readlink /run/current-system)
-          # get the system path for the 'light' specialisation
-          light_specialisation=$(readlink /nix/var/nix/profiles/system/specialisation/light)
-          # check if the current system configuration matches the 'light' specialisation
-          if [ "$current_system" == "$light_specialisation" ]; then
-             notify-send "Switching to Dark"
-             sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch
-             swww img ${wallpaperDark}
-             pkill -USR1 hx
-          else
-             notify-send "Switching to Light"
-             sudo /nix/var/nix/profiles/system/specialisation/light/bin/switch-to-configuration switch
-             swww img ${wallpaperLight}
-             pkill -USR1 hx
-          fi
-        '')
-      ];
     }
   ];
 }

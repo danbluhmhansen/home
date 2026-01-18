@@ -48,21 +48,13 @@
     yazi-plugins.flake = false;
     yazi-ouch.url = "github:ndtoan96/ouch.yazi";
     yazi-ouch.flake = false;
-    yazelix.url = "github:luccahuguet/yazelix";
-    yazelix.flake = false;
     zjstatus.url = "github:dj95/zjstatus";
     zjstatus.inputs.nixpkgs.follows = "nixpkgs";
 
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";
-    sherlock.url = "github:skxxtz/sherlock";
-    sherlock.inputs.nixpkgs.follows = "nixpkgs";
-    sherlock.inputs.flake-parts.follows = "flake-parts";
-    elephant.url = "github:abenz1267/elephant";
-    elephant.inputs.nixpkgs.follows = "nixpkgs";
-    walker.url = "github:abenz1267/walker";
-    walker.inputs.nixpkgs.follows = "nixpkgs";
-    walker.inputs.elephant.follows = "elephant";
+    dms.url = "github:avengemedia/dankmaterialshell/stable";
+    dms.inputs.nixpkgs.follows = "nixpkgs";
 
     hs-spoons.url = "github:hammerspoon/spoons";
     hs-spoons.flake = false;

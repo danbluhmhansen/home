@@ -1,7 +1,6 @@
 {inputs, ...}: {
   programs.yazi = {
     plugins = {
-      auto-layout = "${inputs.yazelix}/configs/yazi/plugins/auto_layout.yazi";
       diff = "${inputs.yazi-plugins}/diff.yazi";
       git = "${inputs.yazi-plugins}/git.yazi";
       jump-to-char = "${inputs.yazi-plugins}/jump-to-char.yazi";
@@ -15,7 +14,6 @@
 
     initLua = ''
       require("git"):setup()
-      require("auto-layout").setup()
     '';
 
     settings = {

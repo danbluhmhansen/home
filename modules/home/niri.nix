@@ -9,8 +9,6 @@
     overview.workspace-shadow.enable = false;
 
     layout = {
-      gaps = 4;
-      border.width = 2;
       center-focused-column = "on-overflow";
       background-color = "transparent";
 
@@ -26,11 +24,7 @@
 
     layer-rules = [
       {
-        matches = [{namespace = "^wpaperd";}];
-        place-within-backdrop = true;
-      }
-      {
-        matches = [{namespace = "^swww-daemon";}];
+        matches = [{namespace = "^quickshell$";}];
         place-within-backdrop = true;
       }
     ];
@@ -39,14 +33,16 @@
       "Mod+Ctrl+E".action = quit;
       "Mod+Ctrl+Slash".action = show-hotkey-overlay;
       "Mod+Escape".action = toggle-keyboard-shortcuts-inhibit;
-      "Mod+Q".action = spawn "uwsm" "app" "--" "ghostty";
-      "Mod+space".action = spawn "uwsm" "app" "--" "walker";
+      "Mod+Q".action = spawn "uwsm-app" "ghostty";
+      "Mod+space".action = spawn "dms" "ipc" "call" "spotlight" "toggle";
       "Mod+W".action = close-window;
+      "Mod+V".action = spawn "dms" "ipc" "call" "clipboard" "toggle";
+      "Mod+M".action = spawn "dms" "ipc" "call" "processlist" "focusOrToggle";
       "Mod+C".action = center-column;
-      "Mod+N".action = spawn "uwsm" "app" "--" "swaync-client" "-t";
-      "Mod+E".action = spawn "uwsm" "app" "--" "swaylock";
-      "Mod+S".action = spawn "toggle-theme";
+      "Mod+N".action = spawn "dms" "ipc" "call" "notifications" "toggle";
+      "Mod+E".action = spawn "dms" "ipc" "call" "lock" "lock";
       "Mod+Z".action = toggle-overview;
+      "Mod+Y".action = spawn "dms" "ipc" "call" "dankdash" "wallpaper";
 
       "Mod+R".action = switch-preset-column-width;
       "Mod+Ctrl+R".action = switch-preset-column-width-back;
@@ -62,11 +58,14 @@
       "Mod+Shift+T".action = switch-focus-between-floating-and-tiling;
 
       XF86AudioMute = {
-        action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
+        action = spawn "dms" "ipc" "call" "audio" "mute";
         allow-when-locked = true;
       };
-      XF86AudioRaiseVolume.action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+";
-      XF86AudioLowerVolume.action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-";
+      XF86AudioRaiseVolume.action = spawn "dms" "ipc" "call" "audio" "increment" "3";
+      XF86AudioLowerVolume.action = spawn "dms" "ipc" "call" "audio" "decrement" "3";
+
+      XF86MonBrightnessUp.action = spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
+      XF86MonBrightnessDown.action = spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
 
       "Mod+P".action.screenshot = [];
       "Mod+Ctrl+P".action.screenshot-screen = [];
@@ -74,6 +73,7 @@
 
       "Mod+Comma".action = consume-window-into-column;
       "Mod+Period".action = expel-window-from-column;
+      "Mod+Slash".action = spawn "dms" "ipc" "call" "settings" "focusOrToggle";
 
       "Mod+O".action = focus-column-last;
       "Mod+I".action = focus-column-first;

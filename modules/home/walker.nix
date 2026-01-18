@@ -1,5 +1,0 @@
-{
-  programs.walker = {
-    runAsService = true;
-  };
-}

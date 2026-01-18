@@ -240,6 +240,7 @@
         libredirect
         bitwarden
         plasma-integration
+        pywalfox
       ];
     };
 

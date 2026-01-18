@@ -7,15 +7,12 @@
   imports = with inputs.self.outputs.homeModules; [
     inputs.sops.homeManagerModules.sops
     inputs.nix-index-database.homeModules.nix-index
-    broot
     firefox
     ghostty
     git
     gpg
     helix
-    lazygit
     nushell
-    sherlock
     starship
     wezterm
     yazi
@@ -64,7 +61,6 @@
 
   programs.bat.enable = true;
   programs.bottom.enable = true;
-  programs.broot.enable = true;
   programs.fzf.enable = true;
   programs.gpg.enable = true;
   programs.helix.enable = true;

@@ -2,9 +2,11 @@
   inputs,
   config,
   pkgs,
+  user,
   ...
 }: {
   imports = with inputs.self.outputs.nixosModules; [
+    inputs.dms.nixosModules.greeter
     inputs.niri.nixosModules.niri
     ./disks.nix
     ./hardware.nix
@@ -55,11 +57,6 @@
     pcscd.enable = true;
     pipewire.enable = true;
     xserver.videoDrivers = ["nvidia"];
-    greetd.enable = true;
-    greetd.settings.default_session.command = let
-      pkg = pkgs.lib.getExe pkgs.tuigreet;
-    in "${pkg} --time --remember --remember-user-session";
-    greetd.settings.default_session.user = "greeter";
     desktopManager.plasma6.enable = true;
     udev.extraRules = ''
       SUBSYSTEMS=="usb", ATTRS{idVendor}=="045e", MODE="0660", GROUP="plugdev", SYMLINK+="webusb"
@@ -67,7 +64,7 @@
     '';
   };
 
-  environment.systemPackages = with pkgs; [wayland-utils wl-clipboard xwayland-satellite];
+  environment.systemPackages = with pkgs; [wayland-utils wl-clipboard xwayland-satellite pywalfox-native];
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     ark
@@ -85,6 +82,11 @@
 
   programs.niri.enable = true;
   programs.niri.package = pkgs.niri-unstable;
+  programs.dank-material-shell.greeter = {
+    enable = true;
+    compositor.name = "niri";
+    configHome = "/home/${user}";
+  };
 
   programs.uwsm.enable = true;
   programs.uwsm.waylandCompositors.niri = {
