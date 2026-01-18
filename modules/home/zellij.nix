@@ -234,17 +234,17 @@
 
             command_dir_command    "starship module directory"
             command_dir_format     "{stdout} "
-            command_dir_interval   "10"
+            command_dir_interval   "1"
             command_dir_rendermode "raw"
 
             command_branch_command    "starship module git_branch"
             command_branch_format     "{stdout} "
-            command_branch_interval   "10"
+            command_branch_interval   "1"
             command_branch_rendermode "raw"
 
             command_status_command    "starship module git_status"
             command_status_format     "{stdout} "
-            command_status_interval   "10"
+            command_status_interval   "1"
             command_status_rendermode "raw"
 
             command_time_command    "starship module time"
