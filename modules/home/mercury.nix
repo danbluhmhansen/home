@@ -38,4 +38,5 @@
   services.gpg-agent.pinentry.package = pkgs.pinentry-gnome3;
 
   services.gnome-keyring.enable = true;
+  services.easyeffects.enable = true;
 }

@@ -10,7 +10,6 @@
     inputs.niri.nixosModules.niri
     ./disks.nix
     ./hardware.nix
-    pipewire
     stylix
   ];
 
@@ -55,6 +54,8 @@
     openssh.enable = true;
     pcscd.enable = true;
     pipewire.enable = true;
+    pipewire.alsa.enable = true;
+    pipewire.pulse.enable = true;
     xserver.videoDrivers = ["nvidia"];
     desktopManager.plasma6.enable = true;
     udev.extraRules = ''
