@@ -25,7 +25,8 @@
         targets.firefox.profileNames = [user];
         targets.helix.enable = false;
         targets.niri.enable = false;
-        targets.qt.platform = "qtct";
+        targets.gtk.enable = false;
+        targets.qt.enable = false;
       };
     }
   ];
