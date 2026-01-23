@@ -96,9 +96,11 @@
   };
 
   programs.gamescope.enable = true;
+  programs.gamescope.capSysNice = true;
+  programs.gamescope.args = ["--adaptive-sync" "--hdr-enabled" "--rt"];
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
-  programs.steam.gamescopeSession.args = ["--adaptive-sync" "--hdr-enabled"];
+  programs.steam.gamescopeSession.steamArgs = ["-tenfoot" "-pipewire-dmabuf"];
 
   stylix.enable = true;
 
