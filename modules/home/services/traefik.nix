@@ -24,7 +24,7 @@
   };
 
   services.podman.containers.traefik = {
-    image = "docker.io/traefik:v3.5";
+    image = "docker.io/traefik:latest";
     environment = {TZ = timeZone;};
     network = ["traefik"];
     volumes = [

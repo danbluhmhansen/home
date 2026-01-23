@@ -6,7 +6,7 @@
   sops.secrets.forgejo = {};
 
   services.podman.containers.forgejo = {
-    image = "codeberg.org/forgejo/forgejo:12-rootless";
+    image = "codeberg.org/forgejo/forgejo:14-rootless";
     user = "1000:1000";
     environment = {
       USER_UID = "1000";

@@ -2,7 +2,7 @@
   sops.secrets.vaultwarden = {};
 
   services.podman.containers.vaultwarden = {
-    image = "docker.io/timshel/oidcwarden:latest-alpine";
+    image = "docker.io/vaultwarden/server:latest";
     environment = {
       DOMAIN = "https://vault.920301.xyz";
       SIGNUPS_ALLOWED = "false";
