@@ -64,7 +64,7 @@
     '';
   };
 
-  environment.systemPackages = with pkgs; [wayland-utils wl-clipboard xwayland-satellite pywalfox-native];
+  environment.systemPackages = with pkgs; [wayland-utils wl-clipboard xwayland-satellite];
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     ark

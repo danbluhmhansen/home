@@ -11,7 +11,17 @@
 
   fonts.fontconfig.enable = true;
 
-  home.packages = with pkgs; [discord gcr libnotify pavucontrol signal-desktop sshfs systemctl-tui yubikey-manager];
+  home.packages = with pkgs; [
+    discord
+    gcr
+    libnotify
+    pavucontrol
+    pywalfox-native
+    signal-desktop
+    sshfs
+    systemctl-tui
+    yubikey-manager
+  ];
 
   programs.wezterm.enable = true;
   programs.ghostty.enable = true;
