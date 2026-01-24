@@ -16,6 +16,10 @@
   homebrew.brews = ["podman"];
   homebrew.casks = [
     {
+      name = "bitwarden";
+      args = {appdir = "~/Applications";};
+    }
+    {
       name = "chromium";
       args = {
         appdir = "~/Applications";
