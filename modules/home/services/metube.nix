@@ -1,6 +1,29 @@
 {config, ...}: {
   services.podman.containers.metube = {
     image = "ghcr.io/alexta69/metube";
+    environment = {
+      PUBLIC_HOST_URL = "https://metube.920301.xyz";
+      YTDL_OPTIONS = "'${builtins.toString (builtins.toJSON {
+        writesubtitles = true;
+        subtitleslangs = ["en" "-live_chat"];
+        updatetime = false;
+        postprocessors = [
+          {
+            key = "Exec";
+            exec_cmd = "chmod 0664";
+            when = "after_move";
+          }
+          {
+            key = "FFmpegEmbedSubtitle";
+            already_have_subtitle = false;
+          }
+          {
+            key = "FFmpegMetadata";
+            add_chapters = true;
+          }
+        ];
+      })}'";
+    };
     network = ["traefik"];
     volumes = ["${config.home.homeDirectory}/srv/downloads:/downloads"];
     labels = {
