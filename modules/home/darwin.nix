@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  home.packages = with pkgs; [discord maple-mono.NF pywalfox-native sshfs];
+  home.packages = with pkgs; [maple-mono.NF pywalfox-native sshfs];
 
   programs.git.settings.credential.helper = "osxkeychain";
 

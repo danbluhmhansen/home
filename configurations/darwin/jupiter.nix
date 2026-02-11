@@ -47,5 +47,9 @@
       name = "signal";
       args = {appdir = "~/Applications";};
     }
+    {
+      name = "steam";
+      args = {appdir = "~/Applications";};
+    }
   ];
 }
