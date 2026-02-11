@@ -239,7 +239,6 @@
         consent-o-matic
         libredirect
         bitwarden
-        plasma-integration
         pywalfox
       ];
     };

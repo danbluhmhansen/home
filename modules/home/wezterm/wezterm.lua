@@ -19,39 +19,6 @@ local function scheme_for_appearance(appearance)
   return appearance:find 'Dark' and 'Catppuccin Mocha' or 'Catppuccin Latte'
 end
 
-wezterm.on('user-var-changed', function(window, pane, name, value)
-  if name == 'br' then
-    local pos = value:find('␟')
-    local dir = value:sub(1, pos - 1)
-    local file = value:sub(pos + 3, -1)
-
-    local ex_pane = pane:tab():get_pane_direction('Right')
-    if ex_pane then
-      local proc_info = ex_pane:get_foreground_process_info()
-      if proc_info.name == 'hx' then
-        ex_pane:send_text(':o ' .. file)
-        ex_pane:activate()
-      end
-      if proc_info.name == 'bash' or proc_info.name == 'zsh' then
-        ex_pane:send_text('cd ' .. dir .. ' && $EDITOR ' .. file .. '\n')
-        ex_pane:activate()
-      end
-      if proc_info.name == 'nu' then
-        ex_pane:send_text('cd ' .. dir .. ';nu --commands $"($env.EDITOR) ' .. file .. '"\n')
-        ex_pane:activate()
-      end
-    else
-      pane:split({
-        args = { shell, '-ci', 'nu --execute "$env.EDITOR ' .. file .. '"' },
-        direction = 'Right',
-        size = pane:get_dimensions().cols - 36,
-        -- NOTE: cwd does not currently work?
-        cwd = dir,
-      })
-    end
-  end
-end)
-
 wezterm.on('update-right-status', function(window, pane)
   local status = {}
   -- Figure out the cwd and host of the current pane. This will pick up the hostname for the remote host if your shell
@@ -120,41 +87,6 @@ table.insert(keys, {
   key    = 'e',
   mods   = 'SUPER',
   action = act.ShowLauncher,
-})
-
-local br_act = wezterm.action_callback(function(window, pane)
-  local proc_info = pane:get_foreground_process_info()
-  if proc_info.name == '.broot-wrapped' then
-    local main_pane = pane:tab():get_pane_direction('Right')
-    if main_pane ~= nil then
-      window:perform_action(act.ActivatePaneDirection('Right'), pane)
-      window:perform_action(act.TogglePaneZoomState, main_pane)
-    end
-  else
-    local br_pane = pane:tab():get_pane_direction('Left')
-    if br_pane == nil then
-      window:perform_action(
-        act.SplitPane({
-          command = { args = { shell, '-ci', 'nu --execute br' } },
-          direction = 'Left',
-          size = { Cells = 36 },
-        }),
-        pane
-      )
-    else
-      window:perform_action(act.TogglePaneZoomState, pane)
-    end
-  end
-end)
-table.insert(keys, {
-  key    = 'b',
-  mods   = 'SHIFT|CTRL',
-  action = br_act,
-})
-table.insert(keys, {
-  key    = 'b',
-  mods   = 'SUPER',
-  action = br_act,
 })
 
 config.keys = keys

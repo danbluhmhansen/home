@@ -11,11 +11,17 @@
 
   fonts.fontconfig.enable = true;
 
+  home.file = {
+    ".icons/breeze".source = "${pkgs.kdePackages.breeze-icons}/share/icons/breeze";
+    ".icons/default/cursors".source = "${pkgs.catppuccin-cursors.mochaDark}/share/icons/catppuccin-mocha-dark-cursors/cursors";
+    ".icons/catppuccin-mocha-dark-cursors/cursors".source = "${pkgs.catppuccin-cursors.mochaDark}/share/icons/catppuccin-mocha-dark-cursors/cursors";
+    ".icons/catppuccin-latte-light-cursors/cursors".source = "${pkgs.catppuccin-cursors.latteLight}/share/icons/catppuccin-latte-light-cursors/cursors";
+  };
+
   home.packages = with pkgs; [
     discord
     gcr
     libnotify
-    pavucontrol
     pywalfox-native
     signal-desktop
     sshfs
@@ -33,7 +39,6 @@
   programs.obs-studio.enable = true;
   programs.obs-studio.plugins = with pkgs.obs-studio-plugins; [droidcam-obs];
 
-  programs.firefox.nativeMessagingHosts = [pkgs.kdePackages.plasma-browser-integration];
   programs.chromium.package = pkgs.ungoogled-chromium;
 
   programs.git.settings.credential.helper = let
@@ -42,6 +47,7 @@
 
   programs.dank-material-shell = {
     systemd.enable = true;
+    niri.includes.filesToInclude = ["alttab" "binds" "colors" "cursor" "layout" "outputs" "wpblur"];
     # systemd.target = "niri-session.service";
   };
 

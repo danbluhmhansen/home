@@ -9,7 +9,6 @@
   imports = with inputs; [
     disko.nixosModules.disko
     sops.nixosModules.sops
-    stylix.nixosModules.stylix
   ];
 
   nixpkgs.config.allowUnfree = true;

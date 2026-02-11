@@ -9,7 +9,6 @@
     sops.darwinModules.sops
     rosetta-builder.darwinModules.default
     nix-homebrew.darwinModules.nix-homebrew
-    stylix.darwinModules.stylix
   ];
 
   nixpkgs.config.allowUnfree = true;

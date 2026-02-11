@@ -5,12 +5,11 @@
   user,
   ...
 }: {
-  imports = with inputs.self.outputs.nixosModules; [
+  imports = [
     inputs.dms.nixosModules.greeter
     inputs.niri.nixosModules.niri
     ./disks.nix
     ./hardware.nix
-    stylix
   ];
 
   home-manager.sharedModules = [inputs.self.outputs.homeModules.mercury];
@@ -41,7 +40,6 @@
   security = {
     pam.services = {
       login.enableGnomeKeyring = true;
-      login.kwallet.enable = true;
       login.u2fAuth = true;
       sudo.u2fAuth = true;
     };
@@ -57,7 +55,6 @@
     pipewire.alsa.enable = true;
     pipewire.pulse.enable = true;
     xserver.videoDrivers = ["nvidia"];
-    desktopManager.plasma6.enable = true;
     udev.extraRules = ''
       SUBSYSTEMS=="usb", ATTRS{idVendor}=="045e", MODE="0660", GROUP="plugdev", SYMLINK+="webusb"
       SUBSYSTEMS=="usb", ATTRS{idVendor}=="0170", MODE="0660", GROUP="plugdev", SYMLINK+="webusb"
@@ -65,18 +62,6 @@
   };
 
   environment.systemPackages = with pkgs; [wayland-utils wl-clipboard xwayland-satellite];
-
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    ark
-    dolphin
-    elisa
-    gwenview
-    kate
-    kinfocenter
-    konsole
-    ksystemstats
-    okular
-  ];
 
   fonts.packages = with pkgs; [maple-mono.NF noto-fonts noto-fonts-color-emoji];
 
@@ -101,8 +86,4 @@
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
   programs.steam.gamescopeSession.steamArgs = ["-tenfoot" "-pipewire-dmabuf"];
-
-  stylix.enable = true;
-
-  qt.platformTheme = pkgs.lib.mkForce "kde";
 }
