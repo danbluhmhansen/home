@@ -73,4 +73,5 @@
 
   programs.nh.flake = "${config.home.homeDirectory}/.config/home";
   programs.nh.clean.enable = true;
+  programs.nh.clean.extraArgs = "--keep-since 14d --keep 5";
 }
