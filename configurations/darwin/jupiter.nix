@@ -17,7 +17,7 @@
   homebrew.casks = [
     {
       name = "bitwarden";
-      args = {appdir = "~/Applications";};
+      args.appdir = "~/Applications";
     }
     {
       name = "chromium";
@@ -28,28 +28,32 @@
     }
     {
       name = "discord";
-      args = {appdir = "~/Applications";};
+      args.appdir = "~/Applications";
     }
     {
       name = "ghostty";
-      args = {appdir = "~/Applications";};
+      args.appdir = "~/Applications";
     }
     {
       name = "hammerspoon";
-      args = {appdir = "~/Applications";};
+      args.appdir = "~/Applications";
     }
     {
       name = "macfuse@dev";
-      args = {appdir = "~/Applications";};
+      args.appdir = "~/Applications";
     }
     {name = "obs";}
     {
       name = "signal";
-      args = {appdir = "~/Applications";};
+      args.appdir = "~/Applications";
     }
     {
       name = "steam";
-      args = {appdir = "~/Applications";};
+      args.appdir = "~/Applications";
+    }
+    {
+      name = "zed";
+      args.appdir = "~/Applications";
     }
   ];
 }

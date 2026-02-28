@@ -106,7 +106,7 @@
         devShells.default = pkgs.mkShell {
           shellHook = config.pre-commit.installationScript;
           packages = with pkgs;
-            [lua-language-server nil]
+            [lua-language-server nil nixd]
             ++ config.pre-commit.settings.enabledPackages
             ++ builtins.attrValues config.treefmt.build.programs;
         };

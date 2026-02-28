@@ -19,6 +19,8 @@
   };
 
   home.packages = with pkgs; [
+    cargo
+    rustc
     discord
     gcr
     libnotify
