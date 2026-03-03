@@ -18,6 +18,8 @@
   users.groups.plugdev = {};
   users.users.dan.extraGroups = ["plugdev"];
 
+  programs.nix-ld.enable = true;
+
   services.pcscd.enable = true;
 
   services.udev.extraRules = ''
