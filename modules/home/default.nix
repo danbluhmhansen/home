@@ -16,7 +16,6 @@
     starship
     wezterm
     yazi
-    zellij
   ];
 
   sops.defaultSopsFile =
@@ -68,7 +67,6 @@
   programs.ripgrep.enable = true;
   programs.starship.enable = true;
   programs.yazi.enable = true;
-  programs.zellij.enable = true;
   programs.zoxide.enable = true;
 
   programs.nh.flake = "${config.home.homeDirectory}/.config/home";

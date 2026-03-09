@@ -44,8 +44,6 @@
     yazi-plugins.flake = false;
     yazi-ouch.url = "github:ndtoan96/ouch.yazi";
     yazi-ouch.flake = false;
-    zjstatus.url = "github:dj95/zjstatus";
-    zjstatus.inputs.nixpkgs.follows = "nixpkgs";
 
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";
