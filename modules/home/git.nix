@@ -13,13 +13,14 @@
   programs.git.settings = {
     user.name = userName;
     user.email = email;
-    user.signingKey = "0x077BBC8A99A747DD";
+    user.signingKey = "~/.ssh/id_ed25519_sk.pub";
     branch.sort = "-committerdate";
     column.ui = "auto";
     commit.gpgSign = true;
     commit.verbose = true;
     diff.algorithm = "histogram";
     diff.colorMoved = "default";
+    gpg.format = "ssh";
     init.defaultBranch = "dev";
     merge.conflictStyle = "zdiff3";
     push.autoSetupRemote = true;
