@@ -38,6 +38,7 @@
   programs.mpv.enable = true;
   programs.yt-dlp.enable = true;
   programs.dank-material-shell.enable = true;
+  programs.zed-editor.enable = true;
   programs.obs-studio.enable = true;
   programs.obs-studio.plugins = with pkgs.obs-studio-plugins; [droidcam-obs];
 
