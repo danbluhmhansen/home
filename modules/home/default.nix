@@ -44,7 +44,7 @@
     ll = "ls -la";
   };
 
-  home.packages = with pkgs; [cachix fd git-ignore gitu less ouch sad xh];
+  home.packages = with pkgs; [cachix devenv fd git-ignore gitu less ouch sad xh];
 
   home.file = {
     ".config/cachix/cachix.dhall".source = config.lib.file.mkOutOfStoreSymlink config.sops.templates."cachix.dhall".path;
