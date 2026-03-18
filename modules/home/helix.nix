@@ -9,7 +9,7 @@
         shell = ["nu" "--stdin" "--commands"];
         line-number = "relative";
         cursorline = true;
-        bufferline.render-mode = "multiple";
+        bufferline = "multiple";
         color-modes = true;
         text-width = 120;
         rainbow-brackets = true;
@@ -49,24 +49,6 @@
 
         indent-guides.render = true;
         soft-wrap.enable = true;
-
-        inline-blame = {
-          show = "cursor-line";
-          auto-fetch = true;
-          format = "{author}, {time-ago} • {commit} • {title}";
-        };
-
-        cmdline = {
-          style = "popup";
-          show-icons = false;
-          use-full-height = true;
-        };
-      };
-
-      icons = {
-        mime.enabled = true;
-        vcs.enabled = true;
-        kind.enabled = true;
       };
 
       keys.normal = {
