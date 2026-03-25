@@ -13,7 +13,7 @@
   programs.git.settings = {
     user.name = userName;
     user.email = email;
-    user.signingKey = "~/.ssh/id_ed25519_sk.pub";
+    user.signingKey = "~/.ssh/id_rsa.pub";
     branch.sort = "-committerdate";
     column.ui = "auto";
     commit.gpgSign = true;
