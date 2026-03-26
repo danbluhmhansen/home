@@ -9,7 +9,14 @@
 
   imports = [inputs.wsl.nixosModules.default];
 
-  home-manager.sharedModules = [{services.gpg-agent.pinentry.package = pkgs.pinentry-curses;}];
+  home-manager.sharedModules = [
+    {
+      services.gpg-agent.pinentry.package = pkgs.pinentry-curses;
+      programs.git.settings.delta.light = true;
+      programs.helix.settings.theme.fallback = "catppuccin_latte";
+      programs.opencode.enable = true;
+    }
+  ];
 
   wsl.enable = true;
   wsl.defaultUser = user;
