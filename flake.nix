@@ -1,12 +1,10 @@
 {
-  description = "Description for the project";
+  description = "Darwin and NixOS configurations";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    ez-configs.url = "github:ehllie/ez-configs";
-    ez-configs.inputs.nixpkgs.follows = "nixpkgs";
-    ez-configs.inputs.flake-parts.follows = "flake-parts";
+    import-tree.url = "github:vic/import-tree";
     wsl.url = "github:nix-community/nixos-wsl";
     wsl.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:LnL7/nix-darwin";
@@ -19,7 +17,7 @@
     git-hooks.url = "github:cachix/git-hooks.nix";
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-core.url = "github:homebrew/homebrew-core";
     homebrew-core.flake = false;
     homebrew-cask.url = "github:homebrew/homebrew-cask";
@@ -56,58 +54,10 @@
     hs-paperwm.flake = false;
   };
 
-  outputs = inputs @ {
-    flake-parts,
-    ez-configs,
-    treefmt,
-    git-hooks,
-    ...
-  }:
-    flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["aarch64-darwin" "aarch64-linux" "x86_64-linux"];
-
-      imports = [ez-configs.flakeModule treefmt.flakeModule git-hooks.flakeModule];
-
-      ezConfigs = let
-        user = "dan";
-      in {
-        root = ./.;
-        globalArgs = {
-          inherit inputs user;
-          userName = "Dan Bluhm Hansen";
-          email = "00.pavers_dither@icloud.com";
-          timeZone = "Europe/Copenhagen";
-        };
-
-        darwin.configurationsDirectory = ./configurations/darwin;
-        home.configurationsDirectory = ./configurations/home;
-        nixos.configurationsDirectory = ./configurations/nixos;
-
-        darwin.modulesDirectory = ./modules/darwin;
-        home.modulesDirectory = ./modules/home;
-        nixos.modulesDirectory = ./modules/nixos;
-
-        darwin.hosts.jupiter.userHomeModules = [user];
-        nixos.hosts.mercury.userHomeModules = [user];
-        nixos.hosts.mars.userHomeModules = [user];
-        nixos.hosts.saturn.userHomeModules = [user];
-      };
-
-      perSystem = {
-        config,
-        pkgs,
-        ...
-      }: {
-        treefmt.programs.alejandra.enable = true;
-        pre-commit.settings.hooks.treefmt.enable = true;
-        pre-commit.settings.hooks.treefmt.package = config.treefmt.build.wrapper;
-        devShells.default = pkgs.mkShell {
-          shellHook = config.pre-commit.installationScript;
-          packages = with pkgs;
-            [lua-language-server nil nixd]
-            ++ config.pre-commit.settings.enabledPackages
-            ++ builtins.attrValues config.treefmt.build.programs;
-        };
-      };
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      debug = true;
+      imports = [(inputs.import-tree [./hosts ./modules])];
+      _module.args.rootPath = ./.;
     };
 }
