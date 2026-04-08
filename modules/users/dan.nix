@@ -45,7 +45,8 @@
     programs.direnv.nix-direnv.enable = true;
 
     programs.bat.enable = true;
-    programs.bat.config.theme = "base16-256";
+    programs.bat.config.theme-dark = "Catppuccin Mocha";
+    programs.bat.config.theme-light = "Catppuccin Latte";
     programs.bottom.enable = true;
     programs.fzf.enable = true;
     programs.ripgrep.enable = true;
