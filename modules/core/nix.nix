@@ -1,5 +1,5 @@
 let
-  subs = ["https://nix-community.cachix.org" "https://danbluhmhansen.cachix.org"];
+  subs = ["https://nix-community.cachix.org" "https://danbluhmhansen.cachix.org" "https://helix.cachix.org"];
   common = {
     nixpkgs.config.allowUnfree = true;
     nix = {
@@ -12,6 +12,7 @@ let
         trusted-public-keys = [
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "danbluhmhansen.cachix.org-1:0qTEsQt253LH3OJC7oxZSjSIf+6vB+l2scs1r+DnM+I="
+          "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
         ];
       };
     };
