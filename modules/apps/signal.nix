@@ -5,5 +5,9 @@
       args.appdir = "~/Applications";
     }
   ];
-  flake.modules.homeManager.signal = {pkgs, ...}: {home.packages = [pkgs.signal-desktop];};
+  flake.modules.homeManager.signal = {
+    pkgs,
+    lib,
+    ...
+  }: {home.packages = lib.optionals pkgs.stdenv.isLinux [pkgs.signal-desktop];};
 }

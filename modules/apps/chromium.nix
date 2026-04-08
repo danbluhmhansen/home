@@ -5,11 +5,9 @@
       args.appdir = "~/Applications";
     }
   ];
-  flake.modules.homeManager.chromium = {pkgs, ...}: {
-    programs.chromium.enable = true;
-    programs.chromium.package =
-      if pkgs.stdenv.isDarwin
-      then null
-      else pkgs.ungoogled-chromium;
-  };
+  flake.modules.homeManager.chromium = {
+    pkgs,
+    lib,
+    ...
+  }: {programs.chromium = {enable = true;} // lib.optionalAttrs pkgs.stdenv.isDarwin {package = null;};};
 }

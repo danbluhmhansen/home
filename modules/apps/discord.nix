@@ -5,5 +5,9 @@
       args.appdir = "~/Applications";
     }
   ];
-  flake.modules.homeManager.discord = {pkgs, ...}: {home.packages = [pkgs.discord];};
+  flake.modules.homeManager.discord = {
+    pkgs,
+    lib,
+    ...
+  }: {home.packages = lib.optionals pkgs.stdenv.isLinux [pkgs.discord];};
 }

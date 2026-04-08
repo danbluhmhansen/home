@@ -9,7 +9,5 @@
     pkgs,
     lib,
     ...
-  }: {
-    programs.zed-editor = {enable = true;} // lib.optionalAttrs pkgs.stdenv.isDarwin {package = null;};
-  };
+  }: {programs.zed-editor = {enable = true;} // lib.optionalAttrs pkgs.stdenv.isDarwin {package = null;};};
 }
