@@ -31,6 +31,7 @@ in {
                 gpg
                 helix
                 mpv
+                opencode
                 starship
                 yazi
 

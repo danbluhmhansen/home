@@ -24,13 +24,13 @@ in {
                 git
                 gpg
                 helix
+                opencode
                 starship
                 yazi
                 zed
               ];
               programs.difftastic.options.background = "light";
               programs.helix.settings.theme.fallback = "catppuccin_latte";
-              programs.opencode.enable = true;
             };
           };
         }

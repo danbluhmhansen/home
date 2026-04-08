@@ -38,6 +38,7 @@ in {
                 git
                 gpg
                 helix
+                opencode
                 starship
                 yazi
               ];
