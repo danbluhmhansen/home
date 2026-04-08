@@ -1,12 +1,11 @@
 {
   flake.modules.homeManager.git = {pkgs, ...}: {
-    programs.delta = {
+    programs.difftastic = {
       enable = true;
-      enableGitIntegration = true;
-      options.hyperlinks = true;
+      git.enable = true;
+      git.diffToolMode = true;
+      options.display = "inline";
     };
-
-    home.sessionVariables.DELTA_PAGER = "less -+X";
 
     programs.git.enable = true;
     programs.git.settings = {
@@ -29,10 +28,6 @@
       push.autoSetupRemote = true;
       tag.gpgSign = true;
       tag.sort = "-version:refname";
-
-      delta.navigate = true;
-      delta.hyperlinks = true;
-
       alias = rec {
         a = "add";
         aa = "add --all";
@@ -56,12 +51,12 @@
         f = "fetch";
         fa = "fetch --all --prune";
         fo = "fetch origin";
-        l = "log";
-        lp = "log --stat --patch";
-        lg = "log --graph";
-        lo = "log --oneline";
-        log = "log --oneline --graph";
-        lod = "log --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'";
+        l = "log --ext-diff";
+        lp = "log --ext-diff --stat --patch";
+        lg = "log --ext-diff --graph";
+        lo = "log --ext-diff --oneline";
+        log = "log --ext-diff --oneline --graph";
+        lod = "log --ext-diff --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'";
         lodd = "${lod} --date=short";
         lods = "${lod} --stat";
         p = "push";

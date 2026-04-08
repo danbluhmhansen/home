@@ -28,7 +28,7 @@ in {
                 yazi
                 zed
               ];
-              programs.git.settings.delta.light = true;
+              programs.difftastic.options.background = "light";
               programs.helix.settings.theme.fallback = "catppuccin_latte";
               programs.opencode.enable = true;
             };
