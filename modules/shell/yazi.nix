@@ -1,18 +1,19 @@
 {inputs, ...}: {
-  flake.modules.homeManager.yazi = {
+  flake.modules.homeManager.yazi = {pkgs, ...}: {
     programs.yazi = {
       enable = true;
-      plugins = {
-        diff = "${inputs.yazi-plugins}/diff.yazi";
-        git = "${inputs.yazi-plugins}/git.yazi";
-        jump-to-char = "${inputs.yazi-plugins}/jump-to-char.yazi";
-        mount = "${inputs.yazi-plugins}/mount.yazi";
-        ouch = "${inputs.yazi-ouch}";
-        smart-enter = "${inputs.yazi-plugins}/smart-enter.yazi";
-        smart-filter = "${inputs.yazi-plugins}/smart-filter.yazi";
-        toggle-pane = "${inputs.yazi-plugins}/toggle-pane.yazi";
-        vcs-files = "${inputs.yazi-plugins}/vcs-files.yazi";
+
+      plugins = with pkgs.yaziPlugins; {
+        inherit diff git jump-to-char mount ouch smart-enter smart-filter sudo toggle-pane vcs-files;
       };
+
+      flavors = {
+        catppuccin-latte = "${inputs.yazi-flavors}/catppuccin-latte.yazi";
+        catppuccin-mocha = "${inputs.yazi-flavors}/catppuccin-mocha.yazi";
+      };
+
+      theme.flavor.dark = "catppuccin-mocha";
+      theme.flavor.light = "catppuccin-latte";
 
       initLua = ''
         require("git"):setup()
@@ -22,12 +23,12 @@
         plugin.prepend_fetchers = [
           {
             id = "git";
-            name = "*";
+            url = "*";
             run = "git";
           }
           {
             id = "git";
-            name = "*/";
+            url = "*/";
             run = "git";
           }
         ];
@@ -87,34 +88,57 @@
             run = "plugin vcs-files";
             desc = "Show Git file changes";
           }
+          {
+            on = ["R" "p" "p"];
+            run = "plugin sudo -- paste";
+            desc = "sudo paste";
+          }
+          {
+            on = ["R" "P"];
+            run = "plugin sudo -- paste --force";
+            desc = "sudo paste";
+          }
+          {
+            on = ["R" "r"];
+            run = "plugin sudo -- rename";
+            desc = "sudo rename";
+          }
+          {
+            on = ["R" "p" "l"];
+            run = "plugin sudo -- link";
+            desc = "sudo link";
+          }
+          {
+            on = ["R" "p" "r"];
+            run = "plugin sudo -- link --relative";
+            desc = "sudo link relative path";
+          }
+          {
+            on = ["R" "p" "L"];
+            run = "plugin sudo -- hardlink";
+            desc = "sudo hardlink";
+          }
+          {
+            on = ["R" "a"];
+            run = "plugin sudo -- create";
+            desc = "sudo create";
+          }
+          {
+            on = ["R" "d"];
+            run = "plugin sudo -- remove";
+            desc = "sudo trash";
+          }
+          {
+            on = ["R" "D"];
+            run = "plugin sudo -- remove --permanently";
+            desc = "sudo delete";
+          }
+          {
+            on = ["R" "m"];
+            run = "plugin sudo -- chmod";
+            desc = "sudo chmod";
+          }
         ];
-      };
-
-      theme = rec {
-        mode = {
-          normal_main = {
-            fg = "black";
-            bg = "blue";
-          };
-          normal_alt = {
-            fg = "blue";
-            bg = "black";
-          };
-          select_main = {
-            fg = "black";
-            bg = "red";
-          };
-          select_alt = {
-            fg = "red";
-            bg = "black";
-          };
-          unset_main = mode.select_main;
-          unset_alt = mode.select_alt;
-        };
-        tabs = {
-          active = mode.normal_main;
-          inactive = mode.normal_alt;
-        };
       };
     };
   };

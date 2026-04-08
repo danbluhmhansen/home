@@ -38,10 +38,8 @@
     helix.inputs.nixpkgs.follows = "nixpkgs";
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
     firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
-    yazi-plugins.url = "github:yazi-rs/plugins";
-    yazi-plugins.flake = false;
-    yazi-ouch.url = "github:ndtoan96/ouch.yazi";
-    yazi-ouch.flake = false;
+    yazi-flavors.url = "github:yazi-rs/flavors";
+    yazi-flavors.flake = false;
 
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";

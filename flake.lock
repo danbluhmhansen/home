@@ -502,8 +502,7 @@
         "sops": "sops",
         "treefmt": "treefmt",
         "wsl": "wsl",
-        "yazi-ouch": "yazi-ouch",
-        "yazi-plugins": "yazi-plugins"
+        "yazi-flavors": "yazi-flavors"
       }
     },
     "rosetta-builder": {
@@ -641,35 +640,19 @@
         "type": "github"
       }
     },
-    "yazi-ouch": {
+    "yazi-flavors": {
       "flake": false,
       "locked": {
-        "lastModified": 1772505001,
-        "narHash": "sha256-14x/bD0aD9hXONaqQD8Dt7rLBCMq7bkVLH6uCPOQ0C8=",
-        "owner": "ndtoan96",
-        "repo": "ouch.yazi",
-        "rev": "406ce6c13ec3a18d4872b8f64b62f4a530759b2c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ndtoan96",
-        "repo": "ouch.yazi",
-        "type": "github"
-      }
-    },
-    "yazi-plugins": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1775612259,
-        "narHash": "sha256-gV9z3nniapKx3i+FP3MazGkusbwiyTgphP/JxrWVmKw=",
+        "lastModified": 1773403393,
+        "narHash": "sha256-3RR8mi7CcVMDMitdTdaonFmfAIkeOzWK/CVKQmomIhE=",
         "owner": "yazi-rs",
-        "repo": "plugins",
-        "rev": "43c69783a674108472eadd5c1b81a3c4d9ff78b5",
+        "repo": "flavors",
+        "rev": "9511cb09cadcbf57e39a46b06a52d00957177175",
         "type": "github"
       },
       "original": {
         "owner": "yazi-rs",
-        "repo": "plugins",
+        "repo": "flavors",
         "type": "github"
       }
     }
