@@ -1,5 +1,9 @@
 {inputs, ...}: {
-  flake.modules.homeManager.helix = {pkgs, ...}: {
+  flake.modules.homeManager.helix = {
+    pkgs,
+    lib,
+    ...
+  }: {
     programs.helix = {
       enable = true;
       package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
@@ -9,7 +13,7 @@
         theme.dark = "catppuccin_mocha";
         theme.light = "catppuccin_latte";
         editor = {
-          shell = ["nu" "--stdin" "--commands"];
+          shell = ["${lib.getExe pkgs.nushell}" "--stdin" "--commands"];
           line-number = "relative";
           cursorline = true;
           bufferline = "multiple";
