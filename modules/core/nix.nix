@@ -29,17 +29,5 @@ in {
       hardware.gpgSmartcards.enable = true;
       users.defaultUserShell = pkgs.zsh;
     };
-  flake.modules.darwin.core =
-    common
-    // {
-      # NOTE enable to bootstrap nix-rosetta-builder
-      # nix.linux-builder = {
-      #   enable = true;
-      #   ephemeral = true;
-      # };
-      nix-rosetta-builder.onDemand = true;
-      ids.gids.nixbld = 30000;
-      programs.gnupg.agent.enable = true;
-      programs.gnupg.agent.enableSSHSupport = true;
-    };
+  flake.modules.darwin.core = common;
 }

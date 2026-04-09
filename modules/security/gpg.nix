@@ -1,4 +1,8 @@
 {
+  flake.modules.darwin.gpg = {
+    programs.gnupg.agent.enable = true;
+    programs.gnupg.agent.enableSSHSupport = true;
+  };
   flake.modules.homeManager.gpg = {pkgs, ...}: {
     home.packages = with pkgs; [openssh libfido2];
     programs.gpg = {
