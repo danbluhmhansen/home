@@ -23,6 +23,7 @@ in {
                 saturn
                 dan
 
+                eza
                 git
                 gpg
                 helix

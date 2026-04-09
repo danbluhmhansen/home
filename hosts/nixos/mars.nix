@@ -21,6 +21,7 @@ in {
                 core
                 mars
                 dan
+                eza
                 git
                 gpg
                 helix

@@ -82,6 +82,7 @@
                     ghostty
                     zed
 
+                    eza
                     git
                     gpg
                     helix
@@ -139,6 +140,7 @@
                     ghostty
                     zed
 
+                    eza
                     git
                     gpg
                     helix

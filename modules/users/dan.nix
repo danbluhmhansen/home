@@ -31,12 +31,8 @@
         then "/Users/dan"
         else "/home/dan"
       );
-    home.shellAliases = {
-      la = "ls -a";
-      ll = "ls -la";
-    };
     home.packages = with pkgs;
-      [cachix devenv fd git-ignore gitu less ouch sad xh]
+      [cachix fd git-ignore gitu less ouch scooter xh]
       ++ lib.optionals pkgs.stdenv.isDarwin [rustup maple-mono.NF];
 
     programs.nh.enable = true;

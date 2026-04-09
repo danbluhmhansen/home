@@ -35,6 +35,7 @@ in {
                 signal
                 zed
 
+                eza
                 git
                 gpg
                 helix
