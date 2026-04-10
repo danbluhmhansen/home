@@ -1,3 +1,0 @@
-keybind = global:cmd+alt+backquote=toggle_quick_terminal
-theme = light:Catppuccin Latte,dark:Catppuccin Mocha
-window-padding-balance = true
