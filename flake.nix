@@ -41,10 +41,8 @@
     yazi-flavors.url = "github:yazi-rs/flavors";
     yazi-flavors.flake = false;
 
-    niri.url = "github:sodiboo/niri-flake";
-    niri.inputs.nixpkgs.follows = "nixpkgs";
-    dms.url = "github:avengemedia/dankmaterialshell/stable";
-    dms.inputs.nixpkgs.follows = "nixpkgs";
+    quickshell.url = "git+https://git.outfoxxed.me/quickshell/quickshell";
+    quickshell.inputs.nixpkgs.follows = "nixpkgs";
 
     hs-spoons.url = "github:hammerspoon/spoons";
     hs-spoons.flake = false;

@@ -61,6 +61,7 @@ in {
         keyring
 
         dms
+        dms-dan
         niri
         nvidia
         pipewire

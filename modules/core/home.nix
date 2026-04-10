@@ -1,5 +1,6 @@
 {inputs, ...}: let
   common = {
+    backupFileExtension = "backup";
     useGlobalPkgs = true;
     useUserPackages = true;
   };
