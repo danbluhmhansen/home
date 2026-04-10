@@ -21,13 +21,18 @@ let
     services.tailscale.enable = true;
   };
 in {
-  flake.modules.nixos.core = {pkgs, ...}:
-    common
-    // {
+  flake.modules.nixos.core = {
+    pkgs,
+    lib,
+    ...
+  }:
+    lib.recursiveUpdate common
+    {
       i18n.defaultLocale = "en_DK.UTF-8";
       i18n.extraLocaleSettings.LC_ALL = "en_DK.UTF-8";
       hardware.gpgSmartcards.enable = true;
       users.defaultUserShell = pkgs.zsh;
+      programs.nix-ld.enable = true;
     };
   flake.modules.darwin.core = common;
 }

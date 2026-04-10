@@ -13,7 +13,6 @@ in {
         {
           networking.hostName = "mars";
           nixpkgs.hostPlatform = "x86_64-linux";
-          programs.nix-ld.enable = true;
           home-manager = {
             extraSpecialArgs = specialArgs;
             users.dan = {
