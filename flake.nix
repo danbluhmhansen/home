@@ -54,6 +54,5 @@
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       debug = true;
       imports = [(inputs.import-tree [./hosts ./modules])];
-      _module.args.rootPath = ./.;
     };
 }
