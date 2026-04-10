@@ -1,0 +1,115 @@
+{
+  "use_podman": true,
+  "agent_servers": {
+    "github-copilot-cli": {
+      "type": "registry"
+    }
+  },
+  "load_direnv": "shell_hook",
+  "diff_view_style": "unified",
+  "languages": {
+    "TOML": {
+      "formatter": {
+        "external": {
+          "command": "taplo",
+          "arguments": ["fmt", "-"]
+        }
+      }
+    }
+  },
+  "lsp": {
+    "nil": {
+      "settings": {
+        "formatting": {
+          "command": ["alejandra"]
+        }
+      }
+    },
+    "rust-analyzer": {
+      "initialization_options": {
+        "check": {
+          "command": "clippy"
+        }
+      }
+    }
+  },
+  "restore_on_startup": "launchpad",
+  "agent": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5.3-codex",
+      "enable_thinking": false
+    },
+    "favorite_models": [
+      {
+        "provider": "copilot_chat",
+        "model": "gpt-5.3-codex",
+        "enable_thinking": false
+      },
+      {
+        "provider": "copilot_chat",
+        "model": "claude-opus-4.6",
+        "enable_thinking": false
+      }
+    ],
+    "model_parameters": []
+  },
+  "edit_predictions": {
+    "provider": "copilot"
+  },
+  "project_panel": {
+    "hide_root": true
+  },
+  "git_panel": {
+    "tree_view": true,
+    "fallback_branch_name": "dev"
+  },
+  "tab_bar": {
+    "show_pinned_tabs_in_separate_row": true
+  },
+  "tabs": {
+    "show_diagnostics": "all",
+    "file_icons": true,
+    "git_status": true
+  },
+  "title_bar": {
+    "show_branch_icon": true
+  },
+  "colorize_brackets": true,
+  "completion_menu_scrollbar": "auto",
+  "indent_guides": {
+    "coloring": "indent_aware"
+  },
+  "preferred_line_length": 120,
+  "soft_wrap": "bounded",
+  "vim": {
+    "cursor_shape": {
+      "visual": "underline"
+    },
+    "use_smartcase_find": true,
+    "toggle_relative_line_numbers": true
+  },
+  "which_key": {
+    "enabled": true
+  },
+  "buffer_font_family": "Maple Mono NF",
+  "icon_theme": {
+    "mode": "system",
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Mocha"
+  },
+  "auto_update": false,
+  "use_system_prompts": false,
+  "format_on_save": "off",
+  "helix_mode": true,
+  "use_system_path_prompts": false,
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "theme": {
+    "dark": "Catppuccin Mocha",
+    "light": "Catppuccin Latte",
+    "mode": "system"
+  }
+}
