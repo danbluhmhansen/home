@@ -173,7 +173,7 @@
             name = "sql";
             formatter.command = "sqruff";
             formatter.args = ["fix" "-"];
-            language-servers = ["postgrestools" "sqruff"];
+            language-servers = ["postgrestools"];
           }
           rec {
             name = "tsx";

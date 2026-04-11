@@ -1,6 +1,5 @@
 {inputs, ...}: {
   flake.modules.homeManager.firefox = {pkgs, ...}: {
-    home.packages = [pkgs.pywalfox-native];
     programs.firefox = {
       enable = true;
       profiles.dan = {
@@ -238,7 +237,6 @@
           consent-o-matic
           libredirect
           bitwarden
-          pywalfox
         ];
       };
 
