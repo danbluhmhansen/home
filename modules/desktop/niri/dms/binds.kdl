@@ -127,7 +127,7 @@ binds {
     Print { screenshot; }
     XF86Launch1 { screenshot; }
     Mod+Shift+E { quit; }
-    Mod+Q hotkey-overlay-title="Open Terminal" { spawn "ghostty"; }
+    Mod+Q hotkey-overlay-title="Open Terminal" { spawn "uwsm" "app" "--" "ghostty"; }
     Mod+D repeat=false { toggle-overview; }
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
     Mod+Shift+Slash { show-hotkey-overlay; }
