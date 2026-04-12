@@ -23,6 +23,8 @@
         steam
         zed
 
+        nushell
+
         gpg
         hammerspoon
         podman
@@ -45,6 +47,7 @@
           gpg
           helix
           mpv
+          nushell
           opencode
           starship
           yazi

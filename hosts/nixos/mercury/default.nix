@@ -39,6 +39,7 @@ in {
                 git
                 gpg
                 helix
+                nushell
                 opencode
                 starship
                 yazi
@@ -66,6 +67,7 @@ in {
         nvidia
         pipewire
 
+        nushell
         steam
 
         openssh

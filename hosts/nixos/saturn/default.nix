@@ -27,6 +27,7 @@ in {
                 git
                 gpg
                 helix
+                nushell
                 starship
                 yazi
 
@@ -59,6 +60,8 @@ in {
         fonts
         dan
         dan-sops
+
+        nushell
 
         openssh
         plugdev

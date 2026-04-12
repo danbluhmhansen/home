@@ -24,6 +24,7 @@ in {
                 git
                 gpg
                 helix
+                nushell
                 opencode
                 starship
                 yazi
@@ -40,6 +41,7 @@ in {
         wsl
         plugdev
         dan
+        nushell
       ]);
   };
 }
