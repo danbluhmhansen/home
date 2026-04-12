@@ -1,0 +1,8 @@
+// DMS Window Rules - Managed by DankMaterialShell
+// Do not edit manually - changes may be overwritten
+
+// @id=wr_1775919146579756302 @name=firefox
+window-rule {
+    match app-id="^firefox$"
+    open-floating true
+}
