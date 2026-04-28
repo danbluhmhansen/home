@@ -19,19 +19,15 @@ in {
             extraSpecialArgs = specialArgs;
             users.dan = {
               imports = with config.flake.modules.homeManager; [
-                core
                 saturn
-                dan
 
                 eza
                 git
                 gpg
                 helix
-                nushell
                 starship
                 yazi
 
-                podman
                 actual
                 authelia
                 cv

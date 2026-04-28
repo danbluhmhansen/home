@@ -1,4 +1,4 @@
-{
+{inputs, ...}: {
   flake.modules.nixos.dan = {
     users.users.dan = {
       isNormalUser = true;
@@ -6,6 +6,7 @@
       home = "/home/dan";
       extraGroups = ["wheel" "networkmanager"];
     };
+    home-manager.sharedModules = [inputs.self.modules.homeManager.dan];
   };
 
   flake.modules.nixos.dan-sops = {config, ...}: {
@@ -16,6 +17,7 @@
   flake.modules.darwin.dan = {
     system.primaryUser = "dan";
     users.users.dan.home = "/Users/dan";
+    home-manager.sharedModules = [inputs.self.modules.homeManager.dan];
   };
 
   flake.modules.homeManager.dan = {

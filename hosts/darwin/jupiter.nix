@@ -34,25 +34,17 @@
       extraSpecialArgs.inputs = inputs;
       users.dan = {
         imports = with config.flake.modules.homeManager; [
-          core
           jupiter
-          dan
 
           firefox
-          ghostty
-          zed
 
           eza
           git
-          gpg
           helix
           mpv
-          nushell
           opencode
           starship
           yazi
-
-          hammerspoon
         ];
       };
     };

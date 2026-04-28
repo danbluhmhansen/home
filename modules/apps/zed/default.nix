@@ -1,10 +1,14 @@
-{
-  flake.modules.darwin.zed.homebrew.casks = [
-    {
-      name = "zed";
-      args.appdir = "~/Applications";
-    }
-  ];
+{inputs, ...}: {
+  flake.modules.darwin.zed = {
+    home-manager.sharedModules = [inputs.self.modules.homeManager.zed];
+    homebrew.casks = [
+      {
+        name = "zed";
+        args.appdir = "~/Applications";
+      }
+    ];
+  };
+
   flake.modules.homeManager.zed = {
     config,
     pkgs,

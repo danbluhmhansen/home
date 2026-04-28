@@ -1,5 +1,6 @@
-let
+{inputs, ...}: let
   common = {
+    home-manager.sharedModules = [inputs.self.modules.homeManager.nushell];
     programs.bash.interactiveShellInit = ''
       if ! [ "$TERM" = "dumb" ] && [ -z "$BASH_EXECUTION_STRING" ]; then
         exec nu

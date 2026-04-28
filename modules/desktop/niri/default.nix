@@ -1,5 +1,6 @@
-{
+{inputs, ...}: {
   flake.modules.nixos.niri = {pkgs, ...}: {
+    home-manager.sharedModules = [inputs.self.modules.homeManager.niri];
     environment.systemPackages = with pkgs; [libnotify wayland-utils wl-clipboard xwayland-satellite];
     programs.niri.enable = true;
     programs.uwsm.enable = true;

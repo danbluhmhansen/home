@@ -1,5 +1,6 @@
-{
+{inputs, ...}: {
   flake.modules.nixos.podman = {
+    home-manager.sharedModules = [inputs.self.modules.homeManager.podman];
     boot.kernel.sysctl = {"net.ipv4.ip_unprivileged_port_start" = 0;};
     virtualisation.containers.enable = true;
     virtualisation.containers.storage.settings.storage = {
@@ -16,7 +17,9 @@
       defaultNetwork.settings.dns_enabled = true;
     };
   };
+
   flake.modules.darwin.podman = {homebrew.brews = ["podman"];};
+
   flake.modules.homeManager.podman = {pkgs, ...}: {
     home.packages = with pkgs; [podman-tui systemctl-tui];
     services.podman.enable = true;

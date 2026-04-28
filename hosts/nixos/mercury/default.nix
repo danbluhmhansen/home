@@ -17,12 +17,7 @@ in {
             extraSpecialArgs = specialArgs;
             users.dan = {
               imports = with config.flake.modules.homeManager; [
-                core
                 mercury
-                dan
-
-                dms
-                niri
 
                 bitwarden
                 chromium
@@ -31,7 +26,6 @@ in {
                 ghostty
                 mpv
                 obs
-                pipewire
                 signal
                 zed
 
@@ -39,7 +33,6 @@ in {
                 git
                 gpg
                 helix
-                nushell
                 opencode
                 starship
                 yazi

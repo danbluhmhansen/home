@@ -1,10 +1,14 @@
-{
-  flake.modules.darwin.ghostty.homebrew.casks = [
-    {
-      name = "ghostty";
-      args.appdir = "~/Applications";
-    }
-  ];
+{inputs, ...}: {
+  flake.modules.darwin.ghostty = {
+    home-manager.sharedModules = [inputs.self.modules.homeManager.ghostty];
+    homebrew.casks = [
+      {
+        name = "ghostty";
+        args.appdir = "~/Applications";
+      }
+    ];
+  };
+
   flake.modules.homeManager.ghostty = {
     pkgs,
     lib,

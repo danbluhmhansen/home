@@ -1,5 +1,6 @@
 {inputs, ...}: {
   flake.modules.darwin.hammerspoon = {
+    home-manager.sharedModules = [inputs.self.modules.homeManager.hammerspoon];
     homebrew.casks = [
       {
         name = "hammerspoon";

@@ -1,5 +1,6 @@
 {inputs, ...}: {
   flake.modules.nixos.dms = {pkgs, ...}: {
+    home-manager.sharedModules = [inputs.self.modules.homeManager.dms];
     environment.systemPackages = with pkgs; [
       accountsservice
       adw-gtk3
@@ -19,6 +20,7 @@
     };
     xdg.icons.fallbackCursorThemes = ["catppuccin-mocha-dark-cursors"];
   };
+
   flake.modules.nixos.dms-dan = {config, ...}: {
     environment.sessionVariables.TERMINAL = "ghostty";
     services.displayManager.dms-greeter.configHome = config.users.users.dan.home;

@@ -1,8 +1,10 @@
-{
+{inputs, ...}: {
   flake.modules.darwin.gpg = {
+    home-manager.sharedModules = [inputs.self.modules.homeManager.gpg];
     programs.gnupg.agent.enable = true;
     programs.gnupg.agent.enableSSHSupport = true;
   };
+
   flake.modules.homeManager.gpg = {pkgs, ...}: {
     home.packages = with pkgs; [openssh libfido2];
     programs.gpg = {
@@ -59,6 +61,7 @@
       maxCacheTtl = 120;
     };
   };
+
   flake.modules.homeManager.mercury = {pkgs, ...}: {services.gpg-agent.pinentry.package = pkgs.pinentry-gnome3;};
   flake.modules.homeManager.mars = {pkgs, ...}: {services.gpg-agent.pinentry.package = pkgs.pinentry-curses;};
   flake.modules.homeManager.jupiter = {pkgs, ...}: {services.gpg-agent.pinentry.package = pkgs.pinentry_mac;};

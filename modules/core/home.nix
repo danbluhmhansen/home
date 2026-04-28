@@ -1,5 +1,6 @@
 {inputs, ...}: let
   common = {
+    sharedModules = [inputs.self.modules.homeManager.core];
     backupFileExtension = "backup";
     useGlobalPkgs = true;
     useUserPackages = true;

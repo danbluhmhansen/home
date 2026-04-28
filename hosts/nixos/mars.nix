@@ -17,14 +17,11 @@ in {
             extraSpecialArgs = specialArgs;
             users.dan = {
               imports = with config.flake.modules.homeManager; [
-                core
                 mars
-                dan
                 eza
                 git
                 gpg
                 helix
-                nushell
                 opencode
                 starship
                 yazi
