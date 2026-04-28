@@ -31,8 +31,7 @@
   }: {
     home.file = {
       ".config/DankMaterialShell/settings.json".source =
-        config.lib.file.mkOutOfStoreSymlink
-        "${config.home.homeDirectory}/.config/home/modules/desktop/dms/settings.json";
+        config.lib.file.mkOutOfStoreSymlink "${config.programs.nh.flake}/modules/desktop/dms/settings.json";
       ".local/share/icons/default/cursors".source = "${pkgs.catppuccin-cursors.mochaDark}/share/icons/catppuccin-mocha-dark-cursors/cursors";
     };
   };

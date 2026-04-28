@@ -13,7 +13,7 @@
   }: {
     home.file = {
       ".config/zed/settings.json".source =
-        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home/modules/apps/zed/settings.json";
+        config.lib.file.mkOutOfStoreSymlink "${config.programs.nh.flake}/modules/apps/zed/settings.json";
     };
     programs.zed-editor = {enable = true;} // lib.optionalAttrs pkgs.stdenv.isDarwin {package = null;};
   };
