@@ -1,5 +1,6 @@
-{
+{inputs, ...}: {
   flake.modules.nixos.keyring = {
+    home-manager.sharedModules = [inputs.self.modules.homeManager.keyring];
     security = {
       pam.services = {
         login.enableGnomeKeyring = true;
@@ -11,7 +12,7 @@
     };
   };
   flake.modules.homeManager.keyring = {pkgs, ...}: {
-    home.packages = [pkgs.gcr];
+    home.packages = with pkgs; [gcr seahorse];
     services.gnome-keyring.enable = true;
   };
 }
