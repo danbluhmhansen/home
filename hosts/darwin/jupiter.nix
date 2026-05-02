@@ -22,6 +22,7 @@ in {
                 jupiter
 
                 firefox
+                zen-browser
 
                 eza
                 git

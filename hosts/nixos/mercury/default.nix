@@ -24,6 +24,7 @@ in {
                 chromium
                 discord
                 firefox
+                zen-browser
                 ghostty
                 mpv
                 obs

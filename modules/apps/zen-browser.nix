@@ -1,7 +1,9 @@
-{
-  flake.modules.homeManager.firefox = {pkgs, ...}: {
-    programs.firefox = {
+{inputs, ...}: {
+  flake.modules.homeManager.zen-browser = {pkgs, ...}: {
+    imports = [inputs.zen-browser.homeModules.default];
+    programs.zen-browser = {
       enable = true;
+      setAsDefaultBrowser = true;
 
       languagePacks = ["en-US" "da-DK"];
 
@@ -26,8 +28,6 @@
         EnableTrackingProtection.Cryptomining = true;
         EnableTrackingProtection.Fingerprinting = true;
         EnableTrackingProtection.EmailTracking = true;
-
-        EnterprisePoliciesEnabled = true;
 
         FirefoxHome.Search = true;
         FirefoxHome.TopSites = true;
@@ -113,11 +113,20 @@
         ];
 
         containersForce = true;
-        containers.personal = {
-          name = "Personal";
+        containers.General = {
+          id = 0;
           icon = "fingerprint";
           color = "purple";
         };
+
+        spacesForce = true;
+        spaces.General = {
+          id = "0";
+          container = 0;
+        };
+
+        pinsForce = true;
+        pins = {};
 
         search = {
           default = "ddg";
@@ -232,12 +241,8 @@
           "browser.uiCustomization.state" = builtins.toJSON {
             placements = {
               widget-overflow-fixed-list = [];
-              unified-extensions-area = [
-                "7esoorv3_alefvanoon_anonaddy_me-browser-action"
-                "gdpr_cavi_au_dk-browser-action"
-              ];
+              unified-extensions-area = [];
               nav-bar = [
-                "sidebar-button"
                 "back-button"
                 "forward-button"
                 "stop-reload-button"
@@ -245,18 +250,21 @@
                 "vertical-spacer"
                 "urlbar-container"
                 "customizableui-special-spring2"
-                "downloads-button"
                 "unified-extensions-button"
-                "ublock0_raymondhill_net-browser-action"
-                "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
               ];
-              TabsToolbar = [
-                "tabbrowser-tabs"
-                "new-tab-button"
-                "alltabs-button"
-              ];
+              TabsToolbar = ["tabbrowser-tabs" "new-tab-button" "alltabs-button"];
               vertical-tabs = [];
               PersonalToolbar = ["personal-bookmarks"];
+              zen-sidebar-top-buttons = ["zen-toggle-compact-mode"];
+              zen-sidebar-foot-buttons = [
+                "downloads-button"
+                "zen-workspaces-button"
+                "gdpr_cavi_au_dk-browser-action"
+                "7esoorv3_alefvanoon_anonaddy_me-browser-action"
+                "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
+                "ublock0_raymondhill_net-browser-action"
+                "zen-create-new-button"
+              ];
             };
             seen = [
               "save-to-pocket-button"
@@ -268,9 +276,16 @@
               "screenshot-button"
               "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
             ];
-            dirtyAreaCache = ["nav-bar" "vertical-tabs" "PersonalToolbar" "unified-extensions-area" "TabsToolbar"];
-            currentVersion = 22;
-            newElementCount = 0;
+            dirtyAreaCache = [
+              "nav-bar"
+              "vertical-tabs"
+              "PersonalToolbar"
+              "unified-extensions-area"
+              "TabsToolbar"
+              "zen-sidebar-foot-buttons"
+            ];
+            currentVersion = 23;
+            newElementCount = 3;
           };
 
           "browser.uiCustomization.navBarWhenVerticalTabs" = [
