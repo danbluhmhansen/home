@@ -10,6 +10,7 @@ in {
     modules =
       [
         inputs.home-manager.nixosModules.home-manager
+        inputs.nur.modules.nixos.default
         inputs.disko.nixosModules.default
         {
           networking.hostName = "mercury";

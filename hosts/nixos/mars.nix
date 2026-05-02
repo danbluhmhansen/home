@@ -10,6 +10,7 @@ in {
     modules =
       [
         inputs.home-manager.nixosModules.home-manager
+        inputs.nur.modules.nixos.default
         {
           networking.hostName = "mars";
           nixpkgs.hostPlatform = "x86_64-linux";

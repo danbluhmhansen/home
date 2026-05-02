@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{
   flake.modules.homeManager.firefox = {pkgs, ...}: {
     programs.firefox = {
       enable = true;
@@ -232,7 +232,7 @@
           ];
         };
 
-        extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
+        extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
           ublock-origin
           consent-o-matic
           libredirect

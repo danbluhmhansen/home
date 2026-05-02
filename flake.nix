@@ -9,8 +9,9 @@
     wsl.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:LnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
-    rosetta-builder.url = "github:cpick/nix-rosetta-builder";
-    rosetta-builder.inputs.nixpkgs.follows = "nixpkgs";
+    nur.url = "github:nix-community/nur";
+    nur.inputs.nixpkgs.follows = "nixpkgs";
+    nur.inputs.flake-parts.follows = "flake-parts";
 
     treefmt.url = "github:numtide/treefmt-nix";
     treefmt.inputs.nixpkgs.follows = "nixpkgs";
@@ -36,8 +37,6 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     helix.url = "github:helix-editor/helix";
     helix.inputs.nixpkgs.follows = "nixpkgs";
-    firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-    firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
     yazi-flavors.url = "github:yazi-rs/flavors";
     yazi-flavors.flake = false;
 
