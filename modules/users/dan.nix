@@ -54,4 +54,8 @@
     programs.nh.clean.enable = true;
     programs.nh.clean.extraArgs = "--keep-since 14d --keep 5";
   };
+
+  flake.modules.homeManager.mars = {pkgs, ...}: {
+    home.packages = with pkgs; [dotnetCorePackages.sdk_10_0-bin powershell];
+  };
 }
