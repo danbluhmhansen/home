@@ -35,6 +35,21 @@ layer-rule {
     place-within-backdrop true
 }
 
+layer-rule {
+    match namespace="^dms:desktop-widget"
+    background-effect {
+        blur true
+    }
+}
+
+layer-rule {
+    match layer="top"
+    match layer="overlay"
+    background-effect {
+        xray false
+    }
+}
+
 overview {
     workspace-shadow {
         off
@@ -113,10 +128,11 @@ debug {
 }
 
 // Include dms files
-include "dms/colors.kdl"
-include "dms/layout.kdl"
 include "dms/alttab.kdl"
 include "dms/binds.kdl"
-include "dms/outputs.kdl"
+include "dms/colors.kdl"
 include "dms/cursor.kdl"
+include "dms/layout.kdl"
+include "dms/outputs.kdl"
 include "dms/windowrules.kdl"
+include "dms/wpblur.kdl"

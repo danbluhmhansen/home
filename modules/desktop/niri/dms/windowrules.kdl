@@ -6,3 +6,9 @@ window-rule {
     match app-id="^firefox$"
     open-floating true
 }
+
+// @id=wr_1776967275854578725 @name=steam_app_2422870
+window-rule {
+    match app-id="^steam_app_2422870$"
+    open-fullscreen true
+}
