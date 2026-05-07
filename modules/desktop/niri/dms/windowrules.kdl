@@ -12,3 +12,9 @@ window-rule {
     match app-id="^steam_app_2422870$"
     open-fullscreen true
 }
+
+// @id=wr_1778165435305141353 @name=zen-beta
+window-rule {
+    match app-id="^zen-beta$"
+    open-floating true
+}

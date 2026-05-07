@@ -114,15 +114,15 @@
 
         containersForce = true;
         containers.General = {
-          id = 0;
+          id = 1;
           icon = "fingerprint";
           color = "purple";
         };
 
         spacesForce = true;
         spaces.General = {
-          id = "0";
-          container = 0;
+          id = "1";
+          container = 1;
         };
 
         pinsForce = true;

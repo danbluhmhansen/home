@@ -43,9 +43,6 @@
     yazi-flavors.url = "github:yazi-rs/flavors";
     yazi-flavors.flake = false;
 
-    quickshell.url = "git+https://git.outfoxxed.me/quickshell/quickshell";
-    quickshell.inputs.nixpkgs.follows = "nixpkgs";
-
     hs-spoons.url = "github:hammerspoon/spoons";
     hs-spoons.flake = false;
     hs-paperwm.url = "github:mogenson/paperwm.spoon";

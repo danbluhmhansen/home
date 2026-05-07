@@ -8,10 +8,7 @@
       kdePackages.breeze-icons
     ];
     hardware.i2c.enable = true;
-    programs.dms-shell = {
-      enable = true;
-      quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
-    };
+    programs.dms-shell = {enable = true;};
     programs.dsearch.enable = true;
     services.displayManager.dms-greeter = {
       enable = true;
