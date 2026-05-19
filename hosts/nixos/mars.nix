@@ -14,6 +14,7 @@ in {
         {
           networking.hostName = "mars";
           nixpkgs.hostPlatform = "x86_64-linux";
+          networking.firewall.allowedTCPPorts = [80 443];
           home-manager = {
             extraSpecialArgs = specialArgs;
             users.dan = {
