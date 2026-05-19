@@ -105,7 +105,15 @@
             q = ":quit";
             "=" = ":format";
             F = "file_picker_in_current_buffer_directory";
-            E = "file_explorer_in_current_buffer_directory";
+            E = [
+              ":sh rm -f /tmp/yazi-helix-file"
+              ":insert-output yazi %{buffer_name} --chooser-file=/tmp/yazi-helix-file"
+              '':insert-output echo "\u{1b}[?1049h\u{1b}[?2004h" o> /dev/tty''
+              ":open %sh{cat /tmp/yazi-helix-file}"
+              ":set mouse false"
+              ":set mouse true"
+              ":redraw"
+            ];
           };
         };
         keys.select = keys.normal;
@@ -190,7 +198,11 @@
         ];
 
         language-server = {
-          rust-analyzer.config.check.command = "clippy";
+          rust-analyzer.config = {
+            assist.preferSelf = true;
+            cargo.features = "all";
+            check.command = "clippy";
+          };
           tailwindcss-ls.config.userLanguages = {
             html = "html";
             rust = "html";
