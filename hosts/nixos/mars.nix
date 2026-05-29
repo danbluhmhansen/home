@@ -28,6 +28,9 @@ in {
                 starship
                 yazi
                 zed
+
+                podman-mars
+                mssql
               ];
               programs.difftastic.options.background = "light";
               programs.helix.settings.theme.fallback = "catppuccin_latte";
@@ -38,9 +41,12 @@ in {
       ++ (with config.flake.modules.nixos; [
         core
         wsl
-        plugdev
         dan
+
         nushell
+
+        plugdev
+        podman
       ]);
   };
 }

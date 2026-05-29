@@ -24,4 +24,11 @@
     home.packages = with pkgs; [podman-tui systemctl-tui];
     services.podman.enable = true;
   };
+
+  flake.modules.homeManager.podman-mars = {pkgs, ...}: {
+    xdg.configFile."systemd/user/podman-user-wait-network-online.service.d/override.conf".text = ''
+      [Service]
+      ExecStart=${pkgs.coreutils}/bin/true
+    '';
+  };
 }
