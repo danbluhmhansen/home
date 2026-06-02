@@ -20,7 +20,7 @@ in {
               imports = with config.flake.modules.homeManager; [
                 mercury
 
-                bitwarden
+                # bitwarden
                 chromium
                 discord
                 firefox

@@ -12,13 +12,7 @@
   }: {
     home.packages = lib.optionals pkgs.stdenv.isLinux [pkgs.discord];
     systemd.user.services.discord-autostart = {
-      Unit.Description = lib.pipe (builtins.readFile "${pkgs.discord}/share/applications/discord.desktop") [
-        (builtins.split "\n")
-        (builtins.filter builtins.isString)
-        (builtins.filter (lib.hasPrefix "GenericName="))
-        builtins.head
-        (lib.removePrefix "GenericName=")
-      ];
+      Unit.Description = "All-in-one cross-platform voice and text chat for gamers";
       Unit.After = "dms.service";
       Service.ExecStart = lib.getExe pkgs.discord;
       Service.Restart = "on-failure";

@@ -12,13 +12,7 @@
   }: {
     home.packages = lib.optionals pkgs.stdenv.isLinux [pkgs.bitwarden-desktop];
     systemd.user.services.bitwarden-autostart = {
-      Unit.Description = lib.pipe (builtins.readFile "${pkgs.bitwarden-desktop}/share/applications/bitwarden.desktop") [
-        (builtins.split "\n")
-        (builtins.filter builtins.isString)
-        (builtins.filter (lib.hasPrefix "Comment="))
-        builtins.head
-        (lib.removePrefix "Comment=")
-      ];
+      Unit.Description = "Secure and free password manager for all of your devices";
       Unit.After = "dms.service";
       Service.ExecStart = lib.getExe pkgs.bitwarden-desktop;
       Service.Restart = "on-failure";

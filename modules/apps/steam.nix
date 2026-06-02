@@ -26,13 +26,7 @@
     ...
   }: {
     systemd.user.services.steam-autostart = {
-      Unit.Description = lib.pipe (builtins.readFile "${pkgs.steam}/share/applications/steam.desktop") [
-        (builtins.split "\n")
-        (builtins.filter builtins.isString)
-        (builtins.filter (lib.hasPrefix "Comment="))
-        builtins.head
-        (lib.removePrefix "Comment=")
-      ];
+      Unit.Description = "Application for managing and playing games on Steam";
       Unit.After = "dms.service";
       Service.ExecStart = lib.getExe pkgs.steam;
       Service.Restart = "on-failure";
