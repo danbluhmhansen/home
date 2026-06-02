@@ -10,9 +10,21 @@
       polkit.enable = true;
       sudo-rs.enable = true;
     };
+    services.gnome = {
+      gnome-keyring.enable = true;
+      gcr-ssh-agent.enable = false;
+    };
   };
-  flake.modules.homeManager.keyring = {pkgs, ...}: {
-    home.packages = with pkgs; [gcr seahorse];
-    services.gnome-keyring.enable = true;
+
+  flake.modules.nixos.keyring-wsl = {
+    security.polkit.extraConfig = ''
+      polkit.addRule(function(action, subject) {
+        if (action.id == "org.debian.pcsc-lite.access_pcsc" || action.id == "org.debian.pcsc-lite.access_card") {
+          return "yes";
+        }
+      });
+    '';
   };
+
+  flake.modules.homeManager.keyring = {pkgs, ...}: {home.packages = with pkgs; [seahorse];};
 }

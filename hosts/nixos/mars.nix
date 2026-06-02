@@ -43,6 +43,9 @@ in {
         wsl
         dan
 
+        keyring
+        keyring-wsl
+
         nushell
 
         plugdev
