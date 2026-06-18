@@ -38,6 +38,7 @@ in {
                 lldap
                 metube
                 postgres
+                sparkyfitness
                 stalwart
                 streaming
                 traefik
