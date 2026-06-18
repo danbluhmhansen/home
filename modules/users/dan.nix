@@ -4,7 +4,7 @@
       isNormalUser = true;
       createHome = true;
       home = "/home/dan";
-      extraGroups = ["wheel" "networkmanager"];
+      extraGroups = ["wheel" "networkmanager" "seat"];
     };
     home-manager.sharedModules = [inputs.self.modules.homeManager.dan];
   };

@@ -223,7 +223,8 @@
   "appLauncherGridColumns": 4,
   "spotlightCloseNiriOverview": true,
   "spotlightSectionViewModes": {
-    "apps": "grid"
+    "apps": "grid",
+    "plugin_emojiLauncher": "grid"
   },
   "appDrawerSectionViewModes": {
     "apps": "grid"
@@ -294,7 +295,7 @@
   "fadeToLockGracePeriod": 5,
   "fadeToDpmsEnabled": true,
   "fadeToDpmsGracePeriod": 5,
-  "launchPrefix": "uwsm app -- ",
+  "launchPrefix": "",
   "brightnessDevicePins": {},
   "wifiNetworkPins": {},
   "bluetoothDevicePins": {

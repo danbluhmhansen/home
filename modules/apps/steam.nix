@@ -2,17 +2,15 @@
   flake.modules.nixos.steam = {pkgs, ...}: {
     home-manager.sharedModules = [inputs.self.modules.homeManager.steam];
     hardware.steam-hardware.enable = true;
-    programs.gamescope = {
-      enable = true;
-      capSysNice = true;
-      args = ["--adaptive-sync" "--hdr-enabled" "--rt"];
-    };
     programs.steam = {
       enable = true;
       extraPackages = [pkgs.hidapi];
-      gamescopeSession.enable = true;
-      gamescopeSession.steamArgs = ["-tenfoot" "-pipewire-dmabuf"];
+      gamescopeSession = {
+        enable = true;
+        steamArgs = ["-tenfoot" "-pipewire-dmabuf"];
+      };
     };
+    services.seatd.enable = true;
   };
   flake.modules.darwin.steam.homebrew.casks = [
     {
