@@ -13,7 +13,6 @@
         PUID = 1000;
         GUID = 1000;
         SPARKY_FITNESS_FRONTEND_URL = "https://fitness.920301.xyz";
-        SPARKY_FITNESS_DISABLE_SIGNUP = "true";
         SPARKY_FITNESS_DISABLE_EMAIL_LOGIN = "true";
         SPARKY_FITNESS_DB_HOST = "postgres";
         SPARKY_FITNESS_DB_NAME = "sparkyfitness";
@@ -52,7 +51,7 @@
       network = ["traefik" "sparkyfitness"];
       labels = {
         "traefik.http.routers.fitness.rule" = ''Host(`fitness.920301.xyz`)'';
-        "traefik.http.services.fitness.loadbalancer.server.port" = "8080";
+        "traefik.http.services.fitness.loadbalancer.server.port" = "80";
         "glance.name" = "SparkyFitness";
         "glance.icon" = "sh:sparkyfitness";
         "glance.url" = "https://fitness.920301.xyz";

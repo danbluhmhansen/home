@@ -2,6 +2,7 @@
   flake.modules.nixos.podman = {
     home-manager.sharedModules = [inputs.self.modules.homeManager.podman];
     boot.kernel.sysctl = {"net.ipv4.ip_unprivileged_port_start" = 0;};
+    systemd.targets.network-online.wantedBy = ["multi-user.target"];
     virtualisation.containers.enable = true;
     virtualisation.containers.storage.settings.storage = {
       driver = "btrfs";
