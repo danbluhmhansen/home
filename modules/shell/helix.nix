@@ -20,6 +20,7 @@
           color-modes = true;
           text-width = 120;
           rainbow-brackets = true;
+          gutters = ["diagnostics" "spacer" "code-action-hint" "line-numbers" "spacer" "diff"];
 
           statusline = {
             left = ["mode" "spinner" "diagnostics" "workspace-diagnostics"];
