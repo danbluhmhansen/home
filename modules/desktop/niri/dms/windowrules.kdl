@@ -24,3 +24,9 @@ window-rule {
     match app-id="^steam_app_1196590$"
     open-fullscreen true
 }
+
+// @id=wr_1782409943008818715 @name=steam_app_548430
+window-rule {
+    match app-id="^steam_app_548430$"
+    open-fullscreen true
+}
