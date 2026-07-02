@@ -60,7 +60,7 @@
         lodd = "${lod} --date=short";
         lods = "${lod} --stat";
         p = "push";
-        p- = "push --force";
+        p- = "push --force-with-lease";
         pd = "push --dry-run";
         r = "restore";
         s = "status --short --branch";
