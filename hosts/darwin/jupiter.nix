@@ -27,7 +27,6 @@ in {
                 eza
                 git
                 helix
-                mpv
                 opencode
                 starship
                 yazi
@@ -45,6 +44,7 @@ in {
         chromium
         discord
         ghostty
+        mpv
         obs
         signal
         steam
