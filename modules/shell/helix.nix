@@ -68,12 +68,12 @@
 
           "`" = {
             c = ":pipe str camel-case";
-            l = ":pipe str downcase";
+            l = ":pipe str lowercase";
             k = ":pipe str kebab-case";
             p = ":pipe str pascal-case";
             s = ":pipe str snake-case";
             t = ":pipe str title-case";
-            u = ":pipe str upcase";
+            u = ":pipe str uppercase";
             e = {
               "3" = ":pipe encode base32";
               "6" = ":pipe encode base64";
