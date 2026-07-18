@@ -1,6 +1,22 @@
 let
   subs = ["https://nix-community.cachix.org" "https://danbluhmhansen.cachix.org" "https://helix.cachix.org"];
+  fzfPatch = final: prev: {
+    fzf = prev.fzf.overrideAttrs (old: {
+      postPatch =
+        (old.postPatch or "")
+        + ''
+          if grep -q 'str downcase' shell/completion.nu; then
+            substituteInPlace shell/completion.nu --replace 'str downcase' 'str lowercase'
+          else
+            echo "ERROR: 'str downcase' no longer found in shell/completion.nu."
+            echo "The fzf overlay for nushell compatibility can be removed."
+            exit 1
+          fi
+        '';
+    });
+  };
   common = {
+    nixpkgs.overlays = [fzfPatch];
     nixpkgs.config.allowUnfree = true;
     nix = {
       channel.enable = false;
