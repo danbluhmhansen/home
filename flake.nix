@@ -42,6 +42,8 @@
     zen-browser.inputs.home-manager.follows = "home-manager";
     yazi-flavors.url = "github:yazi-rs/flavors";
     yazi-flavors.flake = false;
+    dcal.url = "github:avengemedia/dankcalendar";
+    dcal.inputs.nixpkgs.follows = "nixpkgs";
 
     hs-spoons.url = "github:hammerspoon/spoons";
     hs-spoons.flake = false;

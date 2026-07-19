@@ -22,14 +22,15 @@ in {
 
                 # bitwarden
                 chromium
+                dcal
                 discord
                 firefox
-                zen-browser
                 ghostty
                 mpv
                 obs
                 signal
                 zed
+                zen-browser
 
                 eza
                 git

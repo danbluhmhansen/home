@@ -17,6 +17,22 @@
         "type": "github"
       }
     },
+    "dank-qml-common": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1784074596,
+        "narHash": "sha256-/rCqHgC39mHvBDxb/dZLWCQ3W4ev94y3/1KtCRSPDp8=",
+        "owner": "AvengeMedia",
+        "repo": "dank-qml-common",
+        "rev": "b50afcf549f7e9c8f07c85b7f3fbba867701650d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AvengeMedia",
+        "repo": "dank-qml-common",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -34,6 +50,27 @@
       "original": {
         "owner": "LnL7",
         "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
+    "dcal": {
+      "inputs": {
+        "dank-qml-common": "dank-qml-common",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1784469877,
+        "narHash": "sha256-+Ez44YVM9w7L2Vc+JJevk+XNRdyv6ko10NpCJTT6a0w=",
+        "owner": "avengemedia",
+        "repo": "dankcalendar",
+        "rev": "6e5b39ebf9ba73c668b61191e3c35967211291b6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "avengemedia",
+        "repo": "dankcalendar",
         "type": "github"
       }
     },
@@ -343,6 +380,7 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "dcal": "dcal",
         "disko": "disko",
         "flake-parts": "flake-parts",
         "git-hooks": "git-hooks",

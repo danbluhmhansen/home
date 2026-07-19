@@ -5,6 +5,7 @@
       accountsservice
       adw-gtk3
       catppuccin-cursors.mochaDark
+      catppuccin-cursors.latteLight
       kdePackages.breeze-icons
     ];
     hardware.i2c.enable = true;
