@@ -154,12 +154,14 @@
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               definedAliases = ["@no"];
             };
-            "Home Manager - Option Search" = {
+            "Home Manager" = {
               urls = [
                 {
-                  template = "https://home-manager-options.extranix.com";
+                  template = "https://search.nixos.org/options";
                   params = pkgs.lib.attrsToList {
-                    release = "master";
+                    channel = "unstable";
+                    source = "home_manager";
+                    type = "packages";
                     query = "{searchTerms}";
                   };
                 }
