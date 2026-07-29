@@ -1,8 +1,12 @@
 {inputs, ...}: {
   flake.modules.darwin.homebrew = {config, ...}: {
     imports = [inputs.homebrew.darwinModules.nix-homebrew];
-    homebrew.enable = true;
-    homebrew.onActivation.cleanup = "zap";
+    homebrew = {
+      enable = true;
+      global.brewfile = true;
+      onActivation = {cleanup = "zap";};
+      taps = builtins.attrNames config.nix-homebrew.taps;
+    };
     nix-homebrew = {
       enable = true;
       enableRosetta = true;
@@ -12,7 +16,6 @@
       };
       mutableTaps = false;
     };
-    homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
   };
   flake.modules.darwin.dan = {nix-homebrew.user = "dan";};
 }

@@ -1,12 +1,7 @@
 {inputs, ...}: {
   flake.modules.darwin.mpv = {
     home-manager.sharedModules = [inputs.self.modules.homeManager.mpv];
-    homebrew.casks = [
-      {
-        name = "mpv";
-        args.appdir = "~/Applications";
-      }
-    ];
+    homebrew.brews = ["mpv"];
   };
 
   flake.modules.homeManager.mpv = {pkgs, ...}: {

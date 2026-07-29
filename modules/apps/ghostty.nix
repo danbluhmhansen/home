@@ -3,7 +3,7 @@
     home-manager.sharedModules = [inputs.self.modules.homeManager.ghostty];
     homebrew.casks = [
       {
-        name = "ghostty";
+        name = "ghostty@tip";
         args.appdir = "~/Applications";
       }
     ];
