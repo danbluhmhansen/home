@@ -22,7 +22,6 @@
       autoUpdate = "registry";
       labels = {
         "traefik.http.routers.foundryvtt.rule" = ''Host(`foundry.920301.xyz`)'';
-        "traefik.http.routers.foundryvtt.middlewares" = "authelia@docker";
         "traefik.http.services.foundryvtt.loadbalancer.server.port" = "30000";
         "glance.name" = "FoundryVTT";
         "glance.icon" = "si:foundryvirtualtabletop";
