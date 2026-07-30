@@ -8,7 +8,7 @@
     };
 
     services.podman.containers.sparkyfitness-server = {
-      image = "codewithcj/sparkyfitness_server:latest";
+      image = "docker.io/codewithcj/sparkyfitness_server:latest";
       environment = {
         PUID = 1000;
         GUID = 1000;
@@ -41,7 +41,7 @@
     };
 
     services.podman.containers.sparkyfitness = {
-      image = "codewithcj/sparkyfitness:latest";
+      image = "docker.io/codewithcj/sparkyfitness:latest";
       environment = {
         PUID = 1000;
         GUID = 1000;
