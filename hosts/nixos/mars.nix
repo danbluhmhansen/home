@@ -28,6 +28,7 @@ in {
                 starship
                 yazi
                 zed
+                zellij
 
                 podman-mars
                 mssql

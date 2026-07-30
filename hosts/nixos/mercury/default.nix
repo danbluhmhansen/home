@@ -39,6 +39,7 @@ in {
                 opencode
                 starship
                 yazi
+                zellij
               ];
             };
           };

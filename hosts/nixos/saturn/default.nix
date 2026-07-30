@@ -28,6 +28,7 @@ in {
                 helix
                 starship
                 yazi
+                zellij
 
                 actual
                 authelia
