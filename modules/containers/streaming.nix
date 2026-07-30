@@ -20,6 +20,7 @@
         "${config.home.homeDirectory}/srv/movies:/data/movies"
       ];
       ports = ["8096:8096" "7359:7359/udp" "1900:1900/udp"];
+      autoUpdate = "registry";
       labels = {
         "traefik.http.routers.jellyfin.rule" = ''Host(`jf.920301.xyz`)'';
         "traefik.http.services.jellyfin.loadbalancer.server.port" = "8096";
@@ -40,6 +41,7 @@
       };
       network = ["traefik" "streaming"];
       volumes = ["${config.home.homeDirectory}/srv/ombi:/config"];
+      autoUpdate = "registry";
       labels = {
         "traefik.http.routers.ombi.rule" = ''Host(`ombi.920301.xyz`)'';
         "traefik.http.services.ombi.loadbalancer.server.port" = "3579";
@@ -63,6 +65,7 @@
         "${config.home.homeDirectory}/srv/tvshows:/data/tv"
         "${config.home.homeDirectory}/srv/downloads:/downloads"
       ];
+      autoUpdate = "registry";
       labels = {
         "traefik.http.routers.sonarr.rule" = ''Host(`sonarr.920301.xyz`)'';
         "traefik.http.services.sonarr.loadbalancer.server.port" = "8989";
@@ -86,6 +89,7 @@
         "${config.home.homeDirectory}/srv/movies:/data/movies"
         "${config.home.homeDirectory}/srv/downloads:/downloads"
       ];
+      autoUpdate = "registry";
       labels = {
         "traefik.http.routers.radarr.rule" = ''Host(`radarr.920301.xyz`)'';
         "traefik.http.services.radarr.loadbalancer.server.port" = "7878";
@@ -109,6 +113,7 @@
         "${config.home.homeDirectory}/srv/movies:/data/movies"
         "${config.home.homeDirectory}/srv/tvshows:/data/tvshows"
       ];
+      autoUpdate = "registry";
       labels = {
         "traefik.http.routers.bazarr.rule" = ''Host(`bazarr.920301.xyz`)'';
         "traefik.http.services.bazarr.loadbalancer.server.port" = "6767";
@@ -128,6 +133,7 @@
       };
       network = ["traefik" "streaming"];
       volumes = ["${config.home.homeDirectory}/srv/prowlarr:/config"];
+      autoUpdate = "registry";
       labels = {
         "traefik.http.routers.prowlarr.rule" = ''Host(`prowlarr.920301.xyz`)'';
         "traefik.http.services.prowlarr.loadbalancer.server.port" = "9696";
@@ -147,6 +153,7 @@
         TZ = "Europe/Copenhagen";
       };
       network = ["traefik" "streaming"];
+      autoUpdate = "registry";
       labels = {
         "traefik.enable" = "false";
         "glance.name" = "Flaresolverr";
@@ -170,6 +177,7 @@
         "${config.home.homeDirectory}/srv/qbittorrent:/config"
         "${config.home.homeDirectory}/srv/downloads:/downloads"
       ];
+      autoUpdate = "registry";
       labels = {
         "traefik.http.routers.qbittorrent.rule" = ''Host(`qb.920301.xyz`)'';
         "traefik.http.services.qbittorrent.loadbalancer.server.port" = "8080";

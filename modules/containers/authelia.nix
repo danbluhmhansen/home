@@ -3,10 +3,11 @@
     sops.secrets.authelia = {};
 
     services.podman.containers.authelia = {
-      image = "docker.io/authelia/authelia";
+      image = "docker.io/authelia/authelia:latest";
       environmentFile = [config.sops.secrets.authelia.path];
       network = ["traefik" "postgres"];
       volumes = ["${config.home.homeDirectory}/srv/authelia:/config"];
+      autoUpdate = "registry";
       labels = {
         "traefik.http.routers.authelia.rule" = ''Host(`auth.920301.xyz`)'';
         "traefik.http.services.authelia.loadbalancer.server.port" = "9091";

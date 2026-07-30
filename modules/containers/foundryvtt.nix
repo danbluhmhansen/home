@@ -3,7 +3,7 @@
     sops.secrets.foundryvtt = {};
 
     services.podman.containers.foundryvtt = {
-      image = "docker.io/felddy/foundryvtt:13";
+      image = "docker.io/felddy/foundryvtt:14";
       environment = {
         USER_UID = "1000";
         USER_GID = "1000";
@@ -19,6 +19,7 @@
         "${config.home.homeDirectory}/srv/foundry:/data"
         "${config.home.homeDirectory}/srv/downloads:/data/Data/assets/downloads"
       ];
+      autoUpdate = "registry";
       labels = {
         "traefik.http.routers.foundryvtt.rule" = ''Host(`foundry.920301.xyz`)'';
         "traefik.http.routers.foundryvtt.middlewares" = "authelia@docker";

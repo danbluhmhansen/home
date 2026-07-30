@@ -17,6 +17,7 @@
         "${config.home.homeDirectory}/srv/forgejo/conf:/etc/gitea"
       ];
       ports = ["222:2222"];
+      autoUpdate = "registry";
       labels = {
         "traefik.http.routers.forgejo.rule" = ''Host(`forgejo.920301.xyz`)'';
         "traefik.http.services.forgejo.loadbalancer.server.port" = "3000";

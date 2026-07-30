@@ -29,6 +29,7 @@
         "${config.home.homeDirectory}/srv/traefik/traefik.yml:/etc/traefik/traefik.yml"
         "${config.home.homeDirectory}/srv/letsencrypt:/letsencrypt"
       ];
+      autoUpdate = "registry";
       labels = {
         "traefik.enable" = "true";
         "traefik.http.routers.dashboard.rule" = ''Host(`traefik.920301.xyz`)'';

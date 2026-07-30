@@ -36,6 +36,7 @@
         "${config.home.homeDirectory}/srv/sparkyfitness/backup:/app/SparkyFitnessServer/backup"
         "${config.home.homeDirectory}/srv/sparkyfitness/uploads:/app/SparkyFitnessServer/uploads"
       ];
+      autoUpdate = "registry";
       labels = {"traefik.enable" = "false";};
     };
 
@@ -49,6 +50,7 @@
         SPARKY_FITNESS_SERVER_PORT = 3010;
       };
       network = ["traefik" "sparkyfitness"];
+      autoUpdate = "registry";
       labels = {
         "traefik.http.routers.fitness.rule" = ''Host(`fitness.920301.xyz`)'';
         "traefik.http.services.fitness.loadbalancer.server.port" = "80";

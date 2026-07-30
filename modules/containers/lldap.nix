@@ -12,6 +12,7 @@
       environmentFile = [config.sops.secrets.lldap.path];
       network = ["traefik"];
       volumes = ["${config.home.homeDirectory}/srv/lldap:/data"];
+      autoUpdate = "registry";
       labels = {
         "traefik.http.routers.lldap.rule" = ''Host(`ldap.920301.xyz`)'';
         "traefik.http.services.lldap.loadbalancer.server.port" = "17170";

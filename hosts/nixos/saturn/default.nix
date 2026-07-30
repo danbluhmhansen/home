@@ -40,7 +40,6 @@ in {
                 metube
                 postgres
                 sparkyfitness
-                stalwart
                 streaming
                 traefik
                 vaultwarden

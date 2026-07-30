@@ -11,6 +11,7 @@
       environmentFile = [config.sops.secrets.vaultwarden.path];
       network = ["traefik" "postgres"];
       volumes = ["${config.home.homeDirectory}/srv/vaultwarden:/data"];
+      autoUpdate = "registry";
       labels = {
         "traefik.http.routers.vaultwarden.rule" = ''Host(`vault.920301.xyz`)'';
         "traefik.http.services.vaultwarden.loadbalancer.server.port" = "80";

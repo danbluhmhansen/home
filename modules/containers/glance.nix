@@ -8,6 +8,7 @@
         "/run/user/1000/podman/podman.sock:/var/run/docker.sock:ro"
         "${config.home.homeDirectory}/srv/glance/glance.yml:/app/config/glance.yml:ro"
       ];
+      autoUpdate = "registry";
       labels = {
         "traefik.http.routers.glance.rule" = ''Host(`glance.920301.xyz`)'';
         "traefik.http.routers.glance.middlewares" = "authelia@docker";

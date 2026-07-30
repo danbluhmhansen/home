@@ -1,7 +1,7 @@
 {
   flake.modules.homeManager.metube = {config, ...}: {
     services.podman.containers.metube = {
-      image = "ghcr.io/alexta69/metube";
+      image = "ghcr.io/alexta69/metube:latest";
       environment = {
         PUBLIC_HOST_URL = "https://metube.920301.xyz";
         YTDL_OPTIONS = "${toString (builtins.toJSON {
@@ -27,6 +27,7 @@
       };
       network = ["traefik"];
       volumes = ["${config.home.homeDirectory}/srv/downloads:/downloads"];
+      autoUpdate = "registry";
       labels = {
         "traefik.http.routers.metube.rule" = ''Host(`metube.920301.xyz`)'';
         "traefik.http.routers.metube.middlewares" = "authelia@docker";
