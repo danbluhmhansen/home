@@ -216,6 +216,7 @@
           "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
           "browser.startup.page" = 3;
           "browser.tabs.closeWindowWithLastTab" = false;
+          "browser.urlbar.showSearchSuggestionsFirst" = false;
           "browser.warnOnQuitShortcut" = false;
 
           "privacy.userContext.newTabContainerOnLeftClick.enabled" = true;

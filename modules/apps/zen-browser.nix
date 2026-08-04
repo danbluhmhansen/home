@@ -225,6 +225,7 @@
           "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
           "browser.startup.page" = 3;
           "browser.tabs.closeWindowWithLastTab" = false;
+          "browser.urlbar.showSearchSuggestionsFirst" = false;
           "browser.warnOnQuitShortcut" = false;
 
           "privacy.userContext.newTabContainerOnLeftClick.enabled" = true;
@@ -239,6 +240,9 @@
           "sidebar.revamp" = true;
           "sidebar.verticalTabs" = false;
           "sidebar.visibility" = "hide-sidebar";
+
+          "zen.tabs.close-on-back-with-no-history" = false;
+          "zen.tabs.close-window-with-empty" = false;
 
           "browser.uiCustomization.state" = builtins.toJSON {
             placements = {
