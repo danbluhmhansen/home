@@ -4,10 +4,12 @@
     programs.steam = {
       enable = true;
       extraPackages = [pkgs.hidapi];
+      extraCompatPackages = with pkgs; [proton-ge-bin];
       gamescopeSession = {
         enable = true;
         steamArgs = ["-tenfoot" "-pipewire-dmabuf"];
       };
+      protontricks.enable = true;
     };
     services.seatd.enable = true;
   };
