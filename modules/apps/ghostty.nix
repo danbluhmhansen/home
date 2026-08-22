@@ -24,8 +24,8 @@
             theme = "light:Catppuccin Latte,dark:Catppuccin Mocha";
             window-padding-balance = true;
           }
-          // lib.optionalAttrs pkgs.stdenv.isDarwin {font-size = 15;};
+          // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {font-size = 15;};
       }
-      // lib.optionalAttrs pkgs.stdenv.isDarwin {package = null;};
+      // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {package = null;};
   };
 }

@@ -23,11 +23,11 @@ in {
     lib.recursiveUpdate common {
       imports = [inputs.sops.homeManagerModules.sops];
       sops.defaultSopsFile =
-        if pkgs.stdenv.isDarwin
+        if pkgs.stdenv.hostPlatform.isDarwin
         then "${config.home.homeDirectory}/Library/Application Support/sops/secrets/main.yml"
         else "${config.home.homeDirectory}/.config/sops/secrets/main.yml";
       sops.age.keyFile =
-        if pkgs.stdenv.isDarwin
+        if pkgs.stdenv.hostPlatform.isDarwin
         then "${config.home.homeDirectory}/Library/Application Support/sops/age/keys.txt"
         else "${config.home.homeDirectory}/.config/sops/age/keys.txt";
       sops.secrets.cachix = {};

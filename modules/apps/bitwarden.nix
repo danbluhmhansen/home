@@ -10,6 +10,6 @@
     lib,
     ...
   }: {
-    home.packages = lib.optionals pkgs.stdenv.isLinux [pkgs.bitwarden-desktop];
+    home.packages = lib.optionals pkgs.stdenv.hostPlatform.isLinux [pkgs.bitwarden-desktop];
   };
 }

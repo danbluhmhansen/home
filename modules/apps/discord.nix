@@ -10,6 +10,6 @@
     lib,
     ...
   }: {
-    home.packages = lib.optionals pkgs.stdenv.isLinux [pkgs.discord];
+    home.packages = lib.optionals pkgs.stdenv.hostPlatform.isLinux [pkgs.discord];
   };
 }

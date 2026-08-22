@@ -9,5 +9,5 @@
     pkgs,
     lib,
     ...
-  }: {programs.chromium = {enable = true;} // lib.optionalAttrs pkgs.stdenv.isDarwin {package = null;};};
+  }: {programs.chromium = {enable = true;} // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {package = null;};};
 }

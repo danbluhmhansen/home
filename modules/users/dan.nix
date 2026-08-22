@@ -29,13 +29,13 @@
     home.homeDirectory =
       lib.mkForce
       (
-        if pkgs.stdenv.isDarwin
+        if pkgs.stdenv.hostPlatform.isDarwin
         then "/Users/dan"
         else "/home/dan"
       );
     home.packages = with pkgs;
       [cachix fd git-ignore gitu less ouch scooter xh]
-      ++ lib.optionals pkgs.stdenv.isDarwin [rustup maple-mono.NF];
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [rustup maple-mono.NF];
 
     programs.nh.enable = true;
     programs.direnv.enable = true;

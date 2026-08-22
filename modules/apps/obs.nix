@@ -10,6 +10,6 @@
         enable = true;
         plugins = [pkgs.obs-studio-plugins.droidcam-obs];
       }
-      // lib.optionalAttrs pkgs.stdenv.isDarwin {package = null;};
+      // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {package = null;};
   };
 }

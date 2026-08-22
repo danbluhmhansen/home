@@ -10,7 +10,7 @@
     programs.git.enable = true;
     programs.git.settings = {
       credential.helper =
-        if pkgs.stdenv.isDarwin
+        if pkgs.stdenv.hostPlatform.isDarwin
         then "osxkeychain"
         else "${pkgs.git.override {withLibsecret = true;}}/bin/git-credential-libsecret";
       user.name = "Dan Bluhm Hansen";

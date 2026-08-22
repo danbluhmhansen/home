@@ -5,7 +5,7 @@
   };
 
   flake.modules.homeManager.mpv = {pkgs, ...}: {
-    programs.mpv.enable = pkgs.stdenv.isLinux;
+    programs.mpv.enable = pkgs.stdenv.hostPlatform.isLinux;
     programs.yt-dlp.enable = true;
   };
 }

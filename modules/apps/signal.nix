@@ -10,6 +10,6 @@
     lib,
     ...
   }: {
-    home.packages = lib.optionals pkgs.stdenv.isLinux [pkgs.signal-desktop];
+    home.packages = lib.optionals pkgs.stdenv.hostPlatform.isLinux [pkgs.signal-desktop];
   };
 }
