@@ -9,7 +9,6 @@
         theme_dark = "catppuccin-macchiato";
         theme_light = "catppuccin-latte";
         show_startup_tips = false;
-        pane_frames = false;
 
         plugins = {
           about._props.location = "zellij:about";
