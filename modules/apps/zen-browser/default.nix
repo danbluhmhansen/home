@@ -1,6 +1,7 @@
 {inputs, ...}: {
   flake.modules.homeManager.zen-browser = {pkgs, ...}: {
     imports = [inputs.zen-browser.homeModules.default];
+
     programs.zen-browser = {
       enable = true;
       setAsDefaultBrowser = true;
@@ -241,8 +242,13 @@
           "sidebar.verticalTabs" = false;
           "sidebar.visibility" = "hide-sidebar";
 
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+          "zen.pinned-tab-manager.restore-pinned-tabs-to-pinned-url" = true;
           "zen.tabs.close-on-back-with-no-history" = false;
           "zen.tabs.close-window-with-empty" = false;
+          "zen.tabs.show-newtab-vertical" = false;
+          "zen.view.show-newtab-button-top" = false;
+          "zen.workspaces.force-container-workspace" = true;
 
           "browser.uiCustomization.state" = builtins.toJSON {
             placements = {
@@ -318,6 +324,15 @@
           bitwarden
         ];
       };
+    };
+  };
+
+  flake.modules.homeManager.zen-dms = {config, ...}: {
+    home.file = {
+      ".config/DankMaterialShell/zen.css".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.programs.nh.flake}/modules/apps/zen-browser/userChrome.css";
+      ".config/zen/dan/chrome/userChrome.css".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.programs.nh.flake}/modules/apps/zen-browser/userChrome.css";
     };
   };
 }

@@ -31,6 +31,7 @@ in {
                 signal
                 zed
                 zen-browser
+                zen-dms
 
                 eza
                 git

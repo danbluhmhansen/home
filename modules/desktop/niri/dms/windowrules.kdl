@@ -17,6 +17,9 @@ window-rule {
 window-rule {
     match app-id="^zen-beta$"
     open-floating true
+    background-effect {
+        blur true
+    }
 }
 
 // @id=wr_1779548536181530153 @name=steam_app_1196590
