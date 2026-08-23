@@ -30,3 +30,11 @@ window-rule {
     match app-id="^steam_app_548430$"
     open-fullscreen true
 }
+
+// @id=wr_1787505298262116641 @name=com.mitchellh.ghostty
+window-rule {
+    match app-id="^com.mitchellh.ghostty$"
+    background-effect {
+        blur true
+    }
+}

@@ -10,8 +10,8 @@
       defaultEditor = true;
 
       settings = rec {
-        theme.dark = "catppuccin_mocha";
-        theme.light = "catppuccin_latte";
+        theme.dark = "catppuccin_mocha-transparent";
+        theme.light = "catppuccin_latte-transparent";
         editor = {
           shell = ["${lib.getExe pkgs.nushell}" "--stdin" "--commands"];
           line-number = "relative";
@@ -118,6 +118,36 @@
           };
         };
         keys.select = keys.normal;
+      };
+
+      themes = let
+        transparentChrome = {
+          "ui.background" = {fg = "text";};
+          "ui.cursorline.primary" = {};
+          "ui.statusline" = {fg = "subtext1";};
+          "ui.statusline.inactive" = {fg = "surface2";};
+          "ui.bufferline" = {fg = "subtext0";};
+          "ui.bufferline.active" = {
+            fg = "mauve";
+            underline = {
+              color = "mauve";
+              style = "line";
+            };
+          };
+          "ui.bufferline.background" = {};
+          "ui.virtual.inlay-hint" = {fg = "surface1";};
+        };
+      in {
+        "catppuccin_mocha-transparent" =
+          {
+            inherits = "catppuccin_mocha";
+          }
+          // transparentChrome;
+        "catppuccin_latte-transparent" =
+          {
+            inherits = "catppuccin_latte";
+          }
+          // transparentChrome;
       };
 
       languages = {

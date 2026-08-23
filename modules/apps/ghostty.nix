@@ -19,6 +19,8 @@
         enable = true;
         settings =
           {
+            background-blur-radius = 20;
+            background-opacity = 0.85;
             config-file = ["?local.ghostty"];
             keybind = ["global:cmd+alt+backquote=toggle_quick_terminal"];
             theme = "light:Catppuccin Latte,dark:Catppuccin Mocha";
