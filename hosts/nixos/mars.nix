@@ -27,7 +27,6 @@ in {
                 opencode
                 starship
                 yazi
-                zed
                 zellij
 
                 podman-mars

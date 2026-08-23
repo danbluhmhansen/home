@@ -29,7 +29,6 @@ in {
                 mpv
                 obs
                 signal
-                zed
                 zen-browser
                 zen-dms
 

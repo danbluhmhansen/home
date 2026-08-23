@@ -49,7 +49,6 @@ in {
         obs
         signal
         steam
-        zed
 
         nushell
 
