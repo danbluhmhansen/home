@@ -41,6 +41,8 @@
     programs.direnv.enable = true;
     programs.direnv.config.hide_env_diff = true;
     programs.direnv.nix-direnv.enable = true;
+    programs.devenv.enable = true;
+    programs.devenv.enableNushellIntegration = false;
 
     programs.bat.enable = true;
     programs.bat.config.theme-dark = "Catppuccin Mocha";
