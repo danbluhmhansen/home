@@ -18,4 +18,5 @@ jobs:
       with:
         name: danbluhmhansen
         authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+        extraPullNames: devenv,nix-community,helix,cachix
     - run: nix build .#darwinConfigurations.jupiter.config.system.build.toplevel
