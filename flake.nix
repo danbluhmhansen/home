@@ -5,43 +5,15 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
-    wsl.url = "github:nix-community/nixos-wsl";
-    wsl.inputs.nixpkgs.follows = "nixpkgs";
-    darwin.url = "github:LnL7/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
-    nur.url = "github:nix-community/nur";
-    nur.inputs.nixpkgs.follows = "nixpkgs";
-    nur.inputs.flake-parts.follows = "flake-parts";
+    omniflake.url = "github:fzakaria/omniflake";
+    omniflake.inputs.nixpkgs.follows = "nixpkgs";
+    omniflake.inputs.flake-parts.follows = "flake-parts";
 
-    treefmt.url = "github:numtide/treefmt-nix";
-    treefmt.inputs.nixpkgs.follows = "nixpkgs";
-    git-hooks.url = "github:cachix/git-hooks.nix";
-    git-hooks.inputs.nixpkgs.follows = "nixpkgs";
-
-    homebrew.url = "github:zhaofengli/nix-homebrew";
     homebrew-core.url = "github:homebrew/homebrew-core";
     homebrew-core.flake = false;
     homebrew-cask.url = "github:homebrew/homebrew-cask";
     homebrew-cask.flake = false;
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    sops.url = "github:mic92/sops-nix";
-    sops.inputs.nixpkgs.follows = "nixpkgs";
-
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
-
-    nix-index-database.url = "github:nix-community/nix-index-database";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-    helix.url = "github:helix-editor/helix";
-    helix.inputs.nixpkgs.follows = "nixpkgs";
-    devenv.url = "github:cachix/devenv";
-    devenv.inputs.nixpkgs.follows = "nixpkgs";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
-    zen-browser.inputs.home-manager.follows = "home-manager";
     yazi-flavors.url = "github:yazi-rs/flavors";
     yazi-flavors.flake = false;
     dcal.url = "github:avengemedia/dankcalendar";
@@ -53,7 +25,25 @@
     hs-paperwm.flake = false;
   };
 
-  outputs = inputs:
+  outputs = inputs0: let
+    flakes = inputs0.omniflake.flakes;
+    compat = {
+      wsl = flakes.nixos-wsl;
+      darwin = flakes.nix-darwin;
+      nur = flakes.nur;
+      treefmt = flakes.treefmt-nix;
+      git-hooks = flakes.git-hooks-nix;
+      home-manager = flakes.home-manager;
+      sops = flakes.sops-nix;
+      disko = flakes.disko;
+      nix-index-database = flakes.nix-index-database;
+      helix = flakes.helix;
+      devenv = flakes.devenv;
+      zen-browser = flakes.zen-browser-flake;
+      homebrew = flakes.nix-homebrew;
+    };
+    inputs = inputs0 // compat;
+  in
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       debug = true;
       imports = [(inputs.import-tree [./hosts ./modules])];
