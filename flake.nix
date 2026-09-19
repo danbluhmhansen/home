@@ -18,11 +18,6 @@
     yazi-flavors.flake = false;
     dcal.url = "github:avengemedia/dankcalendar";
     dcal.inputs.nixpkgs.follows = "nixpkgs";
-
-    hs-spoons.url = "github:hammerspoon/spoons";
-    hs-spoons.flake = false;
-    hs-paperwm.url = "github:mogenson/paperwm.spoon";
-    hs-paperwm.flake = false;
   };
 
   outputs = inputs0: let

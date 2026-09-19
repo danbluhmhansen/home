@@ -53,7 +53,6 @@ in {
         nushell
 
         gpg
-        hammerspoon
         podman
       ]);
   };

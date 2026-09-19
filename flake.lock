@@ -120,38 +120,6 @@
         "type": "github"
       }
     },
-    "hs-paperwm": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1787063726,
-        "narHash": "sha256-tbz2MJQZogdh643kMvfUI9XMTBhC2Mzd//nHChShkMQ=",
-        "owner": "mogenson",
-        "repo": "paperwm.spoon",
-        "rev": "cb6dd31a392a0d79ed090befc03f05d0ad375bba",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mogenson",
-        "repo": "paperwm.spoon",
-        "type": "github"
-      }
-    },
-    "hs-spoons": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1773444505,
-        "narHash": "sha256-LeMsmm/au7GbnETVAUNNABanjU1byXpYbzWG/5nT4sM=",
-        "owner": "hammerspoon",
-        "repo": "spoons",
-        "rev": "5c20bcecc380acff5f0f5df7a718c5679aaaf62a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hammerspoon",
-        "repo": "spoons",
-        "type": "github"
-      }
-    },
     "import-tree": {
       "locked": {
         "lastModified": 1784254960,
@@ -230,8 +198,6 @@
         "flake-parts": "flake-parts",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
-        "hs-paperwm": "hs-paperwm",
-        "hs-spoons": "hs-spoons",
         "import-tree": "import-tree",
         "nixpkgs": "nixpkgs",
         "omniflake": "omniflake",
