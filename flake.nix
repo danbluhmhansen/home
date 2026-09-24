@@ -33,7 +33,6 @@
       disko = flakes.disko;
       nix-index-database = flakes.nix-index-database;
       helix = flakes.helix;
-      devenv = flakes.devenv;
       zen-browser = flakes.zen-browser-flake;
       homebrew = flakes.nix-homebrew;
     };
