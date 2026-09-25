@@ -67,6 +67,7 @@ in {
         nushell
         steam
 
+        omnibin
         openssh
         plugdev
       ]);

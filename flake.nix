@@ -35,6 +35,7 @@
       helix = flakes.helix;
       zen-browser = flakes.zen-browser-flake;
       homebrew = flakes.nix-homebrew;
+      omnibin = flakes.omnibin;
     };
     inputs = inputs0 // compat;
   in

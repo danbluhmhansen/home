@@ -61,6 +61,7 @@ in {
 
         nushell
 
+        omnibin
         openssh
         plugdev
         podman

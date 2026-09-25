@@ -48,6 +48,7 @@ in {
 
         nushell
 
+        omnibin
         plugdev
         podman
       ]);
