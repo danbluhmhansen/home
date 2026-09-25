@@ -1,36 +1,9 @@
 // DMS Window Rules - Managed by DankMaterialShell
 // Do not edit manually - changes may be overwritten
 
-// @id=wr_1775919146579756302 @name=firefox
+// @id=wr_1776967275854578725 @name=steam_app_*
 window-rule {
-    match app-id="^firefox$"
-    open-floating true
-}
-
-// @id=wr_1776967275854578725 @name=steam_app_2422870
-window-rule {
-    match app-id="^steam_app_2422870$"
-    open-fullscreen true
-}
-
-// @id=wr_1778165435305141353 @name=zen-beta
-window-rule {
-    match app-id="^zen-beta$"
-    open-floating true
-    background-effect {
-        blur true
-    }
-}
-
-// @id=wr_1779548536181530153 @name=steam_app_1196590
-window-rule {
-    match app-id="^steam_app_1196590$"
-    open-fullscreen true
-}
-
-// @id=wr_1782409943008818715 @name=steam_app_548430
-window-rule {
-    match app-id="^steam_app_548430$"
+    match app-id="^steam_app_\\d+$"
     open-fullscreen true
 }
 
@@ -40,4 +13,10 @@ window-rule {
     background-effect {
         blur true
     }
+}
+
+// @id=wr_1789135769486715313 @name=deadcells
+window-rule {
+    match app-id="^deadcells$"
+    open-fullscreen true
 }
