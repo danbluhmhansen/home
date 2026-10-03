@@ -27,7 +27,6 @@ in {
                 eza
                 git
                 helix
-                opencode
                 starship
                 yazi
                 zellij
@@ -47,6 +46,7 @@ in {
         ghostty
         mpv
         obs
+        opencode
         signal
         steam
 

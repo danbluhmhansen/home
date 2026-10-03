@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "anomalyco-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790231534,
+        "narHash": "sha256-gMm0AufZ0oHbqog5LauwsdpxKH5NBe+pnDC8UdlI5zs=",
+        "owner": "anomalyco",
+        "repo": "homebrew-tap",
+        "rev": "c2b38e2864304481248be0dd7072abfb3974e170",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anomalyco",
+        "repo": "homebrew-tap",
+        "type": "github"
+      }
+    },
     "dank-qml-common": {
       "flake": false,
       "locked": {
@@ -194,6 +210,7 @@
     },
     "root": {
       "inputs": {
+        "anomalyco-tap": "anomalyco-tap",
         "dcal": "dcal",
         "flake-parts": "flake-parts",
         "homebrew-cask": "homebrew-cask",

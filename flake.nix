@@ -14,6 +14,9 @@
     homebrew-cask.url = "github:homebrew/homebrew-cask";
     homebrew-cask.flake = false;
 
+    anomalyco-tap.url = "github:anomalyco/homebrew-tap";
+    anomalyco-tap.flake = false;
+
     yazi-flavors.url = "github:yazi-rs/flavors";
     yazi-flavors.flake = false;
     dcal.url = "github:avengemedia/dankcalendar";
