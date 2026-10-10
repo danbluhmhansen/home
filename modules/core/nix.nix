@@ -7,7 +7,7 @@
     "https://cachix.cachix.org"
   ];
   common = {
-    nixpkgs.overlays = with inputs; [helix.overlays.default];
+    nixpkgs.overlays = with inputs; [helix.overlays.default self.overlays.opencode-v2];
     nixpkgs.config.allowUnfree = true;
     nix = {
       channel.enable = false;

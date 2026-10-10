@@ -22,11 +22,13 @@ in {
                 jupiter
 
                 firefox
+                opencode-desktop
                 zen-browser
 
                 eza
                 git
                 helix
+                opencode
                 starship
                 yazi
                 zellij
@@ -46,7 +48,6 @@ in {
         ghostty
         mpv
         obs
-        opencode
         signal
         steam
 
