@@ -16,6 +16,23 @@ in {
           networking.hostName = "saturn";
           users.users.dan.linger = true;
           networking.firewall.allowedTCPPorts = [80 443];
+
+          boot.initrd.luks.devices.extbackup = {
+            device = "/dev/disk/by-uuid/7d997ca3-ddca-4dd8-8a19-aed5170b9306";
+          };
+
+          fileSystems."/srv/external-data" = {
+            device = "/dev/mapper/extbackup";
+            fsType = "btrfs";
+            options = ["noatime" "subvol=@data" "nofail"];
+          };
+
+          fileSystems."/srv/external-backups" = {
+            device = "/dev/mapper/extbackup";
+            fsType = "btrfs";
+            options = ["noatime" "subvol=@backups" "nofail"];
+          };
+
           home-manager = {
             extraSpecialArgs = specialArgs;
             users.dan = {
