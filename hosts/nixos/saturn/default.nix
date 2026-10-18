@@ -17,21 +17,22 @@ in {
           users.users.dan.linger = true;
           networking.firewall.allowedTCPPorts = [80 443];
 
-          boot.initrd.luks.devices.extbackup = {
-            device = "/dev/disk/by-uuid/7d997ca3-ddca-4dd8-8a19-aed5170b9306";
-          };
-
-          fileSystems."/srv/external-data" = {
-            device = "/dev/mapper/extbackup";
-            fsType = "btrfs";
-            options = ["noatime" "subvol=@data" "nofail"];
-          };
-
-          fileSystems."/srv/external-backups" = {
-            device = "/dev/mapper/extbackup";
-            fsType = "btrfs";
-            options = ["noatime" "subvol=@backups" "nofail"];
-          };
+          # Boot-unlock is declared in ./_disks.nix via disko.
+          # Data directories for the containers in modules/containers/streaming.nix.
+          systemd.tmpfiles.rules = [
+            "d /srv/external-data/jellyfin 0755 dan users -"
+            "d /srv/external-data/ombi 0755 dan users -"
+            "d /srv/external-data/sonarr 0755 dan users -"
+            "d /srv/external-data/radarr 0755 dan users -"
+            "d /srv/external-data/bazarr 0755 dan users -"
+            "d /srv/external-data/prowlarr 0755 dan users -"
+            "d /srv/external-data/cleanuparr 0755 dan users -"
+            "d /srv/external-data/qbittorrent 0755 dan users -"
+            "d /srv/external-data/tvshows 0755 dan users -"
+            "d /srv/external-data/movies 0755 dan users -"
+            "d /srv/external-data/foundry 0755 dan users -"
+            "d /srv/external-data/downloads 0755 dan users -"
+          ];
 
           home-manager = {
             extraSpecialArgs = specialArgs;

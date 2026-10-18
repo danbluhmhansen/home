@@ -1,5 +1,36 @@
 {
   disko.devices = {
+    disk.extbackup = {
+      type = "disk";
+      device = "/dev/disk/by-id/usb-Seagate_Expansion_HDD_00000000NT1FMXVK-0:0";
+      content = {
+        type = "gpt";
+        partitions.luks = {
+          label = "external-crypt";
+          size = "100%";
+          content = {
+            type = "luks";
+            name = "extbackup";
+            # Never block boot when the disk is not attached.
+            settings.crypttabExtraOpts = ["nofail"];
+            content = {
+              type = "btrfs";
+              extraArgs = ["-f"];
+              subvolumes = {
+                "@data" = {
+                  mountpoint = "/srv/external-data";
+                  mountOptions = ["noatime" "nofail" "x-systemd.automount"];
+                };
+                "@backups" = {
+                  mountpoint = "/srv/external-backups";
+                  mountOptions = ["noatime" "nofail" "x-systemd.automount"];
+                };
+              };
+            };
+          };
+        };
+      };
+    };
     disk.main = {
       type = "disk";
       device = "/dev/nvme0n1";

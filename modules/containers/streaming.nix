@@ -1,5 +1,7 @@
 {
-  flake.modules.homeManager.streaming = {config, ...}: {
+  flake.modules.homeManager.streaming = let
+    data = "/srv/external-data";
+  in {
     services.podman.networks.streaming = {
       driver = "bridge";
       subnet = "10.81.0.0/24";
@@ -15,9 +17,9 @@
       };
       network = ["traefik" "streaming"];
       volumes = [
-        "${config.home.homeDirectory}/srv/jellyfin:/config"
-        "${config.home.homeDirectory}/srv/tvshows:/data/tvshows"
-        "${config.home.homeDirectory}/srv/movies:/data/movies"
+        "${data}/jellyfin:/config"
+        "${data}/tvshows:/data/tvshows"
+        "${data}/movies:/data/movies"
       ];
       ports = ["8096:8096" "7359:7359/udp" "1900:1900/udp"];
       autoUpdate = "registry";
@@ -40,7 +42,7 @@
         BASE_URL = "/";
       };
       network = ["traefik" "streaming"];
-      volumes = ["${config.home.homeDirectory}/srv/ombi:/config"];
+      volumes = ["${data}/ombi:/config"];
       autoUpdate = "registry";
       labels = {
         "traefik.http.routers.ombi.rule" = ''Host(`ombi.920301.xyz`)'';
@@ -61,9 +63,9 @@
       };
       network = ["traefik" "streaming"];
       volumes = [
-        "${config.home.homeDirectory}/srv/sonarr:/config"
-        "${config.home.homeDirectory}/srv/tvshows:/data/tv"
-        "${config.home.homeDirectory}/srv/downloads:/downloads"
+        "${data}/sonarr:/config"
+        "${data}/tvshows:/data/tv"
+        "${data}/downloads:/downloads"
       ];
       autoUpdate = "registry";
       labels = {
@@ -85,9 +87,9 @@
       };
       network = ["traefik" "streaming"];
       volumes = [
-        "${config.home.homeDirectory}/srv/radarr:/config"
-        "${config.home.homeDirectory}/srv/movies:/data/movies"
-        "${config.home.homeDirectory}/srv/downloads:/downloads"
+        "${data}/radarr:/config"
+        "${data}/movies:/data/movies"
+        "${data}/downloads:/downloads"
       ];
       autoUpdate = "registry";
       labels = {
@@ -109,9 +111,9 @@
       };
       network = ["traefik" "streaming"];
       volumes = [
-        "${config.home.homeDirectory}/srv/bazarr:/config"
-        "${config.home.homeDirectory}/srv/movies:/data/movies"
-        "${config.home.homeDirectory}/srv/tvshows:/data/tvshows"
+        "${data}/bazarr:/config"
+        "${data}/movies:/data/movies"
+        "${data}/tvshows:/data/tvshows"
       ];
       autoUpdate = "registry";
       labels = {
@@ -132,7 +134,7 @@
         TZ = "Europe/Copenhagen";
       };
       network = ["traefik" "streaming"];
-      volumes = ["${config.home.homeDirectory}/srv/prowlarr:/config"];
+      volumes = ["${data}/prowlarr:/config"];
       autoUpdate = "registry";
       labels = {
         "traefik.http.routers.prowlarr.rule" = ''Host(`prowlarr.920301.xyz`)'';
@@ -171,8 +173,8 @@
       };
       network = ["traefik" "streaming"];
       volumes = [
-        "${config.home.homeDirectory}/srv/cleanuparr:/config"
-        "${config.home.homeDirectory}/srv/downloads:/downloads"
+        "${data}/cleanuparr:/config"
+        "${data}/downloads:/downloads"
       ];
       autoUpdate = "registry";
       labels = {
@@ -197,8 +199,8 @@
       };
       network = ["traefik" "streaming"];
       volumes = [
-        "${config.home.homeDirectory}/srv/qbittorrent:/config"
-        "${config.home.homeDirectory}/srv/downloads:/downloads"
+        "${data}/qbittorrent:/config"
+        "${data}/downloads:/downloads"
       ];
       autoUpdate = "registry";
       labels = {

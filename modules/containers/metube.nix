@@ -1,5 +1,7 @@
 {
-  flake.modules.homeManager.metube = {config, ...}: {
+  flake.modules.homeManager.metube = let
+    data = "/srv/external-data";
+  in {
     services.podman.containers.metube = {
       image = "ghcr.io/alexta69/metube:latest";
       environment = {
@@ -26,7 +28,7 @@
         })}";
       };
       network = ["traefik"];
-      volumes = ["${config.home.homeDirectory}/srv/downloads:/downloads"];
+      volumes = ["${data}/downloads:/downloads"];
       autoUpdate = "registry";
       labels = {
         "traefik.http.routers.metube.rule" = ''Host(`metube.920301.xyz`)'';

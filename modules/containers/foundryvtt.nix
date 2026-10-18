@@ -1,5 +1,7 @@
 {
-  flake.modules.homeManager.foundryvtt = {config, ...}: {
+  flake.modules.homeManager.foundryvtt = {config, ...}: let
+    data = "/srv/external-data";
+  in {
     sops.secrets.foundryvtt = {};
 
     services.podman.containers.foundryvtt = {
@@ -16,8 +18,8 @@
       environmentFile = [config.sops.secrets.foundryvtt.path];
       network = ["traefik"];
       volumes = [
-        "${config.home.homeDirectory}/srv/foundry:/data"
-        "${config.home.homeDirectory}/srv/downloads:/data/Data/assets/downloads"
+        "${data}/foundry:/data"
+        "${data}/downloads:/data/Data/assets/downloads"
       ];
       autoUpdate = "registry";
       labels = {
