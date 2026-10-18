@@ -26,7 +26,7 @@
       network = ["traefik"];
       volumes = [
         "/run/user/1000/podman/podman.sock:/var/run/docker.sock"
-        "${config.home.homeDirectory}/srv/traefik/traefik.yml:/etc/traefik/traefik.yml"
+        "${./traefik.yml}:/etc/traefik/traefik.yml:ro"
         "${config.home.homeDirectory}/srv/letsencrypt:/letsencrypt"
       ];
       autoUpdate = "registry";

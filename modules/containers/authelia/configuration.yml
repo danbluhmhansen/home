@@ -1,0 +1,179 @@
+# yaml-language-server: $schema=https://www.authelia.com/schemas/v4.39/json-schema/configuration.json
+theme: 'auto'
+totp:
+  disable: false
+webauthn:
+  enable_passkey_login: true
+authentication_backend:
+  password_change:
+    disable: false
+  password_reset:
+    disable: false
+  ldap:
+    address: 'ldap://lldap:3890'
+    implementation: 'lldap'
+    base_dn: 'dc=920301,dc=xyz'
+    user: 'UID=bind_user,OU=people,DC=920301,DC=xyz'
+access_control:
+  default_policy: 'deny'
+  rules:
+    - domain: '{group}.920301.xyz'
+      policy: 'one_factor'
+    - domain: '*.920301.xyz'
+      subject: 'group:admin'
+      policy: 'two_factor'
+session:
+  cookies:
+    - name: 'authelia_session'
+      domain: '920301.xyz'
+      authelia_url: 'https://auth.920301.xyz'
+      inactivity: '5 minutes'
+      expiration: '1 hour'
+notifier:
+  smtp:
+    address: 'smtp://smtp.mail.me.com:587'
+definitions:
+  user_attributes:
+    vaultwarden_roles:
+      expression: '"vaultwarden_admins" in groups ? ["admin"] : "vaultwarden_users" in groups ? ["user"] : [""]'
+identity_providers:
+  oidc:
+    claims_policies:
+      vaultwarden:
+        id_token:
+          - 'vaultwarden_roles'
+        custom_claims:
+          vaultwarden_roles: {}
+    scopes:
+      vaultwarden:
+        claims:
+          - 'vaultwarden_roles'
+    jwks:
+      - key: {{ secret "/secrets/authelia-jwks.pem" | mindent 10 "|" | msquote }}
+    clients:
+      - client_id: 'actual-budget'
+        client_name: 'Actual Budget'
+        client_secret: '{{ env "OIDC_CLIENT_SECRET_ACTUAL_BUDGET" }}'
+        public: false
+        redirect_uris:
+          - 'https://actual.920301.xyz/openid/callback'
+        scopes:
+          - 'openid'
+          - 'email'
+          - 'profile'
+          - 'groups'
+        grant_types:
+          - 'authorization_code'
+        response_types:
+          - 'code'
+        authorization_policy: 'two_factor'
+        require_pkce: true
+        pkce_challenge_method: 'S256'
+      - client_id: 'forgejo'
+        client_name: 'Forgejo'
+        client_secret: '{{ env "OIDC_CLIENT_SECRET_FORGEJO" }}'
+        public: false
+        redirect_uris:
+          - 'https://forgejo.920301.xyz/user/oauth2/authelia/callback'
+        scopes:
+          - 'openid'
+          - 'email'
+          - 'profile'
+          - 'groups'
+        grant_types:
+          - 'authorization_code'
+        response_types:
+          - 'code'
+        authorization_policy: 'two_factor'
+        require_pkce: true
+        pkce_challenge_method: 'S256'
+      - client_id: 'gameyfin'
+        client_name: 'Gameyfin'
+        client_secret: '{{ env "OIDC_CLIENT_SECRET_GAMEYFIN" }}'
+        public: false
+        redirect_uris:
+          - 'https://gf.920301.xyz/login/oauth2/code/oidc'
+        scopes:
+          - 'openid'
+          - 'email'
+          - 'profile'
+          - 'groups'
+        grant_types:
+          - 'authorization_code'
+        response_types:
+          - 'code'
+        authorization_policy: 'one_factor'
+        token_endpoint_auth_method: 'client_secret_post'
+      - client_id: 'stalwart'
+        client_name: 'Stalwart'
+        client_secret: '{{ env "OIDC_CLIENT_SECRET_STALWART" }}'
+        public: false
+        redirect_uris:
+          - 'https://stalwart.920301.xyz'
+        scopes:
+          - 'openid'
+          - 'email'
+          - 'profile'
+        grant_types:
+          - 'authorization_code'
+        response_types:
+          - 'code'
+        authorization_policy: 'two_factor'
+        require_pkce: true
+        pkce_challenge_method: 'S256'
+      - client_id: 'vaultwarden'
+        client_name: 'Vaultwarden'
+        client_secret: '{{ env "OIDC_CLIENT_SECRET_VAULTWARDEN" }}'
+        public: false
+        redirect_uris:
+          - 'https://vault.920301.xyz/identity/connect/oidc-signin'
+        scopes:
+          - 'openid'
+          - 'offline_access'
+          - 'email'
+          - 'profile'
+          - 'vaultwarden'
+        grant_types:
+          - 'authorization_code'
+          - 'refresh_token'
+        response_types:
+          - 'code'
+        authorization_policy: 'two_factor'
+        require_pkce: true
+        pkce_challenge_method: 'S256'
+      - client_id: 'wishlist'
+        client_name: 'Wishlist'
+        client_secret: '{{ env "OIDC_CLIENT_SECRET_WISHLIST" }}'
+        public: false
+        redirect_uris:
+          - 'https://wish.920301.xyz/login'
+        scopes:
+          - 'openid'
+          - 'email'
+          - 'profile'
+        grant_types:
+          - 'authorization_code'
+        response_types:
+          - 'code'
+        authorization_policy: 'one_factor'
+        require_pkce: true
+        pkce_challenge_method: 'S256'
+        token_endpoint_auth_method: 'client_secret_post'
+      - client_id: 'sparkyfitness'
+        client_name: 'SparkyFitness'
+        client_secret: '{{ env "OIDC_CLIENT_SECRET_SPARKYFITNESS" }}'
+        public: false
+        authorization_policy: 'one_factor'
+        redirect_uris:
+          - 'https://fitness.920301.xyz/api/auth/sso/callback/authelia'
+        scopes:
+          - 'openid'
+          - 'email'
+          - 'profile'
+          - 'groups'
+        response_types:
+          - 'code'
+        grant_types:
+          - 'authorization_code'
+        token_endpoint_auth_method: 'client_secret_post'
+        userinfo_signed_response_alg: 'none'
