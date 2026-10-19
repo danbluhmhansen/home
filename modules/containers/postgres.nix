@@ -9,7 +9,7 @@
     };
 
     services.podman.containers.postgres = {
-      image = "docker.io/postgres:17-alpine";
+      image = "docker.io/pgvector/pgvector:pg17";
       environmentFile = [config.sops.secrets.postgres.path];
       network = ["postgres"];
       volumes = [

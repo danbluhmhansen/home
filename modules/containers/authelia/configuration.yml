@@ -36,6 +36,8 @@ definitions:
   user_attributes:
     vaultwarden_roles:
       expression: '"vaultwarden_admins" in groups ? ["admin"] : "vaultwarden_users" in groups ? ["user"] : [""]'
+    immich_role:
+      expression: '"admin" in groups ? "admin" : "user"'
 identity_providers:
   oidc:
     claims_policies:
@@ -44,10 +46,18 @@ identity_providers:
           - 'vaultwarden_roles'
         custom_claims:
           vaultwarden_roles: {}
+      immich:
+        id_token:
+          - 'immich_role'
+        custom_claims:
+          immich_role: {}
     scopes:
       vaultwarden:
         claims:
           - 'vaultwarden_roles'
+      immich:
+        claims:
+          - 'immich_role'
     jwks:
       - key: {{ secret "/secrets/authelia-jwks.pem" | mindent 10 "|" | msquote }}
     clients:
@@ -87,23 +97,6 @@ identity_providers:
         authorization_policy: 'two_factor'
         require_pkce: true
         pkce_challenge_method: 'S256'
-      - client_id: 'gameyfin'
-        client_name: 'Gameyfin'
-        client_secret: '{{ env "OIDC_CLIENT_SECRET_GAMEYFIN" }}'
-        public: false
-        redirect_uris:
-          - 'https://gf.920301.xyz/login/oauth2/code/oidc'
-        scopes:
-          - 'openid'
-          - 'email'
-          - 'profile'
-          - 'groups'
-        grant_types:
-          - 'authorization_code'
-        response_types:
-          - 'code'
-        authorization_policy: 'one_factor'
-        token_endpoint_auth_method: 'client_secret_post'
       - client_id: 'stalwart'
         client_name: 'Stalwart'
         client_secret: '{{ env "OIDC_CLIENT_SECRET_STALWART" }}'
@@ -175,5 +168,48 @@ identity_providers:
           - 'code'
         grant_types:
           - 'authorization_code'
+        token_endpoint_auth_method: 'client_secret_post'
+        userinfo_signed_response_alg: 'none'
+      - client_id: 'immich'
+        client_name: 'Immich'
+        client_secret: '{{ env "OIDC_CLIENT_SECRET_IMMICH" }}'
+        public: false
+        redirect_uris:
+          - 'https://immich.920301.xyz/auth/login'
+          - 'https://immich.920301.xyz/user-settings'
+          - 'app.immich:///oauth-callback'
+        scopes:
+          - 'openid'
+          - 'email'
+          - 'profile'
+          - 'groups'
+          - 'immich'
+        grant_types:
+          - 'authorization_code'
+        response_types:
+          - 'code'
+        authorization_policy: 'two_factor'
+        require_pkce: true
+        pkce_challenge_method: 'S256'
+        token_endpoint_auth_method: 'client_secret_post'
+        userinfo_signed_response_alg: 'none'
+      - client_id: 'oxicloud'
+        client_name: 'OxiCloud'
+        client_secret: '{{ env "OIDC_CLIENT_SECRET_OXICLOUD" }}'
+        public: false
+        redirect_uris:
+          - 'https://cloud.920301.xyz/api/auth/oidc/callback'
+        scopes:
+          - 'openid'
+          - 'email'
+          - 'profile'
+          - 'groups'
+        grant_types:
+          - 'authorization_code'
+        response_types:
+          - 'code'
+        authorization_policy: 'two_factor'
+        require_pkce: true
+        pkce_challenge_method: 'S256'
         token_endpoint_auth_method: 'client_secret_post'
         userinfo_signed_response_alg: 'none'

@@ -54,9 +54,12 @@ in {
                 forgejo
                 foundryvtt
                 glance
+                immich
                 lldap
                 metube
+                oxicloud
                 postgres
+                redis
                 sparkyfitness
                 streaming
                 traefik

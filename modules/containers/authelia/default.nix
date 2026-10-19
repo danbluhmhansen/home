@@ -27,6 +27,10 @@
         "glance.url" = "https://auth.920301.xyz";
         "glance.description" = "'Single Sign-On Multi-Factor portal for web apps'";
       };
+      extraConfig = {
+        Unit.After = ["sops-nix.service"];
+        Unit.Requires = ["sops-nix.service"];
+      };
     };
   };
 }
