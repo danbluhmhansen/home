@@ -38,6 +38,17 @@
         exit 1
       fi
 
+      # The repository directory is created by tmpfiles when the disk is
+      # attached at boot. If the disk was attached later, it is missing.
+      if [ ! -d ${repository} ]; then
+        if ! mkdir -p ${repository} 2>/dev/null; then
+          echo "backup: cannot create ${repository}." >&2
+          echo "  Attach the backup disk, then run:" >&2
+          echo "  sudo systemd-tmpfiles --create ${repository}" >&2
+          exit 1
+        fi
+      fi
+
       rm -rf ${dumpDir}
       mkdir -p ${dumpDir}
 
