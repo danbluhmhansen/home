@@ -17,6 +17,7 @@
     # `podman exec` therefore only works when the backup runs in the user's
     # own context.
     user = "dan";
+    group = config.users.users.dan.group;
     home = "/home/dan";
 
     mountPoint = "/srv/external-backups";
@@ -38,15 +39,13 @@
         exit 1
       fi
 
-      # The repository directory is created by tmpfiles when the disk is
-      # attached at boot. If the disk was attached later, it is missing.
+      # The repository directory is created by backup-repository-init.service,
+      # which has to run as root because the mount point is not writable from
+      # here.
       if [ ! -d ${repository} ]; then
-        if ! mkdir -p ${repository} 2>/dev/null; then
-          echo "backup: cannot create ${repository}." >&2
-          echo "  Attach the backup disk, then run:" >&2
-          echo "  sudo systemd-tmpfiles --create ${repository}" >&2
-          exit 1
-        fi
+        echo "backup: ${repository} is missing." >&2
+        echo "  Run: sudo systemctl restart backup-repository-init.service" >&2
+        exit 1
       fi
 
       rm -rf ${dumpDir}
@@ -148,12 +147,32 @@
         restartUnits = ["restic-backups-data.service"];
       };
 
-      # The disk is mounted on demand, and accessing it through tmpfiles
-      # triggers the automount, so the repository is created inside the real
-      # filesystem rather than in the empty directory on the root filesystem.
-      systemd.tmpfiles.rules = [
-        "z ${repository} 0750 ${user} users -"
-      ];
+      # systemd-tmpfiles refuses to create anything below an automount point,
+      # so the repository directory is created here instead. Accessing the
+      # mount point triggers the automount, so the directory ends up inside
+      # the real filesystem rather than in the empty directory that shadows
+      # it on the root filesystem.
+      systemd.services."backup-repository-init" = {
+        description = "Create the restic repository directory on the backup disk";
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+          ExecStart = "${pkgs.writeShellScript "backup-repository-init" ''
+            set -eu
+
+            if ${mountpoint} -q ${mountPoint}; then
+              ${pkgs.coreutils}/bin/install -d -o ${user} -g ${group} -m 0750 ${repository}
+            else
+              echo "backup: ${mountPoint} is not mounted" >&2
+            fi
+          ''}";
+        };
+      };
+
+      systemd.services."restic-backups-data" = {
+        after = ["backup-repository-init.service"];
+        wants = ["backup-repository-init.service"];
+      };
 
       services.restic.backups.data = {
         inherit user;

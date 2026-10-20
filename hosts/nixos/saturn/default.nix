@@ -4,6 +4,22 @@
   ...
 }: let
   specialArgs = {inherit inputs;};
+
+  # Data directories for the containers in modules/containers/streaming.nix.
+  dataDirs = builtins.map (dir: "/srv/external-data/${dir}") [
+    "jellyfin"
+    "ombi"
+    "sonarr"
+    "radarr"
+    "bazarr"
+    "prowlarr"
+    "cleanuparr"
+    "qbittorrent"
+    "tvshows"
+    "movies"
+    "foundry"
+    "downloads"
+  ];
 in {
   flake.nixosConfigurations.saturn = inputs.nixpkgs.lib.nixosSystem {
     inherit specialArgs;
@@ -12,7 +28,11 @@ in {
         inputs.home-manager.nixosModules.home-manager
         inputs.nur.modules.nixos.default
         inputs.disko.nixosModules.default
-        {
+        ({
+          pkgs,
+          lib,
+          ...
+        }: {
           networking.hostName = "saturn";
           users.users.dan.linger = true;
           networking.firewall.allowedTCPPorts = [80 443];
@@ -20,21 +40,30 @@ in {
           backup.enable = true;
 
           # Boot-unlock is declared in ./_disks.nix via disko.
-          # Data directories for the containers in modules/containers/streaming.nix.
-          systemd.tmpfiles.rules = [
-            "d /srv/external-data/jellyfin 0755 dan users -"
-            "d /srv/external-data/ombi 0755 dan users -"
-            "d /srv/external-data/sonarr 0755 dan users -"
-            "d /srv/external-data/radarr 0755 dan users -"
-            "d /srv/external-data/bazarr 0755 dan users -"
-            "d /srv/external-data/prowlarr 0755 dan users -"
-            "d /srv/external-data/cleanuparr 0755 dan users -"
-            "d /srv/external-data/qbittorrent 0755 dan users -"
-            "d /srv/external-data/tvshows 0755 dan users -"
-            "d /srv/external-data/movies 0755 dan users -"
-            "d /srv/external-data/foundry 0755 dan users -"
-            "d /srv/external-data/downloads 0755 dan users -"
-          ];
+          #
+          # systemd-tmpfiles refuses to create anything below an automount
+          # point, so the data directories are created here instead. The
+          # directories the containers mount are listed in dataDirs above.
+          systemd.services."external-data-directories" = {
+            description = "Create the data directories on the external disk";
+            wantedBy = ["multi-user.target"];
+            before = ["user@1000.service"];
+            serviceConfig = {
+              Type = "oneshot";
+              RemainAfterExit = true;
+              ExecStart = "${pkgs.writeShellScript "external-data-directories" ''
+                set -eu
+
+                if ${pkgs.util-linux}/bin/mountpoint -q /srv/external-data; then
+                  for dir in ${lib.concatStringsSep " " dataDirs}; do
+                    ${pkgs.coreutils}/bin/install -d -o dan -g users -m 0755 "$dir"
+                  done
+                else
+                  echo "external disk is not mounted" >&2
+                fi
+              ''}";
+            };
+          };
 
           home-manager = {
             extraSpecialArgs = specialArgs;
@@ -70,7 +99,7 @@ in {
               ];
             };
           };
-        }
+        })
         ./_disks.nix
         ./_hardware.nix
       ]
