@@ -97,6 +97,28 @@ identity_providers:
         authorization_policy: 'two_factor'
         require_pkce: true
         pkce_challenge_method: 'S256'
+      # Home Assistant authenticates its own users with OIDC. It is a public
+      # client, so no secret is needed: the redirect URI is exact and PKCE is
+      # required.
+      - client_id: 'home-assistant'
+        client_name: 'Home Assistant'
+        public: true
+        redirect_uris:
+          - 'https://ha.920301.xyz/auth/oidc/callback'
+        scopes:
+          - 'openid'
+          - 'profile'
+          - 'groups'
+        grant_types:
+          - 'authorization_code'
+        response_types:
+          - 'code'
+        authorization_policy: 'two_factor'
+        require_pkce: true
+        pkce_challenge_method: 'S256'
+        token_endpoint_auth_method: 'none'
+        access_token_signed_response_alg: 'none'
+        userinfo_signed_response_alg: 'none'
       - client_id: 'stalwart'
         client_name: 'Stalwart'
         client_secret: '{{ env "OIDC_CLIENT_SECRET_STALWART" }}'

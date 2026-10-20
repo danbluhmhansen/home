@@ -1,0 +1,58 @@
+{
+  flake.modules.homeManager.homeassistant = {
+    config,
+    lib,
+    pkgs,
+    ...
+  }: let
+    # The OpenID Connect authentication provider for Home Assistant. It is a
+    # custom component, so it is installed into the configuration directory.
+    # Home Assistant itself no longer ships an OIDC provider, see
+    # https://github.com/christiaangoossens/hass-oidc-auth
+    #
+    # Pinned to a release, whose assets are immutable. The sha256 of the
+    # release asset is e5badaaacaa63cfd6fe733924a05e76d75058836190398598fb24de57cd47ccd.
+    authOidc = pkgs.fetchzip {
+      url = "https://github.com/christiaangoossens/hass-oidc-auth/releases/download/v1.2.1/hass-oidc-auth.zip";
+      hash = "sha256-zrOc7cRcME7v7dy4d+6kSyALdyKx+3LjetOc/cauN1c=";
+      # The archive holds the files of the component, not a directory.
+      stripRoot = false;
+    };
+  in {
+    # Podman does not create the source of a bind mount that does not exist,
+    # so the configuration directory is created here.
+    home.activation.homeassistantConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      run mkdir -p "$HOME/srv/homeassistant"
+    '';
+
+    home.activation.homeassistantAuthOidc = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      run rm -rf "$HOME/srv/homeassistant/custom_components/auth_oidc"
+      run mkdir -p "$HOME/srv/homeassistant/custom_components/auth_oidc"
+      run cp -R ${authOidc}/. "$HOME/srv/homeassistant/custom_components/auth_oidc/"
+    '';
+
+    services.podman.containers.homeassistant = {
+      image = "ghcr.io/home-assistant/home-assistant:stable";
+      environment = {
+        TZ = "Europe/Copenhagen";
+      };
+      network = ["traefik"];
+      # The SONOFF Dongle Max is attached over USB and is used by the ZHA
+      # integration. It is passed in as /dev/ttyUSB0, which is where Home
+      # Assistant looks for USB radios.
+      devices = ["/dev/sonoff-dongle-m:/dev/ttyUSB0"];
+      volumes = ["${config.home.homeDirectory}/srv/homeassistant:/config"];
+      autoUpdate = "registry";
+      labels = {
+        "traefik.http.routers.homeassistant.rule" = ''Host(`ha.920301.xyz`)'';
+        # Home Assistant authenticates its own users through Authelia with
+        # OIDC, so it is not behind the forward authentication middleware.
+        "traefik.http.services.homeassistant.loadbalancer.server.port" = "8123";
+        "glance.name" = "Home Assistant";
+        "glance.icon" = "sh:home-assistant";
+        "glance.url" = "https://ha.920301.xyz";
+        "glance.description" = "Home automation";
+      };
+    };
+  };
+}

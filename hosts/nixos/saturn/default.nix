@@ -85,6 +85,7 @@ in {
                 forgejo
                 foundryvtt
                 glance
+                homeassistant
                 immich
                 lldap
                 metube
@@ -116,6 +117,7 @@ in {
         openssh
         plugdev
         podman
+        sonoff-dongle
 
         backup
       ]);
