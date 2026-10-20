@@ -23,7 +23,15 @@
                 };
                 "@backups" = {
                   mountpoint = "/srv/external-backups";
-                  mountOptions = ["noatime" "nofail" "x-systemd.automount"];
+                  # The backup repository is created here on boot, so keep the
+                  # automount from stalling the boot for the default timeout
+                  # when the disk is not attached.
+                  mountOptions = [
+                    "noatime"
+                    "nofail"
+                    "x-systemd.automount"
+                    "x-systemd.mount-timeout=30"
+                  ];
                 };
               };
             };

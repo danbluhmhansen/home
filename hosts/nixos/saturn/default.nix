@@ -17,6 +17,8 @@ in {
           users.users.dan.linger = true;
           networking.firewall.allowedTCPPorts = [80 443];
 
+          backup.enable = true;
+
           # Boot-unlock is declared in ./_disks.nix via disko.
           # Data directories for the containers in modules/containers/streaming.nix.
           systemd.tmpfiles.rules = [
@@ -85,6 +87,8 @@ in {
         openssh
         plugdev
         podman
+
+        backup
       ]);
   };
 }
