@@ -1,4 +1,13 @@
-{
+{inputs, ...}: {
+  # Helix from the upstream flake, with the Perl grammar patched so it builds
+  # against glibc 2.44. See ../../pkgs/helix/package.nix.
+  flake.overlays.helix-patched = final: prev: {
+    helix = final.callPackage ../../pkgs/helix/package.nix {
+      helixSource = inputs.helix.outPath;
+      helixRev = inputs.helix.rev;
+    };
+  };
+
   flake.modules.homeManager.helix = {
     pkgs,
     lib,
