@@ -126,7 +126,8 @@
         {
           "id": "keyboard_layout_name",
           "enabled": true,
-          "keyboardLayoutNameCompactMode": false
+          "keyboardLayoutNameCompactMode": false,
+          "keyboardLayoutNameShowIcon": false
         },
         {
           "id": "clipboard",
@@ -149,17 +150,13 @@
           "enabled": true
         },
         {
-          "id": "battery",
-          "enabled": true
-        },
-        {
           "id": "controlCenterButton",
           "enabled": true
         }
       ],
       "transparency": 0,
       "openOnOverview": true,
-      "widgetTransparency": 1,
+      "widgetTransparency": 0.5,
       "widgetOutlineEnabled": false,
       "widgetOutlineOpacity": 1,
       "shadowIntensity": 0,
@@ -211,7 +208,7 @@
       ],
       "islandHomeClockDisplay": "both",
       "islandHomeCompactTight": false,
-      "islandTransparency": 0.8,
+      "islandTransparency": 0.5,
       "islandCornerRadius": 6,
       "islandNotificationExpand": false,
       "islandSatelliteBackground": false,
@@ -232,7 +229,8 @@
     "hslHue": -1,
     "hslSaturation": 0,
     "hslLightness": 1,
-    "valid": true
+    "valid": true,
+    "rgba": -1
   },
   "systemMonitorCustomColor": {
     "r": 1,
@@ -245,7 +243,8 @@
     "hslHue": -1,
     "hslSaturation": 0,
     "hslLightness": 1,
-    "valid": true
+    "valid": true,
+    "rgba": -1
   },
   "desktopWidgetInstances": [
     {
