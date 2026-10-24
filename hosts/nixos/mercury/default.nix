@@ -27,7 +27,6 @@ in {
                 firefox
                 ghostty
                 mpv
-                obs
                 signal
                 zen-browser
                 zen-dms
@@ -67,6 +66,7 @@ in {
         nushell
         steam
 
+        cloudflare-warp
         openssh
         plugdev
       ]);

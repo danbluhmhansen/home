@@ -47,12 +47,12 @@ in {
         discord
         ghostty
         mpv
-        obs
         signal
         steam
 
         nushell
 
+        cloudflare-warp
         gpg
         podman
       ]);
