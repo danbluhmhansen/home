@@ -16,8 +16,6 @@
 
     yazi-flavors.url = "github:yazi-rs/flavors";
     yazi-flavors.flake = false;
-    dcal.url = "github:avengemedia/dankcalendar";
-    dcal.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs0: let

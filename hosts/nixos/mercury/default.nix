@@ -22,14 +22,17 @@ in {
 
                 # bitwarden
                 chromium
-                dcal
                 discord
                 firefox
                 ghostty
                 mpv
                 signal
                 zen-browser
-                zen-dms
+
+                awww
+                mako
+                walker
+                waybar
 
                 eza
                 git
@@ -57,8 +60,7 @@ in {
 
         keyring
 
-        dms
-        dms-dan
+        ly
         niri
         nvidia
         pipewire

@@ -326,13 +326,4 @@
       };
     };
   };
-
-  flake.modules.homeManager.zen-dms = {config, ...}: {
-    home.file = {
-      ".config/DankMaterialShell/zen.css".source =
-        config.lib.file.mkOutOfStoreSymlink "${config.programs.nh.flake}/modules/apps/zen-browser/userChrome.css";
-      ".config/zen/dan/chrome/userChrome.css".source =
-        config.lib.file.mkOutOfStoreSymlink "${config.programs.nh.flake}/modules/apps/zen-browser/userChrome.css";
-    };
-  };
 }

@@ -1,42 +1,5 @@
 {
   "nodes": {
-    "dank-qml-common": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1792513666,
-        "narHash": "sha256-RDqPdPrM5lnwRrfFGLz3IwgTjCV2Ie+nrTD3ldj1t/s=",
-        "owner": "duxlabs-dev",
-        "repo": "dux-qml-common",
-        "rev": "ebf5e6c002da1bdaa4aaa2f319fea7b8507abc42",
-        "type": "github"
-      },
-      "original": {
-        "owner": "duxlabs-dev",
-        "repo": "dux-qml-common",
-        "type": "github"
-      }
-    },
-    "dcal": {
-      "inputs": {
-        "dank-qml-common": "dank-qml-common",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1792524309,
-        "narHash": "sha256-8IB2939mGrv/zJ3YVdcQ9ibU08tDMeUsXNgP7YA3tac=",
-        "owner": "avengemedia",
-        "repo": "dankcalendar",
-        "rev": "3e0e4bceae1bfd17c025ff38d8f9e3cccfa7c8bc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "avengemedia",
-        "repo": "dankcalendar",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "locked": {
         "lastModified": 1767039857,
@@ -194,7 +157,6 @@
     },
     "root": {
       "inputs": {
-        "dcal": "dcal",
         "flake-parts": "flake-parts",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
