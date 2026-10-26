@@ -29,8 +29,15 @@
     # directory is not removed first: some files in it are owned by the
     # container's (rootless) root user and cannot be deleted by the user
     # running the activation, so the contents are just overwritten in place.
+    # The integration is unpacked into the configuration directory. The
+    # directory is overwritten in place, because files in it (such as the
+    # Python bytecode cache written by Home Assistant itself) are owned by
+    # the container's root user and cannot be deleted by the user running the
+    # activation. The read-only modes carried over from the store path are
+    # relaxed first, so the copy can replace existing files.
     home.activation.homeassistantAuthOidc = lib.hm.dag.entryAfter ["writeBoundary"] ''
       run mkdir -p "$HOME/srv/homeassistant/custom_components/auth_oidc"
+      run chmod -R u+w "$HOME/srv/homeassistant/custom_components/auth_oidc"
       run cp -R ${authOidc}/. "$HOME/srv/homeassistant/custom_components/auth_oidc/"
     '';
 
