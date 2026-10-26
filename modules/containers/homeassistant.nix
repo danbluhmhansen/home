@@ -25,8 +25,11 @@
       run mkdir -p "$HOME/srv/homeassistant"
     '';
 
+    # The integration is unpacked into the configuration directory. The
+    # directory is not removed first: some files in it are owned by the
+    # container's (rootless) root user and cannot be deleted by the user
+    # running the activation, so the contents are just overwritten in place.
     home.activation.homeassistantAuthOidc = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      run rm -rf "$HOME/srv/homeassistant/custom_components/auth_oidc"
       run mkdir -p "$HOME/srv/homeassistant/custom_components/auth_oidc"
       run cp -R ${authOidc}/. "$HOME/srv/homeassistant/custom_components/auth_oidc/"
     '';
