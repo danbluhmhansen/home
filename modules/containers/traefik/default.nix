@@ -27,6 +27,7 @@
       volumes = [
         "/run/user/1000/podman/podman.sock:/var/run/docker.sock"
         "${./traefik.yml}:/etc/traefik/traefik.yml:ro"
+        "${./dynamic}:/etc/traefik/dynamic:ro"
         "${config.home.homeDirectory}/srv/letsencrypt:/letsencrypt"
       ];
       autoUpdate = "registry";

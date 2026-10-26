@@ -15,6 +15,9 @@ entryPoints:
         certResolver: "letsencrypt"
 providers:
   docker: {}
+  file:
+    directory: /etc/traefik/dynamic
+    watch: true
 certificatesResolvers:
   letsencrypt:
     acme:

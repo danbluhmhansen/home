@@ -36,7 +36,11 @@
       environment = {
         TZ = "Europe/Copenhagen";
       };
-      network = ["traefik"];
+      # Host networking so that Home Assistant can discover Thread border
+      # routers (such as the HomePod Mini) over mDNS on the LAN. Traefik
+      # reaches the container through the file provider in the traefik module
+      # (see modules/containers/traefik/dynamic/ha.yml).
+      network = ["host"];
       # The SONOFF Dongle Max is attached over USB and is used by the ZHA
       # integration. It is passed in as /dev/ttyUSB0, which is where Home
       # Assistant looks for USB radios.
@@ -44,12 +48,10 @@
       volumes = ["${config.home.homeDirectory}/srv/homeassistant:/config"];
       autoUpdate = "registry";
       labels = {
-        "traefik.http.routers.homeassistant.rule" = ''Host(`ha.920301.xyz`)'';
         # Home Assistant authenticates its own users through Authelia with
         # OIDC, so it is not behind the forward authentication middleware.
-        "traefik.http.services.homeassistant.loadbalancer.server.port" = "8123";
         "glance.name" = "Home Assistant";
-        "glance.icon" = "sh:home-assistant";
+        "glance.icon" = "mdi:home-assistant";
         "glance.url" = "https://ha.920301.xyz";
         "glance.description" = "Home automation";
       };

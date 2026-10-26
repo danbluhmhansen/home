@@ -1,0 +1,15 @@
+http:
+  routers:
+    homeassistant:
+      rule: "Host(`ha.920301.xyz`)"
+      entryPoints:
+        - websecure
+      service: homeassistant
+      tls:
+        certResolver: letsencrypt
+
+  services:
+    homeassistant:
+      loadBalancer:
+        servers:
+          - url: "http://host.containers.internal:8123"
