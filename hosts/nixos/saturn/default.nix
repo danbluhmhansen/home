@@ -8,7 +8,7 @@
   # Data directories for the containers in modules/containers/streaming.nix.
   dataDirs = builtins.map (dir: "/srv/external-data/${dir}") [
     "jellyfin"
-    "ombi"
+    "seerr"
     "sonarr"
     "radarr"
     "bazarr"

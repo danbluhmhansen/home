@@ -96,8 +96,8 @@
                     url = "https://jf.920301.xyz";
                   }
                   {
-                    name = "Ombi";
-                    url = "https://ombi.920301.xyz";
+                    name = "Seerr";
+                    url = "https://seerr.920301.xyz";
                   }
                   {
                     name = "Movies";

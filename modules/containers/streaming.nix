@@ -33,24 +33,22 @@
       };
     };
 
-    services.podman.containers.ombi = {
-      image = "lscr.io/linuxserver/ombi:latest";
+    services.podman.containers.seerr = {
+      image = "ghcr.io/seerr-team/seerr:latest";
       environment = {
-        PUID = "1000";
-        PGID = "1000";
         TZ = "Europe/Copenhagen";
-        BASE_URL = "/";
+        PORT = "5055";
       };
       network = ["traefik" "streaming"];
-      volumes = ["${data}/ombi:/config"];
+      volumes = ["${data}/seerr:/app/config"];
       autoUpdate = "registry";
       labels = {
-        "traefik.http.routers.ombi.rule" = ''Host(`ombi.920301.xyz`)'';
-        "traefik.http.services.ombi.loadbalancer.server.port" = "3579";
-        "glance.name" = "Ombi";
-        "glance.icon" = "sh:ombi";
-        "glance.url" = "https://ombi.920301.xyz";
-        "glance.description" = "Request tool";
+        "traefik.http.routers.seerr.rule" = ''Host(`seerr.920301.xyz`)'';
+        "traefik.http.services.seerr.loadbalancer.server.port" = "5055";
+        "glance.name" = "Seerr";
+        "glance.icon" = "sh:seerr";
+        "glance.url" = "https://seerr.920301.xyz";
+        "glance.description" = "Request management and media discovery";
       };
     };
 
