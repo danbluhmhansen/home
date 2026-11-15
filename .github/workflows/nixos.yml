@@ -19,6 +19,12 @@ jobs:
         name: danbluhmhansen
         authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
         extraPullNames: devenv,nix-community,helix,cachix
+    - uses: ryanccn/attic-action@v0
+      with:
+        endpoint: ${{ secrets.ATTIC_ENDPOINT }}
+        cache: ${{ secrets.ATTIC_CACHE }}
+        token: ${{ secrets.ATTIC_TOKEN }}
+        inputs-from: .
     - run: nix build .#nixosConfigurations.mercury.config.system.build.toplevel
     - run: nix build .#nixosConfigurations.mars.config.system.build.toplevel
     - run: nix build .#nixosConfigurations.saturn.config.system.build.toplevel

@@ -6,7 +6,7 @@
   specialArgs = {inherit inputs;};
 
   # Data directories for the containers in modules/containers/streaming.nix.
-  dataDirs = builtins.map (dir: "/srv/external-data/${dir}") [
+  dataDirs = map (dir: "/srv/external-data/${dir}") [
     "jellyfin"
     "seerr"
     "sonarr"
@@ -19,6 +19,7 @@
     "movies"
     "foundry"
     "downloads"
+    "attic"
   ];
 in {
   flake.nixosConfigurations.saturn = inputs.nixpkgs.lib.nixosSystem {
@@ -56,7 +57,14 @@ in {
 
                 if ${pkgs.util-linux}/bin/mountpoint -q /srv/external-data; then
                   for dir in ${lib.concatStringsSep " " dataDirs}; do
-                    ${pkgs.coreutils}/bin/install -d -o dan -g users -m 0755 "$dir"
+                    case "$dir" in
+                      /srv/external-data/attic)
+                        ${pkgs.coreutils}/bin/install -d -o atticd -g atticd -m 0750 "$dir"
+                        ;;
+                      *)
+                        ${pkgs.coreutils}/bin/install -d -o dan -g users -m 0755 "$dir"
+                        ;;
+                    esac
                   done
                 else
                   echo "external disk is not mounted" >&2
@@ -120,6 +128,7 @@ in {
         sonoff-dongle
 
         backup
+        attic
       ]);
   };
 }

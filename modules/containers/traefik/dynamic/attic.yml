@@ -1,0 +1,14 @@
+http:
+  routers:
+    attic:
+      rule: "Host(`cache.920301.xyz`)"
+      entryPoints:
+        - websecure
+      service: attic
+      tls:
+        certResolver: letsencrypt
+  services:
+    attic:
+      loadBalancer:
+        servers:
+          - url: "http://host.containers.internal:8080"

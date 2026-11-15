@@ -1,9 +1,4 @@
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
   flake.modules.nixos.backup = {
     config,
     lib,
@@ -112,6 +107,10 @@
           # Owned by the container's internal user, copied into the dumps
           # directory by the prepare hook instead.
           "${home}/srv/oxicloud/storage/.jwt_secret"
+          # Attic stores its binary cache data on the external drive and is
+          # intentionally not part of the backup.
+          "/srv/external-data/attic"
+          "/var/lib/atticd"
         ];
         description = "Patterns to exclude from the backup.";
       };

@@ -5,6 +5,7 @@
     "https://helix.cachix.org"
     "https://devenv.cachix.org"
     "https://cachix.cachix.org"
+    "https://cache.920301.xyz/dan-default"
   ];
   common = {
     nixpkgs.overlays = with inputs; [helix.overlays.default self.overlays.helix-patched];
@@ -22,6 +23,7 @@
           "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
           "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
           "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
+          "dan-default:HjMHOF6ftnn3aIaXdO6nvjub64bd1KFZZApTF0mZne0="
         ];
       };
     };
